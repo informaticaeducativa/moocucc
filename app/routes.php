@@ -13,5 +13,13 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	$cursos = Curso::all();
+	return View::make('index')->with('cursos', $cursos); 
+});
+
+
+Route::get('index', function()
+{
+	$cursos = Curso::all();
+	return View::make('index')->with('cursos', $cursos); 
 });
