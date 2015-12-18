@@ -16,7 +16,7 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
  
  	protected $table = 'curso';
  	 	
- 	protected $fillable = array('id_curso', 'nombre', 'fecha_inicio', 'imagen_presentacion', 'comienzo', 'id_tematica', 'nivel');
+ 	protected $fillable = array('id_curso', 'nombre', 'fecha_inicio', 'imagen_presentacion', 'comienzo', 'id_tematica', 'nivel', 'duracion', 'esfuerzo', 'precio', 'prerrequisitos');
 
 	//protected $hidden = array('password', 'remember_token');
     public $timestamps = false;
@@ -24,13 +24,17 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 	public function isValid($data)
     {
 		$rules = array(
-            'id_usuario'     => 'required|numeric',
+            'id_usuario' => 'required|numeric',
             'nombre' => 'required',
             'fecha_inicio' => 'required',
             'imagen_presentacion' => 'required',            
             'comienzo' => 'required',
             'id_tematica' => 'required|numeric',
-            'nivel' => 'required'
+            'nivel' => 'required',
+            'duracion' => 'required',
+            'esfuerzo' => 'required',
+            'precio' => 'required',
+            'prerrequisitos' => 'required'
         );
         
         $validator = Validator::make($data, $rules);

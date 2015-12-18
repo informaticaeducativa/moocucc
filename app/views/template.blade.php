@@ -5,7 +5,7 @@
   @copyright 2015
 -->
 <head>
-	<title>MOOC UCC</title>
+	<title>@yield('title', 'MOOC UCC')</title></title>
 	<meta charset="utf-8">
 	<!-- CSS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" >
@@ -15,31 +15,6 @@
 	<script src= "https://code.jquery.com/jquery.js" ></script>
 	<script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script>
-		$(function() {
-
-        $("#boton_revisar").click( function()
-        {
-			$.ajax({
-			  url:'postquery1',
-			  type:'GET',
-			  dataType:'json',
-			  data: { usuario: $("#id_usuario").val(), curso: $("#id_curso").val() },	
-			  //cache:false,
-			  success:function(data){
-				if(data['success']) {
-					var html = "<table border=1 width='100%'>";
-						html+="<tr><th>Codigo</th><th>Estudiante</th><th>Curso</th><th>Valor</th><th>Fecha</th></tr>";
-				  $(data.records).each(function(i,item){
-					html+="<tr><td>"+item.codigo+"</td><td>"+item.nombres+"</td><td>"+item.nombre+"</td><td>"+item.cantidad+"</td><td>"+item.fecha+"</td></tr>";
-				  });
-				  html+="</table>";
-				  $("#resultados").html(html);
-				}
-			  }
-			});
-        });
-
-});
 
     $(document).ready(function() {   
             var sideslider = $('[data-toggle=collapse-side]');
@@ -119,51 +94,13 @@
 </header>
 <body>
 <div class="container">
-	<center><h1>MOOC UCC</h1></center>
-		
-<!--
-			<table width="100%">
-				<tr>
-					<th>{{ Form::label('id_usuario', 'Estudiante') }}</th>
-					<td>{{ Form::text('id_usuario', 'Estudiante') }}</td>
-				</tr>
-				<tr>
-					<th>{{ Form::label('id_curso', 'Curso') }}</th>
-					<td>{{ Form::text('id_curso', 'cursos') }}</td>
-				</tr>
-				<tr>
-					<th colspan="2"><button class='btn btn-primary btn-block' id="boton_revisar">Revisar</button></th>
-				</tr>
-			</table>            
--->
-	<div class="row">
-		
-    </div>    
-	<div class="row row_cursos">
-		@foreach ($cursos as $curso)
-			<a href="curso/{{ $curso->id_curso }}"> 
-			
-			<div class="col-md-4 col-sm-6 col-xs-12 album_list">
-				<div class="div_list">
-						<img class="imagen_div" src="imagenes/{{$curso->imagen_presentacion}} " >
-					<div class="espaciado">
-						<div class="titulo_curso">
-							<h3>{{ $curso->nombre }}</h3>
-						</div>
-						
-						Nivel: {{ $curso->nivel }}<br>
-						{{ $curso->getTematica() }}<br>
-						{{ $curso->getFechaInicio() }}
-					</div>
-				</div>
-			</div>
-			</a>
-		@endforeach
-    </div>    
-        <div id="resultados"></div>
-		
-		<br>
+	<center><h1>@yield('title_div', 'MOOC UCC')</h1></center>
+	
+	@yield('contenido', '')
+	
 </div>
 </body>
 
 </html>
+
+		

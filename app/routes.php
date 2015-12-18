@@ -23,3 +23,17 @@ Route::get('index', function()
 	$cursos = Curso::all();
 	return View::make('index')->with('cursos', $cursos); 
 });
+
+Route::get('curso/$id', function()
+{
+	$curso = Curso::find($id);
+	return View::make('curso')->with('curso', $curso); 
+});
+
+Route::resource('curso', 'CursoController');
+Route::resource('usuario', 'UsuarioController');
+Route::resource('evaluacion', 'EvaluacionController');
+Route::resource('leccion', 'LeccionController');
+Route::resource('pregunta', 'PreguntaController');
+Route::resource('pregunta_leccion', 'PreguntaLeccionController');
+Route::resource('temario', 'PreguntaLeccionController');
