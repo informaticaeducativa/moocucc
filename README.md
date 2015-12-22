@@ -12,12 +12,13 @@ Para ejecutar el proyecto en un servidor nginx en Ubuntu GNU/Linux 14.04. Seguir
 Necesitaremos correr las actualizaciones en nuestro sistemas operativo; además instalar nginx y sus respectivas librerías en PHP 5
 
 `sudo apt-get update`
+
 `sudo apt-get install nginx php5-fpm php5-cli php5-mcrypt git`
 
 ###2. Modificar la configuración de PHP
 
-Lo primera que necesitamos es abrir el archivo de configuración principal de PHP (==php.ini==),
-para el procesador ==PHP-fpm== que utiliza ==nginx==. Abrir el archivo con permisos de adiministrador con un editor de texto
+Lo primera que necesitamos es abrir el archivo de configuración principal de PHP (`php.ini`),
+para el procesador `PHP-fpm` que utiliza `nginx`. Abrir el archivo con permisos de adiministrador con un editor de texto
 
 `sudo nano /etc/php5/fpm/php.ini`
 
@@ -30,8 +31,8 @@ Una vez abierto el archivo, modifique la línea con el parámetro:
 Esto le indica a PHP que no intente ejecutar scripts con nombres similares si el archivo que busca no es encontrado.
 Una vez finalizado, guardar y cerrar el archivo.
 
-La última pieza de la administración de PHP a modificar es activar la extension ==mcrypt==
-de la cual ==Laravel== depende.
+La última pieza de la administración de PHP a modificar es activar la extension `mcrypt`
+de la cual `Laravel` depende.
 
 `sudo php5enmod mcrypt`
 
@@ -88,6 +89,7 @@ Guardar y cerrar el archivo cuando hayas finalizado. Después para que el servid
 Necesitamos descargar primero Composer para poder utilizar Laravel, para eso ejecutamos la siguientes líneas en consola para instalar Composer:
 
 `cd ~`
+
 `curl -sS https://getcomposer.org/installer | php`
 
 Esto nos instalara composer, sin embargo solo lo hará en el directorio escogido, para que quede globalmente en nuestro sistema, utilizamos:
