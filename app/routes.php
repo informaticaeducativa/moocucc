@@ -76,6 +76,10 @@ Route::get('validar-quiz',  function()
 	
 });
 
+Route::get('login-facebook',array('as'=>'login-facebook','uses'=>'LoginController@loginWithFacebook'));
+Route::get('login-twitter',array('as'=>'login-twitter','uses'=>'LoginController@loginWithTwitter'));
+Route::get('login-google',array('as'=>'login-google','uses'=>'LoginController@loginWithGoogle'));
+
 Route::get('ver-curso/{id}', array('as' => 'ver-curso', function($id)
 {
 	if(Session::get('user_id') == "")

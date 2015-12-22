@@ -72,7 +72,7 @@
  
   <!-- Agrupar los enlaces de navegación, los formularios y cualquier
        otro elemento que se pueda ocultar al minimizar la barra -->
-  <div class="navbar_back collapse navbar-collapse navbar-ex1-collapse">
+  <div class="collapse navbar-collapse navbar-ex1-collapse navbar_back">
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Enlace #1</a></li>
       <li><a href="#">Enlace #2</a></li>
@@ -100,19 +100,45 @@
     </form>
  
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Enlace #3</a></li>
+      <li><a href="../usuario/{{ Session::get('user_id') }}">{{ Session::get('user') }}</a></li>
+      
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          Menú #2 <b class="caret"></b>
+          {{ Session::get('user') }}<b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#">Acción #1</a></li>
+          <li><a href="../usuario/{{ Session::get('user_id') }}">Ver Perfil</a></li>
           <li><a href="#">Acción #2</a></li>
           <li><a href="#">Acción #3</a></li>
           <li class="divider"></li>
-          <li><a href="#">Acción #4</a></li>
+          <li><a href="#">Salir</a></li>
         </ul>
       </li>
+      
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+			<ul id="login-dp" class="dropdown-menu">
+				<li>
+					 <div class="row">
+							<div class="col-md-12">
+								<center>
+									Login via
+									<div class="social-buttons">
+										<a href="{{ URL::route('login-facebook') }}" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a><br><br>
+										<a href="{{ URL::route('login-twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a><br><br>
+										<a href="{{ URL::route('login-google') }}" class="btn btn-gp"><i class="fa fa-google"></i> Google +</a><br><br>
+									</div>
+                               </center>
+							</div>
+<!--
+							<div class="bottom text-center">
+								Eres Nuevo ? <a href="#"><b>Unete</b></a>
+							</div>
+-->
+					 </div>
+				</li>
+			</ul>
+        </li>
     </ul>
   </div>
 </nav>

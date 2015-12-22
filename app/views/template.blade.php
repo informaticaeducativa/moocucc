@@ -99,15 +99,17 @@
 								<center>
 									Login via
 									<div class="social-buttons">
-										<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a><br><br>
-										<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a><br><br>
-										<a href="#" class="btn btn-gp"><i class="fa fa-google"></i> Google +</a><br><br>
+										<a href="{{ URL::route('login-facebook') }}" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a><br><br>
+										<a href="{{ URL::route('login-twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a><br><br>
+										<a href="{{ URL::route('login-google') }}" class="btn btn-gp"><i class="fa fa-google"></i> Google +</a><br><br>
 									</div>
                                </center>
 							</div>
+<!--
 							<div class="bottom text-center">
 								Eres Nuevo ? <a href="#"><b>Unete</b></a>
 							</div>
+-->
 					 </div>
 				</li>
 			</ul>
