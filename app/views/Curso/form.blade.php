@@ -14,9 +14,13 @@
 
 @section ('title') {{ $action }} Curso @stop
 
-@section ('title_div') {{ $action }} Curso @stop
 
 @section ('contenido') 
+<center>
+	<h1>
+		{{ $action }} Curso
+	</h1>
+</center>
   <p>
     <a href="{{ route('curso.index') }}" class="btn btn-info">Lista de Cursos</a>
   </p>

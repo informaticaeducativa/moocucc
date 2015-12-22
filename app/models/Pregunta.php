@@ -66,5 +66,8 @@ class Pregunta extends Eloquent implements UserInterface, RemindableInterface
     }
     
     
+
+    
+    
 }
 

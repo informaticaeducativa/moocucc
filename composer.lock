@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a8c9bc04a5706bf54f2a6d2e62168e90",
+    "hash": "37e04e981ca96f3a01bc65c1bf722c0a",
     "content-hash": "ed50304d3da28369b7a64da5c63c12ae",
     "packages": [
         {
@@ -523,16 +523,16 @@
         },
         {
             "name": "patchwork/utf8",
-            "version": "v1.2.5",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tchwork/utf8.git",
-                "reference": "25a55c6c668de61cc3b97aab4237ebf6dadabe17"
+                "reference": "3bd61bc162ed5c5f4a11e40a0106acc255b451d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tchwork/utf8/zipball/25a55c6c668de61cc3b97aab4237ebf6dadabe17",
-                "reference": "25a55c6c668de61cc3b97aab4237ebf6dadabe17",
+                "url": "https://api.github.com/repos/tchwork/utf8/zipball/3bd61bc162ed5c5f4a11e40a0106acc255b451d9",
+                "reference": "3bd61bc162ed5c5f4a11e40a0106acc255b451d9",
                 "shasum": ""
             },
             "require": {
@@ -548,7 +548,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -578,7 +578,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2015-10-14 08:58:12"
+            "time": "2015-12-15 15:34:15"
         },
         {
             "name": "phpseclib/phpseclib",

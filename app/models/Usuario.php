@@ -16,7 +16,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
  
  	protected $table = 'usuario';
  	 	
- 	protected $fillable = array('id', 'nombre', 'apellido', 'id_social', 'red_social', 'tipo_usuario', 'fecha', 'tipo_inteligencia');
+ 	protected $fillable = array('id', 'nombre', 'apellido', 'id_social', 'red_social', 'tipo_usuario', 'fecha', 'tipo_inteligencia', 'foto', 'titulo');
 
 	//protected $hidden = array('password', 'remember_token');
     public $timestamps = false;
@@ -31,7 +31,9 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
             'red_social' => 'required',
             'tipo_usuario' => 'required',
             'fecha' => 'required',
-            'tipo_inteligencia' => 'required'
+            'tipo_inteligencia' => 'required',
+            'foto' => 'required',
+            'titulo' => 'required'
         );
         
         $validator = Validator::make($data, $rules);

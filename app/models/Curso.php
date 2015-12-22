@@ -71,11 +71,48 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 		return $tematica->nombre;
 	}
 	
+	public function getLecciones($semana) {
+		$lecciones = Leccion::where('id_curso','=', $this->id_curso)->where('semana','=', $semana)->orderBy('id_leccion', 'ASC')->get();
+		return $lecciones;
+	}
+	
+	public function getEvaluaciones($semana) {
+		$evaluaciones = Evaluacion::where('id_curso','=', $this->id_curso)->where('semana','=', $semana)->get();
+		return $evaluaciones;
+	}
+	
 	public function getFechaInicio(){
 		if($this->comienzo == "Auto-aprendizaje"){		return $this->comienzo;		}
 		else if($this->fecha_inicio > date("Y-m-d")){	return "Proximo a iniciar (".$this->fecha_inicio.")";	}
 		else{	return "En curso";	}
 	}
+	
+	public function getTemarios(){
+		$temarios = Temario::where('id_curso','=', $this->id_curso)->where('tipo_contenido', '=', 'info_curso')->get();
+		return $temarios;
+	}
+	
+	public function getTemariosInicio(){
+		$temarios = Temario::where('id_curso','=', $this->id_curso)->where('tipo_contenido', '=', 'inicio')->get();
+		return $temarios;
+	}
+	
+	public function getTemariosSemana(){
+		$temarios = Temario::where('id_curso','=', $this->id_curso)->where('tipo_contenido', '=', 'semana')->get();
+		return $temarios;
+	}
+	
+	public function getProfesoresAdmin(){
+		$profesores = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Admin')->get();
+		return $profesores;
+	}
+	
+	public function getProfesoresAsistentes(){
+		$profesores = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Basico')->get();
+		return $profesores;
+	}
+	
+	
     
 }
 

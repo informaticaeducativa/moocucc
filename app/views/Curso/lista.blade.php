@@ -3,11 +3,14 @@
 
 @section ('title') Lista de Cursos @stop
 
-@section ('title_div') Lista de Cursos @stop
 
 
 @section ('contenido') 
-
+<center>
+	<h1>
+		Lista de Cursos
+	</h1>
+</center>
 <p><a href="{{ route('curso.create') }}" class="btn btn-primary">Crear un nuevo curso</a></p>
 
 <br>

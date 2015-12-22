@@ -72,7 +72,7 @@
  
   <!-- Agrupar los enlaces de navegación, los formularios y cualquier
        otro elemento que se pueda ocultar al minimizar la barra -->
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
+  <div class="navbar_back collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Enlace #1</a></li>
       <li><a href="#">Enlace #2</a></li>
@@ -120,22 +120,7 @@
 <body>
 <div class="container">
 	<center><h1>MOOC UCC</h1></center>
-		
-<!--
-			<table width="100%">
-				<tr>
-					<th>{{ Form::label('id_usuario', 'Estudiante') }}</th>
-					<td>{{ Form::text('id_usuario', 'Estudiante') }}</td>
-				</tr>
-				<tr>
-					<th>{{ Form::label('id_curso', 'Curso') }}</th>
-					<td>{{ Form::text('id_curso', 'cursos') }}</td>
-				</tr>
-				<tr>
-					<th colspan="2"><button class='btn btn-primary btn-block' id="boton_revisar">Revisar</button></th>
-				</tr>
-			</table>            
--->
+
 	<div class="row">
 		
     </div>    
@@ -161,7 +146,6 @@
 		@endforeach
     </div>    
         <div id="resultados"></div>
-		
 		<br>
 </div>
 </body>

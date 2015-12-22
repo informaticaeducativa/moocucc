@@ -58,6 +58,15 @@ class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
         return false;
     }
     
+    public function getPreguntas() {
+		$preguntas = Pregunta::where('id_evaluacion','=', $this->id_evaluacion)->orderBy('id_pregunta', 'ASC')->get();
+		return $preguntas;
+	}
+	
+	public function getPreguntasQuiz() {
+		$preguntas = Pregunta::where('id_evaluacion','=', $this->id_evaluacion)->select('respuesta')->orderBy('id_pregunta', 'ASC')->get();
+		return $preguntas;
+	}
     
 }
 

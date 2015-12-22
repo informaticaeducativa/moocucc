@@ -65,10 +65,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'moocbd',
-			'username' => 'administrador',
-			'password' => 'LauraFierro070912',
+			'host'     => 'ec2-107-21-105-116.compute-1.amazonaws.com',
+			'database' => 'da7vp0fev7pv9q',
+			'username' => 'qczwbruezfkglg',
+			'password' => 'TIHXMMmDS-a_iUpPY5lmQzVTaz',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',

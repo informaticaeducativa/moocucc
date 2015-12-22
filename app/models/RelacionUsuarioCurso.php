@@ -5,16 +5,16 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Relacion_usuario_curso extends Eloquent implements UserInterface, RemindableInterface 
+class RelacionUsuarioCurso extends Eloquent implements UserInterface, RemindableInterface 
 {
  
  	use UserTrait, RemindableTrait;
 
 	public $errors;
-    // protected $primaryKey = 'id_pregunta';
+    protected $primaryKey = array('id_usuario', 'id_curso', 'tipo_relacion');
  
- 	protected $table = 'pregunta_leccion';
- 	$table->primary(array('id_usuario', 'id_curso', 'tipo_relacion'));
+ 	protected $table = 'relacion_usuario_curso';
+ 	//~ $table->primary(array('id_usuario', 'id_curso', 'tipo_relacion'));
  	 	
  	protected $fillable = array('id_usuario', 'id_curso', 'tipo_relacion', 'fecha_creacion');
 
@@ -59,6 +59,11 @@ class Relacion_usuario_curso extends Eloquent implements UserInterface, Remindab
         return false;
     }
     
+    public function getProfesor()
+    {
+		$profesor = Usuario::find($this->id_usuario);
+		return $profesor;
+	}
     
 }
 

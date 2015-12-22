@@ -1,18 +1,16 @@
 @extends ('template')
 
 @section ('title') Ver Curso @stop
-@section ('title_div')  @stop
 
 @section ('boton')
 <p><a href="{{ route('curso.create') }}" class="btn btn-primary">Crear un nuevo curso</a></p>
 @stop
 
 
-
 @section ('contenido') 
  <br>
 
-<div class="div col-sm-12 col-xs-12 border1">
+<div class="div col-sm-12 col-xs-12 ">
 	<div class="col-sm-4 col-xs-12">
 		<img class="imagen_div" src="../imagenes/{{$curso->imagen_presentacion}} " >
     </div>
@@ -25,22 +23,49 @@
 			<center>
 				<br>
 				<h4>{{ $curso->getFechaInicio() }}</h4>
-				  <a href="{{ route('curso.edit', $curso->id_curso) }}" class="btn btn-primary" style="width:100%">
-					  Inscribirse al Curso
-				  </a>
+				  <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">Inscribirse al Curso</button>
 			</center>
 		</div>
 	</div>
 </div>
 <br>
-<div class="col-sm-8 col-xs-12">
-	<div class="div_list2">
-		
+<div class="col-sm-8 col-xs-12 div_list2">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		@foreach ($curso->getTemarios() as $temario)
+					<div class="espaciado">
+						<h3><strong>{{ $temario->titulo }}</strong></h3>
+						{{ $temario->contenido }}
+					</div>
+		@endforeach
+
+		<h3><strong>Profesores Del Curso</strong></h3>
+		@foreach ($curso->getProfesoresAdmin() as $profe)
+		<div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
+			<center>	
+				<h4><strong>{{ $profe->tipo_relacion }}</strong></h4>
+				<img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br>
+				
+				<strong>{{ $profe->getProfesor()->nombre." ".$profe->getProfesor()->apellido }}</strong><br>
+				{{ $profe->getProfesor()->titulo }}<br><br>
+			</center>
+		</div>
+		@endforeach
+		@foreach ($curso->getProfesoresAsistentes() as $profe)
+		<div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
+			<center>
+				<h4><strong>{{ $profe->tipo_relacion }}</strong></h4>
+				<img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br>
+				
+				<strong>{{ $profe->getProfesor()->nombre." ".$profe->getProfesor()->apellido }}</strong><br>
+				{{ $profe->getProfesor()->titulo }}<br><br>
+			</center>
+		</div>
+		@endforeach
 	</div>
 </div>
-<div class="col-sm-4 col-xs-12">
+<div class="col-sm-4 col-xs-12 ">
 	<div class="div_list2 espaciado">
-		<table class="table table-condensed table-hover espaciado">
+		<table class="table-curso-detalles">
 			<tr>
 				<th colspan="3"><center>Datos del curso</center></th>
 			</tr>
@@ -74,6 +99,26 @@
 			</tr>
 		</table>
 	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Inscripción</h4>
+      </div>
+      <div class="modal-body">
+	  ¿ Esta seguro de querer inscribirse en el curso {{ $curso->nombre }} ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+   		{{ HTML::linkRoute('ver-curso-info', 'Inscribirme', array($curso->id_curso), array('class' => 'btn btn-primary')) }}
+
+      </div>
+    </div>
+  </div>
 </div>
 @stop
 
