@@ -62,6 +62,12 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
         return false;
     }
     
+    public function getPreguntasLeccion()
+    {
+		$preguntas = PreguntaLeccion::where('id_leccion','=', $this->id_leccion)->orderBy('fecha_creacion','ASC')->get();
+		return $preguntas;
+	}
+	
     
 }
 
