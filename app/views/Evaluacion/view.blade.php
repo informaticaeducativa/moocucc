@@ -1,17 +1,17 @@
 @extends ('template')
 
-@section ('title') Ver Evaluacion @stop
-@section ('title_div') Ver Evaluacion @stop
+@section ('title') Ver Evaluación @stop
+@section ('title_div') Ver Evaluación @stop
 
 @section ('boton')
-<p><a href="{{ route('evaluacion.create') }}" class="btn btn-primary">Crear un nuevo evaluacion</a></p>
+<p><a href="{{ route('evaluacion.create') }}" class="btn btn-primary">Crear una nueva evaluación</a></p>
 @stop
 
 
 
-@section ('contenido') 
+@section ('contenido')
  <br>
- 
+
 <table id="ticket-table" class="table table-sorting">
 	<thead>
 		<tr>
@@ -40,4 +40,3 @@
 </table>
 
 @stop
-

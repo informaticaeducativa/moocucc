@@ -7,7 +7,7 @@
         $action    = 'Editar';
     else:
         $form_data = array('route' => 'curso.store', 'method' => 'POST');
-        $action    = 'Crear';        
+        $action    = 'Crear';
     endif;
 
 ?>
@@ -15,7 +15,7 @@
 @section ('title') {{ $action }} Curso @stop
 
 
-@section ('contenido') 
+@section ('contenido')
 <center>
 	<h1>
 		{{ $action }} Curso
@@ -38,30 +38,30 @@
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('fecha_inicio', 'Fecha de inicio') }}
-      {{ Form::input('date', 'fecha_inicio', null, array('placeholder' => 'Introduce la fecha de inicio del curso', 'class' => 'form-control')) }}        
+      {{ Form::input('date', 'fecha_inicio', null, array('placeholder' => 'Introduce la fecha de inicio del curso', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('imagen_presentacion', 'Imagen del curso') }}
-      {{ Form::file('imagen_presentacion', null, array('placeholder' => 'Introduce la imagen del curso', 'class' => 'form-control')) }}        
+      {{ Form::file('imagen_presentacion', null, array('placeholder' => 'Introduce la imagen del curso', 'class' => 'form-control')) }}
     </div>
      <div class="form-group col-md-5">
       {{ Form::label('comienzo', 'Comienzo del curso') }}
-      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuando comienza el curso', 'class' => 'form-control')) }}        
+      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuando comienza el curso', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('id_tematica', 'Tematica del curso') }}
-      {{ Form::select('id_tematica', $tematicas, null, array('placeholder' => 'Introduce cuando comienza el curso', 'class' => 'form-control')) }}        
+      {{ Form::label('id_tematica', 'Temática del curso') }}
+      {{ Form::select('id_tematica', $tematicas, null, array('placeholder' => 'Introduce cuando comienza el curso', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('nivel', 'Nivel del curso') }}
-      {{ Form::select('nivel',  array('Principiante' => 'Principiante', 'Medio' => 'Medio', 'Avanzado'=>'Avanzado'), null, array('class' => 'form-control')) }}        
+      {{ Form::select('nivel',  array('Principiante' => 'Principiante', 'Medio' => 'Medio', 'Avanzado'=>'Avanzado'), null, array('class' => 'form-control')) }}
     </div>
   </div>
-  
-  {{ Form::button($action . ' curso', array('type' => 'submit', 'class' => 'btn btn-primary')) }}    
-  
+
+  {{ Form::button($action . ' curso', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+
 {{ Form::close() }}
 
 
 
-@stop  
+@stop

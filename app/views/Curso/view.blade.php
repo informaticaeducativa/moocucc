@@ -7,7 +7,7 @@
 @stop
 
 
-@section ('contenido') 
+@section ('contenido')
  <br>
 
 <div class="div col-sm-12 col-xs-12 ">
@@ -41,10 +41,10 @@
 		<h3><strong>Profesores Del Curso</strong></h3>
 		@foreach ($curso->getProfesoresAdmin() as $profe)
 		<div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
-			<center>	
+			<center>
 				<h4><strong>{{ $profe->tipo_relacion }}</strong></h4>
 				<img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br>
-				
+
 				<strong>{{ $profe->getProfesor()->nombre." ".$profe->getProfesor()->apellido }}</strong><br>
 				{{ $profe->getProfesor()->titulo }}<br><br>
 			</center>
@@ -55,7 +55,7 @@
 			<center>
 				<h4><strong>{{ $profe->tipo_relacion }}</strong></h4>
 				<img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br>
-				
+
 				<strong>{{ $profe->getProfesor()->nombre." ".$profe->getProfesor()->apellido }}</strong><br>
 				{{ $profe->getProfesor()->titulo }}<br><br>
 			</center>
@@ -110,7 +110,7 @@
         <h4 class="modal-title" id="myModalLabel">Inscripción</h4>
       </div>
       <div class="modal-body">
-	  ¿ Esta seguro de querer inscribirse en el curso {{ $curso->nombre }} ?
+	  ¿ Está seguro de querer inscribirse en el curso {{ $curso->nombre }} ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -121,4 +121,3 @@
   </div>
 </div>
 @stop
-
