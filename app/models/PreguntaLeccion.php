@@ -60,6 +60,12 @@ class PreguntaLeccion extends Eloquent implements UserInterface, RemindableInter
         return false;
     }
     
+    public function getUsuario()
+    {
+		$usuario = Usuario::find($this->id_usuario);
+		return $usuario;
+	}
+    
     
 }
 

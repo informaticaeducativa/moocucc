@@ -76,6 +76,20 @@ Route::get('validar-quiz',  function()
 	
 });
 
+Route::get('postear-en-microforo',  function()
+{
+	$data = Input::all();
+	
+	$leccion = $data['leccion'];
+	$mensaje = $data['mensaje'];
+	$usuario = Session::get('user_id');
+	
+	$pregunta_leccion = PreguntaLeccion::create(array('id_usuario'=>$usuario, 'id_leccion'=>$leccion, 'pregunta'=>$mensaje, 'fecha_creacion'=> date('Y-m-d H:i:s')));
+	
+	return Session::get('user');
+	
+});
+
 Route::get('login-facebook',array('as'=>'login-facebook','uses'=>'LoginController@loginWithFacebook'));
 Route::get('login-twitter',array('as'=>'login-twitter','uses'=>'LoginController@loginWithTwitter'));
 Route::get('login-google',array('as'=>'login-google','uses'=>'LoginController@loginWithGoogle'));

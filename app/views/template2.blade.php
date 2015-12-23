@@ -113,7 +113,28 @@
 				$("#r_"+leccion+"x"+pregunta).html(opcion);
 			});
 			
-
+			$("#btn-microforo").click(function() {
+				var mensaje = $(".mensaje").val();
+				var texto_id = $(".mensaje").attr('id');
+				var texto = (texto_id.substr(8,texto_id.length));
+				var textos = texto.split("x");
+				var clase = textos[0];
+				var leccion = textos[1];
+				var usuario = "";
+				
+				jQuery.ajax({
+					url: '../../../postear-en-microforo',					
+					data: {clase: clase, leccion: leccion, mensaje: mensaje },
+					success: function (result) {
+						usuario = result;
+						location.reload();
+					},
+					async: true
+				});
+				
+				
+				
+			});
 
 
 			$("#btn_terminar_prueba").click(function() {
@@ -163,10 +184,8 @@
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-​
   ga('create', 'UA-71691218-1', 'auto');
   ga('send', 'pageview');
-​
 </script>
 </head>
 <!--Header Start Here-->

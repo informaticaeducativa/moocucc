@@ -57,11 +57,31 @@
 				<center>
 					{{ $leccion->contenido_grafico }}
 				</center>
-			</div>	
-				
+			</div>
 			<br>
+			<hr>
 			<br>
-		
+			<center><h3>Micro-foro</h3></center>
+			<div id="form-microforo">
+				<textarea rows="3"  class="form-control mensaje" id="mensajex{{$curso->id_curso}}x{{$leccion->id_leccion}}"></textarea>
+				<button class="btn btn-info" id="btn-microforo">Enviar</button>
+			</div>
+			<div id="microforo">
+				<table>
+				@foreach ($leccion->getPreguntasLeccion() as $pregunta)
+						<tr>
+							<th width="20%"><img class="imagen_redonda_reducida" src="../../../imagenes/fotos/{{ $pregunta->getUsuario()->foto  }} " ></th>
+							<th>
+								<strong>{{ $pregunta->getUsuario()->nombre." ".$pregunta->getUsuario()->apellido }}</strong><br>
+								{{ $pregunta->pregunta }}<br>
+								<h6>{{$pregunta->fecha_creacion}}</h6>
+							</th>
+						</tr>
+						<br>
+				@endforeach
+				</table>
+			</div>
+			<br>
 
 </div>
 
