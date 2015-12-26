@@ -6,7 +6,7 @@ body{
 	background-color: #f8f8f8;
 }
 .navbar_back{
-	background-color: #FFFFFF;	
+	background-color: #FFFFFF;
 }
 
 .top_menos_20{
@@ -21,17 +21,14 @@ body{
 
 hr{
 	display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
+	margin: 0.5em auto 0.5em auto;
+  border-style: inset;
+  border-width: 1px;
 }
 
 
 .row_cursos{
-	padding: 5px 5px 5px 5px;
+	padding: 5px;
 }
 
 .div_list{
@@ -41,9 +38,7 @@ hr{
 	-moz-box-shadow: 4px 4px 10px #999;
 
 	min-height: 200px;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 10px;
+	margin: 0 5px 10px 5px;
 	transition: background-color 0.5s ease;
 	-webkit-transition: background-color 0.5s ease;
 	-moz-transition: background-color 0.5s ease;
@@ -61,7 +56,7 @@ hr{
 
 	min-height: 200px;
 	margin-top: 10px;
-	
+
 	background-color: white;
 }
 
@@ -72,9 +67,7 @@ hr{
 	-webkit-box-shadow: 4px 4px 10px #999;
 	-moz-box-shadow: 4px 4px 10px #999;
 
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 10px;
+	margin: 0 5px 10px 5px;
 	transition: background-color 0.5s ease;
 	-webkit-transition: background-color 0.5s ease;
 	-moz-transition: background-color 0.5s ease;
@@ -98,25 +91,25 @@ hr{
 /*
 	width: 100%;
 */
-	width: 140px;   
+	width: 140px;
    height: 140px;
-   background:#008040; 
-   -moz-border-radius: 70px; 
-   -webkit-border-radius: 70px; 
+   background:#008040;
+   -moz-border-radius: 70px;
+   -webkit-border-radius: 70px;
    border-radius: 70px;
 }
 
 .imagen_redonda_reducida{
-   width: 70px;   
+   width: 70px;
    height: 70px;
-   background:#008040; 
-   -moz-border-radius: 35px; 
-   -webkit-border-radius: 35px; 
+   background:#008040;
+   -moz-border-radius: 35px;
+   -webkit-border-radius: 35px;
    border-radius: 35px;
 }
 
 .espaciado{
-	padding: 5px 5px 5px 5px;
+	padding: 5px;
 }
 
 .titulo_curso{
@@ -128,10 +121,7 @@ hr{
 }
 
 .div{
-	padding-top: 15px;
-	padding-bottom: 15px;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding: 15px;
 	background-color: white;
 	box-shadow: 4px 4px 10px #999;
 	-webkit-box-shadow: 4px 4px 10px #999;
@@ -150,7 +140,6 @@ hr{
 }
 
 
-
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
@@ -158,7 +147,7 @@ hr{
     background-color:rgba(255,255,255,.8);
 }
 #login-dp .help-block{
-    font-size:12px    
+    font-size:12px
 }
 #login-dp .bottom{
     background-color:rgba(255,255,255,.8);
@@ -167,7 +156,7 @@ hr{
     padding:14px;
 }
 #login-dp .social-buttons{
-    margin:12px 0    
+    margin:12px 0
 }
 #login-dp .social-buttons a{
     width: 49%;
@@ -181,7 +170,7 @@ hr{
 }
 .btn-fb:hover{
     color: #fff;
-    background-color:#496ebc 
+    background-color:#496ebc
 }
 .btn-tw{
     color: #fff;
@@ -209,4 +198,3 @@ hr{
         border-top:0 none;
     }
 }
-
