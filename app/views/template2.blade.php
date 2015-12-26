@@ -169,6 +169,56 @@
 				  
 			});
 			
+			$(".btn_res_num").click(function() {
+				var texto_id = $(this).attr('id');
+				var texto = (texto_id.substr(4,texto_id.length));
+				var textos = texto.split("x");
+				var leccion = textos[0];
+				var pregunta = textos[1];
+				var opcion = textos[2];
+				
+				$("#btn_"+leccion+"x"+pregunta+"x1").attr("class","btn btn-primary btn_res");
+				$("#btn_"+leccion+"x"+pregunta+"x2").attr("class","btn btn-primary btn_res");
+				$("#btn_"+leccion+"x"+pregunta+"x3").attr("class","btn btn-primary btn_res");
+				$("#btn_"+leccion+"x"+pregunta+"x4").attr("class","btn btn-primary btn_res");
+				$(this).attr("class","btn btn-danger btn_res");
+
+				$("#r_"+leccion+"x"+pregunta).html(opcion);
+			});
+			
+			$("#btn_inteligencia").click(function() {
+					
+				var preguntas = [];
+				var respuestas = [];
+				var contador = 0;
+				$(".result").each(function( i ) {
+					  
+					var texto_id = $(this).attr('id');
+					var texto = (texto_id.substr(2,texto_id.length));
+					var textos = texto.split("x");
+					var leccion = textos[0];
+					var pregunta = textos[1];
+					var opcion = $(this).text();
+					
+					preguntas[i] = pregunta;
+					respuestas[i] = parseInt(opcion);
+					contador++;
+				});
+				console.log("comienza");
+				jQuery.ajax({
+					url: '../../../validar-inteligencia',
+					data: {preguntas: preguntas, respuestas: respuestas },
+					success: function (result) {
+						console.log(result);
+						$("#regresar").show();
+						
+						alert("Resultado: "+result);
+						
+					},
+					async: true
+				});
+				  
+			});
 			
 		});
 		

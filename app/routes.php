@@ -21,11 +21,11 @@ Route::get('/', function()
 });
 
 
-Route::get('index', function()
+Route::get('index',  array('as' => 'index',function()
 {
 	$cursos = Curso::all();
 	return View::make('index')->with('cursos', $cursos); 
-});
+}));
 
 
 Route::get('google/authorize', function()
@@ -76,6 +76,51 @@ Route::get('validar-quiz',  function()
 	
 });
 
+Route::get('validar-inteligencia',  function()
+{
+	$data = Input::all();
+	
+	$preguntas = $data['preguntas'];
+	$respuestas = $data['respuestas'];
+	$evaluacion = Evaluacion::find(2);
+	$postData = $evaluacion->getPreguntasQuiz();
+	$contador=0;
+	$kinestesico=0;
+	$linguistico=0;
+	$visual=0;
+	
+	foreach ($postData as $pregunta)
+	{
+		if($pregunta["respuesta"] === "Kinestesico")
+		{
+			$kinestesico += $respuestas[$contador];
+		}
+		if($pregunta["respuesta"] === "Visual")
+		{
+			$visual += $respuestas[$contador];
+		}
+		if($pregunta["respuesta"] === "Linguistico")
+		{
+			$linguistico += $respuestas[$contador];
+		}
+		$contador++;
+	}
+	$respuesta = "Kinestesico: ".$kinestesico." Visual: ".$visual." Linguistico: ".$linguistico;
+
+	$usuario = (Session::get('user_id'));
+	
+	if($kinestesico >= $visual && $kinestesico>= $linguistico){
+		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Kinestesico'));
+		return "Ganador Kinestesico: ".$kinestesico." -- Visual: ".$visual." Linguistico: ".$linguistico;
+	}else if($visual >= $kinestesico && $visual>= $linguistico){
+		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Visual'));
+		return "Ganador Visual: ".$visual." -- Kinestesico: ".$kinestesico." Linguistico: ".$linguistico;
+	}else{
+		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Linguistico'));
+		return "Ganador Linguistico: ".$linguistico." -- Kinestesico: ".$kinestesico." Visual: ".$visual;
+	}
+});
+
 Route::get('postear-en-microforo',  function()
 {
 	$data = Input::all();
@@ -103,11 +148,24 @@ Route::get('ver-curso/{id}', array('as' => 'ver-curso', function($id)
     return View::make('Estudiante/ver-curso')->with('curso', $curso); 
 }))->where('id', '[0-9]+');
 
+
+Route::get('prueba-inteligencias', array('as' => 'prueba-inteligencias', function()
+{
+	$evaluacion = Evaluacion::find(2);
+    return View::make('Estudiante/pruebainteligencia')->with('evaluacion', $evaluacion);    
+}));
+
+
+
 Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 {
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
 
+	$usuario = Usuario::find(Session::get('user_id'));
+	if($usuario->tipo_inteligencia == "")
+		return Redirect::to('prueba-inteligencias');
+	
 	$curso = Curso::find($id);
     return View::make('Estudiante/info')->with('curso', $curso); 
 }))->where('id', '[0-9]+');
