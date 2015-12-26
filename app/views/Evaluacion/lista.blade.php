@@ -6,9 +6,9 @@
 @section ('title_div') Lista de Evaluacioness @stop
 
 
-@section ('contenido') 
+@section ('contenido')
 
-<p><a href="{{ route('evaluacion.create') }}" class="btn btn-primary">Crear un nuevo evaluacion</a></p>
+<p><a href="{{ route('evaluacion.create') }}" class="btn btn-primary">Crear una nueva evaluación</a></p>
 
 <br>
 <table id="ticket-table" class="table table-sorting">
