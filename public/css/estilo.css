@@ -26,6 +26,9 @@ hr{
   border-width: 1px;
 }
 
+.strong{
+	font-weight: bold;
+}
 
 .row_cursos{
 	padding: 5px;

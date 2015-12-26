@@ -46,11 +46,11 @@
     </div>
      <div class="form-group col-md-5">
       {{ Form::label('comienzo', 'Comienzo del curso') }}
-      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuando comienza el curso', 'class' => 'form-control')) }}
+      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuándo comienza el curso', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('id_tematica', 'Temática del curso') }}
-      {{ Form::select('id_tematica', $tematicas, null, array('placeholder' => 'Introduce cuando comienza el curso', 'class' => 'form-control')) }}
+      {{ Form::select('id_tematica', $tematicas, null, array('placeholder' => 'Introduce cuándo comienza el curso', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('nivel', 'Nivel del curso') }}
