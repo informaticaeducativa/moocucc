@@ -34,7 +34,8 @@ public function loginWithFacebook() {
 
         //Var_dump
         //display whole array().
-        dd($result);
+        //dd($result);
+        return Redirect::to( "index" );
 
     }
     // if not ask for permission first
@@ -73,7 +74,8 @@ public function loginWithGoogle() {
 
         //Var_dump
         //display whole array().
-        dd($result);
+        //dd($result);
+        return Redirect::to( "index" );
 
     }
     // if not ask for permission first
@@ -113,7 +115,8 @@ public function loginWithTwitter() {
 
         //Var_dump
         //display whole array().
-        dd($result);
+        //dd($result);
+        return Redirect::to( "index" );
 
     }
     // if not ask for permission first
