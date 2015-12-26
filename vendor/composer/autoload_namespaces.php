@@ -24,6 +24,9 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Predis' => array($vendorDir . '/predis/predis/lib'),
     'PHPParser' => array($vendorDir . '/nikic/php-parser/lib'),
+    'OAuth\\Unit' => array($vendorDir . '/lusitanian/oauth/tests'),
+    'OAuth2' => array($vendorDir . '/adoy/oauth2/src'),
+    'OAuth' => array($vendorDir . '/lusitanian/oauth/src'),
     'Net' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Math' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Jeremeamia\\SuperClosure' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
@@ -33,4 +36,6 @@ return array(
     'ClassPreloader' => array($vendorDir . '/classpreloader/classpreloader/src'),
     'Carbon' => array($vendorDir . '/nesbot/carbon/src'),
     'Boris' => array($vendorDir . '/d11wtq/boris/lib'),
+    'Auth0\\Login\\' => array($vendorDir . '/auth0/login/src'),
+    'Artdarek\\OAuth' => array($vendorDir . '/artdarek/oauth-4-laravel/src'),
 );
