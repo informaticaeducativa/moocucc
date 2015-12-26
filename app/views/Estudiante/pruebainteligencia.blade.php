@@ -2,20 +2,29 @@
 
 @section ('title') Prueba de inteligencias @stop
 
-@section ('contenido') 
+@section ('contenido')
 
 
 <div class="col-sm-12 col-xs-12 div_list2 top_menos_20">
 	<div class="col-md-12 col-sm-12 col-xs-12">
-		<h2><center><strong>{{ $evaluacion->nombre }}</strong></center></h2>
-		<br>
-			<h6><strong>Calificable: {{ $evaluacion->calificable }}</strong></h6>
-			<h5>Para realizar este test, debe puntuar cada pregunta de 1 a 4 siguiendo las siguientes indicaciones:<br>1. Parcialmente en desacuerdo<br>2. Ligeramente en desacuerdo<br>3. Ligeramente de acuerdo<br>4. Parcialmente de acuerdo</h5>
-			<br>
+		<h2 class="strong"><center>{{ $evaluacion->nombre }}</center></h2>
+		<br/>
+			<h6 class="strong">Calificable: {{ $evaluacion->calificable }}</h6>
+			<h5>Para realizar este test, debe puntuar cada pregunta de 1 a 4 siguiendo las siguientes indicaciones:
+				<br/>
+				1. Parcialmente en desacuerdo
+				<br/>
+				2. Ligeramente en desacuerdo
+				<br/>
+				3. Ligeramente de acuerdo
+				<br/>
+				4. Parcialmente de acuerdo
+			</h5>
+			<br/>
 			@foreach ($evaluacion->getPreguntas() as $pregunta)
 			<div class="col-md-12 col-sm-12 col-xs-12 espaciado ">
 				{{ $pregunta->nombre }}<br>
-			
+
 				<div class="col-md-12 col-sm-12 col-xs-12 espaciado ">
 					<div class="col-md-6 col-sm-8 col-xs-12 espaciado ">
 						<table width="100%">
@@ -37,26 +46,24 @@
 						</table>
 					</div>
 					<div class="col-md-6 col-sm-8 col-xs-12 espaciado" id="mensaje_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}">
-						
+
 					</div>
 				</div>
 				<hr>
 			</div>
 			@endforeach
-				
-			<br><br><br>
+
+			<br/><br/><br/>
 				<button id="btn_inteligencia" class="btn btn-warning btn-block">Terminar Prueba</button>
-			<br><br>
+			<br/><br/>
 			<div id="regresar" style="display:none;">
 				<a href="{{ URL::route('index') }}"><button class="btn btn-warning btn-block">Regresar</button></a>
-			</div>	
-			
-			<br>
-		
+			</div>
+
+			<br/>
+
 
 	</div>
 </div>
 
 @stop
-
-
