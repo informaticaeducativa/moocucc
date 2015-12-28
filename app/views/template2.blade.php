@@ -271,7 +271,7 @@
           <li><a href="#">Acción #2</a></li>
           <li><a href="#">Acción #3</a></li>
           <li class="divider"></li>
-          <li><a href="#">Acción #4</a></li>
+          <li><a href="#">Salir</a></li>
         </ul>
       </li>
     </ul>

@@ -23,7 +23,14 @@
       <center>
         <br>
         <h4>{{ $curso->getFechaInicio() }}</h4>
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">Inscribirse al Curso</button>
+        
+        @if($inscrito == 1)
+        <a href="{{ URL::route('ver-curso-info', $curso->id_curso) }}">
+	        <button type="button" class="btn btn-primary btn-lg btn-block">Seguir al Curso</button>
+		</a>
+		@else 
+	        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">Inscribirse al Curso</button>
+        @endif
       </center>
     </div>
   </div>

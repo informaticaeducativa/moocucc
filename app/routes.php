@@ -139,6 +139,14 @@ Route::get('login-facebook',array('as'=>'login-facebook','uses'=>'LoginControlle
 Route::get('login-twitter',array('as'=>'login-twitter','uses'=>'LoginController@loginWithTwitter'));
 Route::get('login-google',array('as'=>'login-google','uses'=>'LoginController@loginWithGoogle'));
 
+Route::get('desuscribirse/{id}', array('as' => 'desuscribirse', function($id)
+{
+	$usuario = Session::get('user_id');
+	RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario)->where('id_curso', '=', $id)->delete();
+	return Redirect::to('index');
+}))->where('id', '[0-9]+');
+
+
 Route::get('ver-curso/{id}', array('as' => 'ver-curso', function($id)
 {
 	if(Session::get('user_id') == "")
@@ -166,6 +174,11 @@ Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 	if($usuario->tipo_inteligencia == "")
 		return Redirect::to('prueba-inteligencias');
 	
+	$count = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
+	if ($count == 0){
+		//$respuestas = RelacionUsuarioCurso::create(array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'tipo_relacion' => 'Estudiante', 'fecha_creacion' => date('Y-m-d H:i:s')));
+	  DB::table('relacion_usuario_curso')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'tipo_relacion' => 'Estudiante', 'fecha_creacion' => date('Y-m-d H:i:s'))	);
+	}
 	$curso = Curso::find($id);
     return View::make('Estudiante/info')->with('curso', $curso); 
 }))->where('id', '[0-9]+');

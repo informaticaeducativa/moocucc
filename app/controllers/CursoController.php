@@ -77,7 +77,9 @@ class CursoController extends BaseController
 	public function show($id)
 	{
 		$curso = Curso::find($id);
-		return View::make('Curso/view')->with('curso', $curso);
+		$usuario = Usuario::find(Session::get('user_id'));
+		$count = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario->id)->where('id_curso', '=', $id)->count();
+		return View::make('Curso/view')->with('curso', $curso)->with('inscrito', $count);
 	}
 
 
