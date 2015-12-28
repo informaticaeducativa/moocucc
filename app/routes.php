@@ -13,9 +13,7 @@
 
 Route::get('/', function()
 {
-	Session::put('user_id', '1');
-	Session::put('user', 'Mark Gallego');
-	Session::put('inteligencia', 'Visual');
+
 	$cursos = Curso::all();
 	return View::make('index')->with('cursos', $cursos); 
 });
@@ -182,6 +180,8 @@ Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 	$curso = Curso::find($id);
     return View::make('Estudiante/info')->with('curso', $curso); 
 }))->where('id', '[0-9]+');
+
+
 
 Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', function($id)
 {

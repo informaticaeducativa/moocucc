@@ -32,9 +32,12 @@ public function loginWithFacebook() {
         $message = 'Tu ID de usuario de facebook es: ' . $result['id'] . ' y tu nombre es ' . $result['name'];
         echo $message. "<br/>";
 
-        //Var_dump
-        //display whole array().
-        //dd($result);
+		$count = Usuario::where('id_social', '=', $result['id'])->where('red_social', '=', 'Facebook')->count();
+		if ($count == 0){
+			$respuestas = Usuario::create(array('nombre' => $result['name'], 'id_social' => $result["id"], 'red_social' => 'Facebook',
+			'tipo_usuario' => 'Estudiante', 'fecha' => date('Y-m-d H:i:s')
+			));
+		}
         return Redirect::to( "index" );
 
     }
@@ -71,12 +74,19 @@ public function loginWithGoogle() {
 
         $message = 'Tu ID de Google es: ' . $result['id'] . ' y tu nombre es ' . $result['name'];
         echo $message. "<br/>";
-
-        //Var_dump
-        //display whole array().
-        //dd($result);
+		
+		$count = Usuario::where('id_social', '=', $result['id'])->where('red_social', '=', 'Google')->count();
+		if ($count == 0){
+			$respuestas = Usuario::create(array('nombre' => $result['name'], 'id_social' => $result["id"],  'red_social' => 'Google',
+			'foto' => $result["picture"], 'tipo_usuario' => 'Estudiante', 'fecha' => date('Y-m-d H:i:s')
+			));
+		}
+		$user = Usuario::where('id_social', '=', $result['id'])->first();
+			Session::put('user_id', $user->id);
+			Session::put('user', $user->nombre);
+			Session::put('inteligencia', $user->tipo_inteligencia);
+			
         return Redirect::to( "index" );
-
     }
     // if not ask for permission first
     else {
@@ -113,9 +123,13 @@ public function loginWithTwitter() {
         $message = 'Tu ID de Twitter es: ' . $result['id'] . ' y tu nombre es ' . $result['name'];
         echo $message. "<br/>";
 
-        //Var_dump
-        //display whole array().
-        //dd($result);
+		
+        $count = Usuario::where('id_social', '=', $result['id'])->where('red_social', '=', 'Twitter')->count();
+		if ($count == 0){
+			$respuestas = Usuario::create(array('nombre' => $result['name'], 'id_social' => $result["id"],  'red_social' => 'Twitter',
+			'foto' => str_replace("_normal", "", $result["profile_image_url"]) ,'tipo_usuario' => 'Estudiante', 'fecha' => date('Y-m-d H:i:s')
+			));
+		}
         return Redirect::to( "index" );
 
     }
