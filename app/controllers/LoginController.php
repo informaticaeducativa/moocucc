@@ -38,8 +38,18 @@ public function loginWithFacebook() {
 			'tipo_usuario' => 'Estudiante', 'fecha' => date('Y-m-d H:i:s')
 			));
 		}
-        return Redirect::to( "index" );
-
+		
+        $user = Usuario::where('id_social', '=', $result['id'])->first();
+			Session::put('user_id', $user->id);
+			Session::put('user', $user->nombre);
+			Session::put('inteligencia', $user->tipo_inteligencia);
+			
+		if($user->tipo_usuario == "Administrador")
+			return Redirect::to("administrador");
+		else if($user->tipo_usuario == "Profesor Basico")
+			return Redirect::to( "profesor-base-cursos" );
+		else
+			return Redirect::to( "index" );
     }
     // if not ask for permission first
     else {
@@ -81,12 +91,18 @@ public function loginWithGoogle() {
 			'foto' => $result["picture"], 'tipo_usuario' => 'Estudiante', 'fecha' => date('Y-m-d H:i:s')
 			));
 		}
+		
 		$user = Usuario::where('id_social', '=', $result['id'])->first();
 			Session::put('user_id', $user->id);
 			Session::put('user', $user->nombre);
 			Session::put('inteligencia', $user->tipo_inteligencia);
 			
-        return Redirect::to( "index" );
+		if($user->tipo_usuario == "Administrador")
+			return Redirect::to("administrador");
+		else if($user->tipo_usuario == "Profesor Basico")
+			return Redirect::to( "profesor-base-cursos" );
+		else
+			return Redirect::to( "index" );
     }
     // if not ask for permission first
     else {
@@ -130,7 +146,18 @@ public function loginWithTwitter() {
 			'foto' => str_replace("_normal", "", $result["profile_image_url"]) ,'tipo_usuario' => 'Estudiante', 'fecha' => date('Y-m-d H:i:s')
 			));
 		}
-        return Redirect::to( "index" );
+        
+        $user = Usuario::where('id_social', '=', $result['id'])->first();
+			Session::put('user_id', $user->id);
+			Session::put('user', $user->nombre);
+			Session::put('inteligencia', $user->tipo_inteligencia);
+			
+		if($user->tipo_usuario == "Administrador")
+			return Redirect::to("administrador");
+		else if($user->tipo_usuario == "Profesor Basico")
+			return Redirect::to( "profesor-base-cursos" );
+		else
+			return Redirect::to( "index" );
 
     }
     // if not ask for permission first
