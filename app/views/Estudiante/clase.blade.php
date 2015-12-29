@@ -67,7 +67,13 @@
 				<table>
 					@foreach ($leccion->getPreguntasLeccion() as $pregunta)
 						<tr>
+
+							@if(substr( $pregunta->getUsuario()->foto , 0, 4) == 'http')
+							<th width="20%"><img class="imagen_redonda_reducida" src="{{ $pregunta->getUsuario()->foto }}" ></th>
+							@else
 							<th width="20%"><img class="imagen_redonda_reducida" src="../../../imagenes/fotos/{{ $pregunta->getUsuario()->foto  }} " ></th>
+							@endif							
+							
 							<th>
 								<span class=strong>{{ $pregunta->getUsuario()->nombre." ".$pregunta->getUsuario()->apellido }}</span><br>
 								{{ $pregunta->pregunta }}<br>

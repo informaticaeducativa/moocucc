@@ -50,7 +50,12 @@
 		<div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
 			<center>
 				<h4 class="strong">{{ $profe->tipo_relacion }}</h4>
+
+				@if(substr( $profe->getProfesor()->foto , 0, 4) == 'http')
+				<img class="imagen_redonda" src="{{ $profe->getProfesor()->foto }}" ><br>
+				@else
 				<img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br>
+				@endif
 
 				<span class="strong">{{ $profe->getProfesor()->nombre." ".$profe->getProfesor()->apellido }}</span><br>
 				{{ $profe->getProfesor()->titulo }}<br><br>
@@ -61,8 +66,13 @@
 		<div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
 			<center>
 				<h4 class="strong">{{ $profe->tipo_relacion }}</h4>
+				
+				@if(substr( $profe->getProfesor()->foto , 0, 4) == 'http')
+				<img class="imagen_redonda" src="{{ $profe->getProfesor()->foto }}" ><br>
+				@else
 				<img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br>
-
+				@endif
+				
 				<span class="strong">{{ $profe->getProfesor()->nombre." ".$profe->getProfesor()->apellido }}</span><br>
 				{{ $profe->getProfesor()->titulo }}<br><br>
 			</center>

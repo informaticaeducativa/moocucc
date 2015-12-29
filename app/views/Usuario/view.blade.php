@@ -13,7 +13,11 @@
  <br>
  
 <center>
+	@if(substr( $usuario->foto , 0, 4) == 'http')
+	<img class="imagen_redonda" src="{{ $usuario->foto}}" ><br>
+	@else
 	<img class="imagen_redonda" src="../imagenes/fotos/{{ $usuario->foto  }} " ><br>
+	@endif
 </center>
 <br>				
 <table id="ticket-table" class="table table-sorting">

@@ -132,7 +132,26 @@
 					async: true
 				});
 				
+			});
+
+			$("#btn-microforo-2").click(function() {
+				var mensaje = $(".mensaje").val();
+				var texto_id = $(".mensaje").attr('id');
+				var texto = (texto_id.substr(8,texto_id.length));
+				var textos = texto.split("x");
+				var clase = textos[0];
+				var leccion = textos[1];
+				var usuario = "";
 				
+				jQuery.ajax({
+					url: '../../../../postear-en-microforo',					
+					data: {clase: clase, leccion: leccion, mensaje: mensaje },
+					success: function (result) {
+						usuario = result;
+						location.reload();
+					},
+					async: true
+				});
 				
 			});
 
@@ -261,7 +280,8 @@
     </ul>
  
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="../usuario/{{ Session::get('user_id') }}">{{ Session::get('user') }}</a></li>
+      
+      <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">{{ Session::get('user') }}</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           Configuración<b class="caret"></b>

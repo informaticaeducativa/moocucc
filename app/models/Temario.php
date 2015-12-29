@@ -77,7 +77,7 @@ class Temario extends Eloquent implements UserInterface, RemindableInterface
 		}
 		else
 		{
-			$profesores = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Admin')->orwhere('tipo_relacion','=', 'Profesor Basico')->get();
+			$profesores = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Admin')->orwhere('tipo_relacion','=', 'Profesor Basico')->where('id_curso','=', $this->id_curso)->get();
 			return $profesores;
 		}
 	}

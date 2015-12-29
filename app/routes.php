@@ -11,9 +11,9 @@
 |
 */
 
+//RUTAS DEL INDEX
 Route::get('/', function()
 {
-
 	$cursos = Curso::all();
 	return View::make('index')->with('cursos', $cursos); 
 });
@@ -25,26 +25,23 @@ Route::get('index',  array('as' => 'index',function()
 	return View::make('index')->with('cursos', $cursos); 
 }));
 
-
-Route::get('google/authorize', function()
+Route::get('ver-usuario/{id}', array('as' => 'ver-usuario', function($id)
 {
-    return OAuth::authorize('google');
-});
-Route::get('google/login', function() {
-    try {
-        OAuth::login('google');
-    } catch (ApplicationRejectedException $e) {
-        // User rejected application
-    } catch (InvalidAuthorizationCodeException $e) {
-        // Authorization was attempted with invalid
-        // code,likely forgery attempt
-    }
-    // Current user is now available via Auth facade
-    $user = Auth::user();
-    dd($user);
-    return Redirect::intended();
-});
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
 
+	$curso = Curso::find($id);
+    return View::make('ProfesorBase/evaluacion')->with('curso', $curso)->with('evaluacion', $evaluacion);
+    
+}))->where('id', '[0-9]+');
+
+Route::get('usuario/{id}', array('as'=>'usuario','uses'=> 'UsuarioController@show' ))->where('id', '[0-9]+');
+
+
+
+
+
+//RUTAS DE ELEMENTOS LLAMADOS POR AJAX
 Route::get('obtener-inteligencia',  function()
 {
     return Session::get('inteligencia');
@@ -133,17 +130,19 @@ Route::get('postear-en-microforo',  function()
 	
 });
 
+//RUTAS PARA EL ACCESO A LOGIN
 Route::get('login-facebook',array('as'=>'login-facebook','uses'=>'LoginController@loginWithFacebook'));
 Route::get('login-twitter',array('as'=>'login-twitter','uses'=>'LoginController@loginWithTwitter'));
 Route::get('login-google',array('as'=>'login-google','uses'=>'LoginController@loginWithGoogle'));
 
+
+//RUTAS QUE TOMA EL USUARIO ESTUDIANTE
 Route::get('desuscribirse/{id}', array('as' => 'desuscribirse', function($id)
 {
 	$usuario = Session::get('user_id');
 	RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario)->where('id_curso', '=', $id)->delete();
 	return Redirect::to('index');
 }))->where('id', '[0-9]+');
-
 
 Route::get('ver-curso/{id}', array('as' => 'ver-curso', function($id)
 {
@@ -154,14 +153,11 @@ Route::get('ver-curso/{id}', array('as' => 'ver-curso', function($id)
     return View::make('Estudiante/ver-curso')->with('curso', $curso); 
 }))->where('id', '[0-9]+');
 
-
 Route::get('prueba-inteligencias', array('as' => 'prueba-inteligencias', function()
 {
 	$evaluacion = Evaluacion::find(2);
     return View::make('Estudiante/pruebainteligencia')->with('evaluacion', $evaluacion);    
 }));
-
-
 
 Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 {
@@ -180,8 +176,6 @@ Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 	$curso = Curso::find($id);
     return View::make('Estudiante/info')->with('curso', $curso); 
 }))->where('id', '[0-9]+');
-
-
 
 Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', function($id)
 {
@@ -220,6 +214,86 @@ Route::get('ver-curso/{id}/tarea/{id2}', array('as' => 'ver-tarea', function($id
 	$evaluacion = Evaluacion::find($id2);
     return View::make('Estudiante/evaluacion')->with('curso', $curso)->with('evaluacion', $evaluacion);
 }))->where('id', '[0-9]+')->where('id2', '[0-9]+');
+
+
+
+//RUTAS DEL PROFESOR BASE
+Route::get('profesor-base/cursos', array('as' => 'profesor-base-cursos', function()
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+	
+	$cursos = RelacionUsuarioCurso::where('id_usuario','=', Session::get('user_id'))->where('tipo_relacion','=', 'Profesor Basico')->get();
+    return View::make('ProfesorBase/cursos')->with('relaciones', $cursos); 
+}))->where('id', '[0-9]+');
+
+Route::get('profesor-base/ver-curso-info/{id}', array('as' => 'profesor-base-ver-curso-info', function($id)
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$usuario = Usuario::find(Session::get('user_id'));
+	
+	$curso = Curso::find($id);
+    return View::make('ProfesorBase/info')->with('curso', $curso); 
+}))->where('id', '[0-9]+');
+
+Route::get('profesor-base/ver-curso/{id}', array('as' => 'profesor-base-ver-curso', function($id)
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$curso = Curso::find($id);
+    return View::make('ProfesorBase/ver-curso')->with('curso', $curso); 
+}))->where('id', '[0-9]+');
+
+Route::get('profesor-base/prueba-inteligencias', array('as' => 'profesor-base-prueba-inteligencias', function()
+{
+	$evaluacion = Evaluacion::find(2);
+    return View::make('ProfesorBase/pruebainteligencia')->with('evaluacion', $evaluacion);    
+}));
+
+
+Route::get('profesor-base/ver-curso-contenido/{id}', array('as' => 'profesor-base-ver-curso-contenido', function($id)
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$curso = Curso::find($id);
+    return View::make('ProfesorBase/contenido')->with('curso', $curso); 
+}))->where('id', '[0-9]+');
+
+Route::get('profesor-base/ver-curso-tareas/{id}', array('as' => 'profesor-base-ver-curso-tareas', function($id)
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$curso = Curso::find($id);
+    return View::make('ProfesorBase/tareas')->with('curso', $curso);
+}))->where('id', '[0-9]+');
+
+Route::get('profesor-base/ver-curso/{id}/clase/{id2}', array('as' => 'profesor-base-ver-clase', function($id, $id2)
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$curso = Curso::find($id);
+	$leccion = Leccion::find($id2);
+    return View::make('ProfesorBase/clase')->with('curso', $curso)->with('leccion', $leccion);
+}))->where('id', '[0-9]+')->where('id2', '[0-9]+');
+
+Route::get('profesor-base/ver-curso/{id}/tarea/{id2}', array('as' => 'profesor-base-ver-tarea', function($id, $id2)
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$curso = Curso::find($id);
+	$evaluacion = Evaluacion::find($id2);
+    return View::make('ProfesorBase/evaluacion')->with('curso', $curso)->with('evaluacion', $evaluacion);
+}))->where('id', '[0-9]+')->where('id2', '[0-9]+');
+
+
+
 
 
 
