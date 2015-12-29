@@ -24,7 +24,6 @@ class PreguntaLeccion extends Eloquent implements UserInterface, RemindableInter
 	public function isValid($data)
     {
 		$rules = array(
-            'id_pregunta' => 'required|numeric',
             'id_usuario' => 'required|numeric',
             'id_leccion' => 'required|numeric',
             'pregunta' => 'required',

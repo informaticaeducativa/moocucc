@@ -1,4 +1,4 @@
-@extends ('template')
+@extends ('template2')
 
 @section ('title') Ver Curso @stop
 

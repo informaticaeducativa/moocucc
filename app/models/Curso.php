@@ -24,7 +24,6 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 	public function isValid($data)
     {
 		$rules = array(
-            'id_usuario' => 'required|numeric',
             'nombre' => 'required',
             'fecha_inicio' => 'required',
             'imagen_presentacion' => 'required',            

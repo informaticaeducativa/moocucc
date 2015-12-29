@@ -3,10 +3,10 @@
 <?php
 
     if ($curso->exists):
-        $form_data = array('route' => array('curso.update', $curso->id_curso), 'method' => 'PATCH');
+        $form_data = array('route' => array('curso.update', $curso->id_curso), 'method' => 'PATCH', 'files'=> true);
         $action    = 'Editar';
     else:
-        $form_data = array('route' => 'curso.store', 'method' => 'POST');
+        $form_data = array('route' => 'curso.store', 'method' => 'POST', 'files'=> true);
         $action    = 'Crear';
     endif;
 
@@ -45,8 +45,8 @@
       {{ Form::file('imagen_presentacion', null, array('placeholder' => 'Introduce la imagen del curso', 'class' => 'form-control')) }}
     </div>
      <div class="form-group col-md-5">
-      {{ Form::label('comienzo', 'Comienzo del curso') }}
-      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuándo comienza el curso', 'class' => 'form-control')) }}
+      {{ Form::label('comienzo', 'Tiempo del curso') }}
+      {{ Form::select('comienzo',  array('Auto-aprendizaje' => 'Auto-aprendizaje', 'Con tiempo limite' => 'Con tiempo limite'), null, array('class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('id_tematica', 'Temática del curso') }}
@@ -56,6 +56,23 @@
       {{ Form::label('nivel', 'Nivel del curso') }}
       {{ Form::select('nivel',  array('Principiante' => 'Principiante', 'Medio' => 'Medio', 'Avanzado'=>'Avanzado'), null, array('class' => 'form-control')) }}
     </div>
+    <div class="form-group col-md-5">
+      {{ Form::label('duracion', 'Duracion del curso') }}
+      {{ Form::text('duracion', null, array('placeholder' => 'Ej: 5 Semanas', 'class' => 'form-control')) }}
+    </div>
+    <div class="form-group col-md-5">
+      {{ Form::label('esfuerzo', 'Esfuerzo semanal del curso (en horas)') }}
+      {{ Form::text('esfuerzo', null, array('placeholder' => 'Ej: 4 horas por semana ', 'class' => 'form-control')) }}
+    </div>
+    <div class="form-group col-md-5">
+      {{ Form::label('precio', 'Introduce el precio del curso (o gratis)') }}
+      {{ Form::text('precio', null, array('placeholder' => 'Ej: 5000 COP, gratis ', 'class' => 'form-control')) }}
+    </div>
+    <div class="form-group col-md-5">
+      {{ Form::label('prerrequisitos', 'Prerrequisitos del curso') }}
+      {{ Form::text('prerrequisitos', null, array('placeholder' => 'Escribe los conocimientos que debe tener el estudiante', 'class' => 'form-control')) }}
+    </div>
+    
   </div>
 
   {{ Form::button($action . ' curso', array('type' => 'submit', 'class' => 'btn btn-primary')) }}

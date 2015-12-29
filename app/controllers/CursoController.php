@@ -52,12 +52,18 @@ class CursoController extends BaseController
 		// Revisamos si la data es válido
 		if ($curso->isValid($data))
 		{
+
+				$file = Input::file('imagen_presentacion');
+				$file->move('imagenes', $file->getClientOriginalName());
+				
+				$data['imagen_presentacion'] = 	$file->getClientOriginalName();			
+
 			// Si la data es valida se la asignamos al materia
 			$curso->fill($data);
 			// Guardamos el materia
 			$curso->save();
 			// Y Devolvemos una redirección a la acción show para mostrar el materia
-			return Redirect::route('curso.show', array($curso->id));
+			return Redirect::route('crear-curso-2', array($curso->id_curso));
 		}
 		else
 		{

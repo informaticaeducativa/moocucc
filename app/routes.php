@@ -11,7 +11,9 @@
 |
 */
 
+//
 //RUTAS DEL INDEX
+//
 Route::get('/', function()
 {
 	$cursos = Curso::all();
@@ -25,6 +27,10 @@ Route::get('index',  array('as' => 'index',function()
 	return View::make('index')->with('cursos', $cursos); 
 }));
 
+
+
+
+
 Route::get('ver-usuario/{id}', array('as' => 'ver-usuario', function($id)
 {
 	if(Session::get('user_id') == "")
@@ -35,13 +41,14 @@ Route::get('ver-usuario/{id}', array('as' => 'ver-usuario', function($id)
     
 }))->where('id', '[0-9]+');
 
+//Ver usuario (todos)
 Route::get('usuario/{id}', array('as'=>'usuario','uses'=> 'UsuarioController@show' ))->where('id', '[0-9]+');
 
 
 
-
-
+//
 //RUTAS DE ELEMENTOS LLAMADOS POR AJAX
+//
 Route::get('obtener-inteligencia',  function()
 {
     return Session::get('inteligencia');
@@ -130,13 +137,17 @@ Route::get('postear-en-microforo',  function()
 	
 });
 
+//
 //RUTAS PARA EL ACCESO A LOGIN
+//
 Route::get('login-facebook',array('as'=>'login-facebook','uses'=>'LoginController@loginWithFacebook'));
 Route::get('login-twitter',array('as'=>'login-twitter','uses'=>'LoginController@loginWithTwitter'));
 Route::get('login-google',array('as'=>'login-google','uses'=>'LoginController@loginWithGoogle'));
 
 
+//
 //RUTAS QUE TOMA EL USUARIO ESTUDIANTE
+//
 Route::get('desuscribirse/{id}', array('as' => 'desuscribirse', function($id)
 {
 	$usuario = Session::get('user_id');
@@ -216,8 +227,9 @@ Route::get('ver-curso/{id}/tarea/{id2}', array('as' => 'ver-tarea', function($id
 }))->where('id', '[0-9]+')->where('id2', '[0-9]+');
 
 
-
+//
 //RUTAS DEL PROFESOR BASE
+//
 Route::get('profesor-base/cursos', array('as' => 'profesor-base-cursos', function()
 {
 	if(Session::get('user_id') == "")
@@ -293,8 +305,21 @@ Route::get('profesor-base/ver-curso/{id}/tarea/{id2}', array('as' => 'profesor-b
 }))->where('id', '[0-9]+')->where('id2', '[0-9]+');
 
 
+//
+//RUTAS DEL ADMINISTRADOR
+//
+Route::get('administrador', array('as' => 'administrador', function()
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
 
+	//$curso = Curso::find($id);
+	//$evaluacion = Evaluacion::find($id2);
+    return View::make('Administrador/index');
+}));
 
+Route::get('administrador/crear-curso',array('as'=>'crear-curso','uses'=>'CursoController@create'));
+Route::get('administrador/crear-curso/{id}',array('as'=>'crear-curso-2', 'uses'=>'TemarioController@create'));
 
 
 
@@ -304,4 +329,4 @@ Route::resource('evaluacion', 'EvaluacionController');
 Route::resource('leccion', 'LeccionController');
 Route::resource('pregunta', 'PreguntaController');
 Route::resource('pregunta_leccion', 'PreguntaLeccionController');
-Route::resource('temario', 'PreguntaLeccionController');
+Route::resource('temario', 'TemarioController');

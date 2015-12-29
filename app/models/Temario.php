@@ -24,13 +24,10 @@ class Temario extends Eloquent implements UserInterface, RemindableInterface
 	public function isValid($data)
     {
 		$rules = array(
-            'id_temario' => 'required|numeric',
             'titulo' => 'required',
             'contenido' => 'required',
-            'posicion' => 'required',            
             'id_curso' => 'required|numeric',
-            'tipo_contenido' => 'required',
-            'usuario' => 'required|numeric'
+            'tipo_contenido' => 'required'
         );
         
         $validator = Validator::make($data, $rules);

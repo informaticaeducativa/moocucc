@@ -29,10 +29,12 @@ class TemarioController extends BaseController
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
 		$temario = new Temario;
-		return View::make('Temario/form')->with('temario', $temario);
+		$curso = Curso::find($id);
+		$temarios = $curso->getTemarios();
+		return View::make('Temario/form')->with('temario', $temario)->with('temarios', $temarios)->with('curso', $curso);
 	}
 
 
@@ -47,7 +49,7 @@ class TemarioController extends BaseController
 		$temario = new Temario;
 		// Obtenemos la data enviada por el materia
 		$data = Input::all();
-				
+
 		// Revisamos si la data es válido
 		if ($temario->isValid($data))
 		{
@@ -56,12 +58,15 @@ class TemarioController extends BaseController
 			// Guardamos el materia
 			$temario->save();
 			// Y Devolvemos una redirección a la acción show para mostrar el materia
-			return Redirect::route('temario.show', array($temario->id));
+			
+			return Redirect::route('crear-curso-2', array($temario->id_curso));
 		}
 		else
 		{
 			// En caso de error regresa a la acción create con los datos y los errores encontrados
-			return Redirect::route('temario.create')->withInput()->withErrors($temario->errors);
+			
+			return Redirect::route('index');
+			//return Redirect::route('temario.create')->withInput()->withErrors($temario->errors);
 		}
 				
 	}
@@ -93,7 +98,7 @@ class TemarioController extends BaseController
 		{
 		App::abort(404);
 		}
-		
+
 		$form_data = array('route' => array('temario.update', $temario->id_temario), 'method' => 'PATCH');
         $action    = 'Editar';
         

@@ -62,7 +62,18 @@ return array(
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-
+		/*
+		'pgsql' => array(
+			'driver'   => 'pgsql',
+			'host'     => 'localhost',
+			'database' => 'moocbd',
+			'username' => 'administrador',
+			'password' => 'LauraFierro070912',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+			'schema'   => 'public',
+		),
+		*/
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'ec2-107-21-105-116.compute-1.amazonaws.com',
