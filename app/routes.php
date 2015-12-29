@@ -27,6 +27,11 @@ Route::get('index',  array('as' => 'index',function()
 	return View::make('index')->with('cursos', $cursos); 
 }));
 
+Route::get('logout',  array('as' => 'logout',function()
+{
+	Session::flush();
+	return Redirect::to('index');
+}));
 
 
 

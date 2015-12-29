@@ -288,10 +288,8 @@
         </a>
         <ul class="dropdown-menu">
           <li><a href="#">Acción #1</a></li>
-          <li><a href="#">Acción #2</a></li>
-          <li><a href="#">Acción #3</a></li>
           <li class="divider"></li>
-          <li><a href="#">Salir</a></li>
+          <li><a href="{{ URL::route('logout')}}">Salir</a></li>
         </ul>
       </li>
     </ul>
