@@ -11,19 +11,79 @@
 </center>
 
 <br>
+	<div class="col-md-12 col-sm-12 col-xs-12">
 
-  <div class="row">
+
+	<h3>
+		Profesores Administradores
+	</h3>
+	@foreach($profesores as $profesor)
+	@if($profesor->existeRelacionProfesorAdmin($curso->id_curso))
+	<div class="col-md-4 col-sm-6 col-xs-6">
+		<a href="{{ URL::route('desasignar-profesor', array($curso->id_curso, $profesor->id, 'Profesor Admin' ) ) }}">
+			<table class="table">
+				<tr class="danger">
+
+					<th width="20%">
+						@if(substr( $profesor->foto , 0, 4) == 'http')
+						<img class="imagen_redonda_reducida" src="{{ $profesor->foto }}" >
+						@else
+						<img class="imagen_redonda_reducida" src="../../imagenes/fotos/{{ $profesor->foto  }} " >
+						@endif
+					</th>
+					<th style="vertical-align:middle;">
+						Desvincular a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Administrador
+					</th>
+				</tr>
+			</table>
+		</a>
+	</div>
+	@endif
+	@endforeach  
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+
+	<h3>
+		Profesores Básico
+	</h3>
+	@foreach($profesores as $profesor)
+	@if($profesor->existeRelacionProfesorBasico($curso->id_curso))
+	<div class="col-md-4 col-sm-6 col-xs-6">
+		<a href="{{ URL::route('desasignar-profesor', array($curso->id_curso, $profesor->id, 'Profesor Basico' ) ) }}">
+			<table class="table">
+				<tr class="danger">
+
+					<th width="20%">
+						@if(substr( $profesor->foto , 0, 4) == 'http')
+						<img class="imagen_redonda_reducida" src="{{ $profesor->foto }}" >
+						@else
+						<img class="imagen_redonda_reducida" src="../../imagenes/fotos/{{ $profesor->foto  }} " >
+						@endif
+					</th>
+					<th style="vertical-align:middle;">
+						Desvincular a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Básico
+					</th>
+				</tr>
+			</table>
+		</a>
+	</div>
+	@endif
+	@endforeach  
+
 	
+	</div> 
+	<br>
+	<hr>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+
+	<h2>Para Asignar</h2>
 
 @foreach($profesores as $profesor)
+@if(!$profesor->existeRelacionProfesorAdmin($curso->id_curso))
 <div class="col-md-4 col-sm-6 col-xs-6">
-	<a href="#">
+	<a href="{{ URL::route('asignar-profesor', array($curso->id_curso, $profesor->id, 'Profesor Admin' ) ) }}">
 		<table class="table">
-			@if($existe = $profesor->existeRelacionProfesorAdmin($curso->id_curso))
-			<tr class="danger">
-			@else
 			<tr class="success">
-			@endif
 				<th width="20%">
 					@if(substr( $profesor->foto , 0, 4) == 'http')
 					<img class="imagen_redonda_reducida" src="{{ $profesor->foto }}" >
@@ -32,28 +92,22 @@
 					@endif
 				</th>
 				<th style="vertical-align:middle;">
-					@if($existe)
-					Desvincular
-					@else
-					Adicionar
-					@endif
-					 a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Administrador
+					Adicionar a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Administrador
 				</th>
 			</tr>
 		</table>
 	</a>
 </div>
+@endif
 @endforeach   
 
 @foreach($profesores as $profesor)
+@if(!$existe = $profesor->existeRelacionProfesorBasico($curso->id_curso))
+
 <div class="col-md-4 col-sm-6 col-xs-6">
-	<a href="#">
+	<a href="{{ URL::route('asignar-profesor', array($curso->id_curso, $profesor->id, 'Profesor Basico' ) ) }}">
 		<table class="table">
-			@if($existe = $profesor->existeRelacionProfesorBasico($curso->id_curso))
-			<tr class="danger">
-			@else
 			<tr class="success">
-			@endif
 				<th width="20%">
 					@if(substr( $profesor->foto , 0, 4) == 'http')
 					<img class="imagen_redonda_reducida" src="{{ $profesor->foto }}" >
@@ -62,20 +116,15 @@
 					@endif
 				</th>
 				<th style="vertical-align:middle;">
-					@if($existe)
-					Desvincular
-					@else
-					Adicionar
-					@endif
-					 a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Básico
+					Adicionar a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Básico
 				</th>
 			</tr>
 		</table>
 	</a>
 </div>
+@endif
 @endforeach    
 
-  </div>
-
+</div>
 
 @stop
