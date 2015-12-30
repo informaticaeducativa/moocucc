@@ -75,7 +75,7 @@
 	</br>
 	<hr>
 	<div class="col-md-12 col-sm-12 col-xs-12">
-
+	
 	<strong>Buscar a:</strong>
 	{{ Form::open(array('route' => 'redirect-asignar-profesores', 'method' => 'GET')) }}
 		{{ Form::hidden('id', $curso->id_curso	) }}
@@ -85,8 +85,8 @@
 	{{ Form::close() }}
 
 	<h2>Para Asignar</h2>
-
-@foreach($profesores as $profesor)
+	
+@foreach($profesores2 as $profesor)
 @if(!$profesor->existeRelacionProfesorAdmin($curso->id_curso))
 <div class="col-md-4 col-sm-6 col-xs-6">
 	<a href="{{ URL::route('asignar-profesor', array($curso->id_curso, $profesor->id, 'Profesor Admin' ) ) }}">
@@ -109,7 +109,7 @@
 @endif
 @endforeach   
 
-@foreach($profesores as $profesor)
+@foreach($profesores2 as $profesor)
 @if(!$existe = $profesor->existeRelacionProfesorBasico($curso->id_curso))
 
 <div class="col-md-4 col-sm-6 col-xs-6">
