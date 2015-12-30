@@ -65,6 +65,21 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
         return false;
     }
     
+    public function existeRelacionProfesorAdmin($id_curso)
+    {
+		$count = RelacionUsuarioCurso::where('id_curso','=', $id_curso)->where('tipo_relacion','=','Profesor Admin')->count();
+		if ($count > 0)
+			return true;
+		return false;
+	}
+
+    public function existeRelacionProfesorBasico($id_curso)
+    {
+		$count = RelacionUsuarioCurso::where('id_curso','=', $id_curso)->where('tipo_relacion','=','Profesor Basico')->count();
+		if ($count > 0)
+			return true;
+		return false;
+	}    
     
 }
 

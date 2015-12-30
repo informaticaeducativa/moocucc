@@ -329,6 +329,12 @@ Route::get('administrador', array('as' => 'administrador', function()
 Route::get('administrador/crear-curso',array('as'=>'crear-curso','uses'=>'CursoController@create'));
 Route::get('administrador/crear-curso/{id}',array('as'=>'crear-curso-2', 'uses'=>'TemarioController@create'));
 
+Route::get('administrador/asignar-profesor/{id}',array('as'=>'crear-curso-3', function($id) {
+	$profesores = Usuario::all();
+	$curso = Curso::find($id);
+	return View::make('Administrador/asignar-profe')->with('profesores', $profesores)->with('curso', $curso);
+}))->where('id', '[0-9]+');
+
 
 
 Route::resource('curso', 'CursoController');
