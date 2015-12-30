@@ -57,19 +57,12 @@
 				<button id="btn_inteligencia" class="btn btn-warning btn-block">Terminar Prueba</button>
 			<br/><br/>
 			<div id="regresar" style="display:none;">
-<<<<<<< HEAD
+
 				<a href="{{ URL::route('index') }}"><button class="btn btn-primary btn-block">Regresar</button></a>
 			</div>	
 			
 			<br>
-		
-=======
-				<a href="{{ URL::route('index') }}"><button class="btn btn-warning btn-block">Regresar</button></a>
-			</div>
 
-			<br/>
-
->>>>>>> 9b945b5ba63f1d1e26cfde4107aabc0728eb5125
 
 	</div>
 </div>

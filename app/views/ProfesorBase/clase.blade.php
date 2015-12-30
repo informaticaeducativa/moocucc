@@ -36,7 +36,7 @@
 			<tr>
 				<th width="33%"><button class="btn btn-block btn-info" id="btn_kinestesico">Kinestesico</button></th>
 				<th width="33%"><button class="btn btn-block btn-primary" id="btn_visual">Visual</button></th>
-				<th width="33%"><button class="btn btn-block btn-primary" id="btn_auditivo">Auditivo</button></th>
+				<th width="33%"><button class="btn btn-block btn-primary" id="btn_auditivo">Linguistico</button></th>
 			</tr>
 		</table>
 		<h6 class="strong">{{ $curso->nombre }}</h6>

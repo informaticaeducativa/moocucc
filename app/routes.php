@@ -118,12 +118,15 @@ Route::get('validar-inteligencia',  function()
 	
 	if($kinestesico >= $visual && $kinestesico>= $linguistico){
 		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Kinestesico'));
+		Session::put('inteligencia', 'Kinestesico');	
 		return "Ganador Kinestesico: ".$kinestesico." -- Visual: ".$visual." Linguistico: ".$linguistico;
 	}else if($visual >= $kinestesico && $visual>= $linguistico){
 		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Visual'));
+		Session::put('inteligencia', 'Visual');	
 		return "Ganador Visual: ".$visual." -- Kinestesico: ".$kinestesico." Linguistico: ".$linguistico;
 	}else{
 		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Linguistico'));
+		Session::put('inteligencia', 'Linguistico');	
 		return "Ganador Linguistico: ".$linguistico." -- Kinestesico: ".$kinestesico." Visual: ".$visual;
 	}
 });

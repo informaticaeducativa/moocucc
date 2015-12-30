@@ -58,7 +58,7 @@
 				$("#div_visual").show();
 			}
 			
-            if("Auditivo" == track)
+            if("Linguistico" == track)
 			{
 				$("#btn_kinestesico").attr("class","btn btn-block btn-info");
 				$("#btn_auditivo").attr("class","btn btn-block btn-primary");
