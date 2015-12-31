@@ -11,7 +11,8 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" >
 	<link href="{{URL::to('css/estilo.css')}}" rel="stylesheet">
-
+	<script src="{{URL::to('js/tinymce/tinymce.min.js')}}"></script>
+	<script>tinymce.init({ language : "es_MX", selector:'textarea'});</script>
 	<!-- js -->
 	<script src= "https://code.jquery.com/jquery.js" ></script>
 	<script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
