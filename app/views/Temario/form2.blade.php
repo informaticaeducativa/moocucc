@@ -74,6 +74,15 @@
 		<td>{{ $temariu->contenido }}</td>
 	</tr>
 	@endforeach
+	<tr>
+		<th colspan="2"><center>Contenidos Semana</center></th>
+	</tr>
+	@foreach( $temarios2 as $temariu)
+	<tr>
+		<th>Semana {{ $temariu->posicion }}</th>
+		<td>{{ $temariu->contenido }}</td>
+	</tr>
+	@endforeach
 </table>
 
 
@@ -91,17 +100,19 @@
 
   <div class="row">
     <div class="form-group col-md-10">
-      {{ Form::label('titulo', 'Titulo del Contenido') }}
-      {{ Form::text('titulo', null, array('placeholder' => 'Ej: Acerca de este curso, Temas de este curso', 'class' => 'form-control')) }}
+      {{ Form::label('posicion', 'Semana de Contenido') }}
+      {{ Form::select('posicion', array('1'=>'Semana 1', '2'=>'Semana 2', '3'=>'Semana 3', '4'=>'Semana 4', '5'=>'Semana 5', '6'=>'Semana 6', '7'=>'Semana 7', '8'=>'Semana 8', '9'=>'Semana 9'), null, array('class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-10">
       {{ Form::label('contenido', 'Contenido de inicio') }}
       {{ Form::textarea('contenido', null, array('placeholder' => 'Introduce el contenido', 'class' => 'form-control')) }}
     </div>
+
   </div>
   {{ Form::hidden('id_curso', $curso->id_curso) }}
-  {{ Form::hidden('tipo_contenido', 'info_curso') }}
-  
+  {{ Form::hidden('tipo_contenido', 'semana') }}
+  {{ Form::hidden('titulo', 'xxxxxxxxxxx') }}
+
   {{ Form::button($action . ' temario', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
   
 {{ Form::close() }}

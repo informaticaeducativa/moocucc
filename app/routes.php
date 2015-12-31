@@ -16,6 +16,9 @@
 //
 Route::get('/', function()
 {
+	Session::put('user_id', '1');
+	Session::put('user', 'Mark Gonzales');
+	Session::put('inteligencia', 'Kinestesico');
 	$cursos = Curso::all();
 	return View::make('index')->with('cursos', $cursos); 
 });
@@ -328,6 +331,7 @@ Route::get('administrador', array('as' => 'administrador', function()
 
 Route::get('administrador/crear-curso',array('as'=>'crear-curso','uses'=>'CursoController@create'));
 Route::get('administrador/crear-curso/{id}',array('as'=>'crear-curso-2', 'uses'=>'TemarioController@create'));
+Route::get('administrador/crear-contenido/{id}',array('as'=>'crear-curso-5', 'uses'=>'TemarioController@create2'));
 
 Route::get('administrador/asignar-profesor/{id}',array('as'=>'crear-curso-3', function($id) {
 	$profesores = Usuario::all();
@@ -342,6 +346,8 @@ Route::get('administrador/asignar-profesor/{id}-{nombre}',array('as'=>'crear-cur
 	return View::make('Administrador/asignar-profe2')->with('profesores', $profesores)->with('profesores2', $profesores2)->with('curso', $curso);
 }))->where('id', '[0-9]+');
 
+
+
 //Ruta para redireccionar los profesores buscados en las 2 anteriores rutas
 Route::get('redirect-asignar-profesores',array('as'=>'redirect-asignar-profesores', function() {
 	$datos = Input::all();
@@ -351,6 +357,15 @@ Route::get('redirect-asignar-profesores',array('as'=>'redirect-asignar-profesore
 	$profesores2 = Usuario::where('nombre', 'ILIKE', '%'.$nombre.'%')->get();
 	$curso = Curso::find($id);
 	return Redirect::Route('crear-curso-4', array($id, $nombre));
+}));
+
+//Ruta para redireccionar los contenidos creados en el administrador
+Route::get('redirect-temario-curso',array('as'=>'redirect-temario-curso', function() {
+	$datos = Input::all();
+	$id = $datos['id_curso'];
+	$tipo_contenido = $datos['tipo_contenido'];
+	$curso = Curso::find($id);
+	return Redirect::Route('crear-curso-5', array($id));
 }));
 
 //Ruta para asignar profesor a un curso
@@ -365,7 +380,7 @@ Route::get('desasignar-profesor/{id_curso}/{id_usuario}/{tipo}', array('as'=>'de
 	return Redirect::route('crear-curso-3', $id_curso);
 }))->where('id_curso', '[0-9]+');
 
-//Ruta para redireccionar los profesores buscados en las 2 anteriores rutas
+//Ruta para Ver como queda un curso desde el perfil administrador
 Route::get('administrador/ver-curso/{id}',array('as'=>'admin-ver-curso', function($id) {
 	$curso = Curso::find($id);
     return View::make('Administrador/ver-curso')->with('curso', $curso); 

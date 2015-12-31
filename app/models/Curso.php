@@ -97,7 +97,7 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 	}
 	
 	public function getTemariosSemana(){
-		$temarios = Temario::where('id_curso','=', $this->id_curso)->where('tipo_contenido', '=', 'semana')->get();
+		$temarios = Temario::where('id_curso','=', $this->id_curso)->where('tipo_contenido', '=', 'semana')->orderBy('posicion', 'ASC')->get();
 		return $temarios;
 	}
 	
