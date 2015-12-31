@@ -36,6 +36,15 @@ class TemarioController extends BaseController
 		$temarios = $curso->getTemarios();
 		return View::make('Temario/form')->with('temario', $temario)->with('temarios', $temarios)->with('curso', $curso);
 	}
+		
+	public function create1b($id)
+	{
+		$temario = new Temario;
+		$curso = Curso::find($id);
+		$temarios = $curso->getTemarios();
+		$temarios2 = $curso->getTemariosInicio();
+		return View::make('Temario/form1b')->with('temario', $temario)->with('temarios', $temarios)->with('temarios2', $temarios2)->with('curso', $curso);
+	}
 	
 	/**
 	 * Show the form for creating a new resource.
@@ -73,6 +82,8 @@ class TemarioController extends BaseController
 			// Y Devolvemos una redirección a la acción show para mostrar el materia
 			if($temario->tipo_contenido == "semana")
 				return Redirect::route('crear-curso-5', array($temario->id_curso));
+			if($temario->tipo_contenido == "inicio")
+				return Redirect::route('crear-curso-4b', array($temario->id_curso));
 			return Redirect::route('crear-curso-2', array($temario->id_curso));
 		}
 		else
