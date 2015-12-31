@@ -13,7 +13,7 @@
 <br>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 
-
+	<a href="{{ URL::route('admin-ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentacion del Curso</a>
 	<h3>
 		Profesores Administradores
 	</h3>
@@ -81,7 +81,7 @@
 		{{ Form::hidden('id', $curso->id_curso	) }}
 		{{ Form::text('nombre') }}
 
-		{{ Form::submit('Buscar') }}
+		{{ Form::submit('Buscar', array('class'=>'btn btn-primary') ) }}
 	{{ Form::close() }}
 
 	<h2>Para Asignar</h2>

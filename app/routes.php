@@ -353,17 +353,25 @@ Route::get('redirect-asignar-profesores',array('as'=>'redirect-asignar-profesore
 	return Redirect::Route('crear-curso-4', array($id, $nombre));
 }));
 
-
-
+//Ruta para asignar profesor a un curso
 Route::get('asignar-profesor/{id_curso}/{id_usuario}/{tipo}', array('as'=>'asignar-profesor', function($id_curso, $id_usuario, $tipo) {
 	DB::table('relacion_usuario_curso')->insert(	array('id_usuario' => $id_usuario, 'id_curso' => $id_curso, 'tipo_relacion' => $tipo, 'fecha_creacion' => date('Y-m-d H:i:s'))	);
 	return Redirect::route('crear-curso-3', $id_curso);
 }))->where('id_curso', '[0-9]+');
 
+//Ruta para eliminar una asignacion de profesor a un curso
 Route::get('desasignar-profesor/{id_curso}/{id_usuario}/{tipo}', array('as'=>'desasignar-profesor', function($id_curso, $id_usuario, $tipo) {
 	RelacionUsuarioCurso::where('tipo_relacion', '=', $tipo)->where('id_usuario', '=', $id_usuario)->where('id_curso', '=', $id_curso)->delete();
 	return Redirect::route('crear-curso-3', $id_curso);
 }))->where('id_curso', '[0-9]+');
+
+//Ruta para redireccionar los profesores buscados en las 2 anteriores rutas
+Route::get('administrador/ver-curso/{id}',array('as'=>'admin-ver-curso', function($id) {
+	$curso = Curso::find($id);
+    return View::make('Administrador/ver-curso')->with('curso', $curso); 
+}))->where('id', '[0-9]+');
+
+
 
 Route::resource('curso', 'CursoController');
 Route::resource('usuario', 'UsuarioController');
