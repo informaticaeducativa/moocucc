@@ -333,6 +333,7 @@ Route::get('administrador/crear-curso',array('as'=>'crear-curso','uses'=>'CursoC
 Route::get('administrador/crear-curso/{id}',array('as'=>'crear-curso-2', 'uses'=>'TemarioController@create'));
 Route::get('administrador/crear-inicio/{id}',array('as'=>'crear-curso-4b', 'uses'=>'TemarioController@create1b'));
 Route::get('administrador/crear-contenido/{id}',array('as'=>'crear-curso-5', 'uses'=>'TemarioController@create2'));
+Route::get('administrador/crear-leccion/{id}',array('as'=>'crear-curso-6', 'uses'=>'LeccionController@create'));
 
 Route::get('administrador/asignar-profesor/{id}',array('as'=>'crear-curso-3', function($id) {
 	$profesores = Usuario::all();

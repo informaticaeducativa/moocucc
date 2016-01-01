@@ -24,7 +24,6 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
 	public function isValid($data)
     {
 		$rules = array(
-            'id_leccion' => 'required|numeric',
             'nombre' => 'required',
             'id_curso' => 'required|numeric',
             'server_contenido_grafico' => 'required',

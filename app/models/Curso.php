@@ -69,7 +69,12 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 		$tematica = Tematica::find($this->id_tematica);
 		return $tematica->nombre;
 	}
-	
+
+	public function getAllLecciones() {
+		$lecciones = Leccion::where('id_curso','=', $this->id_curso)->orderBy('id_leccion', 'ASC')->get();
+		return $lecciones;
+	}
+		
 	public function getLecciones($semana) {
 		$lecciones = Leccion::where('id_curso','=', $this->id_curso)->where('semana','=', $semana)->orderBy('id_leccion', 'ASC')->get();
 		return $lecciones;

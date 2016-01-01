@@ -29,11 +29,11 @@ class LeccionController extends BaseController
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
 		$leccion = new Leccion;
-		$tematicas = Tematica::lists('nombre','id_tematica');
-		return View::make('Leccion/form')->with('leccion', $leccion)->with('tematicas', $tematicas);
+		$curso = Curso::find($id);
+		return View::make('Leccion/form')->with('leccion', $leccion)->with('curso', $curso);
 	}
 
 
@@ -57,12 +57,15 @@ class LeccionController extends BaseController
 			// Guardamos el materia
 			$leccion->save();
 			// Y Devolvemos una redirección a la acción show para mostrar el materia
-			return Redirect::route('leccion.show', array($leccion->id));
+			return Redirect::route('crear-curso-6', array($leccion->id_leccion));
+			//return Redirect::route('leccion.show', array($leccion->id_leccion));
 		}
 		else
 		{
 			// En caso de error regresa a la acción create con los datos y los errores encontrados
-			return Redirect::route('leccion.create')->withInput()->withErrors($leccion->errors);
+			//return Redirect::route('leccion.create')->withInput()->withErrors($leccion->errors);
+			//return Redirect::route('leccion.index');
+			//return Redirect::route('leccion.create', array($data['id_curso']))->withInput()->withErrors($leccion->errors);
 		}
 				
 	}
