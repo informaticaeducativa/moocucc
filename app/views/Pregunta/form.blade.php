@@ -17,47 +17,85 @@
 @section ('title_div') {{ $action }} Pregunta @stop
 
 @section ('contenido') 
-  <p>
-    <a href="{{ route('pregunta.index') }}" class="btn btn-info">Lista de Preguntas</a>
-  </p>
+ 
+</br>
 
-<br>
+<center>
+	<h1>Crear Pregunta para {{ $evaluacion->nombre  }}</h1>
+</center>
+
+<h4 class="strong">Preguntas añadidas a la misma evaluación:</h4>
+@foreach($evaluacion->getPreguntas() as $pregunta)
+	{{ $pregunta->nombre }}</br>
+@endforeach
+</br>
+
 
 {{ Form::model($pregunta, $form_data, array('role' => 'form')) }}
 
   @include ('errors', array('errors' => $errors))
 
   <div class="row">
+   <div class="form-group col-md-10">
+      {{ Form::label('nombre', 'Pregunta') }}
+      {{ Form::textarea('nombre', null, array('placeholder' => 'Introduce la pregunta', 'class' => 'form-control')) }}
+   </div>
+   <div class="form-group col-md-5">
+      {{ Form::label('opcion_multiple', 'Pregunta de opcion multiple?') }}
+      {{ Form::select('opcion_multiple', array('si'=>'Si', 'no'=>'No'), null, array('class' => 'form-control')) }}
+    </div>
+   </div>
+  <div class="row" id="row_opciones">
     <div class="form-group col-md-5">
-      {{ Form::label('nombre', 'Nombre del pregunta') }}
-      {{ Form::text('nombre', null, array('placeholder' => 'Introduce el nombre del pregunta', 'class' => 'form-control')) }}
+      {{ Form::label('opcion_a', 'Opcion A') }}
+      {{ Form::text('opcion_a', null, array('placeholder' => 'Introduce la opcion de respuesta A', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('fecha_inicio', 'Fecha de inicio') }}
-      {{ Form::input('date', 'fecha_inicio', null, array('placeholder' => 'Introduce la fecha de inicio del pregunta', 'class' => 'form-control')) }}        
+      {{ Form::label('opcion_b', 'Opcion B') }}
+      {{ Form::text('opcion_b', null, array('placeholder' => 'Introduce la opcion de respuesta B', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('imagen_presentacion', 'Imagen del pregunta') }}
-      {{ Form::file('imagen_presentacion', null, array('placeholder' => 'Introduce la imagen del pregunta', 'class' => 'form-control')) }}        
-    </div>
-     <div class="form-group col-md-5">
-      {{ Form::label('comienzo', 'Comienzo del pregunta') }}
-      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuando comienza el pregunta', 'class' => 'form-control')) }}        
+      {{ Form::label('opcion_c', 'Opcion C') }}
+      {{ Form::text('opcion_c', null, array('placeholder' => 'Introduce la opcion de respuesta C', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('id_tematica', 'Tematica del pregunta') }}
-      {{ Form::select('id_tematica', $tematicas, null, array('placeholder' => 'Introduce cuando comienza el pregunta', 'class' => 'form-control')) }}        
-    </div>
-    <div class="form-group col-md-5">
-      {{ Form::label('nivel', 'Nivel del pregunta') }}
-      {{ Form::select('nivel',  array('Principiante' => 'Principiante', 'Medio' => 'Medio', 'Avanzado'=>'Avanzado'), null, array('class' => 'form-control')) }}        
+      {{ Form::label('opcion_d', 'Opcion D') }}
+      {{ Form::text('opcion_d', null, array('placeholder' => 'Introduce la opcion de respuesta D', 'class' => 'form-control')) }}
     </div>
   </div>
+  <div class="row">
+   <div class="form-group col-md-5">
+      {{ Form::label('respuesta', 'Respuesta a la pregunta') }}
+      {{ Form::text('respuesta', null, array('placeholder' => 'Letra en caso de ser opcion multiple, sino la respuesta como tal', 'class' => 'form-control')) }}
+    </div>
+
+  </div>
+  {{ Form::hidden('id_evaluacion', $evaluacion->id_evaluacion) }}
+  {{ Form::hidden('tipo', 'multiple') }}
   
   {{ Form::button($action . ' pregunta', array('type' => 'submit', 'class' => 'btn btn-primary')) }}    
   
 {{ Form::close() }}
 
-
+<script>
+ $("#opcion_multiple" ).change(function() 
+  {
+	  if( $("#opcion_multiple" ).val() == 'no'){
+		 $("#opcion_a").val("x");	
+		 $("#opcion_b").val("x");	
+		 $("#opcion_c").val("x");	
+		 $("#opcion_d").val("x");	
+		 $("#row_opciones").hide();	
+	  }
+	  else
+	  {
+		 $("#opcion_a").val("");	
+		 $("#opcion_b").val("");	
+		 $("#opcion_c").val("");	
+		 $("#opcion_d").val("");	
+		 $("#row_opciones").show();
+	  }
+  });
+</script>
 
 @stop  

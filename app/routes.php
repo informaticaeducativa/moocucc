@@ -335,6 +335,7 @@ Route::get('administrador/crear-inicio/{id}',array('as'=>'crear-curso-4b', 'uses
 Route::get('administrador/crear-contenido/{id}',array('as'=>'crear-curso-5', 'uses'=>'TemarioController@create2'));
 Route::get('administrador/crear-leccion/{id}',array('as'=>'crear-curso-6', 'uses'=>'LeccionController@create'));
 Route::get('administrador/crear-evaluacion/{id}',array('as'=>'crear-curso-7', 'uses'=>'EvaluacionController@create'));
+Route::get('administrador/crear-preguntas/{id}',array('as'=>'crear-curso-8', 'uses'=>'PreguntaController@create'));
 
 Route::get('administrador/asignar-profesor/{id}',array('as'=>'crear-curso-3', function($id) {
 	$profesores = Usuario::all();

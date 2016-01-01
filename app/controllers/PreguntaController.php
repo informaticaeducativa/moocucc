@@ -29,11 +29,11 @@ class PreguntaController extends BaseController
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
 		$pregunta = new Pregunta;
-		$tematicas = Tematica::lists('nombre','id_tematica');
-		return View::make('Pregunta/form')->with('pregunta', $pregunta)->with('tematicas', $tematicas);
+		$evaluacion = Evaluacion::find($id);
+		return View::make('Pregunta/form')->with('pregunta', $pregunta)->with('evaluacion', $evaluacion);
 	}
 
 
@@ -57,12 +57,13 @@ class PreguntaController extends BaseController
 			// Guardamos el materia
 			$pregunta->save();
 			// Y Devolvemos una redirección a la acción show para mostrar el materia
-			return Redirect::route('pregunta.show', array($pregunta->id));
+			//return Redirect::route('pregunta.show', array($pregunta->id));
+			return Redirect::route('crear-curso-8', array($data['id_evaluacion']));
 		}
 		else
 		{
 			// En caso de error regresa a la acción create con los datos y los errores encontrados
-			return Redirect::route('pregunta.create')->withInput()->withErrors($pregunta->errors);
+			//return Redirect::route('pregunta.create')->withInput()->withErrors($pregunta->errors);
 		}
 				
 	}
