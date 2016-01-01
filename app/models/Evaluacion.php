@@ -16,7 +16,7 @@ class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
  
  	protected $table = 'evaluacion';
  	 	
- 	protected $fillable = array('id_evaluacion', 'id_curso', 'calificable');
+ 	protected $fillable = array('id_evaluacion', 'nombre', 'semana', 'id_curso', 'calificable');
 
 	//protected $hidden = array('password', 'remember_token');
     public $timestamps = false;
@@ -24,8 +24,9 @@ class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
 	public function isValid($data)
     {
 		$rules = array(
-            'id_evaluacion' => 'required|numeric',
             'nombre' => 'required',
+            'semana' => 'required|numeric',
+            'id_curso' => 'required|numeric',
             'calificable' => 'required'
         );
         

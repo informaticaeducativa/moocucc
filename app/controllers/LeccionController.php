@@ -57,7 +57,7 @@ class LeccionController extends BaseController
 			// Guardamos el materia
 			$leccion->save();
 			// Y Devolvemos una redirección a la acción show para mostrar el materia
-			return Redirect::route('crear-curso-6', array($leccion->id_leccion));
+			return Redirect::route('crear-curso-6', array($data['id_curso']));
 			//return Redirect::route('leccion.show', array($leccion->id_leccion));
 		}
 		else

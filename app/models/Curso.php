@@ -84,6 +84,11 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 		$evaluaciones = Evaluacion::where('id_curso','=', $this->id_curso)->where('semana','=', $semana)->get();
 		return $evaluaciones;
 	}
+		
+	public function getAllEvaluaciones() {
+		$evaluaciones = Evaluacion::where('id_curso','=', $this->id_curso)->get();
+		return $evaluaciones;
+	}
 	
 	public function getFechaInicio(){
 		if($this->comienzo == "Auto-aprendizaje"){		return $this->comienzo;		}

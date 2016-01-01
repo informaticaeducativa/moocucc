@@ -29,11 +29,12 @@ class EvaluacionController extends BaseController
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
 		$evaluacion = new Evaluacion;
-		$tematicas = Tematica::lists('nombre','id_tematica');
-		return View::make('Evaluacion/form')->with('evaluacion', $evaluacion)->with('tematicas', $tematicas);
+
+		$curso = Curso::find($id);
+		return View::make('Evaluacion/form')->with('evaluacion', $evaluacion)->with('curso', $curso);
 	}
 
 
@@ -57,12 +58,14 @@ class EvaluacionController extends BaseController
 			// Guardamos el materia
 			$evaluacion->save();
 			// Y Devolvemos una redirección a la acción show para mostrar el materia
-			return Redirect::route('evaluacion.show', array($evaluacion->id));
+			//return Redirect::route('evaluacion.show', array($evaluacion->id));
+			return Redirect::route('crear-curso-7', array($data['id_curso']));
+
 		}
 		else
 		{
 			// En caso de error regresa a la acción create con los datos y los errores encontrados
-			return Redirect::route('evaluacion.create')->withInput()->withErrors($evaluacion->errors);
+			//return Redirect::route('evaluacion.create')->withInput()->withErrors($evaluacion->errors);
 		}
 				
 	}

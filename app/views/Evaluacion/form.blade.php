@@ -17,42 +17,36 @@
 @section ('title_div') {{ $action }} Evaluacion @stop
 
 @section ('contenido')
-  <p>
-    <a href="{{ route('evaluacion.index') }}" class="btn btn-info">Lista de Evaluaciones</a>
-  </p>
+</br>
+<center>
+	<h1>Crear Evaluación para {{ $curso->nombre  }}</h1>
+</center>
 
-<br>
-
+<h4 class="strong">Evaluaciones añadidas al mismo curso:</h4>
+@foreach($curso->getAllEvaluaciones() as $evaluacion)
+	{{ $evaluacion->nombre }} - Semana {{ $evaluacion->semana }} - Calificable: {{ $evaluacion->calificable }}</br>
+@endforeach
+</br></br>
 {{ Form::model($evaluacion, $form_data, array('role' => 'form')) }}
 
   @include ('errors', array('errors' => $errors))
-
+  
   <div class="row">
     <div class="form-group col-md-5">
-      {{ Form::label('nombre', 'Nombre de la evaluación') }}
-      {{ Form::text('nombre', null, array('placeholder' => 'Introduce el nombre del evaluacion', 'class' => 'form-control')) }}
+      {{ Form::label('nombre', 'Nombre o título de la Evaluacion') }}
+      {{ Form::text('nombre', null, array('placeholder' => 'Introduce el nombre del leccion', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('fecha_inicio', 'Fecha de inicio') }}
-      {{ Form::input('date', 'fecha_inicio', null, array('placeholder' => 'Introduce la fecha de inicio del evaluacion', 'class' => 'form-control')) }}
+      {{ Form::label('semana', 'Semana de publicación del examen') }}
+      {{ Form::select('semana', array('1'=>'Semana 1', '2'=>'Semana 2', '3'=>'Semana 3', '4'=>'Semana 4', '5'=>'Semana 5', '6'=>'Semana 6', '7'=>'Semana 7', '8'=>'Semana 8', '9'=>'Semana 9'), null, array('class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('imagen_presentacion', 'Imagen de la evaluación') }}
-      {{ Form::file('imagen_presentacion', null, array('placeholder' => 'Introduce la imagen del evaluacion', 'class' => 'form-control')) }}
-    </div>
-     <div class="form-group col-md-5">
-      {{ Form::label('comienzo', 'Comienzo de la evaluación') }}
-      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuando comienza el evaluacion', 'class' => 'form-control')) }}
-    </div>
-    <div class="form-group col-md-5">
-      {{ Form::label('id_tematica', 'Temática de la evaluación') }}
-      {{ Form::select('id_tematica', $tematicas, null, array('placeholder' => 'Introduce cuando comienza el evaluacion', 'class' => 'form-control')) }}
-    </div>
-    <div class="form-group col-md-5">
-      {{ Form::label('nivel', 'Nivel de la evaluación') }}
-      {{ Form::select('nivel',  array('Principiante' => 'Principiante', 'Medio' => 'Medio', 'Avanzado'=>'Avanzado'), null, array('class' => 'form-control')) }}
+      {{ Form::label('calificable', 'Examen calificable?') }}
+      {{ Form::select('calificable', array('si'=>'Si', 'no'=>'No'), null, array('class' => 'form-control')) }}
     </div>
   </div>
+
+  {{ Form::hidden('id_curso', $curso->id_curso) }}
 
   {{ Form::button($action . ' evaluacion', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
 
@@ -61,3 +55,6 @@
 
 
 @stop
+
+
+
