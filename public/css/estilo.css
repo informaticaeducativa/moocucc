@@ -56,13 +56,10 @@ hr{
 	box-shadow: 4px 4px 10px #999;
 	-webkit-box-shadow: 4px 4px 10px #999;
 	-moz-box-shadow: 4px 4px 10px #999;
-
 	min-height: 200px;
 	margin-top: 10px;
-
 	background-color: white;
 }
-
 
 .div_item{
 	border: 1px solid #000000;
@@ -95,26 +92,26 @@ hr{
 	width: 100%;
 */
 	width: 140px;
-   height: 140px;
-   background:#008040;
-   -moz-border-radius: 70px;
-   -webkit-border-radius: 70px;
-   border-radius: 70px;
+  height: 140px;
+  background:#008040;
+  -moz-border-radius: 70px;
+  -webkit-border-radius: 70px;
+  border-radius: 70px;
 }
 
 .imagen_redonda_reducida{
-   width: 70px;
-   height: 70px;
-   background:#008040;
-   -moz-border-radius: 35px;
-   -webkit-border-radius: 35px;
-   border-radius: 35px;
+  width: 70px;
+  height: 70px;
+  background:#008040;
+  -moz-border-radius: 35px;
+  -webkit-border-radius: 35px;
+  border-radius: 35px;
 }
 
 .imagen_cuadrada_reducida{
-   width: 70px;
-   height: 70px;
-   background:#008040;
+  width: 70px;
+  height: 70px;
+  background:#008040;
 }
 
 .espaciado{
@@ -132,9 +129,9 @@ hr{
 .div{
 	padding: 15px;
 	background-color: white;
-	box-shadow: 4px 4px 10px #999;
 	-webkit-box-shadow: 4px 4px 10px #999;
 	-moz-box-shadow: 4px 4px 10px #999;
+	box-shadow: 4px 4px 10px #999;
 }
 
 .border1{
@@ -142,30 +139,27 @@ hr{
 }
 
 .table-curso-detalles{
-
 	border-collapse: separate;
-	border-spacing:  15px;
-
+	border-spacing: 15px;
 }
-
 
 #login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,.8);
+  min-width: 250px;
+  padding: 14px 14px 0;
+  overflow: hidden;
+  background-color: rgba(255,255,255,.8);
 }
 #login-dp .help-block{
-    font-size:12px
+  font-size:12px
 }
 #login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
+  background-color: rgba(255,255,255,.8);
+  border-top: 1px solid #ddd;
+  clear: both;
+  padding: 14px;
 }
 #login-dp .social-buttons{
-    margin:12px 0
+    margin: 12px 0
 }
 #login-dp .social-buttons a{
     width: 49%;
@@ -175,35 +169,35 @@ hr{
 }
 .btn-fb{
     color: #fff;
-    background-color:#3b5998;
+    background-color: #3b5998;
 }
 .btn-fb:hover{
     color: #fff;
-    background-color:#496ebc
+    background-color: #496ebc
 }
 .btn-tw{
     color: #fff;
-    background-color:#55acee;
+    background-color: #55acee;
 }
 .btn-tw:hover{
     color: #fff;
-    background-color:#59b5fa;
+    background-color: #59b5fa;
 }
 .btn-gp{
     color: #fff;
-    background-color:#EA4335;
+    background-color: #EA4335;
 }
 .btn-gp:hover{
     color: #fff;
-    background-color:#b52222;
+    background-color: #b52222;
 }
 @media(max-width:768px){
-    #login-dp{
-        background-color: inherit;
-        color: #fff;
-    }
-    #login-dp .bottom{
-        background-color: inherit;
-        border-top:0 none;
-    }
+  #login-dp{
+    background-color: inherit;
+    color: #fff;
+  }
+  #login-dp .bottom{
+    background-color: inherit;
+    border-top:0 none;
+  }
 }
