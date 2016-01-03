@@ -68,6 +68,10 @@ class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
 		$preguntas = Pregunta::where('id_evaluacion','=', $this->id_evaluacion)->select('respuesta')->orderBy('id_pregunta', 'ASC')->get();
 		return $preguntas;
 	}
-    
+	
+	public function getIdCurso() {
+		$evaluacion = Evaluacion::where('id_evaluacion','=', $this->id_evaluacion)->first();
+		return $evaluacion->id_curso;
+	}    
 }
 

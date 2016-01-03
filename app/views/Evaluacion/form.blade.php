@@ -17,16 +17,17 @@
 @section ('title_div') {{ $action }} Evaluacion @stop
 
 @section ('contenido')
-</br>
+</br></br>
+<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+
 <center>
 	<h1>Crear Evaluación para {{ $curso->nombre  }}</h1>
 </center>
 
-<h4 class="strong">Evaluaciones añadidas al mismo curso:</h4>
-@foreach($curso->getAllEvaluaciones() as $evaluacion)
-	{{ $evaluacion->nombre }} - Semana {{ $evaluacion->semana }} - Calificable: {{ $evaluacion->calificable }}</br>
-@endforeach
-</br></br>
+<a href="{{ URL::route('ver-curso-tareas', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Evaluaciones del Curso</a>
+</br>
+</br>
+
 {{ Form::model($evaluacion, $form_data, array('role' => 'form')) }}
 
   @include ('errors', array('errors' => $errors))
@@ -52,6 +53,26 @@
 
 {{ Form::close() }}
 
+<hr>
+</br>
+<h4 class="strong">Evaluaciones añadidas al mismo curso:</h4>
+@foreach($curso->getAllEvaluaciones() as $evaluacion)
+	<table width="100%" class="table table-hover">
+		<tr>
+			<th>
+				<strong>{{ $evaluacion->nombre }}</strong>
+			</th>
+			<th style="vertical-align:middle;">
+				<a href="{{ URL::route('ver-tarea', array($curso->id_curso, $evaluacion->id_evaluacion) ) }}" class="btn btn-info" target="_blank">Ver preguntas</a>
+			</th>
+			<th style="vertical-align:middle;">
+				<a href="{{ URL::route('crear-curso-8', $evaluacion->id_evaluacion ) }}" class="btn btn-info">Agregar preguntas</a>
+			</th>
+		</tr>		
+		
+	</table>
+@endforeach
+</br></br>
 
 
 @stop

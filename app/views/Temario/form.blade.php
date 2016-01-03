@@ -17,68 +17,9 @@
 @section ('contenido') 
 
 <br><br>
-<table>
-	<tr>
-		<th colspan="2"><center>Información del curso</center></th>
-	</tr>
-	<tr>
-		<th>ID:</th>
-		<td>{{ $curso->id_curso }}</td>
-	</tr>
-	<tr>
-		<th>Nombre:</th>
-		<td>{{ $curso->nombre }}</td>
-	</tr>
-	<tr>
-		<th>Imagen:</th>
-		<td><img src="../../imagenes/{{ $curso->imagen_presentacion }}" width="200px" height="200px"></td>
-	</tr>
-	<tr>
-		<th>Fecha de inicio:</th>
-		<td>{{ $curso->fecha_inicio }}</td>
-	</tr>
-	<tr>
-		<th>Estilo del curso:</th>
-		<td>{{ $curso->comienzo }}</td>
-	</tr>
-	<tr>
-		<th>Tematica:</th>
-		<td>{{ $curso->getTematica() }}</td>
-	</tr>
-	<tr>
-		<th>Nivel:</th>
-		<td>{{ $curso->nivel }}</td>
-	</tr>
-	<tr>
-		<th>Duración:</th>
-		<td>{{ $curso->duracion }}</td>
-	</tr>	
-	<tr>
-		<th>Esfuerzo:</th>
-		<td>{{ $curso->esfuerzo }}</td>
-	</tr>
-	<tr>
-		<th>Precio:</th>
-		<td>{{ $curso->precio }}</td>
-	</tr>
-	<tr>
-		<th>Prerrequisitos:</th>
-		<td>{{ $curso->prerrequisitos }}</td>
-	</tr>
-	<tr>
-		<th colspan="2"><center>Contenidos</center>	</th>
-	</tr>
-	@foreach( $temarios as $temariu)
-	<tr>
-		<th>{{ $temariu->titulo }}</th>
-		<td>{{ $temariu->contenido }}</td>
-	</tr>
-	@endforeach
-</table>
+<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
 
 
-
-<br>
 <h2>Crear contenido del curso {{ $curso->nombre }}</h2>
 
 <a href="{{ URL::route('admin-ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentacion del Curso</a>

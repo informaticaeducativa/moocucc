@@ -18,18 +18,16 @@
 
 @section ('contenido')
 
-</br>
+</br></br>
+<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
 
 <center>
 	<h1>Crear leccion para {{ $curso->nombre  }}</h1>
 </center>
 
-<h4 class="strong">Lecciones añadidas al mismo curso:</h4>
-@foreach($curso->getAllLecciones() as $leccion)
-	{{ $leccion->nombre }} - Semana {{ $leccion->semana }}</br>
-@endforeach
+<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Lecciones del Curso</a>
 </br>
-
+</br>
 
 {{ Form::model($leccion, $form_data, array('role' => 'form')) }}
 

@@ -47,13 +47,13 @@
 			<tr><th></th></tr>
 			<tr>
 				<th>
-					<a href="{{ URL::route('crear-curso-4b', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Crear contenido de inicio del curso</a>
+					<a href="{{ URL::route('crear-curso-4b', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Crear mensajes de inicio del curso</a>
 				</th>
 			</tr>
 			<tr><th></th></tr>
 			<tr>
 				<th>
-					<a href="{{ URL::route('crear-curso-5', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Crear contenido del curso</a>
+					<a href="{{ URL::route('crear-curso-5', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Crear mensaje semanal del curso</a>
 				</th>
 			</tr>
 			<tr><th></th></tr>

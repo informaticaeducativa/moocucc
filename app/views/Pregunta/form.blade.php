@@ -19,17 +19,15 @@
 @section ('contenido') 
  
 </br>
+</br>
+<a href="{{ URL::route('crear-curso-7', $evaluacion->getIdCurso() ) }}" class="btn btn-danger" >Regresar</a>
 
 <center>
 	<h1>Crear Pregunta para {{ $evaluacion->nombre  }}</h1>
 </center>
 
-<h4 class="strong">Preguntas añadidas a la misma evaluación:</h4>
-@foreach($evaluacion->getPreguntas() as $pregunta)
-	{{ $pregunta->nombre }}</br>
-@endforeach
-</br>
-
+<a href="{{ URL::route('ver-tarea', array($evaluacion->getIdCurso(), $evaluacion->id_evaluacion) ) }}" class="btn btn-primary" target="_blank">Ver Presentación del examen</a>
+</br></br>
 
 {{ Form::model($pregunta, $form_data, array('role' => 'form')) }}
 

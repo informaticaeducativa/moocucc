@@ -4,15 +4,20 @@
 
 
 @section ('contenido')
-<center>
-	<h1>
-		Asignar Profesor a {{ $curso->nombre }}
-	</h1>
-</center>
+</br>
 
-<br>
+
+</br>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 
+	<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+
+	<center>
+		<h1>
+			Asignar Profesor a {{ $curso->nombre }}
+		</h1>
+	</center>
+	</br>
 	<a href="{{ URL::route('admin-ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentacion del Curso</a>
 	<h3>
 		Profesores Administradores
