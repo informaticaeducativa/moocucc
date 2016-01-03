@@ -324,9 +324,9 @@ Route::get('administrador', array('as' => 'administrador', function()
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
 
-	//$curso = Curso::find($id);
+	$cursos = Curso::all();
 	//$evaluacion = Evaluacion::find($id2);
-    return View::make('Administrador/index');
+    return View::make('Administrador/index')->with('cursos', $cursos);
 }));
 
 Route::get('administrador/crear-curso',array('as'=>'crear-curso','uses'=>'CursoController@create'));
@@ -388,6 +388,12 @@ Route::get('desasignar-profesor/{id_curso}/{id_usuario}/{tipo}', array('as'=>'de
 Route::get('administrador/ver-curso/{id}',array('as'=>'admin-ver-curso', function($id) {
 	$curso = Curso::find($id);
     return View::make('Administrador/ver-curso')->with('curso', $curso); 
+}))->where('id', '[0-9]+');
+
+//Ruta para Ver como queda un curso desde el perfil administrador
+Route::get('administrador/editar-curso/{id}',array('as'=>'editar-curso', function($id) {
+	$curso = Curso::find($id);
+    return View::make('Administrador/ver')->with('curso', $curso); 
 }))->where('id', '[0-9]+');
 
 

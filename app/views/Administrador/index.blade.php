@@ -15,36 +15,34 @@
 			<div class="div_item row_cursos">
 				<span class="strong">Crear Curso</span>
 			</div>
-		</a>
-		<a href="#">
-			<div class="div_item row_cursos">
-				<span class="strong">Modificar Curso</span>
-			</div>
 		</a>		
-		<a href="#">
-			<div class="div_item row_cursos">
-				<span class="strong">Asignar Profesor Administrador</span>
-			</div>
-		</a>	
-		<a href="#">
-			<div class="div_item row_cursos">
-				<span class="strong">Asignar Profesor Básico</span>
-			</div>
-		</a>	
-		<a href="#">
-			<div class="div_item row_cursos">
-				<span class="strong">Crear Nueva Temática (Sin hacer)</span>
-			</div>
-		</a>	
 		<a href="#">
 			<div class="div_item row_cursos">
 				<span class="strong">Ver estadisticas de Administrador (Sin hacer)</span>
 			</div>
+		</a>
+		<a href="#">
+			<div class="div_item row_cursos">
+				<span class="strong">Ver estadisticas de Profesor Administrador (Sin hacer)</span>
+			</div>
 		</a>		
 	</div>
 	<div class="col-md-9 col-sm-9 col-xs-12 div_list2">
-		<h2 class="strong"><center>Contenido</center></h2>
+		<h2 class="strong"><center>Escojer un curso para editarlo</center></h2>
 		<br/>
+		@foreach($cursos as $curso)
+		<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}">
+			<div class="div_item row_cursos col-md-5 col-sm-5 col-xs-5 ">
+				<table>
+					<tr>
+						<th><img class="imagen_cuadrada_reducida" src="../imagenes/{{ $curso->imagen_presentacion  }} "></th>
+						<th><span class="strong">{{ $curso->nombre }}</span></th>
+					</tr>
+				</table>
+			</div>
+		</a>
+		@endforeach
+
 	</div>
 
 </div>

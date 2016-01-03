@@ -111,6 +111,12 @@ hr{
    border-radius: 35px;
 }
 
+.imagen_cuadrada_reducida{
+   width: 70px;
+   height: 70px;
+   background:#008040;
+}
+
 .espaciado{
 	padding: 5px;
 }
