@@ -59,22 +59,18 @@
        otro elemento que se pueda ocultar al minimizar la barra -->
   <div class="collapse navbar-collapse navbar-ex1-collapse navbar_back">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Enlace #1</a></li>
-      <li><a href="#">Enlace #2</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          Menú #1 <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Acción #1</a></li>
-          <li><a href="#">Acción #2</a></li>
-          <li><a href="#">Acción #3</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Acción #4</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Acción #5</a></li>
-        </ul>
-      </li>
+     <li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			Temas <b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu">
+			<li><a href="#"></a></li>
+			<li class="divider"></li>
+			<li><a href="#"></a></li>
+			<li class="divider"></li>
+			<li><a href="#"></a></li>
+		</ul>
+	 </li>
     </ul>
  
     <form class="navbar-form navbar-left" role="search" action="{{ URL::route('index') }}" method="POST">
