@@ -29,11 +29,7 @@
 		</tr>
 		<tr>
 			<th>Nombres</th>
-			<td>{{ $usuario->nombre }}</td>
-		</tr>
-		<tr>
-			<th>Apellidos</th>
-			<td>{{ $usuario->apellido }}</td>
+			<td>{{ $usuario->nombre.' '.$usuario->apellido }}</td>
 		</tr>
 		<tr>
 			<th>Tipo de Usuario</th>
@@ -51,13 +47,7 @@
 			<th>Titulo</th>
 			<td>{{ $usuario->titulo }}</td>
 		</tr>
-		<tr>
-			<td colspan="2">
-			  <a href="{{ route('usuario.edit', $usuario->id) }}" class="btn btn-primary">
-				Editar Usuario
-			  </a>
-			</td>
-		</tr>
+
 </table>
 
 @stop

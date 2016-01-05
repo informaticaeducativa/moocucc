@@ -24,13 +24,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
 	public function isValid($data)
     {
 		$rules = array(
-            'id'     => 'required|numeric',
             'nombre' => 'required',
-            'apellido' => 'required',
-            'id_social' => 'required',
-            'red_social' => 'required',
-            'tipo_usuario' => 'required',
-            'fecha' => 'required',
             'tipo_inteligencia' => 'required',
             'foto' => 'required',
             'titulo' => 'required'

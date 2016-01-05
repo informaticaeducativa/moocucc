@@ -3,7 +3,7 @@
 <?php
 
     if ($usuario->exists):
-        $form_data = array('route' => array('usuario.update', $usuario->id_usuario), 'method' => 'PATCH');
+        $form_data = array('route' => array('usuario.update', $usuario->id), 'method' => 'PATCH');
         $action    = 'Editar';
     else:
         $form_data = array('route' => 'usuario.store', 'method' => 'POST');
@@ -25,7 +25,11 @@
 -->
 
 <br>
-
+<center>
+	<h1>
+		{{ $action }} Usuario
+	</h1>
+</center>
 {{ Form::model($usuario, $form_data, array('role' => 'form')) }}
 
   @include ('errors', array('errors' => $errors))

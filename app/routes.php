@@ -19,6 +19,9 @@ Route::get('/', function()
 	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzales');
 	Session::put('inteligencia', 'Kinestesico');
+	Session::put('tipo_usuario', 'Administrador');
+		
+
 	$cursos = Curso::all();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', ''); 
 });
@@ -65,6 +68,59 @@ Route::get('usuario/{id}', array('as'=>'usuario','uses'=> 'UsuarioController@sho
 //
 //RUTAS DE ELEMENTOS LLAMADOS POR AJAX
 //
+Route::get('agregar-datos', function()
+{
+	$data = Input::all();
+	$universidad = $data['universidad'];
+	$ciudad = $data['ciudad'];
+	$pais = $data['pais'];
+	$titulo = $data['titulo'];
+	$id = Session::get('user_id');
+	DB::table('usuario')->where('id', $id)->update(array('ciudad' => $ciudad, 'pais' => $pais, 'universidad' => $universidad, 'titulo' => $titulo ));
+	Session::put('titulo', $titulo);
+	return Response::json((  $ciudad.' '.$pais.' '.$universidad.' '.$titulo.' '.$id ));
+});
+Route::get('agregar-ciudad', function()
+{
+	$data = Input::all();
+	$ciudad = $data['nombre'];
+	DB::table('ciudad')->insert(array('nombre' => $ciudad));
+	$ciudades = DB::table('ciudad')->get();
+	return Response::json(($ciudades));
+});
+Route::get('agregar-pais', function()
+{
+	$data = Input::all();
+	$pais = $data['nombre'];
+	DB::table('pais')->insert(array('nombre' => $pais));
+	$paises = DB::table('pais')->get();
+	return Response::json(($paises));
+});
+Route::get('agregar-universidad', function()
+{
+	$data = Input::all();
+	$universidad = $data['nombre'];
+	DB::table('universidad')->insert(array('nombre' => $universidad));
+	$universidades = DB::table('universidad')->get();
+	return Response::json(($universidades));
+});
+
+Route::get('listar-ciudades', function()
+{
+	$ciudades = DB::table('ciudad')->get();
+	return Response::json(($ciudades));
+});
+Route::get('listar-paises', function()
+{
+	$paises = DB::table('pais')->get();
+	return Response::json(($paises));
+});
+Route::get('listar-universidades', function()
+{
+	$universidades = DB::table('universidad')->get();
+	return Response::json(($universidades));
+});
+
 Route::get('obtener-inteligencia',  function()
 {
     return Session::get('inteligencia');

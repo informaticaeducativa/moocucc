@@ -1,6 +1,6 @@
 @extends ('template2')
 
-@section ('title') Ver Curso @stop
+@section ('title') {{ $curso->nombre }} - MOOC UCC @stop
 
 @section ('boton')
 <p><a href="{{ route('curso.create') }}" class="btn btn-primary">Crear un nuevo curso</a></p>
@@ -135,4 +135,5 @@
     </div>
   </div>
 </div>
+
 @stop

@@ -43,6 +43,7 @@ public function loginWithFacebook() {
 			Session::put('user_id', $user->id);
 			Session::put('user', $user->nombre);
 			Session::put('inteligencia', $user->tipo_inteligencia);
+			Session::put('tipo_usuario', $user->tipo_usuario);
 			
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
@@ -96,7 +97,8 @@ public function loginWithGoogle() {
 			Session::put('user_id', $user->id);
 			Session::put('user', $user->nombre);
 			Session::put('inteligencia', $user->tipo_inteligencia);
-			
+			Session::put('tipo_usuario', $user->tipo_usuario);
+
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
 		else if($user->tipo_usuario == "Profesor Basico")
@@ -151,7 +153,8 @@ public function loginWithTwitter() {
 			Session::put('user_id', $user->id);
 			Session::put('user', $user->nombre);
 			Session::put('inteligencia', $user->tipo_inteligencia);
-			
+			Session::put('tipo_usuario', $user->tipo_usuario);
+
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
 		else if($user->tipo_usuario == "Profesor Basico")

@@ -75,6 +75,8 @@ class UsuarioController extends BaseController
 	 */
 	public function show($id)
 	{
+		if(Session::get('tipo_usuario') == 'Estudiante' && Session::get('user_id') != $id )
+			return Redirect::route('index');
 		$usuario = Usuario::find($id);
 		return View::make('Usuario/view')->with('usuario', $usuario);
 	}
@@ -88,6 +90,9 @@ class UsuarioController extends BaseController
 	 */
 	public function edit($id)
 	{
+		if(Session::get('tipo_usuario') == 'Estudiante' && Session::get('user_id') != $id )
+			return Redirect::route('index');
+			
 		$usuario = Usuario::find($id);
 		if (is_null ($usuario))
 		{
@@ -109,6 +114,9 @@ class UsuarioController extends BaseController
 	 */
 	public function update($id)
 	{
+		if(Session::get('tipo_usuario') == 'Estudiante' && Session::get('user_id') != $id )
+			return Redirect::route('index');
+			
 		   $usuario = Usuario::find($id);
 			$data = Input::all();
 
