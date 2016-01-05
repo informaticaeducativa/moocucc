@@ -20,18 +20,19 @@
 			<div class="div_item row_cursos">
 				<span class="strong">Ver estadisticas de Administrador</span>
 			</div>
-		</a>		
+		</a>
+		
 	</div>
 	<div class="col-md-9 col-sm-9 col-xs-12 div_list2">
-		<h2 class="strong"><center>Escojer un curso para editarlo</center></h2>
+		<h2 class="strong"><center>Ver estadísticas de un Curso</center></h2>
 		<br/>
 		@foreach($cursos as $curso)
-		<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}">
+		<a href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}">
 			<div class="div_item row_cursos col-md-5 col-sm-5 col-xs-5 ">
 				<table>
 					<tr>
 						<th><img class="imagen_cuadrada_reducida" src="../imagenes/{{ $curso->imagen_presentacion  }} "></th>
-						<th><span class="strong">{{ $curso->nombre }}</span></th>
+						<th><span class="strong">{{ $curso->nombre }}<br>Inscritos: {{ $curso->getInscritos() }}</span></th>
 					</tr>
 				</table>
 			</div>

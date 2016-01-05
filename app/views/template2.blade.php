@@ -14,6 +14,7 @@
 
 	<!-- js -->
 	<script src= "https://code.jquery.com/jquery.js" ></script>
+	<script src= "{{URL::to('js/Chart.js')}}"></script>
 	<script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script>
 
@@ -206,6 +207,73 @@
 				$("#r_"+leccion+"x"+pregunta).html(opcion);
 			});
 			
+			var ctx = $("#myChart").get(0).getContext("2d");
+			var ctx2 = $("#myChart2").get(0).getContext("2d");
+			var ctx3 = $("#myChart3").get(0).getContext("2d");
+			var ctx4 = $("#myChart4").get(0).getContext("2d");
+
+			var ctx = document.getElementById("myChart").getContext("2d");
+			var ctx2 = document.getElementById("myChart2").getContext("2d");
+			var ctx3 = document.getElementById("myChart3").getContext("2d");
+			var ctx4 = document.getElementById("myChart4").getContext("2d");
+				
+						
+			jQuery.ajax({
+					url: '../../../obtener-inscritos',
+					data: {curso: $("#datas").val() },
+					success: function (result) {
+						var myBarChart = new Chart(ctx).Pie(result, {});
+					},
+					async: false
+				});
+			
+			jQuery.ajax({
+					url: '../../../obtener-demografia',
+					data: {curso: $("#datas").val() },
+					success: function (result) {
+						var myBarChart2 = new Chart(ctx2).Pie(result, {});
+						drawTable(result, "CiudadDataTable", "Ciudad");
+					},
+					async: false
+				});
+				
+			jQuery.ajax({
+					url: '../../../obtener-demografia-pais',
+					data: {curso: $("#datas").val() },
+					success: function (result) {
+						var myBarChart3 = new Chart(ctx3).Pie(result, {});
+						drawTable(result, "PaisDataTable", "Pais");
+					},
+					async: false
+				});
+			
+			jQuery.ajax({
+					url: '../../../obtener-inscritos-universidad',
+					data: {curso: $("#datas").val() },
+					success: function (result) {
+						var myBarChart4 = new Chart(ctx4).Pie(result, {});
+						drawTable(result, "UniversidadDataTable", "Universidad");
+					},
+					async: false
+				});
+			
+			function drawTable(data, table, demografia) {
+				var row = $("<tr />")
+				$("#"+table).append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+				row.append($("<th>"+demografia+"</th>"));
+				row.append($("<th>Cantidad</th>"));
+				for (var i = 0; i < data.length; i++) {
+					drawRow(data[i], table);
+				}
+			}
+
+			function drawRow(rowData, table) {
+				var row = $("<tr />")
+				$("#"+table).append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+				row.append($("<td>" + rowData.label + "</td>"));
+				row.append($("<td>" + rowData.value + "</td>"));
+			}
+			
 			$("#btn_inteligencia").click(function() {
 					
 				var preguntas = [];
@@ -282,13 +350,12 @@
  
     <ul class="nav navbar-nav navbar-right">
       
-      <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">{{ Session::get('user') }}</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          Configuración<b class="caret"></b>
+          {{ Session::get('user') }}<b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#">Acción #1</a></li>
+          <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi perfil</a></li>
           <li class="divider"></li>
           <li><a href="{{ URL::route('logout')}}">Salir</a></li>
         </ul>

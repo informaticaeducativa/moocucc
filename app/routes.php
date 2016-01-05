@@ -20,14 +20,22 @@ Route::get('/', function()
 	Session::put('user', 'Mark Gonzales');
 	Session::put('inteligencia', 'Kinestesico');
 	$cursos = Curso::all();
-	return View::make('index')->with('cursos', $cursos); 
+	return View::make('index')->with('cursos', $cursos)->with('palabra', ''); 
 });
 
 
 Route::get('index',  array('as' => 'index',function()
 {
 	$cursos = Curso::all();
-	return View::make('index')->with('cursos', $cursos); 
+	return View::make('index')->with('cursos', $cursos)->with('palabra', ''); 
+}));
+
+Route::post('index',  array('as' => 'index',function()
+{
+	$data = Input::all();
+	$palabra = $data['texto-buscar'];
+	$cursos = Curso::where('nombre', 'ILIKE', '%'.$palabra.'%')->get();
+	return View::make('index')->with('cursos', $cursos)->with('palabra', $palabra); 
 }));
 
 Route::get('logout',  array('as' => 'logout',function()
@@ -60,6 +68,38 @@ Route::get('usuario/{id}', array('as'=>'usuario','uses'=> 'UsuarioController@sho
 Route::get('obtener-inteligencia',  function()
 {
     return Session::get('inteligencia');
+});
+
+Route::get('obtener-inscritos',  function()
+{
+	$data = Input::all();
+	$id = $data['curso'];
+	$curso = Curso::find($id);
+    return $curso->getInscritosJSON();
+});
+
+Route::get('obtener-inscritos-universidad',  function()
+{
+	$data = Input::all();
+	$id = $data['curso'];
+	$curso = Curso::find($id);
+    return $curso->getInscritosUniversidadJSON();
+});
+
+Route::get('obtener-demografia',  function()
+{
+	$data = Input::all();
+	$id = $data['curso'];
+	$curso = Curso::find($id);
+    return $curso->getDemografiaJSON();
+});
+
+Route::get('obtener-demografia-pais',  function()
+{
+	$data = Input::all();
+	$id = $data['curso'];
+	$curso = Curso::find($id);
+    return $curso->getDemografiaPaisJSON();
 });
 
 Route::get('validar-quiz',  function()
@@ -327,6 +367,24 @@ Route::get('administrador', array('as' => 'administrador', function()
 	$cursos = Curso::all();
 	//$evaluacion = Evaluacion::find($id2);
     return View::make('Administrador/index')->with('cursos', $cursos);
+}));
+
+Route::get('administrador/estadisticas', array('as' => 'administrador-estadisticas', function()
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$cursos = Curso::all();
+    return View::make('Administrador/estadisticas')->with('cursos', $cursos);
+}));
+
+Route::get('administrador/ver-estadisticas/{id}', array('as' => 'administrador-ver-estadisticas', function($id)
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$curso = Curso::find($id);
+    return View::make('Administrador/ver-estadisticas')->with('curso', $curso);
 }));
 
 Route::get('administrador/crear-curso',array('as'=>'crear-curso','uses'=>'CursoController@create'));

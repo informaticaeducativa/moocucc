@@ -77,29 +77,26 @@
       </li>
     </ul>
  
-    <form class="navbar-form navbar-left" role="search">
+    <form class="navbar-form navbar-left" role="search" action="{{ URL::route('index') }}" method="POST">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Buscar">
+        <input type="text" id="texto-buscar" name="texto-buscar" class="form-control" placeholder="Buscar">
       </div>
-      <button type="submit" class="btn btn-default">Enviar</button>
+      <button type="submit" class="btn btn-default">Buscar</button>
     </form>
  
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="../usuario/{{ Session::get('user_id') }}">{{ Session::get('user') }}</a></li>
-      
+      @if (Session::get('user') != "") 
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           {{ Session::get('user') }}<b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="../usuario/{{ Session::get('user_id') }}">Ver Perfil</a></li>
-          <li><a href="#">Acción #2</a></li>
-          <li><a href="#">Acción #3</a></li>
+          <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Ver Perfil</a></li>
           <li class="divider"></li>
           <li><a href="#">Salir</a></li>
         </ul>
       </li>
-      
+      @else
       <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
 			<ul id="login-dp" class="dropdown-menu">
@@ -115,15 +112,11 @@
 									</div>
                                </center>
 							</div>
-<!--
-							<div class="bottom text-center">
-								Eres Nuevo ? <a href="#"><b>Unete</b></a>
-							</div>
--->
 					 </div>
 				</li>
 			</ul>
         </li>
+      @endif
     </ul>
   </div>
 </nav>

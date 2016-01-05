@@ -1,6 +1,6 @@
 @extends ('template')
 
-@section ('title') Ver Usuario @stop
+@section ('title') Ver Usuario {{ $usuario->nombre }} @stop
 @section ('title_div') Usuario {{ $usuario->nombre." ".$usuario->apellido }} @stop
 
 @section ('boton')
@@ -11,7 +11,9 @@
 
 @section ('contenido') 
  <br>
- 
+ <center>
+	<h1>{{ $usuario->nombre }}</h1>				
+</center>
 <center>
 	@if(substr( $usuario->foto , 0, 4) == 'http')
 	<img class="imagen_redonda" src="{{ $usuario->foto}}" ><br>
@@ -19,7 +21,7 @@
 	<img class="imagen_redonda" src="../imagenes/fotos/{{ $usuario->foto  }} " ><br>
 	@endif
 </center>
-<br>				
+<br>
 <table id="ticket-table" class="table table-sorting">
 		<tr>
 			<th>ID</th>
@@ -50,8 +52,8 @@
 			<td>{{ $usuario->titulo }}</td>
 		</tr>
 		<tr>
-			<td>
-			  <a href="{{ route('usuario.edit', $usuario->id_usuario) }}" class="btn btn-primary">
+			<td colspan="2">
+			  <a href="{{ route('usuario.edit', $usuario->id) }}" class="btn btn-primary">
 				Editar Usuario
 			  </a>
 			</td>

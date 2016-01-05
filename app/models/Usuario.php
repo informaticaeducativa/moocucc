@@ -79,6 +79,12 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
 		if ($count > 0)
 			return true;
 		return false;
+	}
+	
+	public function getCiudad()
+	{
+		$ciudad = Ciudad::find($this->id_ciudad);
+		return $ciudad;
 	}    
     
 }

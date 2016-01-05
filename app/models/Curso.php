@@ -121,7 +121,71 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 		return $profesores;
 	}
 	
+	public function getInscritos(){
+		$inscritos = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Estudiante')->where('estado','=', 'activo')->count();
+		return $inscritos;
+	}
+	
+	public function getInscritosTotal(){
+		$inscritos = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Estudiante')->count();
+		return $inscritos;
+	}
+	
+	public function getRetirados(){
+		$inscritos = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Estudiante')->where('estado','=', 'inactivo')->count();
+		return $inscritos;
+	}
+	
+	public function getInscritosJSON(){
+		$inscritos = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Estudiante')->where('estado','=', 'activo')->count();
+		$retirados = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Estudiante')->where('estado','=', 'inactivo')->count();
+		return Response::json(array(array("value" => $inscritos, 'label'=>'inscritos'), array("value" => $retirados, 'label'=>'retirados')));
+	}
+	
+	public function getDemografiaJSON(){
+		$demografia = DB::table('relacion_usuario_curso')
+    ->join('usuario', 'relacion_usuario_curso.id_usuario', '=', 'usuario.id')
+     ->join('ciudad', 'usuario.ciudad', '=', 'ciudad.id_ciudad')
+   ->selectRaw('ciudad.nombre as label, count(ciudad.id_ciudad) as value')
+   ->where('id_curso','=', $this->id_curso)
+    ->where('tipo_relacion','=', 'Estudiante')
+    ->where('estado','=', 'activo')
+    ->groupBy('ciudad.nombre')
+    ->get();
+		//$demografia = RelacionUsuarioCurso::groupBy('estado')->selectRaw('sum(id_usuario) as sum, estado')->where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Estudiante')->lists('sum','estado');
+		return Response::json(($demografia));
+	}
+	
+	public function getDemografiaPaisJSON(){
+		$demografia = DB::table('relacion_usuario_curso')
+    ->join('usuario', 'relacion_usuario_curso.id_usuario', '=', 'usuario.id')
+     ->join('pais', 'usuario.pais', '=', 'pais.id_pais')
+   ->selectRaw('pais.nombre as label, count(pais.id_pais) as value')
+   ->where('id_curso','=', $this->id_curso)
+    ->where('tipo_relacion','=', 'Estudiante')
+    ->where('estado','=', 'activo')
+    ->groupBy('pais.nombre')
+    ->get();
+
+		return Response::json(($demografia));
+	}	
+		
+	public function getInscritosUniversidadJSON(){
+		$inscritos = DB::table('relacion_usuario_curso')
+    ->join('usuario', 'relacion_usuario_curso.id_usuario', '=', 'usuario.id')
+     ->join('universidad', 'usuario.universidad', '=', 'universidad.id_universidad')
+   ->selectRaw('universidad.nombre as label, count(universidad.id_universidad) as value')
+   ->where('id_curso','=', $this->id_curso)
+    ->where('tipo_relacion','=', 'Estudiante')
+    ->where('estado','=', 'activo')
+    ->groupBy('universidad.nombre')
+    ->get();
+
+		return Response::json(($inscritos));
+	}	
 	
     
 }
+
+
 
