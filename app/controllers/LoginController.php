@@ -35,7 +35,7 @@ public function loginWithFacebook() {
 		$count = Usuario::where('id_social', '=', $result['id'])->where('red_social', '=', 'Facebook')->count();
 		if ($count == 0){
 			$respuestas = Usuario::create(array('nombre' => $result['name'], 'id_social' => $result["id"], 'red_social' => 'Facebook',
-			'tipo_usuario' => 'Estudiante', 'fecha' => date('Y-m-d H:i:s')
+			'foto' => 'https://graph.facebook.com/'.$result['id'].'/picture?width=150&height=150' , 'tipo_usuario' => 'Estudiante', 'fecha' => date('Y-m-d H:i:s')
 			));
 		}
 		
