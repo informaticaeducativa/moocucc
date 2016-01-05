@@ -110,7 +110,8 @@ clase index.blade.php
 			  {{ Session::get('user') }}<b class="caret"></b>
 			</a>
 			<ul class="dropdown-menu">
-			  <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Ver Perfil</a></li>
+			  <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi Perfil</a></li>
+			  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 			  <li class="divider"></li>
 			  <li><a href="#">Salir</a></li>
 			</ul>

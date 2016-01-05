@@ -79,7 +79,14 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
 	{
 		$ciudad = Ciudad::find($this->id_ciudad);
 		return $ciudad;
-	}    
+	}
+	
+	public function misCursos()
+    {
+		$relaciones = RelacionUsuarioCurso::where('id_usuario','=', $this->id)->get();
+		return $relaciones;
+	}
+	    
     
 }
 

@@ -255,6 +255,17 @@ Route::get('login-google',array('as'=>'login-google','uses'=>'LoginController@lo
 //
 //RUTAS QUE TOMA EL USUARIO ESTUDIANTE
 //
+Route::get('mis-cursos', array('as' => 'mis-cursos', function()
+{
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+
+	$usuario = Usuario::find(Session::get('user_id'));
+	$cursos = $usuario->misCursos();
+
+    return View::make('mis-cursos')->with('cursos', $cursos); 
+}))->where('id', '[0-9]+');
+
 Route::get('desuscribirse/{id}', array('as' => 'desuscribirse', function($id)
 {
 	$usuario = Session::get('user_id');
