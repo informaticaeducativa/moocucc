@@ -210,7 +210,44 @@
 				$("#r_"+leccion+"x"+pregunta).html(opcion);
 			});
 			
-			var ctx = $("#myChart").get(0).getContext("2d");
+		
+			
+			$("#btn_inteligencia").click(function() {
+					
+				var preguntas = [];
+				var respuestas = [];
+				var contador = 0;
+				$(".result").each(function( i ) {
+					  
+					var texto_id = $(this).attr('id');
+					var texto = (texto_id.substr(2,texto_id.length));
+					var textos = texto.split("x");
+					var leccion = textos[0];
+					var pregunta = textos[1];
+					var opcion = $(this).text();
+					
+					preguntas[i] = pregunta;
+					respuestas[i] = parseInt(opcion);
+					contador++;
+				});
+				console.log("comienza");
+				jQuery.ajax({
+					url: '../../../validar-inteligencia',
+					data: {preguntas: preguntas, respuestas: respuestas },
+					success: function (result) {
+						console.log(result);
+						$("#regresar").css('visibility', 'visible');
+						$("#btn_inteligencia").css('visibility', 'hidden');
+						
+						alert("Resultado: "+result);
+						
+					},
+					async: true
+				});
+				  
+			});
+			
+				var ctx = $("#myChart").get(0).getContext("2d");
 			var ctx2 = $("#myChart2").get(0).getContext("2d");
 			var ctx3 = $("#myChart3").get(0).getContext("2d");
 			var ctx4 = $("#myChart4").get(0).getContext("2d");
@@ -276,41 +313,6 @@
 				row.append($("<td>" + rowData.label + "</td>"));
 				row.append($("<td>" + rowData.value + "</td>"));
 			}
-			
-			$("#btn_inteligencia").click(function() {
-					
-				var preguntas = [];
-				var respuestas = [];
-				var contador = 0;
-				$(".result").each(function( i ) {
-					  
-					var texto_id = $(this).attr('id');
-					var texto = (texto_id.substr(2,texto_id.length));
-					var textos = texto.split("x");
-					var leccion = textos[0];
-					var pregunta = textos[1];
-					var opcion = $(this).text();
-					
-					preguntas[i] = pregunta;
-					respuestas[i] = parseInt(opcion);
-					contador++;
-				});
-				console.log("comienza");
-				jQuery.ajax({
-					url: '../../../validar-inteligencia',
-					data: {preguntas: preguntas, respuestas: respuestas },
-					success: function (result) {
-						console.log(result);
-						$("#regresar").css('visibility', 'visible');
-						$("#btn_inteligencia").css('visibility', 'hidden');
-						
-						alert("Resultado: "+result);
-						
-					},
-					async: true
-				});
-				  
-			});
 			
 		});
 		
