@@ -86,7 +86,7 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 	}
 		
 	public function getAllEvaluaciones() {
-		$evaluaciones = Evaluacion::where('id_curso','=', $this->id_curso)->get();
+		$evaluaciones = Evaluacion::where('id_curso','=', $this->id_curso)->where('semana','>', 0)->get();
 		return $evaluaciones;
 	}
 	
@@ -183,6 +183,8 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 
 		return Response::json(($inscritos));
 	}	
+	
+
 	
     
 }

@@ -194,40 +194,90 @@ Route::get('validar-inteligencia',  function()
 	$kinestesico=0;
 	$linguistico=0;
 	$visual=0;
-	
+	$musical=0;
+	$logico=0;
+	$intrapersonal=0;
+	$interpersonal=0;
+	$maximo = 0;
+	$ganador = "Kinestesico";
+
 	foreach ($postData as $pregunta)
 	{
-		if($pregunta["respuesta"] === "Kinestesico")
+		else if($pregunta["respuesta"] === "Kinestesico")
 		{
 			$kinestesico += $respuestas[$contador];
+			if($kinestesico>$maximo){
+				$maximo = $kinestesico;
+				$ganador = "Kinestesico";
+			}
 		}
-		if($pregunta["respuesta"] === "Visual")
+		else if($pregunta["respuesta"] === "Visual")
 		{
 			$visual += $respuestas[$contador];
+			if($visual>$maximo){
+				$maximo = $visual;
+				$ganador = "Visual";
+			}
 		}
-		if($pregunta["respuesta"] === "Linguistico")
+		else if($pregunta["respuesta"] === "Linguistico")
 		{
 			$linguistico += $respuestas[$contador];
+			if($linguistico>$maximo){
+				$maximo = $linguistico;
+				$ganador = "Linguistico";
+			}
+		}
+		else if($pregunta["respuesta"] === "Musical")
+		{
+			$musical += $respuestas[$contador];
+			if($musical>$maximo){
+				$maximo = $musical;
+				$ganador = "Musical";
+			}
+		}
+		else if($pregunta["respuesta"] === "Logico")
+		{
+			$logico += $respuestas[$contador];
+			if($logico>$maximo){
+				$maximo = $logico;
+				$ganador = "Logico";
+			}
+		}
+		else if($pregunta["respuesta"] === "Interpersonal")
+		{
+			$interpersonal += $respuestas[$contador];
+			if($interpersonal>$maximo){
+				$maximo = $interpersonal;
+				$ganador = "Interpersonal";
+			}
+		}
+		else if($pregunta["respuesta"] === "Intrapersonal")
+		{
+			$intrapersonal += $respuestas[$contador];
+			if($intrapersonal>$maximo){
+				$maximo = $intrapersonal;
+				$ganador = "Intrapersonal";
+			}
 		}
 		$contador++;
 	}
-	$respuesta = "Kinestesico: ".$kinestesico." Visual: ".$visual." Linguistico: ".$linguistico;
+
+	$respuesta = "Ganador: ".$ganador." Puntaje: ".$maximo;
 
 	$usuario = (Session::get('user_id'));
 	
-	if($kinestesico >= $visual && $kinestesico>= $linguistico){
+	if($kinestesico == $maximo || $musical == $maximo ){
 		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Kinestesico'));
 		Session::put('inteligencia', 'Kinestesico');	
-		return "Ganador Kinestesico: ".$kinestesico." -- Visual: ".$visual." Linguistico: ".$linguistico;
-	}else if($visual >= $kinestesico && $visual>= $linguistico){
+	}else if($visual == $maximo || $logico == $maximo ){
 		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Visual'));
 		Session::put('inteligencia', 'Visual');	
-		return "Ganador Visual: ".$visual." -- Kinestesico: ".$kinestesico." Linguistico: ".$linguistico;
 	}else{
 		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Linguistico'));
 		Session::put('inteligencia', 'Linguistico');	
-		return "Ganador Linguistico: ".$linguistico." -- Kinestesico: ".$kinestesico." Visual: ".$visual;
 	}
+	return $respuesta;
+
 });
 
 Route::get('postear-en-microforo',  function()
@@ -269,7 +319,7 @@ Route::get('mis-cursos', array('as' => 'mis-cursos', function()
 Route::get('desuscribirse/{id}', array('as' => 'desuscribirse', function($id)
 {
 	$usuario = Session::get('user_id');
-	RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario)->where('id_curso', '=', $id)->delete();
+	RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario)->where('id_curso', '=', $id)->update(array('estado' => 'inactivo'));
 	return Redirect::to('index');
 }))->where('id', '[0-9]+');
 
@@ -298,9 +348,13 @@ Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 		return Redirect::to('prueba-inteligencias');
 	
 	$count = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
-	if ($count == 0){
-		//$respuestas = RelacionUsuarioCurso::create(array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'tipo_relacion' => 'Estudiante', 'fecha_creacion' => date('Y-m-d H:i:s')));
-	  DB::table('relacion_usuario_curso')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'tipo_relacion' => 'Estudiante', 'fecha_creacion' => date('Y-m-d H:i:s'))	);
+	$count2 = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('estado', '=', 'inactivo')->count();
+	if ($count2 > 0){
+		RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario)->where('id_curso', '=', $id)->update(array('estado' => 'activo'));
+	}
+	else if($count == 0)
+	{
+	  DB::table('relacion_usuario_curso')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'tipo_relacion' => 'Estudiante', 'fecha_creacion' => date('Y-m-d H:i:s'), 'estado' => 'activo')	);
 	}
 	$curso = Curso::find($id);
     return View::make('Estudiante/info')->with('curso', $curso); 
