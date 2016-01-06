@@ -47,8 +47,8 @@ public function loginWithFacebook() {
 			
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
-		//else if($user->tipo_usuario == "Profesor Basico")
-		//	return Redirect::to( "profesor-base-cursos" );
+		else if($user->tipo_usuario == "Profesor Basico")
+			return Redirect::to( "profesor-base-cursos" );
 		else
 			return Redirect::to( "mis-cursos" );
     }
@@ -101,8 +101,8 @@ public function loginWithGoogle() {
 
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
-		//else if($user->tipo_usuario == "Profesor Basico")
-		//	return Redirect::to( "profesor-base-cursos" );
+		else if($user->tipo_usuario == "Profesor Basico")
+			return Redirect::to( "profesor-base-cursos" );
 		else
 			return Redirect::to( "mis-cursos" );
     }
@@ -157,8 +157,8 @@ public function loginWithTwitter() {
 
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
-		//else if($user->tipo_usuario == "Profesor Basico")
-		//	return Redirect::to( "profesor-base-cursos" );
+		else if($user->tipo_usuario == "Profesor Basico")
+			return Redirect::to( "profesor-base-cursos" );
 		else
 			return Redirect::to( "mis-cursos" );
 

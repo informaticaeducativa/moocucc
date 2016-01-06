@@ -5,31 +5,26 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Leccion extends Eloquent implements UserInterface, RemindableInterface 
+class Registro extends Eloquent implements UserInterface, RemindableInterface 
 {
  
  	use UserTrait, RemindableTrait;
 
 	public $errors;
-    protected $primaryKey = 'id_leccion';
-
+    protected $primaryKey = array('id_usuario', 'id_curso', 'id_leccion');
  
- 	protected $table = 'leccion';
+ 	protected $table = 'registro';
  	 	
- 	protected $fillable = array('id_leccion', 'nombre', 'id_curso', 'server_contenido_grafico', 'contenido_grafico', 'contenido_texto', 'semana');
+ 	protected $fillable = array('id_usuario', 'id_curso', 'id_leccion');
 
-	//protected $hidden = array('password', 'remember_token');
     public $timestamps = false;
 
 	public function isValid($data)
     {
 		$rules = array(
-            'nombre' => 'required',
+            'id_usuario' => 'required|numeric',
             'id_curso' => 'required|numeric',
-            'server_contenido_grafico' => 'required',
-            'contenido_grafico' => 'required',
-            'contenido_texto' => 'required',
-            'semana' => 'required'
+            'id_leccion' => 'required|numeric'
         );
         
         $validator = Validator::make($data, $rules);
@@ -61,19 +56,24 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
         return false;
     }
     
-    public function getPreguntasLeccion()
+    public function getLeccion()
     {
-		$preguntas = PreguntaLeccion::where('id_leccion','=', $this->id_leccion)->orderBy('fecha_creacion','ASC')->get();
-		return $preguntas;
+		$leccion = Leccion::find($this->id_leccion);
+		return $leccion;
 	}
 	
-	public function getRegistro($curso)
+	public function getCurso()
     {
-		$count = Registro::where('id_leccion','=', $this->id_leccion)->where('id_curso','=', $curso)->where('id_usuario','=', Session::get('user_id'))->count();
-		if($count > 0)
-			return true;
-		return false;
+		$curso = Curso::find($this->id_curso);
+		return $curso;
 	}
+	
+	public function getUsuario()
+	{
+		$usuario = Usuario::find($this->id_usuario);
+		return $usuario;
+	}
+	
     
 }
 

@@ -44,6 +44,9 @@
 				<a href="{{ URL::route('ver-clase', array($curso->id_curso, $leccion->id_leccion) ) }}">
 					<div id="id_leccion_{{$leccion->id_leccion }}" class="div_item row_cursos">
 						<span class="strong">{{ $leccion->nombre }}</span>
+						@if ($leccion->getRegistro($curso->id_curso))
+							<img src="{{URL::to('imagenes/chulo.png')}}" width="20px">
+						@endif
 					</div>
 				</a>
 			@endforeach

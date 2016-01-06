@@ -164,6 +164,7 @@
 				var preguntas = [];
 				var respuestas = [];
 				var contador = 0;
+				var curso = $("#curso_div").val();
 				$(".result").each(function( i ) {
 					  
 					var texto_id = $(this).attr('id');
@@ -183,7 +184,9 @@
 					url: '../../../validar-quiz',
 					data: {leccion: leccion1, preguntas: preguntas, respuestas: respuestas },
 					success: function (result) {
-						alert("Resultado: "+parseFloat(((result*100)/contador)).toFixed(2)+" % con "+result+" / "+contador);
+						alert("Resultado: "+result+" % ");
+						$("#regresar_button").css('visibility', 'visible');
+						$("#btn_terminar_prueba").css('visibility', 'hidden');
 					},
 					async: false
 				});
@@ -298,8 +301,8 @@
 					data: {preguntas: preguntas, respuestas: respuestas },
 					success: function (result) {
 						console.log(result);
-						$("#regresar").show();
-						$("#btn_inteligencia").remove();
+						$("#regresar").css('visibility', 'visible');
+						$("#btn_inteligencia").css('visibility', 'hidden');
 						
 						alert("Resultado: "+result);
 						

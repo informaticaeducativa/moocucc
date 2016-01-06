@@ -56,6 +56,10 @@
 				<a href="{{ URL::route('ver-tarea', array($curso->id_curso, $evaluacion->id_evaluacion ) ) }}">
 					<div id="id_leccion_{{$evaluacion->id_evaluacion }}" class="div_item row_cursos">
 						<span class="strong">{{ $evaluacion->nombre }}   (calificable: {{$evaluacion->calificable}})</span>
+						@if ($evaluacion->getRealizado($curso->id_curso))
+							<img src="{{URL::to('imagenes/chulo.png')}}" width="20px">
+							{{ $evaluacion->getCalificacion() }}
+						@endif
 					</div>
 				</a>
 			@endforeach

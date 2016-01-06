@@ -72,6 +72,19 @@ class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
 	public function getIdCurso() {
 		$evaluacion = Evaluacion::where('id_evaluacion','=', $this->id_evaluacion)->first();
 		return $evaluacion->id_curso;
-	}    
+	}
+	
+	public function getRealizado($curso){
+		$count = Calificacion::where('id_evaluacion','=', $this->id_evaluacion)->where('id_curso','=', $curso)->where('id_usuario','=', Session::get('user_id'))->count();
+		if($count > 0)
+			return true;
+		return false;
+	}
+	
+	public function getCalificacion(){
+		$calificacion = Calificacion::where('id_evaluacion','=', $this->id_evaluacion)->where('id_usuario','=', Session::get('user_id'))->first();
+		return $calificacion->nota.'% - intentos:'.$calificacion->intentos;
+	}
+	    
 }
 

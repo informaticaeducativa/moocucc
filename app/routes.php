@@ -179,7 +179,28 @@ Route::get('validar-quiz',  function()
 		}
 		$contador++;
 	}
-	return $respuestas_buenas;
+	$intentos = 1;
+	$nota = intval(($respuestas_buenas*100 / $contador));
+	
+	$count = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso','=', $evaluacion->id_curso)->where('id_evaluacion', '=', $leccion)->count();
+	if ($count == 0){
+		DB::table('calificacion')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $evaluacion->id_curso, 'id_evaluacion' => $leccion, 'nota' => $nota, 'intentos' => $intentos, 'fecha' => date('Y-m-d H:i:s') )	);
+	}
+	else
+	{
+		$intentos = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso','=', $evaluacion->id_curso)->where('id_evaluacion', '=', $leccion)->sum('intentos');
+		$intentos = $intentos + 1;
+		$nota2 = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso','=', $evaluacion->id_curso)->where('id_evaluacion', '=', $leccion)->sum('nota');
+		if($nota > $nota2)
+		{
+			Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso','=', $evaluacion->id_curso)->where('id_evaluacion', '=', $leccion)->update(array('nota' => $nota, 'fecha' => date('Y-m-d H:i:s'), 'intentos' => $intentos));
+		}
+		else
+		{
+			Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso','=', $evaluacion->id_curso)->where('id_evaluacion', '=', $leccion)->update(array('intentos' => $intentos));
+		}
+	}
+	return $nota;
 	
 });
 
@@ -386,6 +407,10 @@ Route::get('ver-curso/{id}/clase/{id2}', array('as' => 'ver-clase', function($id
 
 	$curso = Curso::find($id);
 	$leccion = Leccion::find($id2);
+	$count = Registro::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('id_leccion', '=', $id2)->count();
+	if($count == 0){
+		DB::table('registro')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'id_leccion' => $id2));
+	}
     return View::make('Estudiante/clase')->with('curso', $curso)->with('leccion', $leccion);
 }))->where('id', '[0-9]+')->where('id2', '[0-9]+');
 
