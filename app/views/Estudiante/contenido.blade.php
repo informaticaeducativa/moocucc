@@ -37,6 +37,14 @@
 		<br/>
 		<h1 class="strong"><center>Contenido del curso {{ $curso->nombre }}</center></h1>
 		<br/>
+		<h5 class="strong">Progreso</h5>
+		<div class="progress progress-striped active">
+		  <div class="progress-bar" role="progressbar"
+			   aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+			   style="width: 80%">
+			80% completado
+		  </div>
+		</div>
 		@foreach ($curso->getTemariosSemana() as $temario)
 			<h2>Semana {{$temario->posicion }}</h2>
 			{{$temario->contenido }}<br/><br/>
