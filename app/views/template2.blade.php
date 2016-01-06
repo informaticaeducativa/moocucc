@@ -164,6 +164,7 @@
 				var preguntas = [];
 				var respuestas = [];
 				var contador = 0;
+				var completo = true;
 				var curso = $("#curso_div").val();
 				$(".result").each(function( i ) {
 					  
@@ -177,20 +178,39 @@
 					leccion1 = leccion;
 					preguntas[i] = pregunta;
 					respuestas[i] = opcion;
+					if(opcion == ''){	completo = false;	}
 					contador++;
 				});
-				
-				jQuery.ajax({
-					url: '../../../validar-quiz',
-					data: {leccion: leccion1, preguntas: preguntas, respuestas: respuestas },
-					success: function (result) {
-						alert("Resultado: "+result+" % ");
-						$("#regresar_button").css('visibility', 'visible');
-						$("#btn_terminar_prueba").css('visibility', 'hidden');
-					},
-					async: false
-				});
-				  
+					console.log("completo: "+completo);
+					if(!completo)
+					{
+							var r = confirm("Aun hay preguntas sin responder, desea enviar el cuestionario de todos modos?");
+							if (r == true) {
+								jQuery.ajax({
+									url: '../../../validar-quiz',
+									data: {leccion: leccion1, preguntas: preguntas, respuestas: respuestas },
+									success: function (result) {
+										alert("Resultado: "+result+" % ");
+										$("#regresar_button").css('visibility', 'visible');
+										$("#btn_terminar_prueba").css('visibility', 'hidden');
+									},
+									async: false
+								});
+							} 
+					}
+					else{
+					
+						jQuery.ajax({
+							url: '../../../validar-quiz',
+							data: {leccion: leccion1, preguntas: preguntas, respuestas: respuestas },
+							success: function (result) {
+								alert("Resultado: "+result+" % ");
+								$("#regresar_button").css('visibility', 'visible');
+								$("#btn_terminar_prueba").css('visibility', 'hidden');
+							},
+							async: false
+						});
+					}
 			});
 			
 			$(".btn_res_num").click(function() {
