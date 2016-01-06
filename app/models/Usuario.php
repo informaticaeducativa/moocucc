@@ -86,6 +86,12 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
 		$relaciones = RelacionUsuarioCurso::where('id_usuario','=', $this->id)->get();
 		return $relaciones;
 	}
+	
+	public function getProgreso($id_curso) {
+		$evaluaciones = Evaluacion::where('id_curso','=', $id_curso)->where('calificable','=', 'si')->where('semana','>', 0)->count();
+		//$evaluaciones = Evaluacion::where('id_curso','=', $id_curso)->where('calificable','=', 'si')->where('semana','>', 0)->count();
+		return $evaluaciones ;
+	}
 	    
     
 }

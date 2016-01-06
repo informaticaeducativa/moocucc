@@ -299,6 +299,7 @@
 					success: function (result) {
 						console.log(result);
 						$("#regresar").show();
+						$("#btn_inteligencia").remove();
 						
 						alert("Resultado: "+result);
 						
@@ -339,7 +340,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-	<a class="navbar-brand" href="#"><img src="{{URL::to('imagenes/logo.png')}}" width="30px"></a>
+	<a class="navbar-brand" href="{{ URL::route('index') }}"><img src="{{URL::to('imagenes/logo.png')}}" width="30px"></a>
   </div>
  
   <!-- Agrupar los enlaces de navegación, los formularios y cualquier
