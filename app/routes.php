@@ -20,6 +20,7 @@ Route::get('/', function()
 	Session::put('user', 'Mark Gonzales');
 	Session::put('inteligencia', 'Kinestesico');
 	Session::put('tipo_usuario', 'Administrador');
+	Session::put('titulo', 'E');
 		
 
 	$cursos = Curso::all();
@@ -203,7 +204,7 @@ Route::get('validar-inteligencia',  function()
 
 	foreach ($postData as $pregunta)
 	{
-		else if($pregunta["respuesta"] === "Kinestesico")
+		if($pregunta["respuesta"] === "Kinestesico")
 		{
 			$kinestesico += $respuestas[$contador];
 			if($kinestesico>$maximo){
