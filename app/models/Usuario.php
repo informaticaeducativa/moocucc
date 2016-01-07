@@ -83,7 +83,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
 	
 	public function misCursos()
     {
-		$relaciones = RelacionUsuarioCurso::where('id_usuario','=', $this->id)->get();
+		$relaciones = RelacionUsuarioCurso::where('id_usuario','=', $this->id)->where('estado','<>','inactivo')->get();
 		return $relaciones;
 	}
 	

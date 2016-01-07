@@ -18,7 +18,7 @@
 		</h1>
 	</center>
 	</br>
-	<a href="{{ URL::route('admin-ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentacion del Curso</a>
+	<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentacion del Curso</a>
 	<h3>
 		Profesores Administradores
 	</h3>

@@ -9,17 +9,24 @@
 </script>
 
 <div class="col-sm-12 col-xs-12 div_list2 top_menos_20">
+	@if ($tipo_user = (Session::get('tipo_usuario') == 'Administrador'))
 	<center><h1 class="strong">Perfil de Administrador</h1></center>
+	@else
+	<center><h1 class="strong">Perfil de Profesor Admin</h1></center>
+
+	@endif
 	<div class="col-md-3 col-sm-3 col-xs-12 div_list2">
 
 	<h2 class="strong"><center>Menú</center></h2>
 
 			<img class="col-md-12 col-sm-12 col-xs-12" src="../../imagenes/{{ $curso->imagen_presentacion  }} " />
+				
 		</br></br>	
 	<div class="col-md-12 col-sm-12 col-xs-12" >		
 		</br>
 	</div>
 	<div class="col-md-12 col-sm-12 col-xs-12" >		
+		@if ($tipo_user)
 		<a href="{{ URL::route('crear-curso' ) }}">
 			<div class="div_item row_cursos">
 				<span class="strong">Crear Curso</span>
@@ -27,11 +34,17 @@
 		</a>		
 		<a href="{{ URL::route('administrador-estadisticas' ) }}">
 			<div class="div_item row_cursos">
-				<span class="strong">Ver estadisticas de Administrador</span>
+				<span class="strong">Regresar</span>
 			</div>
 		</a>
+		@else
+		<a href="{{ URL::route('administrador-listar-estadisticas' ) }}">
+			<div class="div_item row_cursos">
+				<span class="strong">Regresar</span>
+			</div>
+		</a>
+		@endif
 		</div>
-
 	</div>
 	<div class="col-md-9 col-sm-9 col-xs-12 div_list2">
 		<h2 class="strong"><center>{{ $curso->nombre }}</center></h2>

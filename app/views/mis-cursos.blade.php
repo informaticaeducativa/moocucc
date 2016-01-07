@@ -162,6 +162,8 @@ clase index.blade.php
 			@foreach ($cursos as $curso)
 			@if ($curso->tipo_relacion == 'Estudiante' )
 			<a href="curso/{{ $curso->id_curso }}">
+			@elseif ($curso->tipo_relacion == 'Profesor Basico' )
+			<a href="{{ URL::route('ver-curso', $curso->id_curso) }}">
 			@else
 			<a href="{{ URL::route('editar-curso', $curso->id_curso) }}">
 			@endif

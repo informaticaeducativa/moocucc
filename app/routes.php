@@ -17,8 +17,8 @@
 Route::get('/', function()
 {
 	
-	Session::put('user_id', '1');
-	Session::put('user', 'Mark Gonzales');
+	Session::put('user_id', '4');
+	Session::put('user', 'Daniel Lopez');
 	Session::put('inteligencia', 'Kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
 	Session::put('titulo', 'E');
@@ -50,17 +50,6 @@ Route::get('logout',  array('as' => 'logout',function()
 }));
 
 
-
-
-Route::get('ver-usuario/{id}', array('as' => 'ver-usuario', function($id)
-{
-	if(Session::get('user_id') == "")
-		return Redirect::to('index');
-
-	$curso = Curso::find($id);
-    return View::make('ProfesorBase/evaluacion')->with('curso', $curso)->with('evaluacion', $evaluacion);
-    
-}))->where('id', '[0-9]+');
 
 //Ver usuario (todos)
 Route::get('usuario/{id}', array('as'=>'usuario','uses'=> 'UsuarioController@show' ))->where('id', '[0-9]+');
@@ -351,6 +340,9 @@ Route::get('ver-curso/{id}', array('as' => 'ver-curso', function($id)
 {
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
+		
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
+		return Redirect::to('index');
 
 	$curso = Curso::find($id);
     return View::make('Estudiante/ver-curso')->with('curso', $curso); 
@@ -358,6 +350,12 @@ Route::get('ver-curso/{id}', array('as' => 'ver-curso', function($id)
 
 Route::get('prueba-inteligencias', array('as' => 'prueba-inteligencias', function()
 {
+	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+		
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
+		return Redirect::to('index');
+	
 	$evaluacion = Evaluacion::find(2);
     return View::make('Estudiante/pruebainteligencia')->with('evaluacion', $evaluacion);    
 }));
@@ -366,11 +364,14 @@ Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 {
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
+		
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
+		return Redirect::to('index');
 	
 	$count = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
 	$count2 = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('estado', '=', 'inactivo')->count();
 	if ($count2 > 0){
-		RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario)->where('id_curso', '=', $id)->update(array('estado' => 'activo'));
+		RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=',  Session::get('user_id'))->where('id_curso', '=', $id)->update(array('estado' => 'activo'));
 	}
 	else if($count == 0)
 	{
@@ -390,6 +391,9 @@ Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', func
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
 
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
+		return Redirect::to('index');
+		
 	$curso = Curso::find($id);
     return View::make('Estudiante/contenido')->with('curso', $curso); 
 }))->where('id', '[0-9]+');
@@ -397,6 +401,9 @@ Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', func
 Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($id)
 {
 	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+		
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
 		return Redirect::to('index');
 
 	$curso = Curso::find($id);
@@ -406,6 +413,9 @@ Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($
 Route::get('ver-curso/{id}/clase/{id2}', array('as' => 'ver-clase', function($id, $id2)
 {
 	if(Session::get('user_id') == "")
+		return Redirect::to('index');
+		
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
 		return Redirect::to('index');
 
 	$curso = Curso::find($id);
@@ -421,6 +431,9 @@ Route::get('ver-curso/{id}/tarea/{id2}', array('as' => 'ver-tarea', function($id
 {
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
+		
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
+		return Redirect::to('index');
 
 	$curso = Curso::find($id);
 	$evaluacion = Evaluacion::find($id2);
@@ -429,92 +442,12 @@ Route::get('ver-curso/{id}/tarea/{id2}', array('as' => 'ver-tarea', function($id
 
 
 //
-//RUTAS DEL PROFESOR BASE
-//
-Route::get('profesor-base/cursos', array('as' => 'profesor-base-cursos', function()
-{
-	if(Session::get('user_id') == "")
-		return Redirect::to('index');
-	
-	$cursos = RelacionUsuarioCurso::where('id_usuario','=', Session::get('user_id'))->where('tipo_relacion','=', 'Profesor Basico')->get();
-    return View::make('ProfesorBase/cursos')->with('relaciones', $cursos); 
-}))->where('id', '[0-9]+');
-
-Route::get('profesor-base/ver-curso-info/{id}', array('as' => 'profesor-base-ver-curso-info', function($id)
-{
-	if(Session::get('user_id') == "")
-		return Redirect::to('index');
-
-	$usuario = Usuario::find(Session::get('user_id'));
-	
-	$curso = Curso::find($id);
-    return View::make('ProfesorBase/info')->with('curso', $curso); 
-}))->where('id', '[0-9]+');
-
-Route::get('profesor-base/ver-curso/{id}', array('as' => 'profesor-base-ver-curso', function($id)
-{
-	if(Session::get('user_id') == "")
-		return Redirect::to('index');
-
-	$curso = Curso::find($id);
-    return View::make('ProfesorBase/ver-curso')->with('curso', $curso); 
-}))->where('id', '[0-9]+');
-
-Route::get('profesor-base/prueba-inteligencias', array('as' => 'profesor-base-prueba-inteligencias', function()
-{
-	$evaluacion = Evaluacion::find(2);
-    return View::make('ProfesorBase/pruebainteligencia')->with('evaluacion', $evaluacion);    
-}));
-
-
-Route::get('profesor-base/ver-curso-contenido/{id}', array('as' => 'profesor-base-ver-curso-contenido', function($id)
-{
-	if(Session::get('user_id') == "")
-		return Redirect::to('index');
-
-	$curso = Curso::find($id);
-    return View::make('ProfesorBase/contenido')->with('curso', $curso); 
-}))->where('id', '[0-9]+');
-
-Route::get('profesor-base/ver-curso-tareas/{id}', array('as' => 'profesor-base-ver-curso-tareas', function($id)
-{
-	if(Session::get('user_id') == "")
-		return Redirect::to('index');
-
-	$curso = Curso::find($id);
-    return View::make('ProfesorBase/tareas')->with('curso', $curso);
-}))->where('id', '[0-9]+');
-
-Route::get('profesor-base/ver-curso/{id}/clase/{id2}', array('as' => 'profesor-base-ver-clase', function($id, $id2)
-{
-	if(Session::get('user_id') == "")
-		return Redirect::to('index');
-
-	$curso = Curso::find($id);
-	$leccion = Leccion::find($id2);
-    return View::make('ProfesorBase/clase')->with('curso', $curso)->with('leccion', $leccion);
-}))->where('id', '[0-9]+')->where('id2', '[0-9]+');
-
-Route::get('profesor-base/ver-curso/{id}/tarea/{id2}', array('as' => 'profesor-base-ver-tarea', function($id, $id2)
-{
-	if(Session::get('user_id') == "")
-		return Redirect::to('index');
-
-	$curso = Curso::find($id);
-	$evaluacion = Evaluacion::find($id2);
-    return View::make('ProfesorBase/evaluacion')->with('curso', $curso)->with('evaluacion', $evaluacion);
-}))->where('id', '[0-9]+')->where('id2', '[0-9]+');
-
-
-//
 //RUTAS DEL ADMINISTRADOR
 //
 Route::get('administrador', array('as' => 'administrador', function()
 {
-	if(Session::get('user_id') == "")
+	if(Session::get('user_id') == "" || Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
-
-
 
 	$cursos = Curso::all();
     return View::make('Administrador/index')->with('cursos', $cursos);
@@ -522,11 +455,35 @@ Route::get('administrador', array('as' => 'administrador', function()
 
 Route::get('administrador/estadisticas', array('as' => 'administrador-estadisticas', function()
 {
-	if(Session::get('user_id') == "")
+	if(Session::get('user_id') == ""  || Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
 
 	$cursos = Curso::all();
     return View::make('Administrador/estadisticas')->with('cursos', $cursos);
+}));
+
+Route::get('administrador/listar-estadisticas', array('as' => 'administrador-listar-estadisticas', function()
+{
+	if(Session::get('user_id') == "" )
+		return Redirect::to('index');
+	
+	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('tipo_relacion', '=', 'Profesor Admin')->get();
+	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+		return Redirect::to('index');
+		
+    return View::make('Administrador/listar-estadisticas')->with('cursos', $relaciones);
+}));
+
+Route::get('administrador/listar-cursos', array('as' => 'administrador-listar-cursos', function()
+{
+	if(Session::get('user_id') == "" )
+		return Redirect::to('index');
+	
+	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('tipo_relacion', '=', 'Profesor Admin')->get();
+	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+		return Redirect::to('index');
+		
+    return View::make('Administrador/listar-cursos')->with('cursos', $relaciones);
 }));
 
 Route::get('administrador/ver-estadisticas/{id}', array('as' => 'administrador-ver-estadisticas', function($id)
@@ -534,7 +491,12 @@ Route::get('administrador/ver-estadisticas/{id}', array('as' => 'administrador-v
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
 
+	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
+	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+		return Redirect::to('index');
+
 	$curso = Curso::find($id);
+	
     return View::make('Administrador/ver-estadisticas')->with('curso', $curso);
 }));
 
@@ -547,16 +509,46 @@ Route::get('administrador/crear-evaluacion/{id}',array('as'=>'crear-curso-7', 'u
 Route::get('administrador/crear-preguntas/{id}',array('as'=>'crear-curso-8', 'uses'=>'PreguntaController@create'));
 
 Route::get('administrador/asignar-profesor/{id}',array('as'=>'crear-curso-3', function($id) {
+	
+	if(Session::get('user_id') == '')
+		return Redirect::to('index');
+		
+	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
+	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+		return Redirect::to('index');
+		
 	$profesores = Usuario::all();
 	$curso = Curso::find($id);
 	return View::make('Administrador/asignar-profe')->with('profesores', $profesores)->with('curso', $curso);
 }))->where('id', '[0-9]+');
 
 Route::get('administrador/asignar-profesor/{id}-{nombre}',array('as'=>'crear-curso-4', function($id, $nombre) {
+	
+	if(Session::get('user_id') == '')
+		return Redirect::to('index');
+		
+	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
+	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+		return Redirect::to('index');
+		
 	$profesores = Usuario::all();
 	$profesores2 = Usuario::where('nombre', 'ILIKE', '%'.$nombre.'%')->get();
 	$curso = Curso::find($id);
 	return View::make('Administrador/asignar-profe2')->with('profesores', $profesores)->with('profesores2', $profesores2)->with('curso', $curso);
+}))->where('id', '[0-9]+');
+
+
+Route::get('administrador/editar-curso/{id}',array('as'=>'editar-curso', function($id) {
+	
+	if(Session::get('user_id') == '')
+		return Redirect::to('index');
+		
+	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
+	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+		return Redirect::to('index');
+	
+	$curso = Curso::find($id);
+    return View::make('Administrador/ver')->with('curso', $curso); 
 }))->where('id', '[0-9]+');
 
 
@@ -583,7 +575,7 @@ Route::get('redirect-temario-curso',array('as'=>'redirect-temario-curso', functi
 
 //Ruta para asignar profesor a un curso
 Route::get('asignar-profesor/{id_curso}/{id_usuario}/{tipo}', array('as'=>'asignar-profesor', function($id_curso, $id_usuario, $tipo) {
-	DB::table('relacion_usuario_curso')->insert(	array('id_usuario' => $id_usuario, 'id_curso' => $id_curso, 'tipo_relacion' => $tipo, 'fecha_creacion' => date('Y-m-d H:i:s'))	);
+	DB::table('relacion_usuario_curso')->insert(	array('id_usuario' => $id_usuario, 'id_curso' => $id_curso, 'tipo_relacion' => $tipo, 'fecha_creacion' => date('Y-m-d H:i:s'), 'estado' => 'activo')	);
 	return Redirect::route('crear-curso-3', $id_curso);
 }))->where('id_curso', '[0-9]+');
 
@@ -592,19 +584,6 @@ Route::get('desasignar-profesor/{id_curso}/{id_usuario}/{tipo}', array('as'=>'de
 	RelacionUsuarioCurso::where('tipo_relacion', '=', $tipo)->where('id_usuario', '=', $id_usuario)->where('id_curso', '=', $id_curso)->delete();
 	return Redirect::route('crear-curso-3', $id_curso);
 }))->where('id_curso', '[0-9]+');
-
-//Ruta para Ver como queda un curso desde el perfil administrador
-Route::get('administrador/ver-curso/{id}',array('as'=>'admin-ver-curso', function($id) {
-	$curso = Curso::find($id);
-    return View::make('Administrador/ver-curso')->with('curso', $curso); 
-}))->where('id', '[0-9]+');
-
-//Ruta para Ver como queda un curso desde el perfil administrador
-Route::get('administrador/editar-curso/{id}',array('as'=>'editar-curso', function($id) {
-	$curso = Curso::find($id);
-    return View::make('Administrador/ver')->with('curso', $curso); 
-}))->where('id', '[0-9]+');
-
 
 
 Route::resource('curso', 'CursoController');
