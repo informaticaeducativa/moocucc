@@ -81,6 +81,9 @@
     </form>
  
     <ul class="nav navbar-nav navbar-right">
+	  @if (Session::get('tipo_usuario') == "Administrador") 	
+       <li><a href="{{ URL::route('administrador')}}">Panel Administrador</a></li>
+       @endif
       @if (Session::get('user') != "") 
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -90,7 +93,7 @@
           <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi Perfil</a></li>
 		  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
           <li class="divider"></li>
-          <li><a href="#">Salir</a></li>
+          <li><a href="{{ URL::route('logout')}}">Salir</a></li>
         </ul>
       </li>
       @else

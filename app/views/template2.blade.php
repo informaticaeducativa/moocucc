@@ -115,6 +115,17 @@
 				$("#r_"+leccion+"x"+pregunta).html(opcion);
 			});
 			
+			$(".input_res").keyup(function() {
+				var texto_id = $(this).attr('id');
+				var texto = (texto_id.substr(6,texto_id.length));
+				var textos = texto.split("x");
+				var leccion = textos[0];
+				var pregunta = textos[1];
+				var opcion = $(this).val();
+
+				$("#r_"+leccion+"x"+pregunta).html(opcion);
+			});
+			
 			$("#btn-microforo").click(function() {
 				var mensaje = $(".mensaje").val();
 				var texto_id = $(".mensaje").attr('id');
@@ -178,6 +189,7 @@
 					leccion1 = leccion;
 					preguntas[i] = pregunta;
 					respuestas[i] = opcion;
+					console.log('cosa '+pregunta+' '+opcion);
 					if(opcion == ''){	completo = false;	}
 					contador++;
 				});
@@ -229,6 +241,8 @@
 
 				$("#r_"+leccion+"x"+pregunta).html(opcion);
 			});
+			
+			
 			
 		
 			
@@ -375,18 +389,43 @@
     </ul>
  
     <ul class="nav navbar-nav navbar-right">
-      
+	   @if (Session::get('tipo_usuario') == "Administrador") 	
+       <li><a href="{{ URL::route('administrador')}}">Panel Administrador</a></li>
+       @endif
+        @if (Session::get('user') != "") 
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           {{ Session::get('user') }}<b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi perfil</a></li>
+          <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi Perfil</a></li>
 		  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
           <li class="divider"></li>
           <li><a href="{{ URL::route('logout')}}">Salir</a></li>
         </ul>
       </li>
+      @else
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+			<ul id="login-dp" class="dropdown-menu">
+				<li>
+					 <div class="row">
+							<div class="col-md-12">
+								<center>
+									Login via
+									<div class="social-buttons">
+										<a href="{{ URL::route('login-facebook') }}" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a><br><br>
+										<a href="{{ URL::route('login-twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a><br><br>
+										<a href="{{ URL::route('login-google') }}" class="btn btn-gp"><i class="fa fa-google"></i> Google +</a><br><br>
+									</div>
+                               </center>
+							</div>
+					 </div>
+				</li>
+			</ul>
+        </li>
+      @endif
+      
     </ul>
   </div>
 </nav>

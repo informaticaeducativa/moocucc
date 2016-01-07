@@ -3,7 +3,7 @@
 @section ('title') Ver Curso @stop
 
 @section ('contenido')
-
+<?php $contador=1; ?>
 <div class="col-sm-3 col-xs-12  bg_blue_80">
 	<div class=" espaciado">
 		{{ HTML::image('imagenes/'.$curso->imagen_presentacion, $alt="", $attributes = array('class' => 'imagen_div')) }}
@@ -42,7 +42,9 @@
 
 			@foreach ($evaluacion->getPreguntas() as $pregunta)
 			<div class="col-md-12 col-sm-12 col-xs-12 espaciado ">
-				{{ $pregunta->nombre }}<br/>
+				{{ '('.$contador.') '.$pregunta->nombre }}			
+			@if ( $pregunta->opcion_multiple == 'si')	
+				<br/>	
 				A) {{ $pregunta->opcion_a }}<br/>
 				B) {{ $pregunta->opcion_b }}<br/>
 				C) {{ $pregunta->opcion_c }}<br/>
@@ -71,8 +73,17 @@
 
 					</div>
 				</div>
+			@else
+			<div class="col-md-12 col-sm-12 col-xs-12 espaciado">
+				<input type="text" class="form-control input_res" id="input_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}">
+				<input type="hidden" class="result" id="r_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}">
+			</div>
+				<div class="col-md-12 col-sm-12 col-xs-12 espaciado" id="mensaje_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}">
+				</div>
+			@endif
 				<hr/>
 			</div>
+			<?php $contador++; ?>
 			@endforeach
 
 			<br/><br/><br/>

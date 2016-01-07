@@ -44,11 +44,10 @@ public function loginWithFacebook() {
 			Session::put('user', $user->nombre);
 			Session::put('inteligencia', $user->tipo_inteligencia);
 			Session::put('tipo_usuario', $user->tipo_usuario);
+			Session::put('titulo', $user->titulo);
 			
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
-		else if($user->tipo_usuario == "Profesor Basico")
-			return Redirect::to( "profesor-base-cursos" );
 		else
 			return Redirect::to( "mis-cursos" );
     }
@@ -98,11 +97,10 @@ public function loginWithGoogle() {
 			Session::put('user', $user->nombre);
 			Session::put('inteligencia', $user->tipo_inteligencia);
 			Session::put('tipo_usuario', $user->tipo_usuario);
+			Session::put('titulo', $user->titulo);
 
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
-		else if($user->tipo_usuario == "Profesor Basico")
-			return Redirect::to( "profesor-base-cursos" );
 		else
 			return Redirect::to( "mis-cursos" );
     }
@@ -154,11 +152,10 @@ public function loginWithTwitter() {
 			Session::put('user', $user->nombre);
 			Session::put('inteligencia', $user->tipo_inteligencia);
 			Session::put('tipo_usuario', $user->tipo_usuario);
+			Session::put('titulo', $user->titulo);
 
 		if($user->tipo_usuario == "Administrador")
 			return Redirect::to("administrador");
-		else if($user->tipo_usuario == "Profesor Basico")
-			return Redirect::to( "profesor-base-cursos" );
 		else
 			return Redirect::to( "mis-cursos" );
 

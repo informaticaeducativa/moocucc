@@ -31,10 +31,12 @@
 			<th>Nombres</th>
 			<td>{{ $usuario->nombre.' '.$usuario->apellido }}</td>
 		</tr>
+		@if ($usuario->tipo_usuario == 'Administrador')
 		<tr>
 			<th>Tipo de Usuario</th>
 			<td>{{ $usuario->tipo_usuario }}</td>
 		</tr>
+		@endif
 		<tr>
 			<th>Fecha de inscripción</th>
 			<td>{{ $usuario->fecha }}</td>
