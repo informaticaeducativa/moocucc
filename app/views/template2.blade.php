@@ -137,7 +137,30 @@
 				
 				jQuery.ajax({
 					url: '../../../postear-en-microforo',					
-					data: {clase: clase, leccion: leccion, mensaje: mensaje },
+					data: {clase: clase, leccion: leccion, mensaje: mensaje, pregunta: 0 },
+					success: function (result) {
+						usuario = result;
+						location.reload();
+					},
+					async: true
+				});
+				
+			});
+			
+			$(".responder_microforo").click(function() {
+				var texto_id = $(this).attr('id');
+				var texto = (texto_id.substr(4,texto_id.length));
+				var textos = texto.split("x");
+				var clase = textos[0];
+				var leccion = textos[1];
+				var pregunta = textos[2];
+				var mensaje = $("#mensajex"+clase+"x"+leccion+"x"+pregunta).val();
+
+				console.log('clase: '+clase+', leccion: '+leccion+', mensaje: '+mensaje+', preguntarel: '+pregunta )
+				
+				jQuery.ajax({
+					url: '../../../postear-en-microforo',					
+					data: {clase: clase, leccion: leccion, mensaje: mensaje, pregunta: pregunta },
 					success: function (result) {
 						usuario = result;
 						location.reload();

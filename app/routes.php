@@ -317,9 +317,14 @@ Route::get('postear-en-microforo',  function()
 	
 	$leccion = $data['leccion'];
 	$mensaje = $data['mensaje'];
+	$pregunta = $data['pregunta'];
 	$usuario = Session::get('user_id');
 	
-	$pregunta_leccion = PreguntaLeccion::create(array('id_usuario'=>$usuario, 'id_leccion'=>$leccion, 'pregunta'=>$mensaje, 'fecha_creacion'=> date('Y-m-d H:i:s')));
+	if($pregunta == '')
+		$pregunta_leccion = PreguntaLeccion::create(array('id_usuario'=>$usuario, 'id_leccion'=>$leccion, 'pregunta'=>$mensaje, 'fecha_creacion'=> date('Y-m-d H:i:s'), 'relacion'=> 0 ));
+	else
+		$pregunta_leccion = PreguntaLeccion::create(array('id_usuario'=>$usuario, 'id_leccion'=>$leccion, 'pregunta'=>$mensaje, 'relacion'=> intval($pregunta), 'fecha_creacion'=> date('Y-m-d H:i:s') ) );
+
 	
 	return Session::get('user');
 	

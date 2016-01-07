@@ -16,7 +16,7 @@ class PreguntaLeccion extends Eloquent implements UserInterface, RemindableInter
  
  	protected $table = 'pregunta_leccion';
  	 	
- 	protected $fillable = array('id_pregunta', 'id_usuario', 'id_leccion', 'pregunta', 'fecha_creacion');
+ 	protected $fillable = array('id_pregunta', 'id_usuario', 'id_leccion', 'pregunta', 'fecha_creacion', 'relacion');
 
 	//protected $hidden = array('password', 'remember_token');
     public $timestamps = false;
@@ -65,6 +65,11 @@ class PreguntaLeccion extends Eloquent implements UserInterface, RemindableInter
 		return $usuario;
 	}
     
+    public function getPreguntasRelacionadas()
+    {
+		$preguntas = PreguntaLeccion::where('relacion','=', $this->id_pregunta)->orderBy('fecha_creacion','ASC')->get();
+		return $preguntas;
+	}
     
 }
 
