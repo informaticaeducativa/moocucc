@@ -17,7 +17,7 @@
 Route::get('/', function()
 {
 	
-	Session::put('user_id', '4');
+	Session::put('user_id', '1');
 	Session::put('user', 'Daniel Lopez');
 	Session::put('inteligencia', 'Kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
@@ -326,7 +326,7 @@ Route::get('mis-cursos', array('as' => 'mis-cursos', function()
 	$usuario = Usuario::find(Session::get('user_id'));
 	$cursos = $usuario->misCursos();
 
-    return View::make('mis-cursos')->with('cursos', $cursos); 
+    return View::make('mis-cursos')->with('cursos', $cursos)->with('usuario', $usuario); 
 }))->where('id', '[0-9]+');
 
 Route::get('desuscribirse/{id}', array('as' => 'desuscribirse', function($id)
@@ -491,7 +491,7 @@ Route::get('administrador/ver-estadisticas/{id}', array('as' => 'administrador-v
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
 
-	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
+	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '<>', 'Estudiante')->get();
 	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
 

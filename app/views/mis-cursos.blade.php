@@ -109,13 +109,13 @@ clase index.blade.php
 		   @endif
 		  
 		  @if (Session::get('user') != "") 
+   	  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 		  <li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 			  {{ Session::get('user') }}<b class="caret"></b>
 			</a>
 			<ul class="dropdown-menu">
 			  <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi Perfil</a></li>
-			  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 			  <li class="divider"></li>
           <li><a href="{{ URL::route('logout')}}">Salir</a></li>
 			</ul>
@@ -156,17 +156,15 @@ clase index.blade.php
 		</center>
 		
 		<div class="row">
-
+		
+		@if ($usuario->esProfesorAdmin())
+			<a href="{{ URL::route('administrador-listar-estadisticas') }}" class="btn btn-primary">Ir al panel Profesor Admin</a><br/><br/>
+		@endif
 		</div>
 		<div class="row row_cursos">
 			@foreach ($cursos as $curso)
 			@if ($curso->tipo_relacion == 'Estudiante' )
 			<a href="curso/{{ $curso->id_curso }}">
-			@elseif ($curso->tipo_relacion == 'Profesor Basico' )
-			<a href="{{ URL::route('ver-curso', $curso->id_curso) }}">
-			@else
-			<a href="{{ URL::route('editar-curso', $curso->id_curso) }}">
-			@endif
 				<div class="col-md-4 col-sm-6 col-xs-12 album_list">
 					<div class="div_list">
 						<img class="imagen_div" src="imagenes/{{$curso->getCurso()->imagen_presentacion}} " >
@@ -175,7 +173,6 @@ clase index.blade.php
 								<h3>{{ $curso->getCurso()->nombre }}</h3>
 								<span class="badge">Inscrito como: {{$curso->tipo_relacion}}</span><br/>
 							</div>
-							
 							Nivel: {{ $curso->getCurso()->nivel }}<br/>
 							{{ $curso->getCurso()->getTematica() }}<br/>
 							{{ $curso->getCurso()->getFechaInicio() }}
@@ -183,6 +180,44 @@ clase index.blade.php
 					</div>
 				</div>
 			</a>
+			@elseif ($curso->tipo_relacion == 'Profesor Basico' )
+			<a href="{{ URL::route('ver-curso', $curso->id_curso) }}">
+				<div class="col-md-4 col-sm-6 col-xs-12 album_list">
+					<div class="div_list">
+						<img class="imagen_div" src="imagenes/{{$curso->getCurso()->imagen_presentacion}} " >
+						<div class="espaciado">
+							<div class="titulo_curso">
+								<h3>{{ $curso->getCurso()->nombre }}</h3>
+								<span class="badge">Inscrito como: {{$curso->tipo_relacion}}</span><br/>
+							</div>
+							<a class="btn btn-primary btn-block" href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}">Ver estadísticas </a>
+							Nivel: {{ $curso->getCurso()->nivel }}<br/>
+							{{ $curso->getCurso()->getTematica() }}<br/>
+							{{ $curso->getCurso()->getFechaInicio() }}
+						</div>
+					</div>
+				</div>
+			</a>
+			@else
+			<a href="{{ URL::route('editar-curso', $curso->id_curso) }}">
+				<div class="col-md-4 col-sm-6 col-xs-12 album_list">
+					<div class="div_list">
+						<img class="imagen_div" src="imagenes/{{$curso->getCurso()->imagen_presentacion}} " >
+						<div class="espaciado">
+							<div class="titulo_curso">
+								<h3>{{ $curso->getCurso()->nombre }}</h3>
+								<span class="badge">Inscrito como: {{$curso->tipo_relacion}}</span><br/>
+							</div>
+							<a class="btn btn-primary btn-block" href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}">Ver estadisticas </a>
+							Nivel: {{ $curso->getCurso()->nivel }}<br/>
+							{{ $curso->getCurso()->getTematica() }}<br/>
+							{{ $curso->getCurso()->getFechaInicio() }}
+						</div>
+					</div>
+				</div>
+			</a>
+			@endif
+				
 			@endforeach
 		</div>
 		<div id="resultados"></div>
