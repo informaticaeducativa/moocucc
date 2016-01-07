@@ -173,6 +173,8 @@ Route::get('validar-quiz',  function()
 	$intentos = 1;
 	$nota = intval(($respuestas_buenas*100 / $contador));
 	
+	
+	
 	$count = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso','=', $evaluacion->id_curso)->where('id_evaluacion', '=', $leccion)->count();
 	if ($count == 0){
 		DB::table('calificacion')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $evaluacion->id_curso, 'id_evaluacion' => $leccion, 'nota' => $nota, 'intentos' => $intentos, 'fecha' => date('Y-m-d H:i:s') )	);
@@ -191,6 +193,22 @@ Route::get('validar-quiz',  function()
 			Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso','=', $evaluacion->id_curso)->where('id_evaluacion', '=', $leccion)->update(array('intentos' => $intentos));
 		}
 	}
+	if($nota >= 70)
+	{
+		$count0 = Avance::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $evaluacion->id_curso)->where('semana','=', $evaluacion->semana)->where('tipo','=', 'evaluacion')->count();
+		if($count0 == 0){
+			$count = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $evaluacion->id_curso)->count();
+			$count2 = Evaluacion::where('id_curso', '=', $evaluacion->id_curso)->where('semana','<=', $evaluacion->semana)->where('semana','>', 0)->count();
+			$count3 = Evaluacion::where('id_curso', '=', $evaluacion->id_curso)->where('semana','>', 0)->count();
+			$porcentaje = intval($count*100/$count3);
+			if($count == $count2)
+			{
+				DB::table('avance')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $evaluacion->id_curso, 'semana' => $evaluacion->semana, 'tipo' => 'evaluacion', 'porcentaje'=>$porcentaje ,'fecha' => date('Y-m-d H:i:s') ) );
+			}
+		}
+	}
+	
+	
 	return $nota;
 	
 });
@@ -410,8 +428,13 @@ Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($
 	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
 		return Redirect::to('index');
 
+	$count = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();		
+	$count3 = Evaluacion::where('id_curso', '=', $id)->where('semana','>', 0)->count();
+	
+	$porcentaje = intval($count*100/$count3);
+	
 	$curso = Curso::find($id);
-    return View::make('Estudiante/tareas')->with('curso', $curso);
+    return View::make('Estudiante/tareas')->with('curso', $curso)->with('porcentaje', $porcentaje);
 }))->where('id', '[0-9]+');
 
 Route::get('ver-curso/{id}/clase/{id2}', array('as' => 'ver-clase', function($id, $id2)
@@ -428,15 +451,17 @@ Route::get('ver-curso/{id}/clase/{id2}', array('as' => 'ver-clase', function($id
 	if($count == 0){
 		DB::table('registro')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'id_leccion' => $id2));
 		
-		$count = Registro::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
-		$count2 = Leccion::where('id_curso', '=', $id)->where('semana','<=', $leccion->semana)->where('semana','>', 0)->count();
-		$count3 = Leccion::where('id_curso', '=', $id)->where('semana','>', 0)->count();
-		$porcentaje = intval($count*100/$count3);
-		if($count == $count2)
-		{
-			DB::table('avance')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'semana' => $leccion->semana, 'tipo' => 'clases', 'porcentaje'=>$porcentaje ,'fecha' => date('Y-m-d H:i:s') ) );
+		$count0 = Avance::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('semana','=', $leccion->semana)->where('tipo','=', 'clases')->count();
+		if($count0 == 0){
+			$count = Registro::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
+			$count2 = Leccion::where('id_curso', '=', $id)->where('semana','<=', $leccion->semana)->where('semana','>', 0)->count();
+			$count3 = Leccion::where('id_curso', '=', $id)->where('semana','>', 0)->count();
+			$porcentaje = intval($count*100/$count3);
+			if($count == $count2)
+			{
+				DB::table('avance')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'semana' => $leccion->semana, 'tipo' => 'clases', 'porcentaje'=>$porcentaje ,'fecha' => date('Y-m-d H:i:s') ) );
+			}
 		}
-
 	}
     return View::make('Estudiante/clase')->with('curso', $curso)->with('leccion', $leccion);
 }))->where('id', '[0-9]+')->where('id2', '[0-9]+');

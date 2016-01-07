@@ -78,10 +78,14 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
 	public function getAvanceClases($semana)
     {
 		$count = Avance::where('id_curso','=', $this->id_curso)->where('tipo','=', 'clases')->where('semana','=', $semana)->where('id_usuario','=', Session::get('user_id'))->count();
-		if($count > 0)
+		$count2 = Avance::where('id_curso','=', $this->id_curso)->where('tipo','=', 'evaluacion')->where('semana','=', $semana)->where('id_usuario','=', Session::get('user_id'))->count();
+		$count3 = Evaluacion::where('id_curso','=', $this->id_curso)->where('semana','=', $semana)->count();
+		if($count > 0 && $count2==$count3)
 			return true;
 		return false;
 	}
+    
+
     
 }
 

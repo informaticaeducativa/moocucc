@@ -44,23 +44,29 @@
 		<h5 class="strong">Progreso</h5>
 		<div class="progress progress-striped active">
 		  <div class="progress-bar" role="progressbar"
-			   aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-			   style="width: 80%">
-			80% completado
+			   aria-valuenow="{{$porcentaje}}" aria-valuemin="0" aria-valuemax="100"
+			   style="width: {{$porcentaje}}%">
+			{{$porcentaje}}% completado
 		  </div>
 		</div>
 		@foreach ($curso->getTemariosSemana() as $temario)
 			<h2>Semana {{$temario->posicion }}</h2>
 			@foreach ($curso->getEvaluaciones($temario->posicion) as $evaluacion)
+				@if($eval = $evaluacion->getPresentaEvaluacion($temario->posicion))
 				<a href="{{ URL::route('ver-tarea', array($curso->id_curso, $evaluacion->id_evaluacion ) ) }}">
+				@endif
 					<div id="id_leccion_{{$evaluacion->id_evaluacion }}" class="div_item row_cursos">
 						<span class="strong">{{ $evaluacion->nombre }}   (calificable: {{$evaluacion->calificable}})</span>
 						@if ($evaluacion->getRealizado($curso->id_curso))
+							@if ($evaluacion->getCalificacion() >= 70)
 							<img src="{{URL::to('imagenes/chulo.png')}}" width="20px">
+							@endif
 							{{ $evaluacion->getCalificacion() }}
 						@endif
 					</div>
+				@if($eval)
 				</a>
+				@endif
 			@endforeach
 			<br/><hr/>
 		@endforeach
