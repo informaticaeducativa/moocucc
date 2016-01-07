@@ -7,7 +7,7 @@
 
 
 <div class="col-sm-12 col-xs-12 div_list2 top_menos_20">
-	<center><h1 class="strong">Perfil de Profesor Admin</h1></center>
+	<center><h1 class="strong">Panel de docentes</h1></center>
 	<div class="col-md-3 col-sm-3 col-xs-12 div_list2">
 		<h2 class="strong"><center>Menú</center></h2>
 		<br/>

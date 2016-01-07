@@ -12,7 +12,7 @@
 	@if ($tipo_user = (Session::get('tipo_usuario') == 'Administrador'))
 	<center><h1 class="strong">Perfil de Administrador</h1></center>
 	@else
-	<center><h1 class="strong">Perfil de Profesor Admin</h1></center>
+	<center><h1 class="strong">Panel docentes</h1></center>
 
 	@endif
 	<div class="col-md-3 col-sm-3 col-xs-12 div_list2">
@@ -60,12 +60,13 @@
 				</tr>
 				<tr>
 					<th>Estudiantes Inscritos a la fecha:</th>
-					<td>{{ $curso->getInscritos() }} - {{ $curso->getInscritos()*100/($curso->getInscritos() ) }} %</td> 
+					<td>{{ $curso->getInscritos() }} - {{ $curso->getInscritos()*100/($curso->getInscritosTotal() ) }} %</td> 
 				</tr>
 				<tr>
 					<th>Estudiantes Retirados a la fecha:</th>
-					<td>{{ $curso->getRetirados() }} - {{ $curso->getRetirados()*100/($curso->getInscritos() ) }} %</td> 
+					<td>{{ $curso->getRetirados() }} - {{ $curso->getRetirados()*100/($curso->getInscritosTotal() ) }} %</td> 
 				</tr>
+				@if ($relacion == 'admin')
 				<tr>
 					<th colspan="2">  
 						<center>
@@ -74,8 +75,9 @@
 						</center>
 					</th>
 				</tr>
+				@endif
 			</table>
-			
+			@if ($relacion == 'admin')
 			<center>	
 				<h4 class="strong">Gráfica de estudiantes por ciudades</h4>
 			</center>
@@ -114,6 +116,7 @@
 					<canvas id="myChart4"   class='img-responsive' ></canvas>
 				</center>
 			</div>
+			@endif
 	</div>
 <input type="hidden" id="datas" value='{{ $curso->id_curso}}'>
 </div>

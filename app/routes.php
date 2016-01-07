@@ -17,7 +17,7 @@
 Route::get('/', function()
 {
 	
-	Session::put('user_id', '1');
+	Session::put('user_id', '4');
 	Session::put('user', 'Daniel Lopez');
 	Session::put('inteligencia', 'Kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
@@ -495,9 +495,14 @@ Route::get('administrador/ver-estadisticas/{id}', array('as' => 'administrador-v
 	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
 
+	$cantidad = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->count();
+	$relacion = "admin";
+	if($cantidad == 0 && Session::get('tipo_usuario') != "Administrador")
+		$relacion = "basico";
+
 	$curso = Curso::find($id);
 	
-    return View::make('Administrador/ver-estadisticas')->with('curso', $curso);
+    return View::make('Administrador/ver-estadisticas')->with('curso', $curso)->with('relacion', $relacion);
 }));
 
 Route::get('administrador/crear-curso',array('as'=>'crear-curso','uses'=>'CursoController@create'));
