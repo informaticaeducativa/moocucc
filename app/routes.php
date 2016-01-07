@@ -17,8 +17,8 @@
 Route::get('/', function()
 {
 	
-	Session::put('user_id', '4');
-	Session::put('user', 'Daniel Lopez');
+	Session::put('user_id', '1');
+	Session::put('user', 'Mark Gonzalez');
 	Session::put('inteligencia', 'Kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
 	Session::put('titulo', 'E');
@@ -394,8 +394,12 @@ Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', func
 	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
 		return Redirect::to('index');
 		
+		$count = Registro::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();		
+		$count3 = Leccion::where('id_curso', '=', $id)->where('semana','>', 0)->count();
+	
+	$porcentaje = intval($count*100/$count3);
 	$curso = Curso::find($id);
-    return View::make('Estudiante/contenido')->with('curso', $curso); 
+    return View::make('Estudiante/contenido')->with('curso', $curso)->with('porcentaje', $porcentaje); 
 }))->where('id', '[0-9]+');
 
 Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($id)
@@ -423,6 +427,16 @@ Route::get('ver-curso/{id}/clase/{id2}', array('as' => 'ver-clase', function($id
 	$count = Registro::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('id_leccion', '=', $id2)->count();
 	if($count == 0){
 		DB::table('registro')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'id_leccion' => $id2));
+		
+		$count = Registro::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
+		$count2 = Leccion::where('id_curso', '=', $id)->where('semana','<=', $leccion->semana)->where('semana','>', 0)->count();
+		$count3 = Leccion::where('id_curso', '=', $id)->where('semana','>', 0)->count();
+		$porcentaje = intval($count*100/$count3);
+		if($count == $count2)
+		{
+			DB::table('avance')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'semana' => $leccion->semana, 'tipo' => 'clases', 'porcentaje'=>$porcentaje ,'fecha' => date('Y-m-d H:i:s') ) );
+		}
+
 	}
     return View::make('Estudiante/clase')->with('curso', $curso)->with('leccion', $leccion);
 }))->where('id', '[0-9]+')->where('id2', '[0-9]+');

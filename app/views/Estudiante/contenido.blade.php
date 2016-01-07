@@ -44,24 +44,32 @@
 		<h5 class="strong">Progreso</h5>
 		<div class="progress progress-striped active">
 		  <div class="progress-bar" role="progressbar"
-			   aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-			   style="width: 80%">
-			80% completado
+			   aria-valuenow="{{ $porcentaje }}" aria-valuemin="0" aria-valuemax="100"
+			   style="width: {{ $porcentaje }}%">
+			{{ $porcentaje }}% completado
 		  </div>
 		</div>
+		@if ($valor = (1 == 1))
+		@endif
 		@foreach ($curso->getTemariosSemana() as $temario)
 			<h2>Semana {{$temario->posicion }}</h2>
 			{{$temario->contenido }}<br/><br/>
 			@foreach ($curso->getLecciones($temario->posicion) as $leccion)
+				@if($valor)
 				<a href="{{ URL::route('ver-clase', array($curso->id_curso, $leccion->id_leccion) ) }}">
+				@endif
 					<div id="id_leccion_{{$leccion->id_leccion }}" class="div_item row_cursos">
 						<span class="strong">{{ $leccion->nombre }}</span>
 						@if ($leccion->getRegistro($curso->id_curso))
 							<img src="{{URL::to('imagenes/chulo.png')}}" width="20px">
 						@endif
 					</div>
+				@if($valor)
 				</a>
+				@endif
 			@endforeach
+			@if ($valor = $leccion->getAvanceClases($temario->posicion))
+			@endif
 			<br/><hr/>
 		@endforeach
 		<br/><br/>
