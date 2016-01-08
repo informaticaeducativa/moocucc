@@ -57,7 +57,7 @@
       {{ Form::select('nivel',  array('Principiante' => 'Principiante', 'Medio' => 'Medio', 'Avanzado'=>'Avanzado'), null, array('class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('duracion', 'Duracion del curso') }}
+      {{ Form::label('duracion', 'Duración del curso') }}
       {{ Form::text('duracion', null, array('placeholder' => 'Ej: 5 Semanas', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
@@ -72,7 +72,7 @@
       {{ Form::label('prerrequisitos', 'Prerrequisitos del curso') }}
       {{ Form::text('prerrequisitos', null, array('placeholder' => 'Escribe los conocimientos que debe tener el estudiante', 'class' => 'form-control')) }}
     </div>
-    
+
   </div>
 
   {{ Form::button($action . ' curso', array('type' => 'submit', 'class' => 'btn btn-primary')) }}

@@ -106,10 +106,10 @@ clase index.blade.php
 		</form>
 
 		<ul class="nav navbar-nav navbar-right">
-		  @if (Session::get('tipo_usuario') == "Administrador") 	
+		  @if (Session::get('tipo_usuario') == "Administrador")
 		   <li><a href="{{ URL::route('administrador')}}">Panel Administrador</a></li>
 		   @endif
-		  @if (Session::get('user') != "") 
+		  @if (Session::get('user') != "")
 	  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 		  <li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -195,11 +195,11 @@ clase index.blade.php
       <div class="modal-body form-group col-md-7 col-sm-7-col-xs-7">
 		Por favor completa los siguientes datos</br></br>
 		<form>
-			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Titulo o cargo que desempeña</label>
+			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Título o cargo que desempeña</label>
 			<input type="text" id="input-titulo" class="form-control" placeholder="Estudiante, Profesor, Emprendedor">
 			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Ciudad</label>
 			<select id="comboboxCiudad" class="form-control" ></select>
-			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Pais</label>
+			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">País</label>
 			<select id="comboboxPais" class="form-control" ></select>
 			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Universidad</label>
 			<select id="comboboxUniversidad" class="form-control" ></select></br>
@@ -207,14 +207,14 @@ clase index.blade.php
 		</form>
       </div>
        <div class="modal-body form-group col-md-5 col-sm-5-col-xs-5">
-		No aparece su universidad, ciudad o pais?</br></br>
+		¿No aparece su universidad, ciudad o país?</br></br>
 		<form>
 			<input type="text" id="nombre-ciudad" name="nombre-ciudad" class="form-control" placeholder="Ciudad">
 			<button type="submit" class="btn btn-primary btn-block" id="submitciudad">Registrar</button>
 		</form>
 		</br>
 		<form>
-			<input type="text" id="nombre-pais" name="nombre-pais" class="form-control" placeholder="Pais">
+			<input type="text" id="nombre-pais" name="nombre-pais" class="form-control" placeholder="País">
 			<button type="submit" class="btn btn-primary btn-block" id="submitpais">Registrar</button>
 		</form>
 		</br>
@@ -234,7 +234,7 @@ clase index.blade.php
 @if (Session::get('titulo') == '' && Session::get('user_id') != '')
 <script  type="text/javascript">
 	$('#myModal').modal();
-	
+
 	jQuery.ajax({
 		url: 'listar-ciudades',
    		success: function (result) {
@@ -246,7 +246,7 @@ clase index.blade.php
 		},
 		async: true
 	});
-	
+
 	jQuery.ajax({
 		url: 'listar-paises',
    		success: function (result) {
@@ -258,7 +258,7 @@ clase index.blade.php
 		},
 		async: true
 	});
-	
+
 	jQuery.ajax({
 		url: 'listar-universidades',
    		success: function (result) {
@@ -270,7 +270,7 @@ clase index.blade.php
 		},
 		async: true
 	});
-	
+
 	$("#submitciudad").click(function(){
 		if($('#nombre-ciudad').val() != ''){
 			jQuery.ajax({
@@ -287,7 +287,7 @@ clase index.blade.php
 			});
 		}
     });
-    
+
     $("#submitpais").click(function(){
 		if($('#nombre-pais').val() != ''){
 			jQuery.ajax({
@@ -304,7 +304,7 @@ clase index.blade.php
 			});
 		}
     });
-    
+
     $("#submituniversidad").click(function(){
 		if($('#nombre-universidad').val() != ''){
 			jQuery.ajax({
@@ -321,20 +321,20 @@ clase index.blade.php
 			});
 		}
     });
-    
+
         $("#submitdatos").click(function(){
 		if($('#input-titulo').val() != ''){
 			jQuery.ajax({
 				url: 'agregar-datos',
 				data: {titulo : $('#input-titulo').val(), ciudad : $("#comboboxCiudad").val(), pais : $("#comboboxPais").val(), universidad :$('#comboboxUniversidad').val()  },
 				success: function (result) {
-					$('#myModal').modal('hide');				
+					$('#myModal').modal('hide');
 				},
 				async: true
 			});
 		}
     });
-    
+
 </script>
 @endif
 </html>

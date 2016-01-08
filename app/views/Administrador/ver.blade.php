@@ -32,13 +32,13 @@
 		<table width="100%">
 			<tr>
 				<th>
-					<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-warning" style="width:100%" target="_blank">Visualización de la página de presentación del Curso</a>				
+					<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-warning" style="width:100%" target="_blank">Visualización de la página de presentación del Curso</a>
 				</th>
 			</tr>
-			<tr><th></th></tr>			
+			<tr><th></th></tr>
 			<tr>
 				<th>
-					<a href="{{ URL::route('ver-curso-info', $curso->id_curso ) }}" class="btn btn-warning" style="width:100%" target="_blank">Visualización de como se ve el contenido del Curso</a>				
+					<a href="{{ URL::route('ver-curso-info', $curso->id_curso ) }}" class="btn btn-warning" style="width:100%" target="_blank">Visualización del contenido del Curso</a>				
 				</th>
 			</tr>
 			<tr><th></th></tr>

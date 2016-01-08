@@ -9,17 +9,17 @@
 
 
 
-@section ('contenido') 
+@section ('contenido')
  <br>
  <center>
-	<h1>{{ $usuario->nombre }}</h1>				
+	<h1>{{ $usuario->nombre }}</h1>
 </center>
 <center>
 	@if(substr( $usuario->foto , 0, 4) == 'http')
 	<img class="imagen_redonda" src="{{ $usuario->foto}}" ><br>
 	@else
 	<img class="imagen_redonda" src="../imagenes/fotos/{{ $usuario->foto  }} " ><br>
-	@endif	
+	@endif
 </center>
 <br>
 <table id="ticket-table" class="table table-sorting">
@@ -28,7 +28,7 @@
 			<td>{{ $usuario->id }}</td>
 		</tr>
 		<tr>
-			<th>Nombres</th>
+			<th>Nombre</th>
 			<td>{{ $usuario->nombre.' '.$usuario->apellido }}</td>
 		</tr>
 		@if ($usuario->tipo_usuario == 'Administrador')
@@ -46,11 +46,10 @@
 			<td>{{ $usuario->tipo_inteligencia }}</td>
 		</tr>
 		<tr>
-			<th>Titulo</th>
+			<th>Título</th>
 			<td>{{ $usuario->titulo }}</td>
 		</tr>
 
 </table>
 
 @stop
-

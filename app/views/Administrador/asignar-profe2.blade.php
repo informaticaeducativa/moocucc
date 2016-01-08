@@ -13,7 +13,7 @@
 <br>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 
-	<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentacion del Curso</a>
+	<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentación del Curso</a>
 	<h3>
 		Profesores Administradores
 	</h3>
@@ -39,7 +39,7 @@
 		</a>
 	</div>
 	@endif
-	@endforeach  
+	@endforeach
 	</div>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 
@@ -68,14 +68,14 @@
 		</a>
 	</div>
 	@endif
-	@endforeach  
+	@endforeach
 
-	
-	</div> 
+
+	</div>
 	</br>
 	<hr>
 	<div class="col-md-12 col-sm-12 col-xs-12">
-	
+
 	<strong>Buscar a:</strong>
 	{{ Form::open(array('route' => 'redirect-asignar-profesores', 'method' => 'GET')) }}
 		{{ Form::hidden('id', $curso->id_curso	) }}
@@ -85,7 +85,7 @@
 	{{ Form::close() }}
 
 	<h2>Para Asignar</h2>
-	
+
 @foreach($profesores2 as $profesor)
 @if(!$profesor->existeRelacionProfesorAdmin($curso->id_curso))
 <div class="col-md-4 col-sm-6 col-xs-6">
@@ -107,7 +107,7 @@
 	</a>
 </div>
 @endif
-@endforeach   
+@endforeach
 
 @foreach($profesores2 as $profesor)
 @if(!$existe = $profesor->existeRelacionProfesorBasico($curso->id_curso))
@@ -131,7 +131,7 @@
 	</a>
 </div>
 @endif
-@endforeach    
+@endforeach
 
 </div>
 
