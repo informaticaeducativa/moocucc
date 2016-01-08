@@ -25,8 +25,12 @@
 					<th colspan="3">{{ HTML::linkRoute('ver-curso-tareas', 'Tareas', array($curso->id_curso), array()) }}</th>
 				</tr>
 				<tr>
-					<th width="5%"><center><a href="{{ URL::route('ver-curso', $curso->id_curso) }}"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></center></a></th>
+					<th width="5%"><center><a href="{{ URL::route('ver-curso', $curso->id_curso) }}"><span class="glyphicon glyphicon glyphicon-info-sign" aria-hidden="true"></span></center></a></th>
 					<th colspan="3">{{ HTML::linkRoute('ver-curso', 'Información del Curso', array($curso->id_curso), array()) }}</th>
+				</tr>
+				<tr>
+					<th width="5%"><center><a href="{{ URL::route('desuscribirse', $curso->id_curso) }}"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></center></a></th>
+					<th colspan="3">{{ HTML::linkRoute('desuscribirse', 'Darse de baja del Curso', array($curso->id_curso), array()) }}</th>
 				</tr>
 		</table>
 	</div>
@@ -37,16 +41,35 @@
 		<br/>
 		<h1 class="strong"><center>Contenido del curso {{ $curso->nombre }}</center></h1>
 		<br/>
+		<h5 class="strong">Progreso</h5>
+		<div class="progress progress-striped active">
+		  <div class="progress-bar" role="progressbar"
+			   aria-valuenow="{{ $porcentaje }}" aria-valuemin="0" aria-valuemax="100"
+			   style="width: {{ $porcentaje }}%">
+			{{ $porcentaje }}% completado
+		  </div>
+		</div>
+		@if ($valor = (1 == 1))
+		@endif
 		@foreach ($curso->getTemariosSemana() as $temario)
 			<h2>Semana {{$temario->posicion }}</h2>
 			{{$temario->contenido }}<br/><br/>
 			@foreach ($curso->getLecciones($temario->posicion) as $leccion)
+				@if($valor)
 				<a href="{{ URL::route('ver-clase', array($curso->id_curso, $leccion->id_leccion) ) }}">
+				@endif
 					<div id="id_leccion_{{$leccion->id_leccion }}" class="div_item row_cursos">
 						<span class="strong">{{ $leccion->nombre }}</span>
+						@if ($leccion->getRegistro($curso->id_curso))
+							<img src="{{URL::to('imagenes/chulo.png')}}" width="20px">
+						@endif
 					</div>
+				@if($valor)
 				</a>
+				@endif
 			@endforeach
+			@if ($valor = $leccion->getAvanceClases($temario->posicion))
+			@endif
 			<br/><hr/>
 		@endforeach
 		<br/><br/>

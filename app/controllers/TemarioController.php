@@ -31,6 +31,13 @@ class TemarioController extends BaseController
 	 */
 	public function create($id)
 	{
+		if(Session::get('user_id') == '')
+			return Redirect::to('index');
+			
+		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
+		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+			return Redirect::to('index');
+		
 		$temario = new Temario;
 		$curso = Curso::find($id);
 		$temarios = $curso->getTemarios();
@@ -39,6 +46,13 @@ class TemarioController extends BaseController
 		
 	public function create1b($id)
 	{
+		if(Session::get('user_id') == '')
+			return Redirect::to('index');
+			
+		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
+		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+			return Redirect::to('index');
+		
 		$temario = new Temario;
 		$curso = Curso::find($id);
 		$temarios = $curso->getTemarios();
@@ -52,7 +66,14 @@ class TemarioController extends BaseController
 	 * @return Response
 	 */
 	public function create2($id)
-	{
+	{	
+		if(Session::get('user_id') == '')
+			return Redirect::to('index');
+			
+		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
+		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
+			return Redirect::to('index');
+
 		$temario = new Temario;
 		$curso = Curso::find($id);
 		$temarios = $curso->getTemarios();

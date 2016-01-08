@@ -82,6 +82,7 @@ clase index.blade.php
 	otro elemento que se pueda ocultar al minimizar la barra -->
 	<div class="collapse navbar-collapse navbar-ex1-collapse navbar_back">
 		<ul class="nav navbar-nav">
+<!--
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					Temas <b class="caret"></b>
@@ -94,6 +95,7 @@ clase index.blade.php
 					<li><a href="#"></a></li>
 				</ul>
 			</li>
+-->
 		</ul>
 
 		<form class="navbar-form navbar-left" role="search" action="{{ URL::route('index') }}" method="POST">
@@ -104,16 +106,19 @@ clase index.blade.php
 		</form>
 
 		<ul class="nav navbar-nav navbar-right">
+		  @if (Session::get('tipo_usuario') == "Administrador") 	
+		   <li><a href="{{ URL::route('administrador')}}">Panel Administrador</a></li>
+		   @endif
 		  @if (Session::get('user') != "") 
+	  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 		  <li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 			  {{ Session::get('user') }}<b class="caret"></b>
 			</a>
 			<ul class="dropdown-menu">
 			  <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi Perfil</a></li>
-			  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 			  <li class="divider"></li>
-			  <li><a href="#">Salir</a></li>
+          <li><a href="{{ URL::route('logout')}}">Salir</a></li>
 			</ul>
 		  </li>
 		  @else

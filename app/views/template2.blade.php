@@ -115,6 +115,17 @@
 				$("#r_"+leccion+"x"+pregunta).html(opcion);
 			});
 			
+			$(".input_res").keyup(function() {
+				var texto_id = $(this).attr('id');
+				var texto = (texto_id.substr(6,texto_id.length));
+				var textos = texto.split("x");
+				var leccion = textos[0];
+				var pregunta = textos[1];
+				var opcion = $(this).val();
+
+				$("#r_"+leccion+"x"+pregunta).html(opcion);
+			});
+			
 			$("#btn-microforo").click(function() {
 				var mensaje = $(".mensaje").val();
 				var texto_id = $(".mensaje").attr('id');
@@ -126,7 +137,30 @@
 				
 				jQuery.ajax({
 					url: '../../../postear-en-microforo',					
-					data: {clase: clase, leccion: leccion, mensaje: mensaje },
+					data: {clase: clase, leccion: leccion, mensaje: mensaje, pregunta: 0 },
+					success: function (result) {
+						usuario = result;
+						location.reload();
+					},
+					async: true
+				});
+				
+			});
+			
+			$(".responder_microforo").click(function() {
+				var texto_id = $(this).attr('id');
+				var texto = (texto_id.substr(4,texto_id.length));
+				var textos = texto.split("x");
+				var clase = textos[0];
+				var leccion = textos[1];
+				var pregunta = textos[2];
+				var mensaje = $("#mensajex"+clase+"x"+leccion+"x"+pregunta).val();
+
+				console.log('clase: '+clase+', leccion: '+leccion+', mensaje: '+mensaje+', preguntarel: '+pregunta )
+				
+				jQuery.ajax({
+					url: '../../../postear-en-microforo',					
+					data: {clase: clase, leccion: leccion, mensaje: mensaje, pregunta: pregunta },
 					success: function (result) {
 						usuario = result;
 						location.reload();
@@ -164,6 +198,8 @@
 				var preguntas = [];
 				var respuestas = [];
 				var contador = 0;
+				var completo = true;
+				var curso = $("#curso_div").val();
 				$(".result").each(function( i ) {
 					  
 					var texto_id = $(this).attr('id');
@@ -176,18 +212,40 @@
 					leccion1 = leccion;
 					preguntas[i] = pregunta;
 					respuestas[i] = opcion;
+					console.log('cosa '+pregunta+' '+opcion);
+					if(opcion == ''){	completo = false;	}
 					contador++;
 				});
-				
-				jQuery.ajax({
-					url: '../../../validar-quiz',
-					data: {leccion: leccion1, preguntas: preguntas, respuestas: respuestas },
-					success: function (result) {
-						alert("Resultado: "+parseFloat(((result*100)/contador)).toFixed(2)+" % con "+result+" / "+contador);
-					},
-					async: false
-				});
-				  
+					console.log("completo: "+completo);
+					if(!completo)
+					{
+							var r = confirm("Aun hay preguntas sin responder, desea enviar el cuestionario de todos modos?");
+							if (r == true) {
+								jQuery.ajax({
+									url: '../../../validar-quiz',
+									data: {leccion: leccion1, preguntas: preguntas, respuestas: respuestas },
+									success: function (result) {
+										alert("Resultado: "+result+" % ");
+										$("#regresar_button").css('visibility', 'visible');
+										$("#btn_terminar_prueba").css('visibility', 'hidden');
+									},
+									async: false
+								});
+							} 
+					}
+					else{
+					
+						jQuery.ajax({
+							url: '../../../validar-quiz',
+							data: {leccion: leccion1, preguntas: preguntas, respuestas: respuestas },
+							success: function (result) {
+								alert("Resultado: "+result+" % ");
+								$("#regresar_button").css('visibility', 'visible');
+								$("#btn_terminar_prueba").css('visibility', 'hidden');
+							},
+							async: false
+						});
+					}
 			});
 			
 			$(".btn_res_num").click(function() {
@@ -207,7 +265,46 @@
 				$("#r_"+leccion+"x"+pregunta).html(opcion);
 			});
 			
-			var ctx = $("#myChart").get(0).getContext("2d");
+			
+			
+		
+			
+			$("#btn_inteligencia").click(function() {
+					
+				var preguntas = [];
+				var respuestas = [];
+				var contador = 0;
+				$(".result").each(function( i ) {
+					  
+					var texto_id = $(this).attr('id');
+					var texto = (texto_id.substr(2,texto_id.length));
+					var textos = texto.split("x");
+					var leccion = textos[0];
+					var pregunta = textos[1];
+					var opcion = $(this).text();
+					
+					preguntas[i] = pregunta;
+					respuestas[i] = parseInt(opcion);
+					contador++;
+				});
+				console.log("comienza");
+				jQuery.ajax({
+					url: '../../../validar-inteligencia',
+					data: {preguntas: preguntas, respuestas: respuestas },
+					success: function (result) {
+						console.log(result);
+						$("#regresar").css('visibility', 'visible');
+						$("#btn_inteligencia").css('visibility', 'hidden');
+						
+						alert("Resultado: "+result);
+						
+					},
+					async: true
+				});
+				  
+			});
+			
+				var ctx = $("#myChart").get(0).getContext("2d");
 			var ctx2 = $("#myChart2").get(0).getContext("2d");
 			var ctx3 = $("#myChart3").get(0).getContext("2d");
 			var ctx4 = $("#myChart4").get(0).getContext("2d");
@@ -274,41 +371,6 @@
 				row.append($("<td>" + rowData.value + "</td>"));
 			}
 			
-			$("#btn_inteligencia").click(function() {
-					
-				var preguntas = [];
-				var respuestas = [];
-				var contador = 0;
-				$(".result").each(function( i ) {
-					  
-					var texto_id = $(this).attr('id');
-					var texto = (texto_id.substr(2,texto_id.length));
-					var textos = texto.split("x");
-					var leccion = textos[0];
-					var pregunta = textos[1];
-					var opcion = $(this).text();
-					
-					preguntas[i] = pregunta;
-					respuestas[i] = parseInt(opcion);
-					contador++;
-				});
-				console.log("comienza");
-				jQuery.ajax({
-					url: '../../../validar-inteligencia',
-					data: {preguntas: preguntas, respuestas: respuestas },
-					success: function (result) {
-						console.log(result);
-						$("#regresar").show();
-						$("#btn_inteligencia").remove();
-						
-						alert("Resultado: "+result);
-						
-					},
-					async: true
-				});
-				  
-			});
-			
 		});
 		
 	$("#menu-toggle").click(function(e) {
@@ -350,18 +412,44 @@
     </ul>
  
     <ul class="nav navbar-nav navbar-right">
-      
+	   @if (Session::get('tipo_usuario') == "Administrador") 	
+       <li><a href="{{ URL::route('administrador')}}">Panel Administrador</a></li>
+       @endif
+        @if (Session::get('user') != "") 
+	  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
+
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           {{ Session::get('user') }}<b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi perfil</a></li>
-		  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
+          <li><a href="{{ URL::route('usuario', Session::get('user_id') ) }}">Mi Perfil</a></li>
           <li class="divider"></li>
           <li><a href="{{ URL::route('logout')}}">Salir</a></li>
         </ul>
       </li>
+      @else
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+			<ul id="login-dp" class="dropdown-menu">
+				<li>
+					 <div class="row">
+							<div class="col-md-12">
+								<center>
+									Login via
+									<div class="social-buttons">
+										<a href="{{ URL::route('login-facebook') }}" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a><br><br>
+										<a href="{{ URL::route('login-twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a><br><br>
+										<a href="{{ URL::route('login-google') }}" class="btn btn-gp"><i class="fa fa-google"></i> Google +</a><br><br>
+									</div>
+                               </center>
+							</div>
+					 </div>
+				</li>
+			</ul>
+        </li>
+      @endif
+      
     </ul>
   </div>
 </nav>

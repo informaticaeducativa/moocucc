@@ -61,7 +61,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
     
     public function existeRelacionProfesorAdmin($id_curso)
     {
-		$count = RelacionUsuarioCurso::where('id_curso','=', $id_curso)->where('tipo_relacion','=','Profesor Admin')->count();
+		$count = RelacionUsuarioCurso::where('id_curso','=', $id_curso)->where('id_usuario','=', $this->id)->where('tipo_relacion','=','Profesor Admin')->count();
 		if ($count > 0)
 			return true;
 		return false;
@@ -69,7 +69,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
 
     public function existeRelacionProfesorBasico($id_curso)
     {
-		$count = RelacionUsuarioCurso::where('id_curso','=', $id_curso)->where('tipo_relacion','=','Profesor Basico')->count();
+		$count = RelacionUsuarioCurso::where('id_curso','=', $id_curso)->where('id_usuario','=', $this->id)->where('tipo_relacion','=','Profesor Basico')->count();
 		if ($count > 0)
 			return true;
 		return false;
@@ -83,8 +83,16 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
 	
 	public function misCursos()
     {
-		$relaciones = RelacionUsuarioCurso::where('id_usuario','=', $this->id)->get();
+		$relaciones = RelacionUsuarioCurso::where('id_usuario','=', $this->id)->where('estado','<>','inactivo')->get();
 		return $relaciones;
+	}
+	
+	public function esProfesorAdmin()
+    {
+		$count = RelacionUsuarioCurso::where('id_usuario','=', $this->id)->where('estado','<>','inactivo')->where('tipo_relacion','=', 'Profesor Admin')->count();
+		if ($count > 0)
+			return true;
+		return false;	
 	}
 	
 	public function getProgreso($id_curso) {

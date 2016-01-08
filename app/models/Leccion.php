@@ -63,10 +63,29 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
     
     public function getPreguntasLeccion()
     {
-		$preguntas = PreguntaLeccion::where('id_leccion','=', $this->id_leccion)->orderBy('fecha_creacion','ASC')->get();
+		$preguntas = PreguntaLeccion::where('id_leccion','=', $this->id_leccion)->where('relacion','=', 0)->orderBy('fecha_creacion','ASC')->get();
 		return $preguntas;
 	}
 	
+	public function getRegistro($curso)
+    {
+		$count = Registro::where('id_leccion','=', $this->id_leccion)->where('id_curso','=', $curso)->where('id_usuario','=', Session::get('user_id'))->count();
+		if($count > 0)
+			return true;
+		return false;
+	}
+	
+	public function getAvanceClases($semana)
+    {
+		$count = Avance::where('id_curso','=', $this->id_curso)->where('tipo','=', 'clases')->where('semana','=', $semana)->where('id_usuario','=', Session::get('user_id'))->count();
+		$count2 = Avance::where('id_curso','=', $this->id_curso)->where('tipo','=', 'evaluacion')->where('semana','=', $semana)->where('id_usuario','=', Session::get('user_id'))->count();
+		$count3 = Evaluacion::where('id_curso','=', $this->id_curso)->where('semana','=', $semana)->count();
+		if($count > 0 && $count2==$count3)
+			return true;
+		return false;
+	}
+    
+
     
 }
 

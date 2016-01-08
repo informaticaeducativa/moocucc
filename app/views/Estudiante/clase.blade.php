@@ -67,19 +67,72 @@
 				<table>
 					@foreach ($leccion->getPreguntasLeccion() as $pregunta)
 						<tr>
-
 							@if(substr( $pregunta->getUsuario()->foto , 0, 4) == 'http')
-							<th width="20%"><img class="imagen_redonda_reducida" src="{{ $pregunta->getUsuario()->foto }}" ></th>
+							<th width="15%"><img class="imagen_redonda_reducida" src="{{ $pregunta->getUsuario()->foto }}" ></th>
 							@else
-							<th width="20%"><img class="imagen_redonda_reducida" src="../../../imagenes/fotos/{{ $pregunta->getUsuario()->foto  }} " ></th>
+							<th width="15%"><img class="imagen_redonda_reducida" src="../../../imagenes/fotos/{{ $pregunta->getUsuario()->foto  }} " ></th>
+							@endif							
+							
+							<th colspan="2">
+								<span class=strong>{{ $pregunta->getUsuario()->nombre." ".$pregunta->getUsuario()->apellido }}</span><br>
+								{{ $pregunta->pregunta }}<br>
+								<h6>{{$pregunta->fecha_creacion}}</h6>									
+							</th>
+						</tr>
+						@if (count($pregunta->getPreguntasRelacionadas()) == 0)
+						<tr>
+							<th colspan="3">
+								<table width="100%">
+									<tr>
+										<td width="5%">
+										</td>
+										<td width="80%">
+											<input type="text" class="form-control" id="mensajex{{$curso->id_curso}}x{{$leccion->id_leccion}}x{{$pregunta->id_pregunta}}">
+										</td>
+										<td>
+											<button class="btn btn-info responder_microforo" id="btnx{{$curso->id_curso}}x{{$leccion->id_leccion}}x{{$pregunta->id_pregunta}}">Responder</button>
+										</td>
+									</tr>
+								</table>
+							</th>
+						</tr>
+						@else
+						@foreach ($pregunta->getPreguntasRelacionadas() as $pregunta2)
+						<tr>
+							<th width="5%"></th>
+
+							@if(substr( $pregunta2->getUsuario()->foto , 0, 4) == 'http')
+							<th width="15%"><img class="imagen_redonda_reducida" src="{{ $pregunta2->getUsuario()->foto }}" ></th>
+							@else
+							<th width="15%"><img class="imagen_redonda_reducida" src="../../../imagenes/fotos/{{ $pregunta2->getUsuario()->foto  }} " ></th>
 							@endif							
 							
 							<th>
-								<span class=strong>{{ $pregunta->getUsuario()->nombre." ".$pregunta->getUsuario()->apellido }}</span><br>
-								{{ $pregunta->pregunta }}<br>
-								<h6>{{$pregunta->fecha_creacion}}</h6>
+								<span class=strong>{{ $pregunta2->getUsuario()->nombre." ".$pregunta2->getUsuario()->apellido }}</span><br>
+								{{ $pregunta2->pregunta }}<br>
+								<h6>{{$pregunta2->fecha_creacion}}</h6>									
 							</th>
 						</tr>
+						@endforeach
+						<tr>
+							<th colspan="3">
+								<table width="100%">
+									<tr>
+										<td width="15%">
+										</td>
+										<td width="80%">
+											<input type="text" class="form-control" id="mensajex{{$curso->id_curso}}x{{$leccion->id_leccion}}x{{$pregunta->id_pregunta}}">
+										</td>
+										<td>
+											<button class="btn btn-info responder_microforo" id="btnx{{$curso->id_curso}}x{{$leccion->id_leccion}}x{{$pregunta->id_pregunta}}">Responder</button>
+										</td>
+									</tr>
+								</table>
+							</th>
+						</tr>
+						@endif
+														
+
 						<br>
 					@endforeach
 				</table>

@@ -55,12 +55,8 @@
 
 			<br/><br/><br/>
 				<button id="btn_inteligencia" class="btn btn-warning btn-block">Terminar Prueba</button>
-			<br/><br/>
-			<div id="regresar" style="display:none;">
-				<a href="{{ URL::route('mis-cursos') }}"><button class="btn btn-primary btn-block">Regresar</button></a>
-			</div>	
-			
-			<br>
+				<a href="{{ URL::route('mis-cursos') }}" style="visibility:hidden;" id="regresar" class="btn btn-warning btn-block">Regresar</a>			
+			<br/>
 		
 	</div>
 </div>

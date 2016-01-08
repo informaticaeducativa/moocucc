@@ -31,6 +31,9 @@ class CursoController extends BaseController
 	 */
 	public function create()
 	{
+		if(Session::get('user_id') == '' || Session::get('tipo_usuario') != "Administrador")
+			return Redirect::to('index');
+			
 		$curso = new Curso;
 		$tematicas = Tematica::lists('nombre','id_tematica');
 		return View::make('Curso/form')->with('curso', $curso)->with('tematicas', $tematicas);
