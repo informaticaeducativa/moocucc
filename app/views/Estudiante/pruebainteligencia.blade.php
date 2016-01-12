@@ -30,22 +30,16 @@
 						<table width="100%">
 							<tr>
 								<th>
-									<button id="btn_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}x1"  class="btn btn-primary btn_res_num">1</button>
+									<button id="btn_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}x1"  class="btn btn-primary btn_res_num">Falso</button>
 								</th>
 								<th>
-									<button id="btn_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}x2"   class="btn btn-primary btn_res_num">2</button>
-								</th>
-								<th>
-									<button id="btn_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}x3"   class="btn btn-primary btn_res_num">3</button>
-								</th>
-								<th>
-									<button id="btn_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}x4"   class="btn btn-primary btn_res_num">4</button>
+									<button id="btn_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}x2"   class="btn btn-primary btn_res_num">Verdadero</button>
 								</th>
 							</tr>
-							<input type="hidden" id="r_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}" class="result" value="0">
+							<input type="hidden" id="r_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}" class="result">
 						</table>
 					</div>
-					<div class="col-md-6 col-sm-8 col-xs-12 espaciado" id="mensaje_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}">
+					<div class="col-md-6 col-sm-8 col-xs-12 espaciado" id="mensaje_{{$evaluacion->id_evaluacion}}x{{$pregunta->id_pregunta}}" style="color:red;">
 
 					</div>
 				</div>

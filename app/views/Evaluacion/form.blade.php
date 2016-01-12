@@ -59,7 +59,7 @@
 @foreach($curso->getAllEvaluaciones() as $evaluacion)
 	<table width="100%" class="table table-hover">
 		<tr>
-			<th>
+			<th width="30%">
 				<strong>{{ $evaluacion->nombre }}</strong>
 			</th>
 			<th style="vertical-align:middle;">

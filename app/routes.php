@@ -19,7 +19,7 @@ Route::get('/', function()
 	
 	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzalez');
-	Session::put('inteligencia', 'Kinestesico');
+	//Session::put('inteligencia', 'Kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
 	Session::put('titulo', 'E');
 	
@@ -200,7 +200,15 @@ Route::get('validar-quiz',  function()
 			$count = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $evaluacion->id_curso)->count();
 			$count2 = Evaluacion::where('id_curso', '=', $evaluacion->id_curso)->where('semana','<=', $evaluacion->semana)->where('semana','>', 0)->count();
 			$count3 = Evaluacion::where('id_curso', '=', $evaluacion->id_curso)->where('semana','>', 0)->count();
-			$porcentaje = intval($count*100/$count3);
+			if($count3 == 0)
+			{
+				$porcentaje = 0;
+			}
+			else
+			{
+				$porcentaje = intval($count*100/$count3);
+			}
+			
 			if($count == $count2)
 			{
 				DB::table('avance')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $evaluacion->id_curso, 'semana' => $evaluacion->semana, 'tipo' => 'evaluacion', 'porcentaje'=>$porcentaje ,'fecha' => date('Y-m-d H:i:s') ) );
@@ -376,7 +384,7 @@ Route::get('prueba-inteligencias', array('as' => 'prueba-inteligencias', functio
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
 		
-	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->count() == 0)
 		return Redirect::to('index');
 	
 	$evaluacion = Evaluacion::find(2);
@@ -387,9 +395,7 @@ Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 {
 	if(Session::get('user_id') == "")
 		return Redirect::to('index');
-		
-	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
-		return Redirect::to('index');
+
 	
 	$count = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
 	$count2 = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('estado', '=', 'inactivo')->count();
@@ -400,9 +406,16 @@ Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 	{
 	  DB::table('relacion_usuario_curso')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'tipo_relacion' => 'Estudiante', 'fecha_creacion' => date('Y-m-d H:i:s'), 'estado' => 'activo')	);
 	}
+
+		
+	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->count() == 0)
+		return Redirect::to('index');
 	
+	$counter = RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->where('tipo_relacion','<>','Estudiante')->where('estado','=','activo')->count();
+			
 	$usuario = Usuario::find(Session::get('user_id'));
-	if($usuario->tipo_inteligencia == "")
+	
+	if($usuario->tipo_inteligencia == "" && $counter == 0 && Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('prueba-inteligencias');
 		
 	$curso = Curso::find($id);
@@ -420,7 +433,14 @@ Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', func
 		$count = Registro::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();		
 		$count3 = Leccion::where('id_curso', '=', $id)->where('semana','>', 0)->count();
 	
-	$porcentaje = intval($count*100/$count3);
+	if($count3 == 0)
+	{
+		$porcentaje = 0;
+	}
+	else
+	{
+		$porcentaje = intval($count*100/$count3);
+	}
 	$curso = Curso::find($id);
     return View::make('Estudiante/contenido')->with('curso', $curso)->with('porcentaje', $porcentaje); 
 }))->where('id', '[0-9]+');

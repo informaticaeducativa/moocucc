@@ -79,8 +79,7 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
     {
 		$count = Avance::where('id_curso','=', $this->id_curso)->where('tipo','=', 'clases')->where('semana','=', $semana)->where('id_usuario','=', Session::get('user_id'))->count();
 		$count2 = Avance::where('id_curso','=', $this->id_curso)->where('tipo','=', 'evaluacion')->where('semana','=', $semana)->where('id_usuario','=', Session::get('user_id'))->count();
-		$count3 = Evaluacion::where('id_curso','=', $this->id_curso)->where('semana','=', $semana)->count();
-		if($count > 0 && $count2==$count3)
+		if($count > 0 && $count2>0)
 			return true;
 		return false;
 	}

@@ -274,33 +274,57 @@
 				var preguntas = [];
 				var respuestas = [];
 				var contador = 0;
+				var completo = true;
+				var leccion = 0;
 				$(".result").each(function( i ) {
 					  
 					var texto_id = $(this).attr('id');
 					var texto = (texto_id.substr(2,texto_id.length));
 					var textos = texto.split("x");
-					var leccion = textos[0];
+					leccion = textos[0];
 					var pregunta = textos[1];
 					var opcion = $(this).text();
 					
 					preguntas[i] = pregunta;
-					respuestas[i] = parseInt(opcion);
+					
+					if(opcion == ''){	completo = false; respuestas[i] = -1;	}
+					else{ respuestas[i] = parseInt(opcion)-1; }
 					contador++;
 				});
 				console.log("comienza");
-				jQuery.ajax({
-					url: '../../../validar-inteligencia',
-					data: {preguntas: preguntas, respuestas: respuestas },
-					success: function (result) {
-						console.log(result);
-						$("#regresar").css('visibility', 'visible');
-						$("#btn_inteligencia").css('visibility', 'hidden');
-						
-						alert("Resultado: "+result);
-						
-					},
-					async: true
-				});
+				
+				if(completo){
+					for (var i=0; i<(respuestas.length); i++)
+					{
+						$("#mensaje_"+leccion+"x"+preguntas[i]).html("");
+					}
+					jQuery.ajax({
+						url: '../../../validar-inteligencia',
+						data: {preguntas: preguntas, respuestas: respuestas },
+						success: function (result) {
+							console.log(result);
+							$("#regresar").css('visibility', 'visible');
+							$("#btn_inteligencia").css('visibility', 'hidden');
+							
+							alert("Resultado: "+result);
+							
+						},
+						async: true
+					});
+				  
+			   }
+			   else
+			   {
+					alert("Aun tiene preguntas sin responder, por favor respondalas todas");
+					for (var i=0; i<(respuestas.length); i++)
+					{
+						$("#mensaje_"+leccion+"x"+preguntas[i]).html("");
+						if(respuestas[i] == -1)
+						{
+							$("#mensaje_"+leccion+"x"+preguntas[i]).html("Pregunta sin responder");
+						}
+					}
+			   }
 				  
 			});
 			
