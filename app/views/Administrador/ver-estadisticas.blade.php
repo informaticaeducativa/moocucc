@@ -20,18 +20,18 @@
 	<h2 class="strong"><center>Menú</center></h2>
 
 			<img class="col-md-12 col-sm-12 col-xs-12" src="../../imagenes/{{ $curso->imagen_presentacion  }} " />
-				
-		</br></br>	
-	<div class="col-md-12 col-sm-12 col-xs-12" >		
+
+		</br></br>
+	<div class="col-md-12 col-sm-12 col-xs-12" >
 		</br>
 	</div>
-	<div class="col-md-12 col-sm-12 col-xs-12" >		
+	<div class="col-md-12 col-sm-12 col-xs-12" >
 		@if ($tipo_user)
 		<a href="{{ URL::route('crear-curso' ) }}">
 			<div class="div_item row_cursos">
 				<span class="strong">Crear Curso</span>
 			</div>
-		</a>		
+		</a>
 		<a href="{{ URL::route('administrador-estadisticas' ) }}">
 			<div class="div_item row_cursos">
 				<span class="strong">Regresar</span>
@@ -52,23 +52,23 @@
 			<table class="table">
 				<tr>
 					<th>Fecha de inicio del curso:</th>
-					<td>{{ $curso->fecha_inicio }}</td> 
+					<td>{{ $curso->fecha_inicio }}</td>
 				</tr>
 				<tr>
 					<th>Estudiantes Inscritos desde su inicio:</th>
-					<td>{{ $curso->getInscritosTotal() }}</td> 
+					<td>{{ $curso->getInscritosTotal() }}</td>
 				</tr>
 				<tr>
 					<th>Estudiantes Inscritos a la fecha:</th>
-					<td>{{ $curso->getInscritos() }} - {{ $curso->getInscritos()*100/($curso->getInscritosTotal() ) }} %</td> 
+					<td>{{ $curso->getInscritos() }} - {{ $curso->getInscritos()*100/($curso->getInscritosTotal() ) }} %</td>
 				</tr>
 				<tr>
 					<th>Estudiantes Retirados a la fecha:</th>
-					<td>{{ $curso->getRetirados() }} - {{ $curso->getRetirados()*100/($curso->getInscritosTotal() ) }} %</td> 
+					<td>{{ $curso->getRetirados() }} - {{ $curso->getRetirados()*100/($curso->getInscritosTotal() ) }} %</td>
 				</tr>
 				@if ($relacion == 'admin')
 				<tr>
-					<th colspan="2">  
+					<th colspan="2">
 						<center>
 							<h4 class="strong">Gráfica de estudiantes activos</h4>
 							<canvas id="myChart" class='img-responsive'></canvas>
@@ -78,11 +78,11 @@
 				@endif
 			</table>
 			@if ($relacion == 'admin')
-			<center>	
+			<center>
 				<h4 class="strong">Gráfica de estudiantes por ciudades</h4>
 			</center>
 			<div class="col-md-6 col-sm-6 col-xs-12">
-				<table id="CiudadDataTable" class="table">					
+				<table id="CiudadDataTable" class="table">
 				</table>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-12">
@@ -91,8 +91,8 @@
 				</center>
 			</div>
 			</br>
-			<center>							
-				<h4 class="strong">Gráfica de estudiantes por Paises</h4>
+			<center>
+				<h4 class="strong">Gráfica de estudiantes por Países</h4>
 			</center>
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<table id="PaisDataTable" class="table">
@@ -104,7 +104,7 @@
 				</center>
 			</div>
 			</br>
-			<center>							
+			<center>
 				<h4 class="strong">Gráfica de estudiantes por Universidad</h4>
 			</center>
 			<div class="col-md-6 col-sm-6 col-xs-12">

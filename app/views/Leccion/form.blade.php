@@ -43,7 +43,7 @@
       {{ Form::select('semana', array('1'=>'Semana 1', '2'=>'Semana 2', '3'=>'Semana 3', '4'=>'Semana 4', '5'=>'Semana 5', '6'=>'Semana 6', '7'=>'Semana 7', '8'=>'Semana 8', '9'=>'Semana 9'), null, array('class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('contenido_grafico', 'Iframe del contenido grafico (Youtube)') }}
+      {{ Form::label('contenido_grafico', 'Iframe del contenido gráfico (Youtube)') }}
       {{ Form::text('contenido_grafico', null, array('placeholder' => 'Introduce el iframe que te comparte youtube', 'class' => 'form-control')) }}
     </div>
      <div class="form-group col-md-10">

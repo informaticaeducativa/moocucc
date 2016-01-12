@@ -15,15 +15,15 @@
 			<div class="div_item row_cursos">
 				<span class="strong">Crear Curso</span>
 			</div>
-		</a>		
+		</a>
 		<a href="{{ URL::route('administrador-estadisticas' ) }}">
 			<div class="div_item row_cursos">
-				<span class="strong">Ver estadisticas de Administrador</span>
+				<span class="strong">Ver estadísticas de Administrador</span>
 			</div>
-		</a>		
+		</a>
 	</div>
 	<div class="col-md-9 col-sm-9 col-xs-12 div_list2">
-		<h2 class="strong"><center>Escojer un curso para editarlo</center></h2>
+		<h2 class="strong"><center>Escoge un curso para editarlo</center></h2>
 		<br/>
 		@foreach($cursos as $curso)
 		<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}">

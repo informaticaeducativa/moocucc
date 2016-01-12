@@ -15,13 +15,13 @@
 			<div class="div_item row_cursos">
 				<span class="strong">Crear Curso</span>
 			</div>
-		</a>		
+		</a>
 		<a href="{{ URL::route('administrador-estadisticas' ) }}">
 			<div class="div_item row_cursos">
-				<span class="strong">Ver estadisticas de Administrador</span>
+				<span class="strong">Ver estadísticas de Administrador</span>
 			</div>
 		</a>
-		
+
 	</div>
 	<div class="col-md-9 col-sm-9 col-xs-12 div_list2">
 		<h2 class="strong"><center>Ver estadísticas de un Curso</center></h2>

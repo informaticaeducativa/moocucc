@@ -14,15 +14,15 @@
 
 @section ('title_div') {{ $action }} Temario @stop
 
-@section ('contenido') 
+@section ('contenido')
 
 <br><br>
 <a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
 
 
-<h2>Crear contenido del curso {{ $curso->nombre }}</h2>
+<h2>Crear contenido del curso: {{ $curso->nombre }}</h2>
 
-<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentacion del Curso</a>
+<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentación del Curso</a>
 </br>
 </br>
 
@@ -32,7 +32,7 @@
 
   <div class="row">
     <div class="form-group col-md-10">
-      {{ Form::label('titulo', 'Titulo del Contenido') }}
+      {{ Form::label('titulo', 'Título del Contenido') }}
       {{ Form::text('titulo', null, array('placeholder' => 'Ej: Acerca de este curso, Temas de este curso', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-10">
@@ -42,11 +42,11 @@
   </div>
   {{ Form::hidden('id_curso', $curso->id_curso) }}
   {{ Form::hidden('tipo_contenido', 'info_curso') }}
-  
+
   {{ Form::button($action . ' temario', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
-  
+
 {{ Form::close() }}
 
 
 
-@stop  
+@stop

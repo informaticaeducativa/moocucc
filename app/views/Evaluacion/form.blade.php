@@ -31,10 +31,10 @@
 {{ Form::model($evaluacion, $form_data, array('role' => 'form')) }}
 
   @include ('errors', array('errors' => $errors))
-  
+
   <div class="row">
     <div class="form-group col-md-5">
-      {{ Form::label('nombre', 'Nombre o título de la Evaluacion') }}
+      {{ Form::label('nombre', 'Nombre o título de la Evaluación') }}
       {{ Form::text('nombre', null, array('placeholder' => 'Introduce el nombre del leccion', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
@@ -42,8 +42,8 @@
       {{ Form::select('semana', array('1'=>'Semana 1', '2'=>'Semana 2', '3'=>'Semana 3', '4'=>'Semana 4', '5'=>'Semana 5', '6'=>'Semana 6', '7'=>'Semana 7', '8'=>'Semana 8', '9'=>'Semana 9'), null, array('class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('calificable', 'Examen calificable?') }}
-      {{ Form::select('calificable', array('si'=>'Si', 'no'=>'No'), null, array('class' => 'form-control')) }}
+      {{ Form::label('calificable', '¿Examen calificable?') }}
+      {{ Form::select('calificable', array('si'=>'Sí', 'no'=>'No'), null, array('class' => 'form-control')) }}
     </div>
   </div>
 
@@ -68,14 +68,11 @@
 			<th style="vertical-align:middle;">
 				<a href="{{ URL::route('crear-curso-8', $evaluacion->id_evaluacion ) }}" class="btn btn-info">Agregar preguntas</a>
 			</th>
-		</tr>		
-		
+		</tr>
+
 	</table>
 @endforeach
 </br></br>
 
 
 @stop
-
-
-

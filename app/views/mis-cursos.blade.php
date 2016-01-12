@@ -106,11 +106,11 @@ clase index.blade.php
 		</form>
 
 		<ul class="nav navbar-nav navbar-right">
-		  @if (Session::get('tipo_usuario') == "Administrador") 	
+		  @if (Session::get('tipo_usuario') == "Administrador")
 		   <li><a href="{{ URL::route('administrador')}}">Panel Administrador</a></li>
 		   @endif
-		  
-		  @if (Session::get('user') != "") 
+
+		  @if (Session::get('user') != "")
    	  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 		  <li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -156,9 +156,9 @@ clase index.blade.php
 				<h1>MOOC UCC</h1>
 			</header>
 		</center>
-		
+
 		<div class="row">
-		
+
 		@if ($usuario->esProfesorAdmin())
 			<a href="{{ URL::route('administrador-listar-estadisticas') }}" class="btn btn-primary">Ir al panel Profesor Admin</a><br/><br/>
 		@endif
@@ -210,7 +210,7 @@ clase index.blade.php
 								<h3>{{ $curso->getCurso()->nombre }}</h3>
 								<span class="badge">Inscrito como: {{$curso->tipo_relacion}}</span><br/>
 							</div>
-							<a class="btn btn-primary btn-block" href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}">Ver estadisticas </a>
+							<a class="btn btn-primary btn-block" href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}">Ver estadísticas </a>
 							Nivel: {{ $curso->getCurso()->nivel }}<br/>
 							{{ $curso->getCurso()->getTematica() }}<br/>
 							{{ $curso->getCurso()->getFechaInicio() }}
@@ -219,7 +219,7 @@ clase index.blade.php
 				</div>
 			</a>
 			@endif
-				
+
 			@endforeach
 		</div>
 		<div id="resultados"></div>
@@ -236,11 +236,11 @@ clase index.blade.php
       <div class="modal-body form-group col-md-7 col-sm-7-col-xs-7">
 		Por favor completa los siguientes datos</br></br>
 		<form>
-			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Titulo o cargo que desempeña</label>
+			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Título o cargo que desempeña</label>
 			<input type="text" id="input-titulo" class="form-control" placeholder="Estudiante, Profesor, Emprendedor">
 			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Ciudad</label>
 			<select id="comboboxCiudad" class="form-control" ></select>
-			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Pais</label>
+			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">País</label>
 			<select id="comboboxPais" class="form-control" ></select>
 			<label for="inputText" class="col-lg-12 col-sm-12 col-xs-12 control-label">Universidad</label>
 			<select id="comboboxUniversidad" class="form-control" ></select></br>
@@ -255,7 +255,7 @@ clase index.blade.php
 		</form>
 		</br>
 		<form>
-			<input type="text" id="nombre-pais" name="nombre-pais" class="form-control" placeholder="Pais">
+			<input type="text" id="nombre-pais" name="nombre-pais" class="form-control" placeholder="País">
 			<button type="submit" class="btn btn-primary btn-block" id="submitpais">Registrar</button>
 		</form>
 		</br>
@@ -274,7 +274,7 @@ clase index.blade.php
 @if (Session::get('titulo') == '' && Session::get('user_id') != '')
 <script  type="text/javascript">
 	$('#myModal').modal();
-	
+
 	jQuery.ajax({
 		url: 'listar-ciudades',
    		success: function (result) {
@@ -286,7 +286,7 @@ clase index.blade.php
 		},
 		async: true
 	});
-	
+
 	jQuery.ajax({
 		url: 'listar-paises',
    		success: function (result) {
@@ -298,7 +298,7 @@ clase index.blade.php
 		},
 		async: true
 	});
-	
+
 	jQuery.ajax({
 		url: 'listar-universidades',
    		success: function (result) {
@@ -310,7 +310,7 @@ clase index.blade.php
 		},
 		async: true
 	});
-	
+
 	$("#submitciudad").click(function(){
 		if($('#nombre-ciudad').val() != ''){
 			jQuery.ajax({
@@ -327,7 +327,7 @@ clase index.blade.php
 			});
 		}
     });
-    
+
     $("#submitpais").click(function(){
 		if($('#nombre-pais').val() != ''){
 			jQuery.ajax({
@@ -344,7 +344,7 @@ clase index.blade.php
 			});
 		}
     });
-    
+
     $("#submituniversidad").click(function(){
 		if($('#nombre-universidad').val() != ''){
 			jQuery.ajax({
@@ -361,20 +361,20 @@ clase index.blade.php
 			});
 		}
     });
-    
+
         $("#submitdatos").click(function(){
 		if($('#input-titulo').val() != ''){
 			jQuery.ajax({
 				url: 'agregar-datos',
 				data: {titulo : $('#input-titulo').val(), ciudad : $("#comboboxCiudad").val(), pais : $("#comboboxPais").val(), universidad :$('#comboboxUniversidad').val()  },
 				success: function (result) {
-					$('#myModal').modal('hide');				
+					$('#myModal').modal('hide');
 				},
 				async: true
 			});
 		}
     });
-    
+
 </script>
 @endif
 

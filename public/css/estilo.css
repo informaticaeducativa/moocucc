@@ -36,15 +36,17 @@ hr{
 
 .div_list{
 	border: 1px solid #000000;
-	box-shadow: 4px 4px 10px #999;
+	-ms-box-shadow: 4px 4px 10px #999;
 	-webkit-box-shadow: 4px 4px 10px #999;
 	-moz-box-shadow: 4px 4px 10px #999;
+	box-shadow: 4px 4px 10px #999;
 
 	min-height: 200px;
 	margin: 0 5px 10px 5px;
-	transition: background-color 0.5s ease;
+	-ms-transition: background-color 0.5s ease;
 	-webkit-transition: background-color 0.5s ease;
 	-moz-transition: background-color 0.5s ease;
+	transition: background-color 0.5s ease;
 	background-color: white;
 }
 .div_list:hover {
@@ -53,9 +55,10 @@ hr{
 
 .div_list2{
 	border: 1px solid #999;
-	box-shadow: 4px 4px 10px #999;
+	-ms-box-shadow: 4px 4px 10px #999;
 	-webkit-box-shadow: 4px 4px 10px #999;
 	-moz-box-shadow: 4px 4px 10px #999;
+	box-shadow: 4px 4px 10px #999;
 	min-height: 200px;
 	margin-top: 10px;
 	background-color: white;
@@ -63,14 +66,16 @@ hr{
 
 .div_item{
 	border: 1px solid #000000;
-	box-shadow: 4px 4px 10px #999;
+	-ms-box-shadow: 4px 4px 10px #999;
 	-webkit-box-shadow: 4px 4px 10px #999;
 	-moz-box-shadow: 4px 4px 10px #999;
+	box-shadow: 4px 4px 10px #999;
 
 	margin: 0 5px 10px 5px;
-	transition: background-color 0.5s ease;
+	-ms-transition: background-color 0.5s ease;
 	-webkit-transition: background-color 0.5s ease;
 	-moz-transition: background-color 0.5s ease;
+	transition: background-color 0.5s ease;
 	background-color: white;
 }
 .div_item:hover {
@@ -94,6 +99,7 @@ hr{
 	width: 140px;
   height: 140px;
   background:#008040;
+	-ms-border-radius: 70px;
   -moz-border-radius: 70px;
   -webkit-border-radius: 70px;
   border-radius: 70px;
@@ -103,6 +109,7 @@ hr{
   width: 70px;
   height: 70px;
   background:#008040;
+	-ms-border-radius: 35px;
   -moz-border-radius: 35px;
   -webkit-border-radius: 35px;
   border-radius: 35px;
@@ -129,6 +136,7 @@ hr{
 .div{
 	padding: 15px;
 	background-color: white;
+	-ms-box-shadow: 4px 4px 10px #999;
 	-webkit-box-shadow: 4px 4px 10px #999;
 	-moz-box-shadow: 4px 4px 10px #999;
 	box-shadow: 4px 4px 10px #999;

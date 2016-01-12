@@ -18,7 +18,7 @@
 		</h1>
 	</center>
 	</br>
-	<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentacion del Curso</a>
+	<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentación del Curso</a>
 	<h3>
 		Profesores Administradores
 	</h3>
@@ -44,7 +44,7 @@
 		</a>
 	</div>
 	@endif
-	@endforeach  
+	@endforeach
 	</div>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 
@@ -73,10 +73,10 @@
 		</a>
 	</div>
 	@endif
-	@endforeach  
+	@endforeach
 
-	
-	</div> 
+
+	</div>
 	</br>
 	<hr>
 	<div class="col-md-12 col-sm-12 col-xs-12">
@@ -112,7 +112,7 @@
 	</a>
 </div>
 @endif
-@endforeach   
+@endforeach
 
 @foreach($profesores as $profesor)
 @if(!$existe = $profesor->existeRelacionProfesorBasico($curso->id_curso))
@@ -136,7 +136,7 @@
 	</a>
 </div>
 @endif
-@endforeach    
+@endforeach
 
 </div>
 
