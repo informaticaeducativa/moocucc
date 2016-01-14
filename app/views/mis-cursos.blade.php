@@ -111,7 +111,8 @@ clase index.blade.php
 		   @endif
 
 		  @if (Session::get('user') != "")
-   	  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
+			<li><a href="{{ URL::route('mis-badges') }}">Mis Badges</a></li>
+			<li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 		  <li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 			  {{ Session::get('user') }}<b class="caret"></b>

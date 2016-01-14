@@ -5,29 +5,26 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Avance extends Eloquent implements UserInterface, RemindableInterface
+class Badge extends Eloquent implements UserInterface, RemindableInterface
 {
 
- 	use UserTrait, RemindableTrait;
+ 	  use UserTrait, RemindableTrait;
 
-	public $errors;
-    protected $primaryKey = array('id_usuario', 'id_curso', 'semana', 'tipo');
+	  public $errors;
+    protected $primaryKey = 'id_curso';
 
- 	protected $table = 'avance';
+ 	  protected $table = 'badge';
 
- 	protected $fillable = array('id_usuario', 'id_curso', 'semana', 'tipo', 'fecha', 'porcentaje');
+ 	  protected $fillable = array( 'id_curso', 'color1', 'color2');
 
     public $timestamps = false;
 
-	public function isValid($data)
+	  public function isValid($data)
     {
 		$rules = array(
-            'id_usuario' => 'required|numeric',
             'id_curso' => 'required|numeric',
-            'semana' => 'required|numeric',
-            'porcentaje' => 'required|numeric',
-            'fecha' => 'required',
-            'tipo' => 'required'
+            'color1' => 'required',
+            'color2' => 'required'
         );
 
         $validator = Validator::make($data, $rules);
@@ -59,23 +56,11 @@ class Avance extends Eloquent implements UserInterface, RemindableInterface
         return false;
     }
 
-	public function getCurso()
+  	public function getCurso()
     {
-		$curso = Curso::find($this->id_curso);
-		return $curso;
-	}
-
-	public function getUsuario()
-	{
-		$usuario = Usuario::find($this->id_usuario);
-		return $usuario;
-	}
-
-  public function getBadge()
-  {
-    $badge = Badge::find($this->id_curso);
-    return $badge;
-  }
+  		$curso = Curso::find($this->id_curso);
+  		return $curso;
+  	}
 
 
 }

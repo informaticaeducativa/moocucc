@@ -42,9 +42,9 @@
 
 			@foreach ($evaluacion->getPreguntas() as $pregunta)
 			<div class="col-md-12 col-sm-12 col-xs-12 espaciado ">
-				{{ '('.$contador.') '.$pregunta->nombre }}			
-			@if ( $pregunta->opcion_multiple == 'si')	
-				<br/>	
+				{{ '('.$contador.') '.$pregunta->nombre }}
+			@if ( $pregunta->opcion_multiple == 'si')
+				<br/>
 				A) {{ $pregunta->opcion_a }}<br/>
 				B) {{ $pregunta->opcion_b }}<br/>
 				C) {{ $pregunta->opcion_c }}<br/>
@@ -93,5 +93,59 @@
 
 	</div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title strong text-center" id="myModalLabel">Curso Completado</h4>
+      </div>
+      <div class="modal-body">
+					<center>
+							<canvas id="canvas_completo" width="140" height="140"></canvas>
+					</center>
+					<h3>Felicitaciones</h3>
+					Has completado satisfactoriamente el curso
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Salir</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{{URL::to('js/canvas1.js')}}"></script>
+<script type="text/javascript">
+		makeCanvasCompleto({{$evaluacion->semana}}, '{{$badge->color1}}', '{{$badge->color2}}');
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title strong text-center" id="myModalLabel">Semana {{$evaluacion->semana}}</h4>
+      </div>
+      <div class="modal-body">
+					<center>
+							<canvas id="canvas" width="140" height="140"></canvas>
+					</center>
+					<h3>Felicitaciones</h3>
+					Has completado satisfactoriamente la semana 1 del curso {{$curso->nombre}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Salir</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{{URL::to('js/canvas1.js')}}"></script>
+<script type="text/javascript">
+		makeCanvasSemanal({{$evaluacion->semana}}, '{{$badge->color1}}', '{{$badge->color2}}');
+</script>
+
 
 @stop

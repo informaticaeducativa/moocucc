@@ -18,7 +18,7 @@
 	<script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script>
 
-    $(document).ready(function() {   
+    $(document).ready(function() {
             var sideslider = $('[data-toggle=collapse-side]');
             var sel = sideslider.attr('data-target');
             var sel2 = sideslider.attr('data-target-2');
@@ -27,8 +27,10 @@
                 $(sel2).toggleClass('out');
             });
 		});
-		
-		
+
+
+
+
 </script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -54,7 +56,7 @@
     </button>
 	<a class="navbar-brand" href="{{ URL::route('index') }}"><img src="{{URL::to('imagenes/logo.png')}}" width="30px"></a>
   </div>
- 
+
   <!-- Agrupar los enlaces de navegación, los formularios y cualquier
        otro elemento que se pueda ocultar al minimizar la barra -->
   <div class="collapse navbar-collapse navbar-ex1-collapse navbar_back">
@@ -74,20 +76,21 @@
 	 </li>
 -->
     </ul>
- 
+
     <form class="navbar-form navbar-left" role="search" action="{{ URL::route('index') }}" method="POST">
       <div class="form-group">
         <input type="text" id="texto-buscar" name="texto-buscar" class="form-control" placeholder="Buscar">
       </div>
       <button type="submit" class="btn btn-default">Buscar</button>
     </form>
- 
+
     <ul class="nav navbar-nav navbar-right">
-	  @if (Session::get('tipo_usuario') == "Administrador") 	
+	  @if (Session::get('tipo_usuario') == "Administrador")
        <li><a href="{{ URL::route('administrador')}}">Panel Administrador</a></li>
        @endif
-      @if (Session::get('user') != "") 
-   	  <li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
+      @if (Session::get('user') != "")
+			<li><a href="{{ URL::route('mis-badges') }}">Mis Badges</a></li>
+			<li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 		<li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           {{ Session::get('user') }}<b class="caret"></b>
@@ -128,13 +131,11 @@
 <!--
 	<center><h1>@yield('title_div', 'MOOC UCC')</h1></center>
 -->
-	
+
 	@yield('contenido', '')
-			 
+
 
 </div>
 </body>
 
 </html>
-
-		
