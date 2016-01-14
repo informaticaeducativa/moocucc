@@ -610,14 +610,13 @@ Route::get('administrador/crear-preguntas/{id}',array('as'=>'crear-curso-8', 'us
 
 Route::get('administrador/asignar-color/{id}', array('as'=>'crear-curso-9', function($id){
 
-/*
 	if(Session::get('user_id') == '')
 		return Redirect::to('index');
 
 	$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
 	if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
-*/
+
 if(Badge::where('id_curso', '=', $id)->count() == 0)
 {
 	DB::table('badge')->insert(	array('id_curso' => $id, 'color1' => '#FFFFFF', 'color2' => '#000000')	);

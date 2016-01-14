@@ -38,7 +38,7 @@
 			<tr><th></th></tr>
 			<tr>
 				<th>
-					<a href="{{ URL::route('ver-curso-info', $curso->id_curso ) }}" class="btn btn-warning" style="width:100%" target="_blank">Visualización del contenido del Curso</a>				
+					<a href="{{ URL::route('ver-curso-info', $curso->id_curso ) }}" class="btn btn-warning" style="width:100%" target="_blank">Visualización del contenido del Curso</a>
 				</th>
 			</tr>
 			<tr><th></th></tr>
@@ -47,12 +47,18 @@
 					<a href="{{ URL::route('crear-curso-2', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Crear contenido de presentación del curso</a>
 				</th>
 			</tr>
-			<tr><th></th></tr>
+      <tr><th></th></tr>
 			<tr>
 				<th>
 					<a href="{{ URL::route('crear-curso-3', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Asignar profesores al curso</a>
 				</th>
 			</tr>
+      <tr><th></th></tr>
+      <tr>
+        <th>
+          <a href="{{ URL::route('crear-curso-9', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Asignar colores de los badges</a>
+        </th>
+      </tr>
 			<tr><th></th></tr>
 			<tr>
 				<th>
