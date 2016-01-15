@@ -83,7 +83,7 @@ clase index.blade.php
 		otro elemento que se pueda ocultar al minimizar la barra -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse navbar_back">
 			<ul class="nav navbar-nav">
-	<!--
+			<!--
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						Temas <b class="caret"></b>
@@ -96,7 +96,7 @@ clase index.blade.php
 						<li><a href="#"></a></li>
 					</ul>
 				</li>
-	-->
+			-->
 			</ul>
 
 			<form class="navbar-form navbar-left" role="search" action="{{ URL::route('index') }}" method="POST">
