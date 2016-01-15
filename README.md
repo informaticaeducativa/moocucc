@@ -5,7 +5,7 @@ Laravel 4.2
 
 ## Instrucciones de Instalación
 
-Para ejecutar el proyecto en un servidor nginx en Ubuntu GNU/Linux 14.04. Seguir las siguientes instrucciones:
+Para ejecutar el proyecto en un servidor nginx en Ubuntu GNU/Linux 14.04 o Debian Jessie 8.2 x64. Seguir las siguientes instrucciones:
 
 ### 1. Instalar los componentes del Backend
 
