@@ -147,3 +147,10 @@ Ahora bien, si miramos la estructura de nuestra carpeta `app`:
 ```
 
 Podremos observar nuestras tres carpetas principales: `models` (modelos/clases), `controllers` (controladores) y `views` (vistas).
+
+Dentro de la carpeta `models` se pueden ver todas las clases/modelos de nuestra aplicación. Se puede apreciar que todas las clases poseen la extensión `php`.
+
+En la carpeta `controllers` se pueden apreciar los controladores de la aplicación, los cuáles también son clases y conectan a los modelos con las vistas.
+
+Por último, la carpeta `views` contiene nuestras vistas, los cuáles son archivos también de extensión `.php` y que contienen código HTML5/PHP y son las responsables de la parte visual del **MOOC**. Están ubicadas dentro de carpetas con el mismo nombre de las clases y cada modelo tiene diferentes vistas, por ejemplo, un curso tiene vista lista, view y form, las cuáles son la vista general, específica y formulario/creación respectivamente.
+El archivo `index.blade.php` contiene el código del front-end de la vista index (o vista principal) del **MOOC**.
