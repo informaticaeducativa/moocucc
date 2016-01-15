@@ -5,7 +5,7 @@ Laravel 4.2
 
 ## Instrucciones de Instalación
 
-Para ejecutar el proyecto en un servidor nginx en Ubuntu GNU/Linux 14.04. Seguir las siguientes instrucciones:
+Para ejecutar el proyecto en un servidor nginx en Ubuntu GNU/Linux 14.04 o Debian Jessie 8.2 x64. Seguir las siguientes instrucciones:
 
 ### 1. Instalar los componentes del Backend
 
@@ -86,7 +86,7 @@ Guardar y cerrar el archivo cuando hayas finalizado. Después para que el servid
 
 Ahora, descomprimimos el archivo ``.zip` del proyecto, por ejemplo `mooc_ucc.zip` y copiamos la carpeta del proyecto a `/var/www`
 
-`sudo cp /var/www`
+`sudo cp -R mooc_ucc /var/www`
 
 Ahora nuestros archivos quedan en el directorio `/var/www/mooc_ucc` pero quedan con cuenta de administrador (grupo root), por lo cual vamos a cambiarlos a otro (grupo web):
 
@@ -101,6 +101,18 @@ EL último paso es reiniciar nuestro servidor nginx
 `sudo service nginx restart`
 
 Una vez hecho esto podremos ingresar a localhost y nos debería permitir ver nuestra página index
+
+**Si por algún motivo obtenemos un error referente a "couldn't find driver", debemos instalar y habilitar la extensión de `postgresql` en PHP**
+
+`sudo apt-get install php5-pgsql`
+
+Si luego de instalar el módulo aún nos sale el error, debemos activarlo manualmente, así que accedemos a `/etc/php/php.ini` y descomentamos la línea:
+
+`;extension=pgsql.so` y
+
+`;extension=pdo_pgsql.so` (en el caso de `archlinux`)
+
+**NOTA:** Para descomentar basta con eliminar el `;` inicial.
 
 ## Entorno de desarrollo
 
