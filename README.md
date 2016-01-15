@@ -154,3 +154,5 @@ En la carpeta `controllers` se pueden apreciar los controladores de la aplicaci�
 
 Por último, la carpeta `views` contiene nuestras vistas, los cuáles son archivos también de extensión `.php` y que contienen código HTML5/PHP y son las responsables de la parte visual del **MOOC**. Están ubicadas dentro de carpetas con el mismo nombre de las clases y cada modelo tiene diferentes vistas, por ejemplo, un curso tiene vista lista, view y form, las cuáles son la vista general, específica y formulario/creación respectivamente.
 El archivo `index.blade.php` contiene el código del front-end de la vista index (o vista principal) del **MOOC**.
+
+En el archivo `routes.php` encontraremos las rutas de las vistas con sus correspondientes verbos `HTTP`: `GET`, `POST`, etc.
