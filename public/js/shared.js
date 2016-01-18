@@ -104,7 +104,7 @@ try {
 
     } else {
 
-        var socket = new WebSocket("ws://127.0.0.3:7778/");
+        var socket = new WebSocket("ws://104.131.81.194:7778/");
         var id     = 1;
 
         socket.addEventListener("open", function (e) {
