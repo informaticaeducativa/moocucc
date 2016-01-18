@@ -713,3 +713,19 @@ Route::resource('leccion', 'LeccionController');
 Route::resource('pregunta', 'PreguntaController');
 Route::resource('pregunta_leccion', 'PreguntaLeccionController');
 Route::resource('temario', 'TemarioController');
+
+//
+// RUTAS DEL Chat
+//
+Route::get("chat", array('as'=>'chat', function()
+{
+		if(Session::get('user_id') == "")
+			return Redirect::to('index');
+
+		if(Session::get('user') == "")
+			return Redirect::to('index');
+
+		$nombre = Session::get('user', 'Anonimo');
+
+    return View::make("index/index")->with('nombre', $nombre);
+}));

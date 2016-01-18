@@ -9,7 +9,9 @@
 		"firebase/php-jwt" : "dev-master",
 		"auth0/login": "~1.0",
 		"artdarek/oauth-4-laravel": "dev-master",
-		"heroku/heroku-buildpack-php": "^90.0"
+		"heroku/heroku-buildpack-php": "^90.0",
+		"cboden/Ratchet"    : "0.3.*",
+		"guzzle/guzzle" : "*"
 	},
 	"autoload": {
 		"classmap": [
@@ -20,7 +22,10 @@
 			"app/database/seeds",
 			"app/tests/TestCase.php",
 			"app/library/Artdarek"
-		]
+		],
+		"psr-0": {
+            "Formativ\\Chat": "workbench/formativ/chat/src/"
+        }
 	},
 	"scripts": {
 		"post-install-cmd": [
