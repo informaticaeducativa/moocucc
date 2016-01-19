@@ -10,16 +10,7 @@
 		<h2 class="strong"><center>{{ $evaluacion->nombre }}</center></h2>
 		<br/>
 			<h6 class="strong">Calificable: {{ $evaluacion->calificable }}</h6>
-			<h5>Para realizar este test, debe puntuar cada pregunta de 1 a 4 siguiendo las siguientes indicaciones:
-				<br/>
-				1. Parcialmente en desacuerdo
-				<br/>
-				2. Ligeramente en desacuerdo
-				<br/>
-				3. Ligeramente de acuerdo
-				<br/>
-				4. Parcialmente de acuerdo
-			</h5>
+			<h5>Para realizar este test, debe seleccionar Verdadero o False según corresponda:</h5>
 			<br/>
 			@foreach ($evaluacion->getPreguntas() as $pregunta)
 			<div class="col-md-12 col-sm-12 col-xs-12 espaciado ">
@@ -48,10 +39,10 @@
 			@endforeach
 
 			<br/><br/><br/>
-				<button id="btn_inteligencia" class="btn btn-warning btn-block">Terminar Prueba</button>
-				<a href="{{ URL::route('mis-cursos') }}" style="visibility:hidden;" id="regresar" class="btn btn-warning btn-block">Regresar</a>			
+				<button id="btn_inteligencia" class="btn btn-success btn-block">Terminar Prueba</button>
+				<a href="{{ URL::route('mis-cursos') }}" style="visibility:hidden;" id="regresar" class="btn btn-primary btn-block">Regresar</a>
 			<br/>
-		
+
 	</div>
 </div>
 

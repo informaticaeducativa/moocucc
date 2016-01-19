@@ -87,8 +87,8 @@
 			@endforeach
 
 			<br/><br/><br/>
-				<button id="btn_terminar_prueba" class="btn btn-warning btn-block">Terminar Prueba</button>
-				<a href="{{ URL::route('ver-curso-tareas', $curso->id_curso) }}" id="regresar_button" style="visibility:hidden;" class="btn btn-warning btn-block">Finalizar</a>
+				<button id="btn_terminar_prueba" class="btn btn-success btn-block">Terminar Prueba</button>
+				<a href="{{ URL::route('ver-curso-tareas', $curso->id_curso) }}" id="regresar_button" style="visibility:hidden;" class="btn btn-primary btn-block">Finalizar</a>
 			<br/><br/>
 
 	</div>

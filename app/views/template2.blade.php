@@ -201,7 +201,7 @@ clase index.blade.php
 			$("#btn_"+leccion+"x"+pregunta+"xb").attr("class","btn btn-primary btn_res");
 			$("#btn_"+leccion+"x"+pregunta+"xc").attr("class","btn btn-primary btn_res");
 			$("#btn_"+leccion+"x"+pregunta+"xd").attr("class","btn btn-primary btn_res");
-			$(this).attr("class","btn btn-danger btn_res");
+			$(this).attr("class","btn btn-success btn_res");
 
 			$("#r_"+leccion+"x"+pregunta).html(opcion);
 		});
@@ -313,7 +313,7 @@ clase index.blade.php
 			//console.log("completo: "+completo);
 			if(!completo)
 			{
-				var r = confirm("Aun hay preguntas sin responder, desea enviar el cuestionario de todos modos?");
+				var r = confirm("Aún hay preguntas sin responder, ¿Desea enviar el cuestionario de todos modos?");
 				if (r == true) {
 					jQuery.ajax({
 						url: '../../../validar-quiz',
@@ -366,7 +366,7 @@ clase index.blade.php
 			$("#btn_"+leccion+"x"+pregunta+"x2").attr("class","btn btn-primary btn_res");
 			$("#btn_"+leccion+"x"+pregunta+"x3").attr("class","btn btn-primary btn_res");
 			$("#btn_"+leccion+"x"+pregunta+"x4").attr("class","btn btn-primary btn_res");
-			$(this).attr("class","btn btn-danger btn_res");
+			$(this).attr("class","btn btn-success btn_res");
 
 			$("#r_"+leccion+"x"+pregunta).html(opcion);
 		});
@@ -421,7 +421,7 @@ clase index.blade.php
 			}
 			else
 			{
-				alert("Aun tiene preguntas sin responder, por favor respondalas todas");
+				alert("Aún tienes preguntas sin responder, por favor respóndelas todas");
 				for (var i=0; i<(respuestas.length); i++)
 				{
 					$("#mensaje_"+leccion+"x"+preguntas[i]).html("");
