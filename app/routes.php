@@ -305,7 +305,7 @@ Route::get('validar-inteligencia',  function()
 		$contador++;
 	}
 
-	$respuesta = $ganador."\nPuntaje: ".$maximo;
+	$respuesta = "\nTu tipo de inteligencia es:\n".$ganador;
 
 	$usuario = (Session::get('user_id'));
 

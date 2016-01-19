@@ -322,7 +322,7 @@ clase index.blade.php
 							var textos = result.split("x");
 							var resultado = textos[0];
 							var avance = textos[1];
-							alert("Resultado: "+resultado+" % ");
+							alert("Resultado:"+resultado);
 							$("#regresar_button").css('visibility', 'visible');
 							$("#btn_terminar_prueba").css('visibility', 'hidden');
 							if(avance == "si"){ $('#myModal').modal();  }
@@ -343,7 +343,7 @@ clase index.blade.php
 						var textos = result.split("x");
 						var resultado = textos[0];
 						var avance = textos[1];
-						alert("Resultado: "+resultado+" % ");
+						alert("Resultado: "+resultado);
 						$("#regresar_button").css('visibility', 'visible');
 						$("#btn_terminar_prueba").css('visibility', 'hidden');
 						if(avance == "si"){ $('#myModal').modal();  }
