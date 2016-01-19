@@ -86,6 +86,7 @@
 		       <li><a href="{{ URL::route('administrador')}}">Panel Administrador</a></li>
 		       @endif
 		      @if (Session::get('user') != "")
+					<li><a href="{{ URL::route('chat') }}">Chat</a></li>
 					<li><a href="{{ URL::route('mis-badges') }}">Mis Badges</a></li>
 					<li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 				<li class="dropdown">
@@ -123,12 +124,6 @@
 		  </div>
 		</nav>
 	</header>
-
-	<div class="container" style="position:relative; top:-30px;">
-	<!--
-		<center><h1>@yield('title_div', 'MOOC UCC')</h1></center>
-	-->
-		@yield('contenido', '')
 
 	</div>
 

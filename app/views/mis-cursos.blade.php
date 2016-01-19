@@ -109,6 +109,7 @@ clase index.blade.php
 		   @endif
 
 		  @if (Session::get('user') != "")
+			<li><a href="{{ URL::route('chat') }}">Chat</a></li>
 			<li><a href="{{ URL::route('mis-badges') }}">Mis Badges</a></li>
 			<li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 		  <li class="dropdown">
