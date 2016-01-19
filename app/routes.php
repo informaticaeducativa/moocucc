@@ -16,13 +16,13 @@
 //
 Route::get('/', function()
 {
-
+/*
 	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzalez');
 	//Session::put('inteligencia', 'Kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
 	Session::put('titulo', 'E');
-
+*/
 
 	$cursos = Curso::all();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', '');
@@ -713,3 +713,19 @@ Route::resource('leccion', 'LeccionController');
 Route::resource('pregunta', 'PreguntaController');
 Route::resource('pregunta_leccion', 'PreguntaLeccionController');
 Route::resource('temario', 'TemarioController');
+
+//
+// RUTAS DEL Chat
+//
+Route::get("chat", array('as'=>'chat', function()
+{
+		if(Session::get('user_id') == "")
+			return Redirect::to('index');
+
+		if(Session::get('user') == "")
+			return Redirect::to('index');
+
+		$nombre = Session::get('user', 'Anonimo');
+
+    return View::make("index/index")->with('nombre', $nombre);
+}));

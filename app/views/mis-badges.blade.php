@@ -85,20 +85,19 @@ clase index.blade.php
 				<ul class="nav navbar-nav">
 					<!--
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						Temas <b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="#"></a></li>
-							<li class="divider"></li>
-							<li><a href="#"></a></li>
-							<li class="divider"></li>
-							<li><a href="#"></a></li>
-						</ul>
-					</li>
-				-->
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					Temas <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+					<li><a href="#"></a></li>
+					<li class="divider"></li>
+					<li><a href="#"></a></li>
+					<li class="divider"></li>
+					<li><a href="#"></a></li>
+							</ul>
+						</li>
+					-->
 				</ul>
-
 				<form class="navbar-form navbar-left" role="search" action="{{ URL::route('index') }}" method="POST">
 					<div class="form-group">
 						<input type="text" id="texto-buscar" name="texto-buscar" class="form-control" placeholder="Buscar">
@@ -112,6 +111,7 @@ clase index.blade.php
 					@endif
 
 					@if (Session::get('user') != "")
+					<li><a href="{{ URL::route('chat') }}">Chat</a></li>
 					<li><a href="{{ URL::route('mis-badges') }}">Mis Badges</a></li>
 					<li><a href="{{ URL::route('mis-cursos') }}">Mis Cursos</a></li>
 					<li class="dropdown">
