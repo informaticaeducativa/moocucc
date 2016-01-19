@@ -131,7 +131,7 @@ clase index.blade.php
 
 
 
-		if("Kinestesico" == track)
+		if("Kinestésico" == track)
 		{
 			$("#btn_kinestesico").attr("class","btn btn-block btn-info");
 			$("#btn_visual").attr("class","btn btn-block btn-primary");
@@ -151,7 +151,7 @@ clase index.blade.php
 			$("#div_visual").show();
 		}
 
-		if("Linguistico" == track)
+		if("Lingüístico" == track)
 		{
 			$("#btn_kinestesico").attr("class","btn btn-block btn-info");
 			$("#btn_auditivo").attr("class","btn btn-block btn-primary");
