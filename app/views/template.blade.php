@@ -114,6 +114,13 @@
 		</nav>
 	</header>
 
+	<div class="container" style="position:relative; top:-30px;">
+		<!--
+			<center><h1>@yield('title_div', 'MOOC UCC')</h1></center>
+		-->
+		<!-- Extended content here -->
+		@yield('contenido', '')
+
 	</div>
 
 	<!-- bootstrap - js -->
