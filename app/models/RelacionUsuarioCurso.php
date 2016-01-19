@@ -73,6 +73,7 @@ class RelacionUsuarioCurso extends Eloquent implements UserInterface, Remindable
   }
 
   public function getUsuario()
+  // Ésta función Retorna el usuario cuando se busca por id
   {
     $usuario = Usuario::find($this->id_usuario);
     return $usuario;

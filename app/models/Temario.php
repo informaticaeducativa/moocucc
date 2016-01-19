@@ -22,6 +22,8 @@ class Temario extends Eloquent implements UserInterface, RemindableInterface
   public $timestamps = false;
 
   public function isValid($data)
+  // Función que recibe $data y verifica los datos requeridos
+  // para validar.
   {
     $rules = array(
       'titulo' => 'required',
@@ -68,6 +70,7 @@ class Temario extends Eloquent implements UserInterface, RemindableInterface
 
   public function getProfesores()
   {
+    // Valida que el usuario exista
     if($this->usuario != '')
     {
       $profesor = Usuario::find($this->id_usuario);

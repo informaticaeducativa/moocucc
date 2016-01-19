@@ -66,6 +66,7 @@ class Avance extends Eloquent implements UserInterface, RemindableInterface
   }
 
   public function getUsuario()
+  // Ésta función Retorna el usuario cuando se busca por id
   {
     $usuario = Usuario::find($this->id_usuario);
     return $usuario;

@@ -20,6 +20,8 @@ class Calificacion extends Eloquent implements UserInterface, RemindableInterfac
   public $timestamps = false;
 
   public function isValid($data)
+  // Función que recibe $data y verifica los datos requeridos
+  // para validar.
   {
     $rules = array(
       'id_usuario' => 'required|numeric',
@@ -73,6 +75,7 @@ class Calificacion extends Eloquent implements UserInterface, RemindableInterfac
   }
 
   public function getUsuario()
+  // Ésta función Retorna el usuario cuando se busca por id
   {
     $usuario = Usuario::find($this->id_usuario);
     return $usuario;
