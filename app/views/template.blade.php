@@ -14,17 +14,6 @@
 	<script src="{{URL::to('js/tinymce/tinymce.min.js')}}"></script>
 	<script>tinymce.init({ language : "es_MX", selector:'textarea'});</script>
 	<!-- js -->
-	<script>
-    $(document).ready(function() {
-      var sideslider = $('[data-toggle=collapse-side]');
-      var sel = sideslider.attr('data-target');
-      var sel2 = sideslider.attr('data-target-2');
-      sideslider.click(function(event){
-        $(sel).toggleClass('in');
-        $(sel2).toggleClass('out');
-      });
-		});
-	</script>
 
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -131,6 +120,18 @@
 	<script src= "http://code.jquery.com/jquery-2.2.0.min.js" ></script>
 	<script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<!-- bootstrap - js -->
+
+	<script>
+    $(document).ready(function() {
+      var sideslider = $('[data-toggle=collapse-side]');
+      var sel = sideslider.attr('data-target');
+      var sel2 = sideslider.attr('data-target-2');
+      sideslider.click(function(event){
+        $(sel).toggleClass('in');
+        $(sel2).toggleClass('out');
+      });
+		});
+	</script>
 
 </body>
 
