@@ -229,7 +229,7 @@ Ahora le decimos que actualice:
 
 Lo siguiente es agregar un script para permitir el inicio automático de supervisord y sus servicios cuando se reinicie el SO.
 
-`sudo nano /etc/init.d/supervisor`http://serverfault.com/questions/96499/how-to-automatically-start-supervisord-on-linux-ubuntu
+`sudo nano /etc/init.d/supervisor`
 
 Y agregamos la información incluída en el siguiente gist:
 
