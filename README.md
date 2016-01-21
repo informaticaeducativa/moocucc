@@ -193,7 +193,8 @@ command=/usr/local/bin/run_queue.sh
 autostart=true
 autorestart=true
 stderr_logfile=/var/log/laraqueue.err.log
-stdout_logfile=/var/log/laraqueue.out.log```
+stdout_logfile=/var/log/laraqueue.out.log
+```
 
 Damos permisos de ejecución:
 
@@ -209,7 +210,10 @@ Agregamos lo siguiente:
 #!/bin/bash
 php /home/dev/mooc_ucc/artisan chat:serve
 ```
+
 El anterior archivo abre una terminar en bash y ejecuta mediante php el comando mencionado anteriormente para la ejecución del servicio del chat en la aplicación del MOOC.
+
+Instruciones tomadas de [Github-Gist](https://gist.github.com/roadev/164d907d8ba2663b56d8)
 
 Iniciamos el servicio de supervisor con:
 
@@ -225,10 +229,28 @@ Ahora le decimos que actualice:
 
 Lo siguiente es agregar un script para permitir el inicio automático de supervisord y sus servicios cuando se reinicie el SO.
 
-`sudo nano /etc/init.d/supervisor`
+`sudo nano /etc/init.d/supervisor`http://serverfault.com/questions/96499/how-to-automatically-start-supervisord-on-linux-ubuntu
 
 Y agregamos la información incluída en el siguiente gist:
 
 [Supervisord script](https://gist.github.com/howthebodyworks/176149)
 
+Guardamos y damos permisos de ejecución al script:
+
+`sudo chmod +x /etc/init.d/supervisord`
+
+Para programar el daemon:
+`sudo update-rc.d supervisord defaults`
+
+Por último detenemos e iniciamos el servicio nuevamente:
+
+
+`service supervisord stop`
+
+`service supervisord start`
+
+Si por algún motivo el chat no inicia tras reiniciar el SO, verificar las instrucciones adicionales en el enlace de referencia:
+
 Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/how-to-automatically-start-supervisord-on-linux-ubuntu)
+
+**Con esto ya tendremos corriendo siempre el servicio del chat**
