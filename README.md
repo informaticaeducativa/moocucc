@@ -168,3 +168,67 @@ Por último, la carpeta `views` contiene nuestras vistas, los cuáles son archiv
 El archivo `index.blade.php` contiene el código del front-end de la vista index (o vista principal) del **MOOC**.
 
 En el archivo `routes.php` encontraremos las rutas de las vistas con sus correspondientes verbos `HTTP`: `GET`, `POST`, etc.
+
+
+### 4. Configurar servicio del chat
+
+Para el correcto funcionamiento del chat se debe correr un servicio por medio de `artisan` el cuál está basado en [ember.js](http://emberjs.com/) y que además, debe estar corriendo siempre en el servidor, de lo contrario la funcionalidad del chat sería interrumpida. Para lograr esto debemos utilizar un paquete o librería que nos permita correr el servicio perpetuamente y que se inicie aún cuando el servidor sea reiniciado también. Para ello utilizaremos el paquete [supervisor](http://supervisord.org/) para [Debian Jessie](https://www.debian.org/releases/stable/)
+
+El comando es:
+
+`php artisan chat:serve`
+
+**Procedemos con la instalación de [supervisor](http://supervisord.org/):**
+
+`sudo apt-get install supervisor`
+
+Ahora creamos un archivo de configuración para el `supervisord`
+
+`sudo nano /etc/supervisor/conf.d/laravel_queue.conf`
+
+Y agregamos la siguiente configuración:
+
+```[program:laravel_queue]
+command=/usr/local/bin/run_queue.sh
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/laraqueue.err.log
+stdout_logfile=/var/log/laraqueue.out.log```
+
+Damos permisos de ejecución:
+
+`sudo chmod +x /etc/supervisor/conf.d/laravel_queue.conf`
+
+Ahora creamos el archivo `run_queue.sh` y lo editamos
+
+`sudo nano /usr/local/bin/run_queue.sh`
+
+Agregamos lo siguiente:
+
+```
+#!/bin/bash
+php /home/dev/mooc_ucc/artisan chat:serve
+```
+El anterior archivo abre una terminar en bash y ejecuta mediante php el comando mencionado anteriormente para la ejecución del servicio del chat en la aplicación del MOOC.
+
+Iniciamos el servicio de supervisor con:
+
+`sudo service supervisord start`
+
+Ahora le decimos a supervisor que lea el archivo de configuración que agregamos:
+
+`sudo supervisorctl reread`
+
+Ahora le decimos que actualice:
+
+`sudo supervisorctl update`
+
+Lo siguiente es agregar un script para permitir el inicio automático de supervisord y sus servicios cuando se reinicie el SO.
+
+`sudo nano /etc/init.d/supervisor`
+
+Y agregamos la información incluída en el siguiente gist:
+
+[Supervisord script](https://gist.github.com/howthebodyworks/176149)
+
+Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/how-to-automatically-start-supervisord-on-linux-ubuntu)
