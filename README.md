@@ -240,6 +240,7 @@ Guardamos y damos permisos de ejecución al script:
 `sudo chmod +x /etc/init.d/supervisord`
 
 Para programar el daemon:
+
 `sudo update-rc.d supervisord defaults`
 
 Por último detenemos e iniciamos el servicio nuevamente:
