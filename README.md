@@ -1,7 +1,18 @@
 # Educación Informativa UCC
 
 Hecho en:
-Laravel 4.2
+
+**Laravel 4.2**
+
+**Servidor de desarrollo:** Droplet [DigitalOcean](https://m.do.co/c/aba501793a55)
+
+**Características del server:** 1 CPU, 1 Gb RAM, 30 Gb SSD
+
+**OS:** Debian 8.2 (Jessie/Stable)
+
+**Servidor web:** nginx
+
+**Ubicación:** New York - US
 
 ## Instrucciones de Instalación
 
@@ -254,4 +265,4 @@ Si por algún motivo el chat no inicia tras reiniciar el SO, verificar las instr
 
 Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/how-to-automatically-start-supervisord-on-linux-ubuntu)
 
-**Con esto ya tendremos corriendo siempre el servicio del chat**
+**Con esto ya tendremos corriendo siempre el servicio del chat.**
