@@ -16,13 +16,13 @@
 //
 Route::get('/', function()
 {
-/*
+
 	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzalez');
-	//Session::put('inteligencia', 'Kinestesico');
+	Session::put('inteligencia', 'Kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
 	Session::put('titulo', 'E');
-*/
+
 
 	$cursos = Curso::all();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', '');
@@ -194,12 +194,13 @@ Route::get('validar-quiz',  function()
 		}
 	}
 	if($nota >= 70)
-	{
+	{ //ERROR DETECTADO
 		$count0 = Avance::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $evaluacion->id_curso)->where('semana','=', $evaluacion->semana)->where('tipo','=', 'evaluacion')->count();
 		if($count0 == 0){
 			$count = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $evaluacion->id_curso)->count();
 			$count2 = Evaluacion::where('id_curso', '=', $evaluacion->id_curso)->where('semana','<=', $evaluacion->semana)->where('semana','>', 0)->count();
 			$count3 = Evaluacion::where('id_curso', '=', $evaluacion->id_curso)->where('semana','>', 0)->count();
+			//EXCEPCION DE PORCENTAJE
 			if($count3 == 0)
 			{
 				$porcentaje = 0;
@@ -416,7 +417,8 @@ Route::get('prueba-inteligencias', array('as' => 'prueba-inteligencias', functio
 	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->count() == 0)
 		return Redirect::to('index');
 
-	$evaluacion = Evaluacion::find(2);
+		//$evaluacion = Evaluacion::find(2);
+		$evaluacion = Evaluacion::find(0);
     return View::make('Estudiante/pruebainteligencia')->with('evaluacion', $evaluacion);
 }));
 
