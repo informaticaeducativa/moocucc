@@ -16,13 +16,13 @@
 //
 Route::get('/', function()
 {
-
+/*
 	Session::put('user_id', '3');
 	Session::put('user', 'Mark Gonzalez');
 	Session::put('inteligencia', '');
 	Session::put('tipo_usuario', 'Estudiante');
 	Session::put('titulo', 'E');
-
+*/
 
 	$cursos = Curso::where('id_curso', '<>', '0')->get();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', '');
