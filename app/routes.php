@@ -17,21 +17,21 @@
 Route::get('/', function()
 {
 
-	Session::put('user_id', '1');
+	Session::put('user_id', '3');
 	Session::put('user', 'Mark Gonzalez');
-	Session::put('inteligencia', 'Kinestesico');
+	Session::put('inteligencia', '');
 	Session::put('tipo_usuario', 'Estudiante');
 	Session::put('titulo', 'E');
 
 
-	$cursos = Curso::all();
+	$cursos = Curso::where('id_curso', '<>', '0')->get();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', '');
 });
 
 
 Route::get('index',  array('as' => 'index',function()
 {
-	$cursos = Curso::all();
+	$cursos = Curso::where('id_curso', '<>', '0')->get();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', '');
 }));
 
@@ -232,7 +232,7 @@ Route::get('validar-inteligencia',  function()
 
 	$preguntas = $data['preguntas'];
 	$respuestas = $data['respuestas'];
-	$evaluacion = Evaluacion::find(2);
+	$evaluacion = Evaluacion::find(0);
 	$postData = $evaluacion->getPreguntasQuiz();
 	$contador=0;
 	$kinestesico=0;
@@ -546,7 +546,7 @@ Route::get('administrador', array('as' => 'administrador', function()
 	if(Session::get('user_id') == "" || Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
 
-	$cursos = Curso::all();
+	$cursos = Curso::where('id_curso', '<>', '0')->get();
     return View::make('Administrador/index')->with('cursos', $cursos);
 }));
 
@@ -555,7 +555,7 @@ Route::get('administrador/estadisticas', array('as' => 'administrador-estadistic
 	if(Session::get('user_id') == ""  || Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
 
-	$cursos = Curso::all();
+		$cursos = Curso::where('id_curso', '<>', '0')->get();
     return View::make('Administrador/estadisticas')->with('cursos', $cursos);
 }));
 
