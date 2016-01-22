@@ -5,17 +5,17 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class PreguntaLeccion extends Eloquent implements UserInterface, RemindableInterface 
+class PreguntaLeccion extends Eloquent implements UserInterface, RemindableInterface
 {
- 
+
  	use UserTrait, RemindableTrait;
 
 	public $errors;
     protected $primaryKey = 'id_pregunta';
 
- 
+
  	protected $table = 'pregunta_leccion';
- 	 	
+
  	protected $fillable = array('id_pregunta', 'id_usuario', 'id_leccion', 'pregunta', 'fecha_creacion', 'relacion');
 
 	//protected $hidden = array('password', 'remember_token');
@@ -29,20 +29,20 @@ class PreguntaLeccion extends Eloquent implements UserInterface, RemindableInter
             'pregunta' => 'required',
             'fecha_creacion' => 'required'
         );
-        
+
         $validator = Validator::make($data, $rules);
-        
+
         if ($validator->passes())
         {
             return true;
         }
-        
+
         $this->errors = $validator->errors();
-        
+
         return false;
 
     }
-    
+
     public function validAndSave($data)
     {
         // Revisamos si la data es válida
@@ -52,24 +52,24 @@ class PreguntaLeccion extends Eloquent implements UserInterface, RemindableInter
             $this->fill($data);
             // Guardamos el usuario
             $this->save();
-            
+
             return true;
         }
-        
+
         return false;
     }
-    
+
     public function getUsuario()
+    // Ésta función Retorna el usuario cuando se busca por id
     {
 		$usuario = Usuario::find($this->id_usuario);
 		return $usuario;
 	}
-    
+
     public function getPreguntasRelacionadas()
     {
 		$preguntas = PreguntaLeccion::where('relacion','=', $this->id_pregunta)->orderBy('fecha_creacion','ASC')->get();
 		return $preguntas;
 	}
-    
-}
 
+}

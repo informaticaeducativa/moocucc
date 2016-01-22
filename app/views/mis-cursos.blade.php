@@ -13,8 +13,6 @@ clase index.blade.php
 	<link href="{{URL::to('css/estilo.css')}}" rel="stylesheet">
 
 	<!-- js -->
-	<script src= "https://code.jquery.com/jquery.js" ></script>
-	<script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script>
 	$(function() {
 
@@ -54,12 +52,12 @@ clase index.blade.php
 
 	</script>
 	<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-71691218-1', 'auto');
-	ga('send', 'pageview');
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-71691218-1', 'auto');
+		ga('send', 'pageview');
 	</script>
 </head>
 <!--Header Start Here-->
@@ -272,112 +270,118 @@ clase index.blade.php
   </div>
 </div>
 
+	<!-- bootstrap - js -->
+	<script src= "http://code.jquery.com/jquery-2.2.0.min.js" ></script>
+	<script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<!-- bootstrap - js -->
+
+	@if (Session::get('titulo') == '' && Session::get('user_id') != '')
+	<script  type="text/javascript">
+		$('#myModal').modal();
+
+		jQuery.ajax({
+			url: 'listar-ciudades',
+	   		success: function (result) {
+				console.log('mensaje: '+result);
+				$('#comboboxCiudad').html('');
+				for (var i = 0; i < result.length; i++) {
+					$('#comboboxCiudad').append("<option value='"+result[i].id_ciudad+"'>"+result[i].nombre+"</option>");
+				}
+			},
+			async: true
+		});
+
+		jQuery.ajax({
+			url: 'listar-paises',
+	   		success: function (result) {
+				console.log('mensaje: '+result);
+				$('#comboboxPais').html('');
+				for (var i = 0; i < result.length; i++) {
+					$('#comboboxPais').append("<option value='"+result[i].id_pais+"'>"+result[i].nombre+"</option>");
+				}
+			},
+			async: true
+		});
+
+		jQuery.ajax({
+			url: 'listar-universidades',
+	   		success: function (result) {
+				console.log('mensaje: '+result);
+				$('#comboboxUniversidad').html('');
+				for (var i = 0; i < result.length; i++) {
+					$('#comboboxUniversidad').append("<option value='"+result[i].id_universidad+"'>"+result[i].nombre+"</option>");
+				}
+			},
+			async: true
+		});
+
+		$("#submitciudad").click(function(){
+			if($('#nombre-ciudad').val() != ''){
+				jQuery.ajax({
+					url: 'agregar-ciudad',
+					data: {nombre : $('#nombre-ciudad').val()},
+					success: function (result) {
+						$('#comboboxCiudad').html('');
+						for (var i = 0; i < result.length; i++) {
+							$('#comboboxCiudad').append("<option value='"+result[i].id_ciudad+"'>"+result[i].nombre+"</option>");
+						}
+						$('#nombre-ciudad').val('');
+					},
+					async: true
+				});
+			}
+	    });
+
+	    $("#submitpais").click(function(){
+			if($('#nombre-pais').val() != ''){
+				jQuery.ajax({
+					url: 'agregar-pais',
+					data: {nombre : $('#nombre-pais').val()},
+					success: function (result) {
+						$('#comboboxPais').html('');
+						for (var i = 0; i < result.length; i++) {
+							$('#comboboxPais').append("<option value='"+result[i].id_pais+"'>"+result[i].nombre+"</option>");
+						}
+						$('#nombre-pais').val('');
+					},
+					async: true
+				});
+			}
+	    });
+
+	    $("#submituniversidad").click(function(){
+			if($('#nombre-universidad').val() != ''){
+				jQuery.ajax({
+					url: 'agregar-universidad',
+					data: {nombre : $('#nombre-universidad').val()},
+					success: function (result) {
+						$('#comboboxUniversidad').html('');
+						for (var i = 0; i < result.length; i++) {
+							$('#comboboxUniversidad').append("<option value='"+result[i].id_universidad+"'>"+result[i].nombre+"</option>");
+						}
+						$('#nombre-universidad').val('');
+					},
+					async: true
+				});
+			}
+	    });
+
+	        $("#submitdatos").click(function(){
+			if($('#input-titulo').val() != ''){
+				jQuery.ajax({
+					url: 'agregar-datos',
+					data: {titulo : $('#input-titulo').val(), ciudad : $("#comboboxCiudad").val(), pais : $("#comboboxPais").val(), universidad :$('#comboboxUniversidad').val()  },
+					success: function (result) {
+						$('#myModal').modal('hide');
+					},
+					async: true
+				});
+			}
+	    });
+
+	</script>
+	@endif
+
 </body>
-@if (Session::get('titulo') == '' && Session::get('user_id') != '')
-<script  type="text/javascript">
-	$('#myModal').modal();
-
-	jQuery.ajax({
-		url: 'listar-ciudades',
-   		success: function (result) {
-			console.log('mensaje: '+result);
-			$('#comboboxCiudad').html('');
-			for (var i = 0; i < result.length; i++) {
-				$('#comboboxCiudad').append("<option value='"+result[i].id_ciudad+"'>"+result[i].nombre+"</option>");
-			}
-		},
-		async: true
-	});
-
-	jQuery.ajax({
-		url: 'listar-paises',
-   		success: function (result) {
-			console.log('mensaje: '+result);
-			$('#comboboxPais').html('');
-			for (var i = 0; i < result.length; i++) {
-				$('#comboboxPais').append("<option value='"+result[i].id_pais+"'>"+result[i].nombre+"</option>");
-			}
-		},
-		async: true
-	});
-
-	jQuery.ajax({
-		url: 'listar-universidades',
-   		success: function (result) {
-			console.log('mensaje: '+result);
-			$('#comboboxUniversidad').html('');
-			for (var i = 0; i < result.length; i++) {
-				$('#comboboxUniversidad').append("<option value='"+result[i].id_universidad+"'>"+result[i].nombre+"</option>");
-			}
-		},
-		async: true
-	});
-
-	$("#submitciudad").click(function(){
-		if($('#nombre-ciudad').val() != ''){
-			jQuery.ajax({
-				url: 'agregar-ciudad',
-				data: {nombre : $('#nombre-ciudad').val()},
-				success: function (result) {
-					$('#comboboxCiudad').html('');
-					for (var i = 0; i < result.length; i++) {
-						$('#comboboxCiudad').append("<option value='"+result[i].id_ciudad+"'>"+result[i].nombre+"</option>");
-					}
-					$('#nombre-ciudad').val('');
-				},
-				async: true
-			});
-		}
-    });
-
-    $("#submitpais").click(function(){
-		if($('#nombre-pais').val() != ''){
-			jQuery.ajax({
-				url: 'agregar-pais',
-				data: {nombre : $('#nombre-pais').val()},
-				success: function (result) {
-					$('#comboboxPais').html('');
-					for (var i = 0; i < result.length; i++) {
-						$('#comboboxPais').append("<option value='"+result[i].id_pais+"'>"+result[i].nombre+"</option>");
-					}
-					$('#nombre-pais').val('');
-				},
-				async: true
-			});
-		}
-    });
-
-    $("#submituniversidad").click(function(){
-		if($('#nombre-universidad').val() != ''){
-			jQuery.ajax({
-				url: 'agregar-universidad',
-				data: {nombre : $('#nombre-universidad').val()},
-				success: function (result) {
-					$('#comboboxUniversidad').html('');
-					for (var i = 0; i < result.length; i++) {
-						$('#comboboxUniversidad').append("<option value='"+result[i].id_universidad+"'>"+result[i].nombre+"</option>");
-					}
-					$('#nombre-universidad').val('');
-				},
-				async: true
-			});
-		}
-    });
-
-        $("#submitdatos").click(function(){
-		if($('#input-titulo').val() != ''){
-			jQuery.ajax({
-				url: 'agregar-datos',
-				data: {titulo : $('#input-titulo').val(), ciudad : $("#comboboxCiudad").val(), pais : $("#comboboxPais").val(), universidad :$('#comboboxUniversidad').val()  },
-				success: function (result) {
-					$('#myModal').modal('hide');
-				},
-				async: true
-			});
-		}
-    });
-
-</script>
-@endif
 
 </html>

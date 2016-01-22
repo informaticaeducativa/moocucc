@@ -243,16 +243,16 @@ Route::get('validar-inteligencia',  function()
 	$intrapersonal=0;
 	$interpersonal=0;
 	$maximo = 0;
-	$ganador = "Kinestesico";
+	$ganador = "Kinestésico";
 
 	foreach ($postData as $pregunta)
 	{
-		if($pregunta["respuesta"] === "Kinestesico")
+		if($pregunta["respuesta"] === "Kinestésico")
 		{
 			$kinestesico += $respuestas[$contador];
 			if($kinestesico>$maximo){
 				$maximo = $kinestesico;
-				$ganador = "Kinestesico";
+				$ganador = "Kinestésico";
 			}
 		}
 		else if($pregunta["respuesta"] === "Visual")
@@ -263,12 +263,12 @@ Route::get('validar-inteligencia',  function()
 				$ganador = "Visual";
 			}
 		}
-		else if($pregunta["respuesta"] === "Linguistico")
+		else if($pregunta["respuesta"] === "Lingüístico")
 		{
 			$linguistico += $respuestas[$contador];
 			if($linguistico>$maximo){
 				$maximo = $linguistico;
-				$ganador = "Linguistico";
+				$ganador = "Lingüístico";
 			}
 		}
 		else if($pregunta["respuesta"] === "Musical")
@@ -279,12 +279,12 @@ Route::get('validar-inteligencia',  function()
 				$ganador = "Musical";
 			}
 		}
-		else if($pregunta["respuesta"] === "Logico")
+		else if($pregunta["respuesta"] === "Lógico")
 		{
 			$logico += $respuestas[$contador];
 			if($logico>$maximo){
 				$maximo = $logico;
-				$ganador = "Logico";
+				$ganador = "Lógico";
 			}
 		}
 		else if($pregunta["respuesta"] === "Interpersonal")
@@ -306,19 +306,19 @@ Route::get('validar-inteligencia',  function()
 		$contador++;
 	}
 
-	$respuesta = "Ganador: ".$ganador." Puntaje: ".$maximo;
+	$respuesta = "\nTu tipo de inteligencia es:\n".$ganador;
 
 	$usuario = (Session::get('user_id'));
 
 	if($kinestesico == $maximo || $musical == $maximo ){
-		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Kinestesico'));
-		Session::put('inteligencia', 'Kinestesico');
+		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Kinestésico'));
+		Session::put('inteligencia', 'Kinestésico');
 	}else if($visual == $maximo || $logico == $maximo ){
 		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Visual'));
 		Session::put('inteligencia', 'Visual');
 	}else{
-		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Linguistico'));
-		Session::put('inteligencia', 'Linguistico');
+		Usuario::where('id', '=', $usuario)->update(array('tipo_inteligencia' => 'Lingüístico'));
+		Session::put('inteligencia', 'Lingüístico');
 	}
 	return $respuesta;
 

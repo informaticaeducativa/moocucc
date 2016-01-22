@@ -38,9 +38,9 @@
 
 		<table width="100%">
 			<tr>
-				<th width="33%"><button class="btn btn-block btn-info" id="btn_kinestesico">Kinestesico</button></th>
+				<th width="33%"><button class="btn btn-block btn-info" id="btn_kinestesico">Kinestésico</button></th>
 				<th width="33%"><button class="btn btn-block btn-primary" id="btn_visual">Visual</button></th>
-				<th width="33%"><button class="btn btn-block btn-primary" id="btn_auditivo">Linguistico</button></th>
+				<th width="33%"><button class="btn btn-block btn-primary" id="btn_auditivo">Lingüístico</button></th>
 			</tr>
 		</table>
 		<h6 class="strong">{{ $curso->nombre }}</h6>
@@ -71,12 +71,12 @@
 							<th width="15%"><img class="imagen_redonda_reducida" src="{{ $pregunta->getUsuario()->foto }}" ></th>
 							@else
 							<th width="15%"><img class="imagen_redonda_reducida" src="../../../imagenes/fotos/{{ $pregunta->getUsuario()->foto  }} " ></th>
-							@endif							
-							
+							@endif
+
 							<th colspan="2">
 								<span class=strong>{{ $pregunta->getUsuario()->nombre." ".$pregunta->getUsuario()->apellido }}</span><br>
 								{{ $pregunta->pregunta }}<br>
-								<h6>{{$pregunta->fecha_creacion}}</h6>									
+								<h6>{{$pregunta->fecha_creacion}}</h6>
 							</th>
 						</tr>
 						@if (count($pregunta->getPreguntasRelacionadas()) == 0)
@@ -105,12 +105,12 @@
 							<th width="15%"><img class="imagen_redonda_reducida" src="{{ $pregunta2->getUsuario()->foto }}" ></th>
 							@else
 							<th width="15%"><img class="imagen_redonda_reducida" src="../../../imagenes/fotos/{{ $pregunta2->getUsuario()->foto  }} " ></th>
-							@endif							
-							
+							@endif
+
 							<th>
 								<span class=strong>{{ $pregunta2->getUsuario()->nombre." ".$pregunta2->getUsuario()->apellido }}</span><br>
 								{{ $pregunta2->pregunta }}<br>
-								<h6>{{$pregunta2->fecha_creacion}}</h6>									
+								<h6>{{$pregunta2->fecha_creacion}}</h6>
 							</th>
 						</tr>
 						@endforeach
@@ -131,7 +131,7 @@
 							</th>
 						</tr>
 						@endif
-														
+
 
 						<br>
 					@endforeach
