@@ -49,6 +49,11 @@
 			{{ $porcentaje }}% completado
 		  </div>
 		</div>
+
+		@if ($cantidad == 0)
+		<h2 class="text-center">No hay contenido agregado en este curso</h2>
+		@endif
+
 		@if ($valor = (1 == 1))
 		@endif
 		@foreach ($curso->getTemariosSemana() as $temario)

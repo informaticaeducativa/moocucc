@@ -18,6 +18,7 @@ Route::get('/', function()
 {
 /*
 	Session::put('user_id', '20');
+	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzalez');
 	Session::put('inteligencia', 'kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
@@ -484,7 +485,7 @@ Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', func
 		$porcentaje = intval($count*100/$count3);
 	}
 	$curso = Curso::find($id);
-    return View::make('Estudiante/contenido')->with('curso', $curso)->with('porcentaje', $porcentaje);
+    return View::make('Estudiante/contenido')->with('curso', $curso)->with('porcentaje', $porcentaje)->with('cantidad', $count3);
 }))->where('id', '[0-9]+');
 
 Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($id)
@@ -506,7 +507,7 @@ Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($
 	}
 
 	$curso = Curso::find($id);
-    return View::make('Estudiante/tareas')->with('curso', $curso)->with('porcentaje', $porcentaje);
+    return View::make('Estudiante/tareas')->with('curso', $curso)->with('porcentaje', $porcentaje)->with('cantidad', $count3);
 }))->where('id', '[0-9]+');
 
 Route::get('ver-curso/{id}/clase/{id2}', array('as' => 'ver-clase', function($id, $id2)
