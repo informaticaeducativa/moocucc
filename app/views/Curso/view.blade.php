@@ -23,12 +23,12 @@
       <center>
         <br>
         <h4>{{ $curso->getFechaInicio() }}</h4>
-        
+
         @if($inscrito == 1)
         <a href="{{ URL::route('ver-curso-info', $curso->id_curso) }}">
 	        <button type="button" class="btn btn-primary btn-lg btn-block">Seguir al Curso</button>
 		</a>
-		@else 
+		@else
 	        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">Inscribirse al Curso</button>
         @endif
       </center>
@@ -55,7 +55,12 @@
     <div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
       <center>
         <h4 class="strong">{{ $profe->tipo_relacion }}</h4>
-        <img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br>
+
+        @if(substr( $profe->getProfesor()->foto , 0, 4) == 'http')
+    		<img class="imagen_redonda" src="{{ $profe->getProfesor()->foto }}" ><br/>
+    		@else
+    		<img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br/>
+    		@endif
 
         <p class=strong>
           {{ $profe->getProfesor()->nombre." ".$profe->getProfesor()->apellido }}

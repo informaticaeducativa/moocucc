@@ -1,9 +1,9 @@
 <?php
 
-class CursoController extends BaseController 
+class CursoController extends BaseController
 {
-      
-     
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,9 +14,9 @@ class CursoController extends BaseController
 		$cursos = Curso::all();
 		return View::make('Curso/lista')->with('cursos', $cursos);
    	}
-   	
-   	
-   	
+
+
+
    	public function lista()
    	{
 		$cursos = Curso::all();
@@ -33,7 +33,7 @@ class CursoController extends BaseController
 	{
 		if(Session::get('user_id') == '' || Session::get('tipo_usuario') != "Administrador")
 			return Redirect::to('index');
-			
+
 		$curso = new Curso;
 		$tematicas = Tematica::lists('nombre','id_tematica');
 		return View::make('Curso/form')->with('curso', $curso)->with('tematicas', $tematicas);
@@ -51,15 +51,15 @@ class CursoController extends BaseController
 		$curso = new Curso;
 		// Obtenemos la data enviada por el materia
 		$data = Input::all();
-				
+
 		// Revisamos si la data es válido
 		if ($curso->isValid($data))
 		{
 
 				$file = Input::file('imagen_presentacion');
 				$file->move('imagenes', $file->getClientOriginalName());
-				
-				$data['imagen_presentacion'] = 	$file->getClientOriginalName();			
+
+				$data['imagen_presentacion'] = 	$file->getClientOriginalName();
 
 			// Si la data es valida se la asignamos al materia
 			$curso->fill($data);
@@ -73,7 +73,7 @@ class CursoController extends BaseController
 			// En caso de error regresa a la acción create con los datos y los errores encontrados
 			return Redirect::route('curso.create')->withInput()->withErrors($curso->errors);
 		}
-				
+
 	}
 
 
@@ -85,13 +85,15 @@ class CursoController extends BaseController
 	 */
 	public function show($id)
 	{
-		if(Session::get('user_id') == "")
-			$usuario = new Usuario;
-		else
-			$usuario = Usuario::find(Session::get('user_id'));
-
+		if(Session::get('user_id') == ""){
+      $usuario = new Usuario;
+      $count = 0;
+    }
+		else{
+      $usuario = Usuario::find(Session::get('user_id'));
+      $count = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario->id)->where('id_curso', '=', $id)->count();
+    }
 		$curso = Curso::find($id);
-		$count = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario->id)->where('id_curso', '=', $id)->count();
 		return View::make('Curso/view')->with('curso', $curso)->with('inscrito', $count);
 	}
 
@@ -109,10 +111,10 @@ class CursoController extends BaseController
 		{
 		App::abort(404);
 		}
-		
+
 		$form_data = array('route' => array('curso.update', $curso->id_curso), 'method' => 'PATCH');
         $action    = 'Editar';
-        
+
    		$tematicas = Tematica::lists('nombre','id_tematica');
         return View::make('Curso/form', compact('curso', 'form_data', 'action'))->with('tematicas', $tematicas);
 	}
@@ -156,4 +158,3 @@ class CursoController extends BaseController
 
 
 }
-

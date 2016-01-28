@@ -17,7 +17,7 @@
 Route::get('/', function()
 {
 /*
-	Session::put('user_id', '1');
+	Session::put('user_id', '20');
 	Session::put('user', 'Mark Gonzalez');
 	Session::put('inteligencia', 'kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
