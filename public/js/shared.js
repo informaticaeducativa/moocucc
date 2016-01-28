@@ -12,8 +12,7 @@ App.Message = DS.Model.extend({
     "user_id"       : DS.attr("integer"),
     "user_name"     : DS.attr("string"),
     "user_id_class" : DS.attr("string"),
-    "message"       : DS.attr("string"),
-    "user_room"     : DS.attr("string")
+    "message"       : DS.attr("string")
 });
 
 App.Store = DS.Store.extend({
@@ -51,6 +50,8 @@ App.IndexRoute = Ember.Route.extend({
 
 App.IndexController = Ember.ArrayController.extend({
 
+
+
     "command" : null,
 
     "actions" : {
@@ -72,6 +73,13 @@ App.IndexController = Ember.ArrayController.extend({
 
             } else {
 
+              if($("#data-task").val() != ''){
+                  socket.send(JSON.stringify({
+                      "type" : "name",
+                      "data" : $("#data-task").val()
+                  }));
+                $("#data-task").val('');
+              }
                 socket.send(JSON.stringify({
                     "type" : "message",
                     "data" : command
@@ -122,41 +130,36 @@ try {
 
             if (data.user.name == null)
             {
-                socket.send(JSON.stringify({
-                    "type" : "name",
-                    "data" : $("#data-task").val()
-                }));
                 $(".name-" + data.user.id).html(data.user.name);
-                data.user.name = $("#data-task").val();
-
             }
 
+            else{
 
-            switch (data.message.type) {
+              switch (data.message.type) {
 
-                case "name":
+                  case "name":
 
-                    $(".name-" + data.user.id).html(data.user.name);
+                      $(".name-" + data.user.id).html(data.user.name);
 
-                    break;
+                      break;
 
-                case "message":
+                  case "message":
 
+                      store.push("message", {
+                          "id"            : id++,
+                          "user_id"       : data.user.id,
+                          "user_name"     : data.user.name+" dice:" || "User dice:",
+                          "user_id_class" : "name-" + data.user.id,
+                          "message"       : data.message.data,
+                          "user_room"     : $("#data-room").val(),
+                      });
 
-                //$(".name-" + data.user.id).html($("#data-task").val());
+                      break;
 
-                    store.push("message", {
-                        "id"            : id++,
-                        "user_id"       : data.user.id,
-                        "user_name"     : data.user.name+" dice:" || "User dice:",
-                        "user_id_class" : "name-" + data.user.id,
-                        "message"       : data.message.data,
-                        "user_room"     : $("#data-room").val(),
-                    });
+                }
 
-                    break;
+             }//fin else
 
-            }
 
         });
 

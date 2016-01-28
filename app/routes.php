@@ -19,20 +19,22 @@ Route::get('/', function()
 /*
 	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzalez');
-	//Session::put('inteligencia', 'Kinestesico');
+	Session::put('inteligencia', 'kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
 	Session::put('titulo', 'E');
 */
 
-	$cursos = Curso::all();
+	$cursos = Curso::where('id_curso', '<>', '0')->get();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', '');
 });
 
 
 Route::get('index',  array('as' => 'index',function()
 {
-	$cursos = Curso::all();
+
+	$cursos = Curso::where('id_curso', '<>', '0')->get();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', '');
+
 }));
 
 Route::post('index',  array('as' => 'index',function()
@@ -194,12 +196,13 @@ Route::get('validar-quiz',  function()
 		}
 	}
 	if($nota >= 70)
-	{
+	{ //ERROR DETECTADO
 		$count0 = Avance::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $evaluacion->id_curso)->where('semana','=', $evaluacion->semana)->where('tipo','=', 'evaluacion')->count();
 		if($count0 == 0){
 			$count = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $evaluacion->id_curso)->count();
 			$count2 = Evaluacion::where('id_curso', '=', $evaluacion->id_curso)->where('semana','<=', $evaluacion->semana)->where('semana','>', 0)->count();
 			$count3 = Evaluacion::where('id_curso', '=', $evaluacion->id_curso)->where('semana','>', 0)->count();
+			//EXCEPCION DE PORCENTAJE
 			if($count3 == 0)
 			{
 				$porcentaje = 0;
@@ -231,7 +234,7 @@ Route::get('validar-inteligencia',  function()
 
 	$preguntas = $data['preguntas'];
 	$respuestas = $data['respuestas'];
-	$evaluacion = Evaluacion::find(2);
+	$evaluacion = Evaluacion::find(0);
 	$postData = $evaluacion->getPreguntasQuiz();
 	$contador=0;
 	$kinestesico=0;
@@ -416,7 +419,8 @@ Route::get('prueba-inteligencias', array('as' => 'prueba-inteligencias', functio
 	if(Session::get('tipo_usuario') != "Administrador" && RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->count() == 0)
 		return Redirect::to('index');
 
-	$evaluacion = Evaluacion::find(2);
+		//$evaluacion = Evaluacion::find(2);
+		$evaluacion = Evaluacion::find(0);
     return View::make('Estudiante/pruebainteligencia')->with('evaluacion', $evaluacion);
 }));
 
@@ -544,7 +548,7 @@ Route::get('administrador', array('as' => 'administrador', function()
 	if(Session::get('user_id') == "" || Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
 
-	$cursos = Curso::all();
+	$cursos = Curso::where('id_curso', '<>', '0')->get();
     return View::make('Administrador/index')->with('cursos', $cursos);
 }));
 
@@ -553,7 +557,7 @@ Route::get('administrador/estadisticas', array('as' => 'administrador-estadistic
 	if(Session::get('user_id') == ""  || Session::get('tipo_usuario') != "Administrador")
 		return Redirect::to('index');
 
-	$cursos = Curso::all();
+		$cursos = Curso::where('id_curso', '<>', '0')->get();
     return View::make('Administrador/estadisticas')->with('cursos', $cursos);
 }));
 
