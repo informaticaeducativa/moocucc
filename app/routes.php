@@ -21,7 +21,7 @@ Route::get('/', function()
 	Session::put('user', 'Mark Gonzalez');
 	Session::put('inteligencia', 'kinestesico');
 	Session::put('tipo_usuario', 'Estudiante');
-	Session::put('titulo', 'E');
+	Session::put('titulo', 'Estudiante');
 */
 
 	$cursos = Curso::where('id_curso', '<>', '0')->get();
@@ -77,7 +77,10 @@ Route::get('agregar-ciudad', function()
 {
 	$data = Input::all();
 	$ciudad = $data['nombre'];
-	DB::table('ciudad')->insert(array('nombre' => $ciudad));
+	$ciudad = strtoupper( substr($ciudad, 0,1) ).strtolower( substr($ciudad, 1, strlen($ciudad)-1) );
+	if( DB::table('ciudad')->where('nombre', $ciudad)->count() == 0 ){
+			DB::table('ciudad')->insert(array('nombre' => $ciudad));
+	}
 	$ciudades = DB::table('ciudad')->get();
 	return Response::json(($ciudades));
 });
@@ -85,7 +88,10 @@ Route::get('agregar-pais', function()
 {
 	$data = Input::all();
 	$pais = $data['nombre'];
-	DB::table('pais')->insert(array('nombre' => $pais));
+	$pais = strtoupper( substr($pais, 0,1) ).strtolower( substr($pais, 1, strlen($pais)-1) );
+	if( DB::table('pais')->where('nombre', $pais)->count() == 0 ){
+			DB::table('pais')->insert(array('nombre' => $pais));
+	}
 	$paises = DB::table('pais')->get();
 	return Response::json(($paises));
 });
@@ -93,7 +99,10 @@ Route::get('agregar-universidad', function()
 {
 	$data = Input::all();
 	$universidad = $data['nombre'];
-	DB::table('universidad')->insert(array('nombre' => $universidad));
+	$universidad = strtoupper( substr($universidad, 0,1) ).strtolower( substr($universidad, 1, strlen($universidad)-1) );
+	if( DB::table('universidad')->where('nombre', $universidad)->count() == 0 ){
+			DB::table('universidad')->insert(array('nombre' => $universidad));
+	}
 	$universidades = DB::table('universidad')->get();
 	return Response::json(($universidades));
 });
