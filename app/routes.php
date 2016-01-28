@@ -21,7 +21,7 @@ Route::get('/', function()
 	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzalez');
 	Session::put('inteligencia', 'kinestesico');
-	Session::put('tipo_usuario', 'Estudiante');
+	Session::put('tipo_usuario', 'Administrador');
 	Session::put('titulo', 'Estudiante');
 */
 
@@ -62,6 +62,18 @@ Route::get('usuario/{id}', array('as'=>'usuario','uses'=> 'UsuarioController@sho
 //
 //RUTAS DE ELEMENTOS LLAMADOS POR AJAX
 //
+Route::get('existe-mensaje', function()
+{
+		$data = Input::all();
+		$semana = $data['semana'];
+		$curso = $data['curso'];
+
+		$cantidad = DB::table('temario')->where('posicion', $semana)->where('id_curso', $curso)->where('tipo_contenido', 'semana')->count();
+		return Response::json( "".$cantidad );
+
+});
+
+
 Route::get('agregar-datos', function()
 {
 	$data = Input::all();

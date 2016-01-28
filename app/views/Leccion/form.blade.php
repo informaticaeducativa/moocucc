@@ -28,7 +28,7 @@
 <a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Lecciones del Curso</a>
 </br>
 </br>
-
+<h3 id="mensajeerror" style="color:red;"></h3>
 {{ Form::model($leccion, $form_data, array('role' => 'form')) }}
 
   @include ('errors', array('errors' => $errors))
@@ -57,6 +57,38 @@
 
 {{ Form::close() }}
 
+<script src= "http://code.jquery.com/jquery-2.2.0.min.js" ></script>
+<script>
+$(function() {
 
+  jQuery.ajax({
+    url: '../../../existe-mensaje',
+    data: { semana: 1, curso: $("[name=id_curso]").val() },
+    success: function (result) {
+
+      if(result == "0"){ $('#mensajeerror').text("Para poder visualizar el curso en la semana 1 debe agregar el mensaje semanal");  }
+      else { $('#mensajeerror').text("");      }
+    },
+    async: false
+  });
+
+  $('#semana').on('change', function(){
+      console.log("cambio: "+$(this).val()+" "+$("[name=id_curso]").val());
+
+      jQuery.ajax({
+        url: '../../../existe-mensaje',
+        data: { semana: $(this).val(), curso: $("[name=id_curso]").val() },
+        success: function (result) {
+
+          if(result == "0"){ $('#mensajeerror').text("Para poder visualizar el curso en la semana "+$("#semana").val()+" debe agregar el mensaje semanal primero");  }
+          else { $('#mensajeerror').text("");      }
+        },
+        async: false
+      });
+
+  });
+
+});
+</script>
 
 @stop
