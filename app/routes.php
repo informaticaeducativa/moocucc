@@ -498,7 +498,12 @@ Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($
 	$count = Calificacion::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
 	$count3 = Evaluacion::where('id_curso', '=', $id)->where('semana','>', 0)->count();
 
-	$porcentaje = intval($count*100/$count3);
+	if($count3 >0){
+		$porcentaje = intval($count*100/$count3);
+	}
+	else {
+		$porcentaje = 0;
+	}
 
 	$curso = Curso::find($id);
     return View::make('Estudiante/tareas')->with('curso', $curso)->with('porcentaje', $porcentaje);
@@ -523,7 +528,14 @@ Route::get('ver-curso/{id}/clase/{id2}', array('as' => 'ver-clase', function($id
 			$count = Registro::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->count();
 			$count2 = Leccion::where('id_curso', '=', $id)->where('semana','<=', $leccion->semana)->where('semana','>', 0)->count();
 			$count3 = Leccion::where('id_curso', '=', $id)->where('semana','>', 0)->count();
-			$porcentaje = intval($count*100/$count3);
+
+			if($count3 >0){
+					$porcentaje = intval($count*100/$count3);
+			}
+			else {
+					$porcentaje = 0;
+			}
+
 			if($count == $count2)
 			{
 				DB::table('avance')->insert(	array('id_usuario' => Session::get('user_id'), 'id_curso' => $id, 'semana' => $leccion->semana, 'tipo' => 'clases', 'porcentaje'=>$porcentaje ,'fecha' => date('Y-m-d H:i:s') ) );
