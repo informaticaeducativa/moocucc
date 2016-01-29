@@ -1,9 +1,9 @@
 <?php
 
-class PreguntaController extends BaseController 
+class PreguntaController extends BaseController
 {
-      
-     
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,9 +14,9 @@ class PreguntaController extends BaseController
 		$preguntas = Pregunta::all();
 		return View::make('Pregunta/lista')->with('preguntas', $preguntas);
    	}
-   	
-   	
-   	
+
+
+
    	public function lista()
    	{
 		$preguntas = Pregunta::all();
@@ -33,11 +33,11 @@ class PreguntaController extends BaseController
 	{
 		if(Session::get('user_id') == '')
 			return Redirect::to('index');
-			
+
 		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
 		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 			return Redirect::to('index');
-			
+
 		$pregunta = new Pregunta;
 		$evaluacion = Evaluacion::find($id);
 		return View::make('Pregunta/form')->with('pregunta', $pregunta)->with('evaluacion', $evaluacion);
@@ -55,7 +55,7 @@ class PreguntaController extends BaseController
 		$pregunta = new Pregunta;
 		// Obtenemos la data enviada por el materia
 		$data = Input::all();
-				
+
 		// Revisamos si la data es válido
 		if ($pregunta->isValid($data))
 		{
@@ -72,7 +72,7 @@ class PreguntaController extends BaseController
 			// En caso de error regresa a la acción create con los datos y los errores encontrados
 			//return Redirect::route('pregunta.create')->withInput()->withErrors($pregunta->errors);
 		}
-				
+
 	}
 
 
@@ -102,12 +102,12 @@ class PreguntaController extends BaseController
 		{
 		App::abort(404);
 		}
-		
+		$evaluacion = Evaluacion::find($pregunta->id_evaluacion);
 		$form_data = array('route' => array('pregunta.update', $pregunta->id_pregunta), 'method' => 'PATCH');
         $action    = 'Editar';
-        
+
    		$tematicas = Tematica::lists('nombre','id_tematica');
-        return View::make('Pregunta/form', compact('pregunta', 'form_data', 'action'))->with('tematicas', $tematicas);
+        return View::make('Pregunta/form', compact('pregunta', 'form_data', 'action'))->with('tematicas', $tematicas)->with('evaluacion', $evaluacion);
 	}
 
 
@@ -126,7 +126,7 @@ class PreguntaController extends BaseController
         if ($pregunta->validAndSave($data))
         {
             // Y Devolvemos una redirección a la acción show para mostrar el materia
-            return Redirect::route('pregunta.show', array($pregunta->id_pregunta));
+            return Redirect::route('pregunta.edit', array($pregunta->id_pregunta));
         }
         else
         {
@@ -149,4 +149,3 @@ class PreguntaController extends BaseController
 
 
 }
-

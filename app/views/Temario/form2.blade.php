@@ -14,7 +14,7 @@
 
 @section ('title_div') {{ $action }} Temario @stop
 
-@section ('contenido') 
+@section ('contenido')
 <br><br>
 <a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger">Regresar</a>
 
@@ -45,9 +45,9 @@
   {{ Form::hidden('titulo', 'xxxxxxxxxxx') }}
 
   {{ Form::button($action . ' temario', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
-  
+
 {{ Form::close() }}
 
 
 
-@stop  
+@stop

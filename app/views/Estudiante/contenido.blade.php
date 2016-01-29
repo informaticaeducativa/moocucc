@@ -57,7 +57,10 @@
 		@if ($valor = (1 == 1))
 		@endif
 		@foreach ($curso->getTemariosSemana() as $temario)
-			<h2>Semana {{$temario->posicion }}</h2>
+			<h2>Semana {{$temario->posicion }}
+									@if($editable)
+											{{ HTML::linkRoute('editar-temario-semanal', 'Editar Mensaje', array($temario->id_temario), array('class' => 'btn btn-primary btn-xs')) }}
+									@endif</h2>
 			{{$temario->contenido }}<br/><br/>
 			@foreach ($curso->getLecciones($temario->posicion) as $leccion)
 				@if($valor)
@@ -68,7 +71,14 @@
 						@if ($leccion->getRegistro($curso->id_curso))
 							<img src="{{URL::to('imagenes/chulo.png')}}" width="20px">
 						@endif
+						@if($editable)
+								{{ HTML::linkRoute('editar-leccion', 'Editar Leccion', array($leccion->id_leccion), array('class' => 'btn btn-primary btn-xs')) }}
+						@endif
 					</div>
+
+
+
+
 				@if($valor)
 				</a>
 				@endif

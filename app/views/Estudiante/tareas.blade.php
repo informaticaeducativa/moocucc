@@ -67,6 +67,9 @@
 							@endif
 							{{ $evaluacion->getCalificacion() }}
 						@endif
+						@if($editable)
+								{{ HTML::linkRoute('editar-evaluacion', 'Editar Tarea', array($evaluacion->id_evaluacion), array('class' => 'btn btn-primary btn-xs')) }}
+						@endif
 					</div>
 				@if($eval)
 				</a>

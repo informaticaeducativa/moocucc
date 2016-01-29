@@ -40,8 +40,12 @@
 		<center><h1> Ver Curso {{$curso->nombre}} </h1></center>
 		@foreach ($curso->getTemarios() as $temario)
 		<div class="espaciado">
-			<h3 class="strong">{{ $temario->titulo }}</h3>
+			<h3 class="strong">{{ $temario->titulo }}
+				@if($editable)
+					{{ HTML::linkRoute('editar-temario-info-curso', 'Editar Mensaje', array($temario->id_temario), array('class' => 'btn btn-primary btn-xs')) }}
+			@endif</h3>
 			{{ $temario->contenido }}
+
 		</div>
 		@endforeach
 
@@ -66,13 +70,13 @@
 		<div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
 			<center>
 				<h4 class="strong">{{ $profe->tipo_relacion }}</h4>
-				
+
 				@if(substr( $profe->getProfesor()->foto , 0, 4) == 'http')
 				<img class="imagen_redonda" src="{{ $profe->getProfesor()->foto }}" ><br>
 				@else
 				<img class="imagen_redonda" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " ><br>
 				@endif
-				
+
 				<span class="strong">{{ $profe->getProfesor()->nombre." ".$profe->getProfesor()->apellido }}</span><br>
 				{{ $profe->getProfesor()->titulo }}<br><br>
 			</center>

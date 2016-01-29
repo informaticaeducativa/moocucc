@@ -1,9 +1,9 @@
 <?php
 
-class LeccionController extends BaseController 
+class LeccionController extends BaseController
 {
-      
-     
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,9 +14,9 @@ class LeccionController extends BaseController
 		$lecciones = Leccion::all();
 		return View::make('Leccion/lista')->with('lecciones', $lecciones);
    	}
-   	
-   	
-   	
+
+
+
    	public function lista()
    	{
 		$lecciones = Leccion::all();
@@ -33,11 +33,11 @@ class LeccionController extends BaseController
 	{
 		if(Session::get('user_id') == '')
 			return Redirect::to('index');
-			
+
 		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
 		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 			return Redirect::to('index');
-		
+
 		$leccion = new Leccion;
 		$curso = Curso::find($id);
 		return View::make('Leccion/form')->with('leccion', $leccion)->with('curso', $curso);
@@ -55,7 +55,7 @@ class LeccionController extends BaseController
 		$leccion = new Leccion;
 		// Obtenemos la data enviada por el materia
 		$data = Input::all();
-				
+
 		// Revisamos si la data es válido
 		if ($leccion->isValid($data))
 		{
@@ -74,7 +74,7 @@ class LeccionController extends BaseController
 			//return Redirect::route('leccion.index');
 			//return Redirect::route('leccion.create', array($data['id_curso']))->withInput()->withErrors($leccion->errors);
 		}
-				
+
 	}
 
 
@@ -104,12 +104,12 @@ class LeccionController extends BaseController
 		{
 		App::abort(404);
 		}
-		
+		$curso = Curso::find($id);
 		$form_data = array('route' => array('leccion.update', $leccion->id_leccion), 'method' => 'PATCH');
         $action    = 'Editar';
-        
+
    		$tematicas = Tematica::lists('nombre','id_tematica');
-        return View::make('Leccion/form', compact('leccion', 'form_data', 'action'))->with('tematicas', $tematicas);
+        return View::make('Leccion/form', compact('leccion', 'form_data', 'action'))->with('tematicas', $tematicas)->with('curso', $curso);
 	}
 
 
@@ -123,12 +123,12 @@ class LeccionController extends BaseController
 	{
 		   $leccion = Leccion::find($id);
 			$data = Input::all();
-
 		 // Revisamos si la data es válida y guardamos en ese caso
         if ($leccion->validAndSave($data))
         {
             // Y Devolvemos una redirección a la acción show para mostrar el materia
-            return Redirect::route('leccion.show', array($leccion->id_leccion));
+            $curso = Curso::find($leccion->id_leccion);
+            return Redirect::route('leccion.edit', array($leccion->id_leccion))->with('curso', $curso);
         }
         else
         {
@@ -151,4 +151,3 @@ class LeccionController extends BaseController
 
 
 }
-

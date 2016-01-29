@@ -7,7 +7,7 @@
         $action    = 'Editar';
     else:
         $form_data = array('route' => 'pregunta.store', 'method' => 'POST');
-        $action    = 'Crear';        
+        $action    = 'Crear';
     endif;
 
 ?>
@@ -16,8 +16,8 @@
 
 @section ('title_div') {{ $action }} Pregunta @stop
 
-@section ('contenido') 
- 
+@section ('contenido')
+
 </br>
 </br>
 <a href="{{ URL::route('crear-curso-7', $evaluacion->getIdCurso() ) }}" class="btn btn-danger" >Regresar</a>
@@ -70,30 +70,34 @@
   </div>
   {{ Form::hidden('id_evaluacion', $evaluacion->id_evaluacion) }}
   {{ Form::hidden('tipo', 'multiple') }}
-  
-  {{ Form::button($action . ' pregunta', array('type' => 'submit', 'class' => 'btn btn-primary')) }}    
-  
+
+  {{ Form::button($action . ' pregunta', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+
 {{ Form::close() }}
 
+
+<script src= "http://code.jquery.com/jquery-2.2.0.min.js" ></script>
 <script>
- $("#opcion_multiple" ).change(function() 
+
+ $("#opcion_multiple" ).change(function()
   {
 	  if( $("#opcion_multiple" ).val() == 'no'){
-		 $("#opcion_a").val("x");	
-		 $("#opcion_b").val("x");	
-		 $("#opcion_c").val("x");	
-		 $("#opcion_d").val("x");	
-		 $("#row_opciones").hide();	
+		 $("#opcion_a").val("x");
+		 $("#opcion_b").val("x");
+		 $("#opcion_c").val("x");
+		 $("#opcion_d").val("x");
+		 $("#row_opciones").hide();
 	  }
 	  else
 	  {
-		 $("#opcion_a").val("");	
-		 $("#opcion_b").val("");	
-		 $("#opcion_c").val("");	
-		 $("#opcion_d").val("");	
+		 $("#opcion_a").val("");
+		 $("#opcion_b").val("");
+		 $("#opcion_c").val("");
+		 $("#opcion_d").val("");
 		 $("#row_opciones").show();
 	  }
   });
+
 </script>
 
-@stop  
+@stop

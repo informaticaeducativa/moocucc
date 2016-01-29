@@ -1,9 +1,9 @@
 <?php
 
-class EvaluacionController extends BaseController 
+class EvaluacionController extends BaseController
 {
-      
-     
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,9 +14,9 @@ class EvaluacionController extends BaseController
 		$evaluaciones = Evaluacion::all();
 		return View::make('Evaluacion/lista')->with('evaluaciones', $evaluaciones);
    	}
-   	
-   	
-   	
+
+
+
    	public function lista()
    	{
 		$evaluaciones = Evaluacion::all();
@@ -33,11 +33,11 @@ class EvaluacionController extends BaseController
 	{
 		if(Session::get('user_id') == '')
 			return Redirect::to('index');
-			
+
 		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
 		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 			return Redirect::to('index');
-		
+
 		$evaluacion = new Evaluacion;
 
 		$curso = Curso::find($id);
@@ -56,7 +56,7 @@ class EvaluacionController extends BaseController
 		$evaluacion = new Evaluacion;
 		// Obtenemos la data enviada por el materia
 		$data = Input::all();
-				
+
 		// Revisamos si la data es válido
 		if ($evaluacion->isValid($data))
 		{
@@ -74,7 +74,7 @@ class EvaluacionController extends BaseController
 			// En caso de error regresa a la acción create con los datos y los errores encontrados
 			//return Redirect::route('evaluacion.create')->withInput()->withErrors($evaluacion->errors);
 		}
-				
+
 	}
 
 
@@ -104,12 +104,12 @@ class EvaluacionController extends BaseController
 		{
 		App::abort(404);
 		}
-		
+		$curso = Curso::find($evaluacion->id_curso);
 		$form_data = array('route' => array('evaluacion.update', $evaluacion->id_evaluacion), 'method' => 'PATCH');
         $action    = 'Editar';
-        
+
    		$tematicas = Tematica::lists('nombre','id_tematica');
-        return View::make('Evaluacion/form', compact('evaluacion', 'form_data', 'action'))->with('tematicas', $tematicas);
+        return View::make('Evaluacion/form', compact('evaluacion', 'form_data', 'action'))->with('tematicas', $tematicas)->with('curso', $curso);
 	}
 
 
@@ -128,7 +128,7 @@ class EvaluacionController extends BaseController
         if ($evaluacion->validAndSave($data))
         {
             // Y Devolvemos una redirección a la acción show para mostrar el materia
-            return Redirect::route('evaluacion.show', array($evaluacion->id_evaluacion));
+            return Redirect::route('evaluacion.edit', array($evaluacion->id_evaluacion));
         }
         else
         {
@@ -151,4 +151,3 @@ class EvaluacionController extends BaseController
 
 
 }
-

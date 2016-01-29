@@ -16,14 +16,14 @@
 //
 Route::get('/', function()
 {
-/*
+
 	Session::put('user_id', '20');
 	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzalez');
 	Session::put('inteligencia', 'kinestesico');
 	Session::put('tipo_usuario', 'Administrador');
 	Session::put('titulo', 'Estudiante');
-*/
+
 
 	$cursos = Curso::where('id_curso', '<>', '0')->get();
 	return View::make('index')->with('cursos', $cursos)->with('palabra', '');
@@ -430,7 +430,12 @@ Route::get('ver-curso/{id}', array('as' => 'ver-curso', function($id)
 		return Redirect::to('index');
 
 	$curso = Curso::find($id);
-    return View::make('Estudiante/ver-curso')->with('curso', $curso);
+
+	$editable = false;
+	if(Session::get('tipo_usuario') == "Administrador" || RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->where('estado', '=', 'activo' )->where('tipo_relacion','=','Profesor Admin')->count() > 0)
+		$editable = true;
+
+    return View::make('Estudiante/ver-curso')->with('curso', $curso)->with('editable', $editable);
 }))->where('id', '[0-9]+');
 
 Route::get('prueba-inteligencias', array('as' => 'prueba-inteligencias', function()
@@ -474,7 +479,12 @@ Route::get('ver-curso-info/{id}', array('as' => 'ver-curso-info', function($id)
 		return Redirect::to('prueba-inteligencias');
 
 	$curso = Curso::find($id);
-    return View::make('Estudiante/info')->with('curso', $curso);
+
+
+	$editable = false;
+	if(Session::get('tipo_usuario') == "Administrador" || RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->where('estado', '=', 'activo' )->where('tipo_relacion','=','Profesor Admin')->count() > 0)
+		$editable = true;
+    return View::make('Estudiante/info')->with('curso', $curso)->with('editable', $editable);
 }))->where('id', '[0-9]+');
 
 Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', function($id)
@@ -497,7 +507,13 @@ Route::get('ver-curso-contenido/{id}', array('as' => 'ver-curso-contenido', func
 		$porcentaje = intval($count*100/$count3);
 	}
 	$curso = Curso::find($id);
-    return View::make('Estudiante/contenido')->with('curso', $curso)->with('porcentaje', $porcentaje)->with('cantidad', $count3);
+
+
+	$editable = false;
+	if(Session::get('tipo_usuario') == "Administrador" || RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->where('estado', '=', 'activo' )->where('tipo_relacion','=','Profesor Admin')->count() > 0)
+		$editable = true;
+
+    return View::make('Estudiante/contenido')->with('curso', $curso)->with('porcentaje', $porcentaje)->with('cantidad', $count3)->with('editable', $editable);
 }))->where('id', '[0-9]+');
 
 Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($id)
@@ -519,7 +535,12 @@ Route::get('ver-curso-tareas/{id}', array('as' => 'ver-curso-tareas', function($
 	}
 
 	$curso = Curso::find($id);
-    return View::make('Estudiante/tareas')->with('curso', $curso)->with('porcentaje', $porcentaje)->with('cantidad', $count3);
+
+		$editable = false;
+		if(Session::get('tipo_usuario') == "Administrador" || RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->where('estado', '=', 'activo' )->where('tipo_relacion','=','Profesor Admin')->count() > 0)
+			$editable = true;
+
+    return View::make('Estudiante/tareas')->with('curso', $curso)->with('porcentaje', $porcentaje)->with('cantidad', $count3)->with('editable', $editable);
 }))->where('id', '[0-9]+');
 
 Route::get('ver-curso/{id}/clase/{id2}', array('as' => 'ver-clase', function($id, $id2)
@@ -569,7 +590,12 @@ Route::get('ver-curso/{id}/tarea/{id2}', array('as' => 'ver-tarea', function($id
 		$badge = Badge::find($id);
 		$curso = Curso::find($id);
 		$evaluacion = Evaluacion::find($id2);
-    return View::make('Estudiante/evaluacion')->with('curso', $curso)->with('evaluacion', $evaluacion)->with('badge',$badge);
+
+		$editable = false;
+		if(Session::get('tipo_usuario') == "Administrador" || RelacionUsuarioCurso::where('id_usuario','=',Session::get('user_id'))->where('id_curso','=',$id)->where('estado', '=', 'activo' )->where('tipo_relacion','=','Profesor Admin')->count() > 0)
+			$editable = true;
+
+    return View::make('Estudiante/evaluacion')->with('curso', $curso)->with('evaluacion', $evaluacion)->with('badge',$badge)->with('editable', $editable);
 
 }))->where('id', '[0-9]+')->where('id2', '[0-9]+');
 
@@ -751,6 +777,13 @@ Route::resource('leccion', 'LeccionController');
 Route::resource('pregunta', 'PreguntaController');
 Route::resource('pregunta_leccion', 'PreguntaLeccionController');
 Route::resource('temario', 'TemarioController');
+
+Route::get('temario/{id}/edit1b', array('uses' => 'TemarioController@edit1b', 'as' => 'editar-temario-inicio'));
+Route::get('temario/{id}/edit2', array('uses' => 'TemarioController@edit2', 'as' => 'editar-temario-semanal'));
+Route::get('temario/{id}/edit', array('uses' => 'TemarioController@edit', 'as' => 'editar-temario-info-curso'));
+Route::get('leccion/{id}/edit', array('uses' => 'LeccionController@edit', 'as' => 'editar-leccion'));
+Route::get('evaluacion/{id}/edit', array('uses' => 'EvaluacionController@edit', 'as' => 'editar-evaluacion'));
+Route::get('pregunta/{id}/edit', array('uses' => 'PreguntaController@edit', 'as' => 'editar-pregunta'));
 
 //
 // RUTAS DEL Chat

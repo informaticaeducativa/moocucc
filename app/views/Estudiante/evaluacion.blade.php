@@ -41,7 +41,12 @@
 			<h6 class="strong">Calificable: {{ $evaluacion->calificable }}</h6>
 
 			@foreach ($evaluacion->getPreguntas() as $pregunta)
+
 			<div class="col-md-12 col-sm-12 col-xs-12 espaciado ">
+				@if($editable)
+						{{ HTML::linkRoute('editar-pregunta', 'Editar pregunta', array($pregunta->id_pregunta), array('class' => 'btn btn-primary btn-xs')) }}<br>
+				@endif
+
 				{{ '('.$contador.') '.$pregunta->nombre }}
 			@if ( $pregunta->opcion_multiple == 'si')
 				<br/>

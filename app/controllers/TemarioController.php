@@ -1,9 +1,9 @@
 <?php
 
-class TemarioController extends BaseController 
+class TemarioController extends BaseController
 {
-      
-     
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,9 +14,9 @@ class TemarioController extends BaseController
 		$temarios = Temario::all();
 		return View::make('Temario/lista')->with('temarios', $temarios);
    	}
-   	
-   	
-   	
+
+
+
    	public function lista()
    	{
 		$temarios = Temario::all();
@@ -33,43 +33,43 @@ class TemarioController extends BaseController
 	{
 		if(Session::get('user_id') == '')
 			return Redirect::to('index');
-			
+
 		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
 		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 			return Redirect::to('index');
-		
+
 		$temario = new Temario;
 		$curso = Curso::find($id);
 		$temarios = $curso->getTemarios();
 		return View::make('Temario/form')->with('temario', $temario)->with('temarios', $temarios)->with('curso', $curso);
 	}
-		
+
 	public function create1b($id)
 	{
 		if(Session::get('user_id') == '')
 			return Redirect::to('index');
-			
+
 		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
 		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 			return Redirect::to('index');
-		
+
 		$temario = new Temario;
 		$curso = Curso::find($id);
 		$temarios = $curso->getTemarios();
 		$temarios2 = $curso->getTemariosInicio();
 		return View::make('Temario/form1b')->with('temario', $temario)->with('temarios', $temarios)->with('temarios2', $temarios2)->with('curso', $curso);
 	}
-	
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
 	public function create2($id)
-	{	
+	{
 		if(Session::get('user_id') == '')
 			return Redirect::to('index');
-			
+
 		$relaciones = RelacionUsuarioCurso::where('id_usuario', '=', Session::get('user_id'))->where('id_curso', '=', $id)->where('tipo_relacion', '=', 'Profesor Admin')->get();
 		if(count($relaciones) == 0 && Session::get('tipo_usuario') != "Administrador")
 			return Redirect::to('index');
@@ -110,11 +110,11 @@ class TemarioController extends BaseController
 		else
 		{
 			// En caso de error regresa a la acción create con los datos y los errores encontrados
-			
+
 			return Redirect::route('index');
 			//return Redirect::route('temario.create')->withInput()->withErrors($temario->errors);
 		}
-				
+
 	}
 
 
@@ -145,14 +145,40 @@ class TemarioController extends BaseController
 		{
 		App::abort(404);
 		}
-
+		$curso = Curso::find($temario->id_curso);
 		$form_data = array('route' => array('temario.update', $temario->id_temario), 'method' => 'PATCH');
         $action    = 'Editar';
-        
-        return View::make('Temario/form', compact('temario', 'form_data', 'action'));
+
+        return View::make('Temario/form', compact('temario', 'form_data', 'action'))->with('curso', $curso);
 	}
 
+  public function edit1b($id)
+	{
+		$temario = Temario::find($id);
+		if (is_null ($temario))
+		{
+		App::abort(404);
+		}
+		$curso = Curso::find($temario->id_curso);
+		$form_data = array('route' => array('temario.update1b', $temario->id_temario), 'method' => 'PATCH');
+        $action    = 'Editar';
 
+        return View::make('Temario/form1b', compact('temario', 'form_data', 'action'))->with('curso', $curso);
+	}
+
+  public function edit2($id)
+	{
+		$temario = Temario::find($id);
+		if (is_null ($temario))
+		{
+		App::abort(404);
+		}
+		$curso = Curso::find($temario->id_curso);
+		$form_data = array('route' => array('temario.update2', $temario->id_temario), 'method' => 'PATCH');
+        $action    = 'Editar';
+
+        return View::make('Temario/form2', compact('temario', 'form_data', 'action'))->with('curso', $curso);
+	}
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -168,15 +194,33 @@ class TemarioController extends BaseController
         if ($temario->validAndSave($data))
         {
             // Y Devolvemos una redirección a la acción show para mostrar el materia
-            return Redirect::route('temario.show', array($temario->id_temario));
+            //return Redirect::route('temario.show', array($temario->id_temario));
+            $curso = Curso::find($temario->id_temario);
+            if($temario->tipo_contenido == 'info_curso'){
+                return Redirect::route('temario.edit', $temario->id_temario)->with('curso', $curso);
+            }
+            else if($temario->tipo_contenido == 'inicio'){
+                return Redirect::route('editar-temario-inicio', $temario->id_temario)->with('curso', $curso);
+            }
+            else {
+                return Redirect::route('editar-temario-semanal', $temario->id_temario)->with('curso', $curso);
+            }
+
         }
         else
         {
             // En caso de error regresa a la acción create con los datos y los errores encontrados
-            return Redirect::route('temario.edit', $temario->id_temario)->withInput()->withErrors($temario->errors);
+            if($temario->tipo_contenido == 'info_curso'){
+                return Redirect::route('temario.edit', $id)->withInput()->withErrors($temario->errors);
+            }
+            else if($temario->tipo_contenido == 'inicio'){
+                return Redirect::route('editar-temario-inicio', $id)->withInput()->withErrors($temario->errors);
+            }
+            else {
+                return Redirect::route('editar-temario-semanal', $id)->withInput()->withErrors($temario->errors);
+            }
         }
 	}
-
 
 	/**
 	 * Remove the specified resource from storage.
@@ -191,4 +235,3 @@ class TemarioController extends BaseController
 
 
 }
-

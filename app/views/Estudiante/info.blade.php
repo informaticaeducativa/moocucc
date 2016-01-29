@@ -47,17 +47,20 @@
 						<h3 class="strong">{{ $temario->titulo }}</h3>
 						<center>
 						@foreach ($temario->getProfesores() as $profe)
-							
+
 							@if(substr( $profe->getProfesor()->foto , 0, 4) == 'http')
 							<img class="imagen_redonda_reducida" src="{{ $profe->getProfesor()->foto }}" >
 							@else
 							<img class="imagen_redonda_reducida" src="../imagenes/fotos/{{ $profe->getProfesor()->foto  }} " >
 							@endif
-							
+
 						@endforeach
 						</center>
-						
+
 						{{ $temario->contenido }}
+						@if($editable)
+								{{ HTML::linkRoute('editar-temario-inicio', 'Editar Mensaje', array($temario->id_temario), array('class' => 'btn btn-primary btn-xs')) }}
+						@endif
 						<br/><br/>
 <!--
 					</div>
