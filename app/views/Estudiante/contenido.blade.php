@@ -29,8 +29,8 @@
 					<th colspan="3">{{ HTML::linkRoute('ver-curso', 'Información del Curso', array($curso->id_curso), array()) }}</th>
 				</tr>
 				<tr>
-					<th width="5%"><center><a href="{{ URL::route('desuscribirse', $curso->id_curso) }}"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></center></a></th>
-					<th colspan="3">{{ HTML::linkRoute('desuscribirse', 'Darse de baja del Curso', array($curso->id_curso), array()) }}</th>
+					<th width="5%"><center><a href="#" id="desuscribirx{{$curso->id_curso}}" class="btn_desuscribirse"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></center></a></th>
+					<th colspan="3"> <a href="#" id="desuscribirx{{$curso->id_curso}}" class="btn_desuscribirse">Darse de baja</a> </th>
 				</tr>
 		</table>
 	</div>

@@ -189,6 +189,26 @@ clase index.blade.php
 		});
 
 
+		$(".btn_desuscribirse").click(function() {
+			var texto_id = $(this).attr('id');
+			var texto = (texto_id.substr(12,texto_id.length));
+
+			if (confirm('¿Estas seguro de darte de baja en este curso?')){
+				jQuery.ajax({
+					url: '../../../desuscribir',
+					data: {curso: texto },
+					success: function (result) {
+							//alert(result);
+							window.location="{{URL::to('index')}}";
+					},
+					async: true
+				});
+			}
+
+		});
+
+
+
 		$(".btn_res").click(function() {
 			var texto_id = $(this).attr('id');
 			var texto = (texto_id.substr(4,texto_id.length));

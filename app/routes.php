@@ -62,6 +62,15 @@ Route::get('usuario/{id}', array('as'=>'usuario','uses'=> 'UsuarioController@sho
 //
 //RUTAS DE ELEMENTOS LLAMADOS POR AJAX
 //
+Route::get('desuscribir', array('as' => 'desuscribir', function()
+{
+	$data = Input::all();
+	$id = $data['curso'];
+	$usuario = Session::get('user_id');
+	//RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $usuario)->where('id_curso', '=', $id)->update(array('estado' => 'inactivo'));
+	return Response::json( "".$id );
+}));
+
 Route::get('existe-mensaje', function()
 {
 		$data = Input::all();
