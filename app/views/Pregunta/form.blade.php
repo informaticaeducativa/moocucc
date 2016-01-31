@@ -20,7 +20,11 @@
 
 </br>
 </br>
+@if ($action == 'Editar')
+<a href="{{ URL::route('ver-tarea', array( $evaluacion->getIdCurso(), $evaluacion->id_evaluacion )  ) }}" class="btn btn-danger" >Regresar</a>
+@else
 <a href="{{ URL::route('crear-curso-7', $evaluacion->getIdCurso() ) }}" class="btn btn-danger" >Regresar</a>
+@endif
 
 <center>
 	<h1>Crear Pregunta para {{ $evaluacion->nombre  }}</h1>

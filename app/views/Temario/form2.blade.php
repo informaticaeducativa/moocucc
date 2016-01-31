@@ -16,7 +16,12 @@
 
 @section ('contenido')
 <br><br>
-<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger">Regresar</a>
+<br><br>
+@if ($action == 'Editar')
+<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+@else
+<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+@endif
 
 <br>
 <h2>Crear mensaje semanal del curso del curso {{ $curso->nombre }}</h2>

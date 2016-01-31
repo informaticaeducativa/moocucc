@@ -17,7 +17,11 @@
 @section ('contenido')
 
 <br><br>
+@if ($action == 'Editar')
+<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+@else
 <a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+@endif
 
 
 <h2>Crear contenido del curso: {{ $curso->nombre }}</h2>
