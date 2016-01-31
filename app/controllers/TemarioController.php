@@ -96,6 +96,14 @@ class TemarioController extends BaseController
 		// Revisamos si la data es válido
 		if ($temario->isValid($data))
 		{
+			if($data['tipo_contenido']=='semana')
+			{
+					if(Temario::where('tipo_contenido','=','semana')->where('id_curso', '=', $data['id_curso'])->where('posicion','=', $data['posicion'])->count() > 0 )
+					{
+							return Redirect::route('crear-curso-5', array($data['id_curso']));
+					}
+
+			}
 			// Si la data es valida se la asignamos al materia
 			$temario->fill($data);
 			// Guardamos el materia
@@ -190,7 +198,9 @@ class TemarioController extends BaseController
 		   $temario = Temario::find($id);
 			$data = Input::all();
 
-		 // Revisamos si la data es válida y guardamos en ese caso
+
+
+		 		// Revisamos si la data es válida y guardamos en ese caso
         if ($temario->validAndSave($data))
         {
             // Y Devolvemos una redirección a la acción show para mostrar el materia
