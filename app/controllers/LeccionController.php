@@ -104,7 +104,7 @@ class LeccionController extends BaseController
 		{
 		App::abort(404);
 		}
-		$curso = Curso::find($id);
+		$curso = Curso::find($leccion->id_curso);
 		$form_data = array('route' => array('leccion.update', $leccion->id_leccion), 'method' => 'PATCH');
         $action    = 'Editar';
 
