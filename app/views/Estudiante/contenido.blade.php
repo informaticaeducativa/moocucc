@@ -59,7 +59,7 @@
 		@foreach ($curso->getTemariosSemana() as $temario)
 			<h2>Semana {{$temario->posicion }}
 									@if($editable)
-											{{ HTML::linkRoute('editar-temario-semanal', 'Editar Mensaje', array($temario->id_temario), array('class' => 'btn btn-primary btn-xs')) }}
+											{{ HTML::linkRoute('editar-temario-semanal', 'Editar Mensaje del Módulo', array($temario->id_temario), array('class' => 'btn btn-primary btn-xs')) }}
 									@endif</h2>
 			{{$temario->contenido }}<br/><br/>
 			@foreach ($curso->getLecciones($temario->posicion) as $leccion)
