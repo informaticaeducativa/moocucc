@@ -4,14 +4,14 @@
 @section ('title_div') Ver Pregunta de leccion @stop
 
 @section ('boton')
-<p><a href="{{ route('pregunta_leccion.create') }}" class="btn btn-primary">Crear un nuevo pregunta de leccion</a></p>
+<p><a href="{{ route('pregunta_leccion.create') }}" class="btn btn-primary">Crear una nueva pregunta de la lección</a></p>
 @stop
 
 
 
-@section ('contenido') 
+@section ('contenido')
  <br>
- 
+
 <table id="ticket-table" class="table table-sorting">
 	<thead>
 		<tr>
@@ -40,4 +40,3 @@
 </table>
 
 @stop
-

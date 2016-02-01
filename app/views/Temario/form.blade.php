@@ -18,15 +18,15 @@
 
 <br><br>
 @if ($action == 'Editar')
-<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" >Regresar</a>
 @else
-<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-primary" >Regresar</a>
 @endif
 
 
 <h2>Crear contenido del curso: {{ $curso->nombre }}</h2>
 
-<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentación del Curso</a>
+<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-warning" target="_blank">Ver Presentación del Curso</a>
 </br>
 </br>
 
@@ -47,7 +47,7 @@
   {{ Form::hidden('id_curso', $curso->id_curso) }}
   {{ Form::hidden('tipo_contenido', 'info_curso') }}
 
-  {{ Form::button($action . ' temario', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+  {{ Form::button($action . ' temario', array('type' => 'submit', 'class' => 'btn btn-success')) }}
 
 {{ Form::close() }}
 

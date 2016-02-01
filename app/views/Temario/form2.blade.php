@@ -18,15 +18,15 @@
 <br><br>
 <br><br>
 @if ($action == 'Editar')
-<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-primary" >Regresar</a>
 @else
-<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-primary" >Regresar</a>
 @endif
 
 <br>
 <h2>Crear mensaje semanal del curso del curso {{ $curso->nombre }}</h2>
 
-<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver mensajes semanales del Curso</a>
+<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-warning" target="_blank">Ver mensajes semanales del Curso</a>
 </br>
 </br>
 
@@ -49,7 +49,7 @@
   {{ Form::hidden('tipo_contenido', 'semana') }}
   {{ Form::hidden('titulo', 'xxxxxxxxxxx') }}
 
-  {{ Form::button($action . ' temario', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+  {{ Form::button($action . ' temario', array('type' => 'submit', 'class' => 'btn btn-success')) }}
 
 {{ Form::close() }}
 

@@ -20,16 +20,16 @@
 
 </br></br>
 @if ($action == 'Editar')
-<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-primary" >Regresar</a>
 @else
-<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-primary" >Regresar</a>
 @endif
 
 <center>
-	<h1>Crear leccion para {{ $curso->nombre  }}</h1>
+	<h1>Crear lección para {{ $curso->nombre  }}</h1>
 </center>
 
-<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Lecciones del Curso</a>
+<a href="{{ URL::route('ver-curso-contenido', $curso->id_curso ) }}" class="btn btn-warning" target="_blank">Ver Lecciones del Curso</a>
 </br>
 </br>
 <h3 id="mensajeerror" style="color:red;"></h3>
@@ -40,7 +40,7 @@
   <div class="row">
     <div class="form-group col-md-5">
       {{ Form::label('nombre', 'Nombre de la lección') }}
-      {{ Form::text('nombre', null, array('placeholder' => 'Introduce el nombre del leccion', 'class' => 'form-control')) }}
+      {{ Form::text('nombre', null, array('placeholder' => 'Introduce el nombre de la lección', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('semana', 'Semana de publicación del contenido') }}
@@ -57,7 +57,7 @@
   </div>
   {{ Form::hidden('server_contenido_grafico', 'youtube') }}
   {{ Form::hidden('id_curso', $curso->id_curso) }}
-  {{ Form::button($action . ' leccion', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+  {{ Form::button($action . ' leccion', array('type' => 'submit', 'class' => 'btn btn-success')) }}
 
 {{ Form::close() }}
 

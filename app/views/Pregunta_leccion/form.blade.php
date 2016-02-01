@@ -7,7 +7,7 @@
         $action    = 'Editar';
     else:
         $form_data = array('route' => 'pregunta_leccion.store', 'method' => 'POST');
-        $action    = 'Crear';        
+        $action    = 'Crear';
     endif;
 
 ?>
@@ -16,9 +16,9 @@
 
 @section ('title_div') {{ $action }} Pregunta de leccion @stop
 
-@section ('contenido') 
+@section ('contenido')
   <p>
-    <a href="{{ route('pregunta_leccion.index') }}" class="btn btn-info">Lista de Preguntas de leccion</a>
+    <a href="{{ route('pregunta_leccion.index') }}" class="btn btn-info">Lista de Preguntas de la lección</a>
   </p>
 
 <br>
@@ -34,27 +34,27 @@
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('fecha_inicio', 'Fecha de inicio') }}
-      {{ Form::input('date', 'fecha_inicio', null, array('placeholder' => 'Introduce la fecha de inicio del pregunta_leccion', 'class' => 'form-control')) }}        
+      {{ Form::input('date', 'fecha_inicio', null, array('placeholder' => 'Introduce la fecha de inicio del pregunta_leccion', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('imagen_presentacion', 'Imagen del pregunta_leccion') }}
-      {{ Form::file('imagen_presentacion', null, array('placeholder' => 'Introduce la imagen del pregunta_leccion', 'class' => 'form-control')) }}        
+      {{ Form::file('imagen_presentacion', null, array('placeholder' => 'Introduce la imagen del pregunta_leccion', 'class' => 'form-control')) }}
     </div>
      <div class="form-group col-md-5">
       {{ Form::label('comienzo', 'Comienzo del pregunta_leccion') }}
-      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuando comienza el pregunta_leccion', 'class' => 'form-control')) }}        
+      {{ Form::text('comienzo', null, array('placeholder' => 'Introduce cuando comienza el pregunta_leccion', 'class' => 'form-control')) }}
     </div>
 
     <div class="form-group col-md-5">
       {{ Form::label('nivel', 'Nivel del pregunta_leccion') }}
-      {{ Form::select('nivel',  array('Principiante' => 'Principiante', 'Medio' => 'Medio', 'Avanzado'=>'Avanzado'), null, array('class' => 'form-control')) }}        
+      {{ Form::select('nivel',  array('Principiante' => 'Principiante', 'Medio' => 'Medio', 'Avanzado'=>'Avanzado'), null, array('class' => 'form-control')) }}
     </div>
   </div>
-  
-  {{ Form::button($action . ' pregunta_leccion', array('type' => 'submit', 'class' => 'btn btn-primary')) }}    
-  
+
+  {{ Form::button($action . ' pregunta_leccion', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+
 {{ Form::close() }}
 
 
 
-@stop  
+@stop

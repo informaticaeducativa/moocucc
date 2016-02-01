@@ -6,9 +6,9 @@
 @section ('title_div') Lista de Lecciones @stop
 
 
-@section ('contenido') 
+@section ('contenido')
 
-<p><a href="{{ route('leccion.create') }}" class="btn btn-primary">Crear un nuevo leccion</a></p>
+<p><a href="{{ route('leccion.create') }}" class="btn btn-primary">Crear una nueva lección</a></p>
 
 <br>
 <table id="ticket-table" class="table table-sorting">

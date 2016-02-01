@@ -10,7 +10,7 @@
 </br>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 
-	<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-danger" >Regresar</a>
+	<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}" class="btn btn-primary" >Regresar</a>
 
 	<center>
 		<h1>
@@ -18,7 +18,7 @@
 		</h1>
 	</center>
 	</br>
-	<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentación del Curso</a>
+	<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-warning" target="_blank">Ver Presentación del Curso</a>
 	<h3>
 		Profesores Administradores
 	</h3>
@@ -86,7 +86,7 @@
 		{{ Form::hidden('id', $curso->id_curso	) }}
 		{{ Form::text('nombre') }}
 
-		{{ Form::submit('Buscar', array('class'=>'btn btn-primary') ) }}
+		{{ Form::submit('Buscar', array('class'=>'btn btn-success') ) }}
 	{{ Form::close() }}
 
 	<h2>Para Asignar</h2>

@@ -17,12 +17,12 @@
     <br/>
     @if (Session::get('tipo_usuario') == 'Administrador')
     <a href="{{ URL::route('administrador-estadisticas' ) }}" class="btn btn-primary" style="width:100%">Regresar</a><br/><br/>
-    <a href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Ver estadísticas de este curso</a><br/><br/>
-    <a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Editar Curso</a>
+    <a href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}" class="btn btn-success" style="width:100%">Ver estadísticas de este curso</a><br/><br/>
+    <a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-warning" style="width:100%">Editar Curso</a>
 	@else
 	<a href="{{ URL::route('administrador-listar-estadisticas' ) }}" class="btn btn-primary" style="width:100%">Regresar</a><br/><br/>
-	<a href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Ver estadísticas de este curso</a><br/><br/>
-  <a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" style="width:100%">Editar Curso</a>
+	<a href="{{ URL::route('administrador-ver-estadisticas', $curso->id_curso ) }}" class="btn btn-success" style="width:100%">Ver estadísticas de este curso</a><br/><br/>
+  <a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-warning" style="width:100%">Editar Curso</a>
 	@endif
   </div>
   <div class="col-sm-8 col-xs-12 ">

@@ -1,14 +1,14 @@
 @extends ('template')
 
 
-@section ('title') Lista de Preguntas de leccion @stop
+@section ('title') Lista de Preguntas de la lección @stop
 
-@section ('title_div') Lista de Preguntas de leccion @stop
+@section ('title_div') Lista de Preguntas de la lección @stop
 
 
-@section ('contenido') 
+@section ('contenido')
 
-<p><a href="{{ route('pregunta_leccion.create') }}" class="btn btn-primary">Crear un nuevo pregunta de leccion</a></p>
+<p><a href="{{ route('pregunta_leccion.create') }}" class="btn btn-primary">Crear una nueva pregunta de la lección</a></p>
 
 <br>
 <table id="ticket-table" class="table table-sorting">

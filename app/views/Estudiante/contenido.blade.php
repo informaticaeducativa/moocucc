@@ -72,7 +72,7 @@
 							<img src="{{URL::to('imagenes/chulo.png')}}" width="20px">
 						@endif
 						@if($editable)
-								{{ HTML::linkRoute('editar-leccion', 'Editar Leccion', array($leccion->id_leccion), array('class' => 'btn btn-primary btn-xs')) }}
+								{{ HTML::linkRoute('editar-leccion', 'Editar Lección', array($leccion->id_leccion), array('class' => 'btn btn-primary btn-xs')) }}
 						@endif
 					</div>
 

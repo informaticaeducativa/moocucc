@@ -23,7 +23,7 @@
 		</a>
 	</div>
 	<div class="col-md-9 col-sm-9 col-xs-12 div_list2">
-		<h2 class="strong"><center>Escoge un curso para editarlo</center></h2>
+		<h2 class="strong"><center>Escoge un curso para administrarlo</center></h2>
 		<br/>
 		@foreach($cursos as $curso)
 		<a href="{{ URL::route('editar-curso', $curso->id_curso ) }}">

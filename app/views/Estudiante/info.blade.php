@@ -59,7 +59,7 @@
 
 						{{ $temario->contenido }}
 						@if($editable)
-								{{ HTML::linkRoute('editar-temario-inicio', 'Editar Mensaje', array($temario->id_temario), array('class' => 'btn btn-primary btn-xs')) }}
+								{{ HTML::linkRoute('editar-temario-inicio', 'Editar Contenido del módulo', array($temario->id_temario), array('class' => 'btn btn-primary btn-xs')) }}
 						@endif
 						<br/><br/>
 <!--
