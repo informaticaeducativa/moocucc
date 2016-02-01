@@ -21,7 +21,7 @@
 </br>
 </br>
 @if ($action == 'Editar')
-<a href="{{ URL::route('ver-tarea', array( $evaluacion->getIdCurso(), $evaluacion->id_evaluacion )  ) }}" class="btn btn-danger" >Regresar</a>
+<a href="{{ URL::route('ver-tarea', array( $evaluacion->getIdCurso(), $evaluacion->id_evaluacion )  ) }}" class="btn btn-primary" >Regresar</a>
 @else
 <a href="{{ URL::route('crear-curso-7', $evaluacion->getIdCurso() ) }}" class="btn btn-danger" >Regresar</a>
 @endif
@@ -30,7 +30,7 @@
 	<h1>Crear Pregunta para {{ $evaluacion->nombre  }}</h1>
 </center>
 
-<a href="{{ URL::route('ver-tarea', array($evaluacion->getIdCurso(), $evaluacion->id_evaluacion) ) }}" class="btn btn-primary" target="_blank">Ver Presentación del examen</a>
+<a href="{{ URL::route('ver-tarea', array($evaluacion->getIdCurso(), $evaluacion->id_evaluacion) ) }}" class="btn btn-warning" target="_blank">Ver Presentación del examen</a>
 </br></br>
 
 {{ Form::model($pregunta, $form_data, array('role' => 'form')) }}
@@ -43,39 +43,39 @@
       {{ Form::textarea('nombre', null, array('placeholder' => 'Introduce la pregunta', 'class' => 'form-control')) }}
    </div>
    <div class="form-group col-md-5">
-      {{ Form::label('opcion_multiple', 'Pregunta de opcion multiple?') }}
+      {{ Form::label('opcion_multiple', '¿Pregunta de opción múltiple?') }}
       {{ Form::select('opcion_multiple', array('si'=>'Si', 'no'=>'No'), null, array('class' => 'form-control')) }}
     </div>
    </div>
   <div class="row" id="row_opciones">
     <div class="form-group col-md-5">
-      {{ Form::label('opcion_a', 'Opcion A') }}
-      {{ Form::text('opcion_a', null, array('placeholder' => 'Introduce la opcion de respuesta A', 'class' => 'form-control')) }}
+      {{ Form::label('opcion_a', 'Opción A') }}
+      {{ Form::text('opcion_a', null, array('placeholder' => 'Introduce la opción de respuesta A', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('opcion_b', 'Opcion B') }}
-      {{ Form::text('opcion_b', null, array('placeholder' => 'Introduce la opcion de respuesta B', 'class' => 'form-control')) }}
+      {{ Form::label('opcion_b', 'Opción B') }}
+      {{ Form::text('opcion_b', null, array('placeholder' => 'Introduce la opción de respuesta B', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('opcion_c', 'Opcion C') }}
-      {{ Form::text('opcion_c', null, array('placeholder' => 'Introduce la opcion de respuesta C', 'class' => 'form-control')) }}
+      {{ Form::label('opcion_c', 'Opción C') }}
+      {{ Form::text('opcion_c', null, array('placeholder' => 'Introduce la opción de respuesta C', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-5">
-      {{ Form::label('opcion_d', 'Opcion D') }}
-      {{ Form::text('opcion_d', null, array('placeholder' => 'Introduce la opcion de respuesta D', 'class' => 'form-control')) }}
+      {{ Form::label('opcion_d', 'Opción D') }}
+      {{ Form::text('opcion_d', null, array('placeholder' => 'Introduce la opción de respuesta D', 'class' => 'form-control')) }}
     </div>
   </div>
   <div class="row">
    <div class="form-group col-md-5">
       {{ Form::label('respuesta', 'Respuesta a la pregunta') }}
-      {{ Form::text('respuesta', null, array('placeholder' => 'Letra en caso de ser opcion multiple, sino la respuesta como tal', 'class' => 'form-control')) }}
+      {{ Form::text('respuesta', null, array('placeholder' => 'Letra en caso de ser opcion múltiple, sino la respuesta como tal', 'class' => 'form-control')) }}
     </div>
 
   </div>
   {{ Form::hidden('id_evaluacion', $evaluacion->id_evaluacion) }}
   {{ Form::hidden('tipo', 'multiple') }}
 
-  {{ Form::button($action . ' pregunta', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+  {{ Form::button($action . ' pregunta', array('type' => 'submit', 'class' => 'btn btn-success')) }}
 
 {{ Form::close() }}
 
