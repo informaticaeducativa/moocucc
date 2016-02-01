@@ -61,6 +61,7 @@
 			<center><h3>Micro-foro</h3></center>
 			<div id="form-microforo">
 				<textarea rows="3"  class="form-control mensaje" id="mensajex{{$curso->id_curso}}x{{$leccion->id_leccion}}"></textarea>
+				<br/>
 				<button class="btn btn-info" id="btn-microforo">Enviar</button>
 			</div>
 			<div id="microforo">
