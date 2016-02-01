@@ -82,7 +82,13 @@
 
 <script src= "http://code.jquery.com/jquery-2.2.0.min.js" ></script>
 <script>
-
+if( $("#opcion_multiple" ).val() == 'no'){
+ $("#opcion_a").val("x");
+ $("#opcion_b").val("x");
+ $("#opcion_c").val("x");
+ $("#opcion_d").val("x");
+ $("#row_opciones").hide();
+}
  $("#opcion_multiple" ).change(function()
   {
 	  if( $("#opcion_multiple" ).val() == 'no'){
