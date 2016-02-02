@@ -5,17 +5,17 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Evaluacion extends Eloquent implements UserInterface, RemindableInterface 
+class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
 {
- 
+
  	use UserTrait, RemindableTrait;
 
 	public $errors;
     protected $primaryKey = 'id_evaluacion';
 
- 
+
  	protected $table = 'evaluacion';
- 	 	
+
  	protected $fillable = array('id_evaluacion', 'nombre', 'semana', 'id_curso', 'calificable');
 
 	//protected $hidden = array('password', 'remember_token');
@@ -29,20 +29,20 @@ class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
             'id_curso' => 'required|numeric',
             'calificable' => 'required'
         );
-        
+
         $validator = Validator::make($data, $rules);
-        
+
         if ($validator->passes())
         {
             return true;
         }
-        
+
         $this->errors = $validator->errors();
-        
+
         return false;
 
     }
-    
+
     public function validAndSave($data)
     {
         // Revisamos si la data es válida
@@ -52,40 +52,40 @@ class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
             $this->fill($data);
             // Guardamos el usuario
             $this->save();
-            
+
             return true;
         }
-        
+
         return false;
     }
-    
+
     public function getPreguntas() {
 		$preguntas = Pregunta::where('id_evaluacion','=', $this->id_evaluacion)->orderBy('id_pregunta', 'ASC')->get();
 		return $preguntas;
 	}
-	
+
 	public function getPreguntasQuiz() {
 		$preguntas = Pregunta::where('id_evaluacion','=', $this->id_evaluacion)->select('respuesta')->orderBy('id_pregunta', 'ASC')->get();
 		return $preguntas;
 	}
-	
+
 	public function getIdCurso() {
 		$evaluacion = Evaluacion::where('id_evaluacion','=', $this->id_evaluacion)->first();
 		return $evaluacion->id_curso;
 	}
-	
+
 	public function getRealizado($curso){
 		$count = Calificacion::where('id_evaluacion','=', $this->id_evaluacion)->where('id_curso','=', $curso)->where('id_usuario','=', Session::get('user_id'))->count();
 		if($count > 0)
 			return true;
 		return false;
 	}
-	
+
 	public function getCalificacion(){
 		$calificacion = Calificacion::where('id_evaluacion','=', $this->id_evaluacion)->where('id_usuario','=', Session::get('user_id'))->first();
 		return $calificacion->nota.'% - intentos:'.$calificacion->intentos;
 	}
-	
+
 	public function getPresentaEvaluacion($semana)
     {
 		$count = Avance::where('id_curso','=', $this->id_curso)->where('tipo','=', 'clases')->where('semana','=', $semana)->where('id_usuario','=', Session::get('user_id'))->count();
@@ -93,6 +93,22 @@ class Evaluacion extends Eloquent implements UserInterface, RemindableInterface
 			return true;
 		return false;
 	}
-	    
-}
 
+    public function getPromedioNota()
+    {
+        $count = Calificacion::where('id_evaluacion','=', $this->id_evaluacion)->avg('nota');
+        return round($count, 2);
+    }
+
+    public function getPromedioIntentos()
+    {
+        $count = Calificacion::where('id_evaluacion','=', $this->id_evaluacion)->avg('intentos');
+        return round($count, 2);
+    }
+
+    public function getPromedioEstudiantes()
+    {
+        $count = Calificacion::where('id_evaluacion','=', $this->id_evaluacion)->count();
+        return round($count, 2);
+    }
+}

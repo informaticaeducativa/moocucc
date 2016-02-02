@@ -60,12 +60,13 @@
 				</tr>
 				<tr>
 					<th>Estudiantes Inscritos a la fecha:</th>
-					<td>{{ $curso->getInscritos() }} - {{ $curso->getInscritos()*100/($curso->getInscritosTotal() ) }} %</td>
+					<td>{{ $curso->getInscritos() }} - {{ round($curso->getInscritos()*100/($curso->getInscritosTotal() ), 2) }} %</td>
 				</tr>
 				<tr>
 					<th>Estudiantes Retirados a la fecha:</th>
-					<td>{{ $curso->getRetirados() }} - {{ $curso->getRetirados()*100/($curso->getInscritosTotal() ) }} %</td>
+					<td>{{ $curso->getRetirados() }} - {{ round($curso->getRetirados()*100/($curso->getInscritosTotal() ), 2) }} %</td>
 				</tr>
+
 				@if ($relacion == 'admin')
 				<tr>
 					<th colspan="2">
@@ -77,6 +78,30 @@
 				</tr>
 				@endif
 			</table>
+
+			<table width="100%">
+				<tr>
+						<th colspan="4">
+								<h4 class="text-center strong">Datos de Evaluaciones</h4>
+						</th>
+				</tr>
+				<tr>
+					<th width="55%">Nombre de evaluación</th>
+					<th width="15%" class="text-center">Promedio Notas</th>
+					<th width="15%" class="text-center">Promedio Intentos</th>
+					<th width="15%" class="text-center">Estudiantes</th>
+				</tr>
+				@foreach ($curso->getAllEvaluaciones() as $evaluacion):
+				<tr>
+					<th>{{ $evaluacion->nombre }}</th>
+					<td class="text-center">{{ $evaluacion->getPromedioNota() }} </td>
+					<td class="text-center">{{ $evaluacion->getPromedioIntentos() }}</td>
+					<td class="text-center">{{ $evaluacion->getPromedioEstudiantes() }}</td>
+				</tr>
+				@endforeach;
+			</table>
+
+			<br/>
 			@if ($relacion == 'admin')
 			<center>
 				<h4 class="strong">Gráfica de estudiantes por ciudades</h4>
