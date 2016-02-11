@@ -6,7 +6,7 @@
 @section ('contenido')
 
 
-<div class="col-sm-12 col-xs-12 div_list2 top_menos_20">
+<div class="col-sm-12 col-xs-12 div_list2 top_menos_20" style="height: 90vh;">
 	<center><h1 class="strong">Panel de docentes</h1></center>
 	<div class="col-md-3 col-sm-3 col-xs-12 div_list2">
 		<h2 class="strong"><center>Menú</center></h2>
@@ -15,13 +15,13 @@
 			<div class="div_item row_cursos">
 				<span class="strong">Editar Curso</span>
 			</div>
-		</a>		
+		</a>
 		<a href="{{ URL::route('administrador-listar-estadisticas' ) }}">
 			<div class="div_item row_cursos">
 				<span class="strong">Ver estadísticas </span>
 			</div>
 		</a>
-		
+
 	</div>
 	<div class="col-md-9 col-sm-9 col-xs-12 div_list2">
 		<h2 class="strong"><center>Ver estadísticas de un Curso</center></h2>
