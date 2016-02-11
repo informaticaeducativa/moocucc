@@ -44,7 +44,16 @@
 
 			<div class="col-md-12 col-sm-12 col-xs-12 espaciado ">
 				@if($editable)
-						{{ HTML::linkRoute('editar-pregunta', 'Editar pregunta', array($pregunta->id_pregunta), array('class' => 'btn btn-primary btn-xs')) }}<br>
+				<table>
+						<tr>
+								<th>
+									{{ HTML::linkRoute('editar-pregunta', 'Editar pregunta', array($pregunta->id_pregunta), array('class' => 'btn btn-primary btn-xs')) }}<br>
+								</th>
+								<th>
+									{{ HTML::linkRoute('borrar-pregunta', 'Borrar pregunta', array($pregunta->id_pregunta), array('class' => 'btn btn-danger btn-xs')) }}<br>
+								</th>
+						</tr>
+				</table>
 				@endif
 
 				{{ '('.$contador.') '.$pregunta->nombre }}

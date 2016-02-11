@@ -17,7 +17,6 @@
 Route::get('/', function()
 {
 /*
-	Session::put('user_id', '20');
 	Session::put('user_id', '1');
 	Session::put('user', 'Mark Gonzalez');
 	Session::put('inteligencia', 'kinestesico');
@@ -793,6 +792,19 @@ Route::get('temario/{id}/edit', array('uses' => 'TemarioController@edit', 'as' =
 Route::get('leccion/{id}/edit', array('uses' => 'LeccionController@edit', 'as' => 'editar-leccion'));
 Route::get('evaluacion/{id}/edit', array('uses' => 'EvaluacionController@edit', 'as' => 'editar-evaluacion'));
 Route::get('pregunta/{id}/edit', array('uses' => 'PreguntaController@edit', 'as' => 'editar-pregunta'));
+
+Route::get('borrar-pregunta/{id}', array('as'=>'borrar-pregunta', function($id)
+{
+		$pregunta = Pregunta::find($id);
+		$id_tarea = $pregunta->id_evaluacion;
+		$tarea = Evaluacion::find($id_tarea);
+		$evaluacion = $tarea->id_curso;
+
+		$pregunta->delete();
+
+		return Redirect::route('ver-tarea', array($evaluacion, $id_tarea));
+
+}))->where('id', '[0-9]+');
 
 //
 // RUTAS DEL Chat
