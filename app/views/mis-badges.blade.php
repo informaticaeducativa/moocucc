@@ -61,7 +61,7 @@ clase index.blade.php
 	</script>
 </head>
 
-<body>
+<body style="background-color:#6cc644;">
 
 	<!--Header Start Here-->
 	<header>
