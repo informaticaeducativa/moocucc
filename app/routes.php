@@ -61,6 +61,27 @@ Route::get('usuario/{id}', array('as'=>'usuario','uses'=> 'UsuarioController@sho
 //
 //RUTAS DE ELEMENTOS LLAMADOS POR AJAX
 //
+Route::get('listar-imagenes', array('as' => 'listar-imagenes', function()
+{
+		$directorio = opendir("./imagenes"); //ruta actual
+		$todos =  array();
+		while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+		{
+		    if (is_dir($archivo))//verificamos si es o no un directorio
+		    {
+			  }
+		    else if( strtolower(substr($archivo, strlen($archivo)-3, strlen($archivo) )) == "jpg" ||
+						strtolower(substr($archivo, strlen($archivo)-3, strlen($archivo) )) == "png" ||
+						strtolower(substr($archivo, strlen($archivo)-3, strlen($archivo) )) == "gif" 
+						)
+		    {
+						$todos[] =  array("title"=>$archivo,"value" => $archivo);
+		    }
+		}
+return Response::json( ($todos) );
+}));
+
+
 Route::get('desuscribir', array('as' => 'desuscribir', function()
 {
 	$data = Input::all();

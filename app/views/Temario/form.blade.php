@@ -42,6 +42,7 @@
     <div class="form-group col-md-10">
       {{ Form::label('contenido', 'Contenido de inicio') }}
       {{ Form::textarea('contenido', null, array('placeholder' => 'Introduce el contenido', 'class' => 'form-control')) }}
+
     </div>
   </div>
   {{ Form::hidden('id_curso', $curso->id_curso) }}

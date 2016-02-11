@@ -86,4 +86,6 @@ return array(
 
 	'prefix' => 'laravel',
 
+	//'img_path' => 'imagenes/',
+
 );

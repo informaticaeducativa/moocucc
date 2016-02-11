@@ -12,7 +12,25 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" >
 	<link href="{{URL::to('css/estilo.css')}}" rel="stylesheet">
 	<script src="{{URL::to('js/tinymce/tinymce.min.js')}}"></script>
-	<script>tinymce.init({ language : "es_MX", selector:'textarea'});</script>
+	<script>tinymce.init({
+		language : "es_MX",
+		selector:'textarea',
+		image_caption: true,
+		plugins: [
+        "advlist autolink lists link charmap print preview anchor",
+        "searchreplace visualblocks code fullscreen",
+        "insertdatetime media table contextmenu paste imagetools jbimages"
+    ],
+		//image_list: "/listar-imagenes",
+		//images_upload_url: 'postAcceptor.php',
+		 images_upload_base_path: '/some/basepath',
+		 images_upload_credentials: true,
+		image_prepend_url: "http://informaticaeducativaucc.com/imagenes/",
+		image_description: false,
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages",
+  	imagetools_cors_hosts: ['informaticaeducativaucc.com/imagenes/']
+
+	});</script>
 	<!-- js -->
 
 	<script>
