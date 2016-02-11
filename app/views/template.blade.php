@@ -40,7 +40,7 @@
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
 	    </button>
-			<a class="navbar-brand" href="{{ URL::route('index') }}"><img src="{{URL::to('imagenes/logo.png')}}" width="30px"></a>
+			<a class="navbar-brand" href="{{ URL::route('index') }}" style="padding: 0 15px;"><img src="{{URL::to('imagenes/logo.png')}}" width="50px" style="position:relative; top:6px;"></a>
 	  </div>
 
 		  <!-- Agrupar los enlaces de navegación, los formularios y cualquier
