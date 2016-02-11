@@ -10,7 +10,7 @@
 @section ('contenido')
 <br>
 
-<div class="div col-sm-12 col-xs-12 ">
+<div class="div col-sm-12 col-xs-12 " style="height: 90vh;">
   <div class="col-sm-4 col-xs-12">
     <img class="imagen_div" src="../../imagenes/{{$curso->imagen_presentacion}} " >
     <br/>

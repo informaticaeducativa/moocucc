@@ -12,6 +12,7 @@ body{
 .top_menos_20{
 	position: relative;
 	top: -20px;
+	/*height: 93vh;*/
 }
 
 .navbar_back>ul>li>a, .dropdown-menu>li>a{
