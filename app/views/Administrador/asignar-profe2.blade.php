@@ -15,12 +15,12 @@
 
 	<a href="{{ URL::route('ver-curso', $curso->id_curso ) }}" class="btn btn-primary" target="_blank">Ver Presentación del Curso</a>
 	<h3>
-		Profesores Administradores
+		Docentes Principales
 	</h3>
 	@foreach($profesores as $profesor)
 	@if($profesor->existeRelacionProfesorAdmin($curso->id_curso))
 	<div class="col-md-4 col-sm-6 col-xs-6">
-		<a href="{{ URL::route('desasignar-profesor', array($curso->id_curso, $profesor->id, 'Profesor Admin' ) ) }}">
+		<a href="{{ URL::route('desasignar-profesor', array($curso->id_curso, $profesor->id, 'Docente Principal' ) ) }}">
 			<table class="table">
 				<tr class="danger">
 
@@ -32,7 +32,7 @@
 						@endif
 					</th>
 					<th style="vertical-align:middle;">
-						Desvincular a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Administrador
+						Desvincular a {{ $profesor->nombre." ".$profesor->apellido }} Como Docente Principal
 					</th>
 				</tr>
 			</table>
@@ -44,7 +44,7 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 
 	<h3>
-		Profesores Básico
+		Docentes
 	</h3>
 	@foreach($profesores as $profesor)
 	@if($profesor->existeRelacionProfesorBasico($curso->id_curso))
@@ -61,7 +61,7 @@
 						@endif
 					</th>
 					<th style="vertical-align:middle;">
-						Desvincular a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Básico
+						Desvincular a {{ $profesor->nombre." ".$profesor->apellido }} Como Docente
 					</th>
 				</tr>
 			</table>
@@ -100,7 +100,7 @@
 					@endif
 				</th>
 				<th style="vertical-align:middle;">
-					Adicionar a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Administrador
+					Adicionar a {{ $profesor->nombre." ".$profesor->apellido }} Como Docente Principal
 				</th>
 			</tr>
 		</table>
@@ -124,7 +124,7 @@
 					@endif
 				</th>
 				<th style="vertical-align:middle;">
-					Adicionar a {{ $profesor->nombre." ".$profesor->apellido }} Como Profesor Básico
+					Adicionar a {{ $profesor->nombre." ".$profesor->apellido }} Como Docente
 				</th>
 			</tr>
 		</table>

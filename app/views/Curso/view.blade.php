@@ -54,7 +54,7 @@
     @foreach ($curso->getProfesoresAdmin() as $profe)
     <div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
       <center>
-        <h4 class="strong">{{ $profe->tipo_relacion }}</h4>
+        <h4 class="strong">Docente Principal</h4>
 
         @if(substr( $profe->getProfesor()->foto , 0, 4) == 'http')
     		<img class="imagen_redonda" src="{{ $profe->getProfesor()->foto }}" ><br/>
@@ -72,7 +72,7 @@
     @foreach ($curso->getProfesoresAsistentes() as $profe)
     <div class="col-md-4 col-sm-6 col-xs-12 espaciado ">
       <center>
-        <h4 class="strong">{{ $profe->tipo_relacion }}</h4>
+        <h4 class="strong">Docente</h4>
 
 		@if(substr( $profe->getProfesor()->foto , 0, 4) == 'http')
 		<img class="imagen_redonda" src="{{ $profe->getProfesor()->foto }}" ><br/>
