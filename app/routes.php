@@ -72,7 +72,7 @@ Route::get('listar-imagenes', array('as' => 'listar-imagenes', function()
 			  }
 		    else if( strtolower(substr($archivo, strlen($archivo)-3, strlen($archivo) )) == "jpg" ||
 						strtolower(substr($archivo, strlen($archivo)-3, strlen($archivo) )) == "png" ||
-						strtolower(substr($archivo, strlen($archivo)-3, strlen($archivo) )) == "gif" 
+						strtolower(substr($archivo, strlen($archivo)-3, strlen($archivo) )) == "gif"
 						)
 		    {
 						$todos[] =  array("title"=>$archivo,"value" => $archivo);

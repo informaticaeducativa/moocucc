@@ -19,8 +19,10 @@
 		plugins: [
         "advlist autolink lists link charmap print preview anchor",
         "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste imagetools jbimages"
+        "insertdatetime media table contextmenu paste imagetools jbimages image"
     ],
+		relative_urls: false,
+
 		//image_list: "/listar-imagenes",
 		//images_upload_url: 'postAcceptor.php',
 		 images_upload_base_path: '/some/basepath',
@@ -28,7 +30,7 @@
 		image_prepend_url: "http://informaticaeducativaucc.com/imagenes/",
 		image_description: false,
 		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages",
-  	imagetools_cors_hosts: ['informaticaeducativaucc.com/imagenes/']
+  	imagetools_cors_hosts: ['http:://informaticaeducativaucc.com/imagenes/']
 
 	});</script>
 	<!-- js -->
