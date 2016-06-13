@@ -21,7 +21,7 @@ Route::group(array('prefix' => 'rest'), function()
         return Response::json( $usuarios );
     });
 
-    //  /rest/user/{id}
+    //  /rest/usuario/{id}
     Route::get('usuario/{id}', function($id)
     {
     	$usuario = Usuario::where('id', '=', $id)->get();
@@ -29,10 +29,89 @@ Route::group(array('prefix' => 'rest'), function()
     });
 
 	//  /rest/cursos
+	//  /rest/cursos?texto-buscar
     Route::get('cursos', function()
     {
-		$cursos = Curso::where('id_curso', '<>', '0')->get();
+    	$data = Input::all();
+		if(isset( $data['texto-buscar'] )){
+			$cursos = Curso::where('nombre', 'ILIKE', '%'.$data['texto-buscar'].'%')->get();
+		}
+		else{
+			$cursos = Curso::where('id_curso', '<>', '0')->get();		
+		}
         return Response::json( $cursos );
+    });
+
+    //  /rest/desuscribir/{idusuario}/curso/{idcurso}
+	Route::get('desuscribir/{idusuario}/curso/{idcurso}', function($idusuario, $idcurso)
+	{
+		$value = RelacionUsuarioCurso::where('tipo_relacion', '=', 'Estudiante')->where('id_usuario', '=', $idusuario)->where('id_curso', '=', $idcurso)->update(array('estado' => 'inactivo'));
+		return Response::json( $value );
+	});
+
+    //  /rest/agregar-ciudad/{nombre}
+	Route::get('agregar-ciudad/{nombre}', function($nombre)
+	{
+		$ciudad = $nombre;
+		$ciudad = strtoupper( substr($ciudad, 0,1) ).strtolower( substr($ciudad, 1, strlen($ciudad)-1) );
+		if( DB::table('ciudad')->where('nombre', $ciudad)->count() == 0 ){
+				DB::table('ciudad')->insert(array('nombre' => $ciudad));
+		}
+		$ciudades = DB::table('ciudad')->get();
+		return Response::json(($ciudades));
+	});
+
+    //  /rest/agregar-pais/{nombre}
+	Route::get('agregar-pais/{nombre}', function($nombre)
+	{
+		$pais = $nombre;
+		$pais = strtoupper( substr($pais, 0,1) ).strtolower( substr($pais, 1, strlen($pais)-1) );
+		if( DB::table('pais')->where('nombre', $pais)->count() == 0 ){
+				DB::table('pais')->insert(array('nombre' => $pais));
+		}
+		$paises = DB::table('pais')->get();
+		return Response::json(($paises));
+	});
+
+    //  /rest/agregar-universidad/{nombre}
+	Route::get('agregar-universidad/{nombre}', function($nombre)
+	{
+		$universidad = $nombre;
+		$universidad = strtoupper( substr($universidad, 0,1) ).strtolower( substr($universidad, 1, strlen($universidad)-1) );
+		if( DB::table('universidad')->where('nombre', $universidad)->count() == 0 ){
+				DB::table('universidad')->insert(array('nombre' => $universidad));
+		}
+		$universidades = DB::table('universidad')->get();
+		return Response::json(($universidades));
+	});
+
+    //  /rest/ciudades
+	Route::get('listar-ciudades', function()
+	{
+		$ciudades = DB::table('ciudad')->get();
+		return Response::json(($ciudades));
+	});
+
+    //  /rest/paises
+	Route::get('listar-paises', function()
+	{
+		$paises = DB::table('pais')->get();
+		return Response::json(($paises));
+	});
+
+    //  /rest/universidades
+	Route::get('listar-universidades', function()
+	{
+		$universidades = DB::table('universidad')->get();
+		return Response::json(($universidades));
+	});
+
+    //  /rest/test
+    Route::get('test', function()
+    {	
+    	$data = Input::all();
+    	if(!isset( $data['prueba'] )){  $data['prueba']='';	} 
+        return Response::json( "Mensaje secreto: ".$data['prueba'] );
     });
 
 });
