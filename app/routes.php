@@ -11,6 +11,34 @@
 |
 */
 
+//RUTAS API
+Route::group(array('prefix' => 'rest'), function()
+{
+	//  /rest/users
+    Route::get('usuarios', function()
+    {
+    	$usuarios = Usuario::all();
+        return Response::json( $usuarios );
+    });
+
+    //  /rest/user/{id}
+    Route::get('usuario/{id}', function($id)
+    {
+    	$usuario = Usuario::where('id', '=', $id)->get();
+        return Response::json( $usuario );
+    });
+
+	//  /rest/cursos
+    Route::get('cursos', function()
+    {
+		$cursos = Curso::where('id_curso', '<>', '0')->get();
+        return Response::json( $cursos );
+    });
+
+});
+
+
+
 //
 //RUTAS DEL INDEX
 //
