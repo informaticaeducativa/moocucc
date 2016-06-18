@@ -11,7 +11,8 @@
 		"artdarek/oauth-4-laravel": "dev-master",
 		"heroku/heroku-buildpack-php": "^90.0",
 		"cboden/Ratchet"    : "0.3.*",
-		"guzzle/guzzle" : "*"
+		"guzzle/guzzle" : "*",
+		"barryvdh/laravel-cors": "0.2.x"
 	},
 	"autoload": {
 		"classmap": [

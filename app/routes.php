@@ -12,7 +12,7 @@
 */
 
 //RUTAS API
-Route::group(array('prefix' => 'rest'), function()
+Route::group(array('prefix' => 'api'), function()
 {
 	//  /rest/users
     Route::get('usuarios', function()
