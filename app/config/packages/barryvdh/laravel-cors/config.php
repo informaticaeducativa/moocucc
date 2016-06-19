@@ -20,7 +20,7 @@ return array(
         'allowedOrigins' => array('*'),
         'allowedHeaders' => array('*'),
         'allowedMethods' => array(),
-        'exposedHeaders' => array(),
+        'exposedHeaders' => array(),    
         'maxAge' => 0,
         'hosts' => array(),
     ),

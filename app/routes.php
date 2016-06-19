@@ -21,6 +21,12 @@ Route::group(array('prefix' => 'api'), function()
         return Response::json( $usuarios );
     });
 
+    Route::get('tematicas', function()
+    {
+    	$tematicas = Tematica::all();
+        return Response::json( $tematicas );
+    });
+
     //  /rest/usuario/{id}
     Route::get('usuario/{id}', function($id)
     {
