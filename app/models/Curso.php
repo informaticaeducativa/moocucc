@@ -13,6 +13,8 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 	public $errors;
     protected $primaryKey = 'id_curso';
 
+  
+  	
  
  	protected $table = 'curso';
  	 	
@@ -183,6 +185,14 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 
 		return Response::json(($inscritos));
 	}	
+
+
+	public function toArray()
+    {
+        $array = parent::toArray();
+        $array['nombre_tematica'] = $this->getTematica();
+        return $array;
+    }
 	
 
 	
