@@ -211,7 +211,7 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
         $array = parent::toArray();
         $array['nombre_tematica'] = $this->getTematica();
         $array['fecha_inicio_semantica'] = $this->getFechaInicio();
-        $array['imagen_presentacion_url'] = "http://www.informaticaeducativaucc.com/images/".$this->imagen_presentacion;
+        $array['imagen_presentacion_url'] = "http://www.informaticaeducativaucc.com/imagenes/".$this->imagen_presentacion;
         $array['profesores_admin'] = $this->getProfesoresAdminApi();
         $array['profesores_asistentes'] = $this->getProfesoresAsistentesApi();
         return $array;
