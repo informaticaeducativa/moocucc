@@ -14,11 +14,17 @@
 //RUTAS API
 Route::group(array('prefix' => 'api'), function()
 {
-	//  /rest/users
+
     Route::get('usuarios', function()
     {
     	$usuarios = Usuario::all();
         return Response::json( $usuarios );
+    });
+
+    Route::get('usuario/{id}', function($id)
+    {
+    	$usuario = Usuario::where('id', '=', $id)->get();
+        return Response::json( $usuario );
     });
 
     Route::get('tematicas', function()
@@ -31,13 +37,6 @@ Route::group(array('prefix' => 'api'), function()
     {
     	$tematica = Tematica::where('id_tematica', '=', $id)->get();
         return Response::json( $tematica );
-    });
-
-    //  /rest/usuario/{id}
-    Route::get('usuario/{id}', function($id)
-    {
-    	$usuario = Usuario::where('id', '=', $id)->get();
-        return Response::json( $usuario );
     });
 
 	//  /rest/cursos

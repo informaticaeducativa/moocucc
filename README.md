@@ -266,3 +266,23 @@ Si por algún motivo el chat no inicia tras reiniciar el SO, verificar las instr
 Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/how-to-automatically-start-supervisord-on-linux-ubuntu)
 
 **Con esto ya tendremos corriendo siempre el servicio del chat.**
+
+### 5. API REST
+
+/api/cursos					GET
+/api/curso/{id}				GET
+/api/cursos?texto-buscar	GET
+
+/api/usuarios				GET 
+/api/usuario/{id}			GET 
+
+/api/tematicas				GET
+/api/tematica/{id}			GET
+
+/api/desuscribir/{idusuario}/curso/{idcurso} GET
+/api/agregar-ciudad/{nombre}		GET
+/api/agregar-pais/{nombre}			GET
+/api/agregar-universidad/{nombre}	GET
+/api/listar-ciudades		GET
+/api/listar-paises			GET
+/api/listar-universidades	GET
