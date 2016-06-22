@@ -286,3 +286,6 @@ Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/ho
 /api/listar-ciudades		GET
 /api/listar-paises			GET
 /api/listar-universidades	GET
+/api/temarios				GET
+/api/temarios?id_curso=6	GET
+/api/temarios?id_curso=6&tipo_contenido=inicio	GET

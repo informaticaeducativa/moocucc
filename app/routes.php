@@ -15,10 +15,41 @@
 Route::group(array('prefix' => 'api'), function()
 {
 
+ 	Route::get('badges', function()
+    {
+    	$data = Input::all();
+		if(isset( $data['usuario_id']) && isset( $data['curso_id']) ){
+			$cursos = Curso::where('nombre', 'ILIKE', '%'.$data['texto-buscar'].'%')->get();
+			$usuario = Usuario::find(Session::get('user_id'));
+			$cursos = $usuario->misCursos();
+			$avances = Avance::where('tipo','=','evaluacion')->where('id_usuario','=',$usuario->id)->orderBy('id_curso','DESC')->orderBy('fecha','ASC')->get();
+
+		}
+		else{
+        	return Response::json( array("result"=>"error") );
+		}
+    });
+
     Route::get('usuarios', function()
     {
     	$usuarios = Usuario::all();
         return Response::json( $usuarios );
+    });
+
+    Route::get('temarios', function()
+    {
+	   	$data = Input::all();
+    	if( isset( $data['id_curso']) &&  isset($data['tipo_contenido']) ){
+	    	$temarios = Temario::where('id_curso', '=', $data['id_curso'])->where('tipo_contenido', '=', $data['tipo_contenido'])->get();
+	    }
+		else if( isset( $data['id_curso'] )){
+	    	$temarios = Temario::where('id_curso', '=', $data['id_curso'])->get();
+		}
+    	else
+    	{
+	    	$temarios = Temario::all();
+    	}
+        return Response::json( $temarios );
     });
 
     Route::get('usuario/{id}', function($id)
