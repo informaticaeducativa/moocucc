@@ -572,6 +572,9 @@ Route::get('login-facebook',array('as'=>'login-facebook','uses'=>'LoginControlle
 Route::get('login-twitter',array('as'=>'login-twitter','uses'=>'LoginController@loginWithTwitter'));
 Route::get('login-google',array('as'=>'login-google','uses'=>'LoginController@loginWithGoogle'));
 
+Route::post('login-facebook',array('as'=>'login-facebook','uses'=>'LoginController@loginWithFacebook'));
+Route::post('login-twitter',array('as'=>'login-twitter','uses'=>'LoginController@loginWithTwitter'));
+Route::post('login-google',array('as'=>'login-google','uses'=>'LoginController@loginWithGoogle'));
 
 //
 //RUTAS QUE TOMA EL USUARIO ESTUDIANTE
