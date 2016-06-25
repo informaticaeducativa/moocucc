@@ -96,6 +96,12 @@ Route::group(array('prefix' => 'api'), function()
         return Response::json( $cursos );
     });
 
+    Route::get('curso_usuario/{user_id}', function($user_id)
+    {
+      $user_courses = DB::table('relacion_usuario_curso')->where('id_usuario', '=', $user_id)->get();
+      return Response::json(($user_courses));
+    });
+
     //  /rest/desuscribir/{idusuario}/curso/{idcurso}
 	Route::get('desuscribir/{idusuario}/curso/{idcurso}', function($idusuario, $idcurso)
 	{
