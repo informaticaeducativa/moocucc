@@ -52,7 +52,7 @@ Route::group(array('prefix' => 'api'), function()
         return Response::json( $temarios );
     });
 
-    Route::get('usuario/{id}', function($id)
+    Route::get('usuario/id/{id}', function($id)
     {
     	$usuario = Usuario::where('id', '=', $id)->get();
         return Response::json( $usuario );
