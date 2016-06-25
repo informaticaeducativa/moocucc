@@ -160,12 +160,26 @@ Route::group(array('prefix' => 'api'), function()
 		return Response::json(($paises));
 	});
 
+  //filter country by id
+  Route::get('pais/{country_id}', function($country_id)
+  {
+    $country = DB::table('pais')->where('id_pais', '=', $country_id)->get();
+    return Response::json(($country));
+  });
+
     //  /rest/universidades
 	Route::get('listar-universidades', function()
 	{
 		$universidades = DB::table('universidad')->get();
 		return Response::json(($universidades));
 	});
+
+  //filter university by id
+  Route::get('universidad/{university_id}', function($university_id)
+  {
+    $university = DB::table('universidad')->where('id_universidad', '=', $university_id)->get();
+    return Response::json(($university));
+  });
 
     //  /rest/test
     Route::get('test', function()
