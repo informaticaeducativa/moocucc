@@ -52,9 +52,15 @@ Route::group(array('prefix' => 'api'), function()
         return Response::json( $temarios );
     });
 
-    Route::get('usuario/{id}', function($id)
+    Route::get('usuario/id/{id}', function($id)
     {
     	$usuario = Usuario::where('id', '=', $id)->get();
+        return Response::json( $usuario );
+    });
+
+    Route::get('usuario/social/{id_social}', function($id_social)
+    {
+    	$usuario = Usuario::where('id_social', '=', $id_social)->get();
         return Response::json( $usuario );
     });
 
@@ -79,7 +85,7 @@ Route::group(array('prefix' => 'api'), function()
 			$cursos = Curso::where('nombre', 'ILIKE', '%'.$data['texto-buscar'].'%')->get();
 		}
 		else{
-			$cursos = Curso::where('id_curso', '<>', '0')->get();		
+			$cursos = Curso::where('id_curso', '<>', '0')->get();
 		}
         return Response::json( $cursos );
     });
@@ -140,6 +146,13 @@ Route::group(array('prefix' => 'api'), function()
 		return Response::json(($ciudades));
 	});
 
+  //filter city by id
+  Route::get('ciudad/{city_id}', function($city_id)
+  {
+    $city = DB::table('ciudad')->where('id_ciudad', '=', $city_id)->get();
+    return Response::json(($city));
+  });
+
     //  /rest/paises
 	Route::get('listar-paises', function()
 	{
@@ -156,9 +169,9 @@ Route::group(array('prefix' => 'api'), function()
 
     //  /rest/test
     Route::get('test', function()
-    {	
+    {
     	$data = Input::all();
-    	if(!isset( $data['prueba'] )){  $data['prueba']='';	} 
+    	if(!isset( $data['prueba'] )){  $data['prueba']='';	}
         return Response::json( "Mensaje secreto: ".$data['prueba'] );
     });
 
