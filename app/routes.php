@@ -149,7 +149,7 @@ Route::group(array('prefix' => 'api'), function()
   //filter city by id
   Route::get('ciudad/{city_id}', function($city_id)
   {
-    $city = DB::table('ciudad')->where('city_id', '=', $city_id)->get();
+    $city = DB::table('ciudad')->where('id_ciudad', '=', $city_id)->get();
     return Response::json(($city));
   });
 
