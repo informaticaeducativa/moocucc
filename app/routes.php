@@ -146,6 +146,13 @@ Route::group(array('prefix' => 'api'), function()
 		return Response::json(($ciudades));
 	});
 
+  //filter city by id
+  Route::get('ciudad/{city_id}', function($city_id)
+  {
+    $city = DB::table('ciudad')->where('city_id', '=', $city_id)->get();
+    return Response::json(($city));
+  });
+
     //  /rest/paises
 	Route::get('listar-paises', function()
 	{
