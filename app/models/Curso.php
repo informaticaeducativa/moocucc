@@ -122,7 +122,7 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 		$lista = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Admin')->get();
 		$profesores = array();
 		foreach ($lista as $profe) {
-			$profesores[] = Usuario::where('id','=', $profe->id_usuario)->get();
+			$profesores[] = Usuario::where('id','=', $profe->id_usuario)->get()[0];
 		}
 		return $profesores;
 	}
@@ -136,7 +136,7 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 		$lista = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Basico')->get();
 		$profesores = array();
 		foreach ($lista as $profe) {
-			$profesores[] = Usuario::where('id','=', $profe->id_usuario)->get();
+			$profesores[] = Usuario::where('id','=', $profe->id_usuario)->get()[0];
 		}
 
 		return $profesores;
