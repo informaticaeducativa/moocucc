@@ -144,6 +144,14 @@ Route::group(array('prefix' => 'api'), function()
 		$universidades = DB::table('universidad')->get();
 		return Response::json(($universidades));
 	});
+	// add course to user
+	Route::get('assign-course', function()
+	{
+		$data = Input::all();
+		$course_id = $data['course_id'];
+		$user_id = $data['user_id'];
+		DB::table('relacion_usuario_curso')->insert(array('id_usuario' => $user_id, 'id_curso' => $course_id, 'tipo_relacion' => 'Estudiante', 'fecha_creacion' => date('Y-m-d H:i:s'), 'estado' => 'activo'));
+	});
 
     //  /rest/ciudades
 	Route::get('listar-ciudades', function()
