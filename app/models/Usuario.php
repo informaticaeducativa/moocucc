@@ -21,7 +21,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
   //protected $hidden = array('password', 'remember_token');
   public $timestamps = false;
 
-  
+
   public function isValid($data)
   {
     $rules = array(
@@ -80,6 +80,9 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface
   {
     $ciudad = Ciudad::find($this->id_ciudad);
     return $ciudad;
+  }
+  public function getCiudadApi() {
+    return var_dump(getCiudad()->nombre);
   }
 
   public function misCursos()
