@@ -133,10 +133,10 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 	}
 
 	public function getProfesoresAsistentesApi(){
-		$lista = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Basico')->get()[0];
+		$lista = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Basico')->get();
 		$profesores = array();
 		foreach ($lista as $profe) {
-			$profesores[] = Usuario::where('id','=', $profe->id_usuario)->get();
+			$profesores[] = Usuario::where('id','=', $profe->id_usuario)->get()[0];
 		}
 
 		return $profesores;
