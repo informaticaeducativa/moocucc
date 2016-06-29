@@ -145,7 +145,7 @@ Route::group(array('prefix' => 'api'), function()
 		return Response::json(($universidades));
 	});
 	// add course to user
-	Route::get('assign-course', function()
+	Route::post('assign-course', function()
 	{
 		$data = Input::all();
 		$course_id = $data['course_id'];
