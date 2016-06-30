@@ -154,6 +154,19 @@ Route::group(array('prefix' => 'api'), function()
 		return 0;
 	});
 
+	// /api/classes
+	Route::get('classes', function()
+    {
+    	$classes = Leccion::all();
+        return Response::json($classes);
+    });
+	// /api/class/{class_id}
+    Route::get('class/{class_id}', function($class_id)
+	{
+		$class = Leccion::where('id_leccion', '=', $class_id)->get();
+	    return Response::json(($class));
+	});
+
     //  /rest/ciudades
 	Route::get('listar-ciudades', function()
 	{
