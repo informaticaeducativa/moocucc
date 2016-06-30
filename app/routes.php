@@ -158,9 +158,12 @@ Route::group(array('prefix' => 'api'), function()
 	Route::get('classes', function()
     {
     	$data = Input::all();
-    	if (array_key_exists('week_id', $data)) {
+    	if (array_key_exists('week_id', $data) && array_key_exists('course_id', $data)) {
     		$week = $data['week_id'];
-    		$classes = Leccion::where('semana', '=', $week)->get();
+    		$course = $data['course_id'];
+    		$classes = Leccion::where('semana', '=', $week)
+    							->where('id_curso', '=', $course_id)
+    							->get();
     	} else {
     		$classes = Leccion::all();
     	}
