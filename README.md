@@ -301,9 +301,7 @@ Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/ho
 
 `/api/temarios?id_curso=6`	GET
 
-`/api/temarios?id_curso=6&tipo_contenido=inicio`	GET
-
-`/api/curso_usuario/{user_id}` GET
+`/api/temarios?id_curso={course_id}&tipo_contenido={content_type}`	GET
 
 `/api/usuario/social/{id_social}` GET
 
@@ -313,3 +311,8 @@ Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/ho
 
 `/api/universidad/{university_id}`	GET
 
+`/api/universidad/{university_id}`	GET
+
+`/api/curso_usuario/{user_id}` GET
+
+`/api/assign-course?user_id={user_id}&course_id={course_id}`	POST
