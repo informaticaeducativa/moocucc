@@ -151,6 +151,7 @@ Route::group(array('prefix' => 'api'), function()
 		$course_id = $data['course_id'];
 		$user_id = $data['user_id'];
 		DB::table('relacion_usuario_curso')->insert(array('id_usuario' => $user_id, 'id_curso' => $course_id, 'tipo_relacion' => 'Estudiante', 'fecha_creacion' => date('Y-m-d H:i:s'), 'estado' => 'activo'));
+		return 0;
 	});
 
     //  /rest/ciudades
