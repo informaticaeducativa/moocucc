@@ -158,8 +158,8 @@ Route::group(array('prefix' => 'api'), function()
 	Route::get('classes', function()
     {
     	$data = Input::all();
-    	$week = $data['week_id'];
     	if (array_key_exists('week_id', $data)) {
+    		$week = $data['week_id'];
     		$classes = Leccion::where('semana', '=', $week)->get();
     	} else {
     		$classes = Leccion::all();
