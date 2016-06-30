@@ -162,7 +162,7 @@ Route::group(array('prefix' => 'api'), function()
     		$week = $data['week_id'];
     		$course = $data['course_id'];
     		$classes = Leccion::where('semana', '=', $week)
-    							->where('id_curso', '=', $course_id)
+    							->where('id_curso', '=', $course)
     							->get();
     	} else {
     		$classes = Leccion::all();
