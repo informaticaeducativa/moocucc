@@ -157,7 +157,14 @@ Route::group(array('prefix' => 'api'), function()
 	// /api/classes
 	Route::get('classes', function()
     {
-    	$classes = Leccion::all();
+    	$data = Input::all();
+    	$week = $data['week_id'];
+    	if (array_key_exists('week_id', $data)) {
+    		$classes = Leccion::where('semana', '=', $week)->get();
+    	} else {
+    		$classes = Leccion::all();
+    	}
+    	
         return Response::json($classes);
     });
 	// /api/class/{class_id}
