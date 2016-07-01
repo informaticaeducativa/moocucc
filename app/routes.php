@@ -164,10 +164,12 @@ Route::group(array('prefix' => 'api'), function()
     		$classes = Leccion::where('semana', '=', $week)
     							->where('id_curso', '=', $course)
     							->get();
+      } elseif (array_key_exists('week_id', $data) {
+    		$course = $data['course_id'];
+    		$classes = Leccion::where('id_curso', '=', $course)->get();
     	} else {
     		$classes = Leccion::all();
     	}
-    	
         return Response::json($classes);
     });
 	// /api/class/{class_id}
