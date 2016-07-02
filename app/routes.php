@@ -172,6 +172,33 @@ Route::group(array('prefix' => 'api'), function()
     }
     return Response::json($classes);
   });
+
+  // /api/tests
+  Route::get('tests', function()
+  {
+    $data = Input::all();
+    if (array_key_exists('week_id', $data) && array_key_exists('course_id', $data)) {
+      $week = $data['week_id'];
+      $course = $data['course_id'];
+      $tests = Evaluacion::where('semana', '=', $week)
+      ->where('id_curso', '=', $course)
+      ->get();
+    } elseif (array_key_exists('course_id', $data)) {
+      $course = $data['course_id'];
+      $tests = Evaluacion::where('id_curso', '=', $course)->get();
+    } else {
+      $tests = Evaluacion::all();
+    }
+    return Response::json($tests);
+  });
+
+  // /api/test/{test_id}
+  Route::get('test/{test_id}', function($test_id)
+  {
+    $test = Leccion::where('id_evaluacion', '=', $test_id)->get();
+    return Response::json(($test));
+  });
+
   // /api/class/{class_id}
   Route::get('class/{class_id}', function($class_id)
   {
