@@ -195,7 +195,7 @@ Route::group(array('prefix' => 'api'), function()
   // /api/test/{test_id}
   Route::get('test/{test_id}', function($test_id)
   {
-    $test = Leccion::where('id_evaluacion', '=', $test_id)->get();
+    $test = Evaluacion::where('id_evaluacion', '=', $test_id)->get();
     return Response::json(($test));
   });
 
