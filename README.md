@@ -316,3 +316,15 @@ Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/ho
 `/api/curso_usuario/{user_id}` GET
 
 `/api/assign-course?user_id={user_id}&course_id={course_id}`	POST
+
+`/api/classes?course_id={course_id}`	GET
+
+`/api/class/{class_id}`	GET
+
+`/api/classes?course_id={course_id}&week_id={week_id}`	GET
+
+`/api/tests?course_id={course_id}&week_id={week_id}`	GET
+
+`/api/tests?course_id={course_id}`	GET
+
+`/api/test/{test_id}`	GET
