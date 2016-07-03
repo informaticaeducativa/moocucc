@@ -191,6 +191,18 @@ Route::group(array('prefix' => 'api'), function()
     }
     return Response::json($tests);
   });
+// /api/questions
+  Route::get('questions', function()
+  {
+    $data = Input::all();
+      if (array_key_exists('question_id', $data) {
+      $question = $data['question_id'];
+      $tests = Pregunta::where('pregunta', '=', $question)->get();
+    } else {
+      $questions = Pregunta::all();
+    }
+    return Response::json($questions);
+  });
 
   // /api/test/{test_id}
   Route::get('test/{test_id}', function($test_id)
