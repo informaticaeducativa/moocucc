@@ -195,7 +195,7 @@ Route::group(array('prefix' => 'api'), function()
   Route::get('questions', function()
   {
     $data = Input::all();
-      if (array_key_exists('test_id', $data) {
+      if (array_key_exists('test_id', $data)) {
       $test = $data['test_id'];
       $questions = Pregunta::where('id_evaluacion', '=', $test)->get();
     } else {
