@@ -123,7 +123,9 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Auth0\Login\LoginServiceProvider',
-		"Formativ\Chat\ChatServiceProvider"
+		"Formativ\Chat\ChatServiceProvider",
+    	'Barryvdh\Cors\CorsServiceProvider',
+
 
 
 	),

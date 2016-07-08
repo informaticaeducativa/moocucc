@@ -41,5 +41,6 @@ return array(
     'Carbon' => array($vendorDir . '/nesbot/carbon/src'),
     'Boris' => array($vendorDir . '/d11wtq/boris/lib'),
     'Auth0\\Login\\' => array($vendorDir . '/auth0/login/src'),
+    'Asm89\\Stack' => array($vendorDir . '/asm89/stack-cors/src'),
     'Artdarek\\OAuth' => array($vendorDir . '/artdarek/oauth-4-laravel/src'),
 );

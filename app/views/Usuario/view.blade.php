@@ -36,15 +36,18 @@
 			<th>Tipo de Usuario</th>
 			<td>{{ $usuario->tipo_usuario }}</td>
 		</tr>
-		@endif
-		<tr>
-			<th>Fecha de inscripción</th>
-			<td>{{ $usuario->fecha }}</td>
-		</tr>
+		@else
 		<tr>
 			<th>Tipo de Inteligencia</th>
 			<td>{{ $usuario->tipo_inteligencia }}</td>
 		</tr>
+		@endif
+		<tr>
+
+			<th>Fecha de inscripción</th>
+			<td>{{ $usuario->fecha }}</td>
+		</tr>
+		
 		<tr>
 			<th>Título</th>
 			<td>{{ $usuario->titulo }}</td>

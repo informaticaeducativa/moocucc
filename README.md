@@ -266,3 +266,65 @@ Si por algún motivo el chat no inicia tras reiniciar el SO, verificar las instr
 Instruciones tomadas de [Server Fault](http://serverfault.com/questions/96499/how-to-automatically-start-supervisord-on-linux-ubuntu)
 
 **Con esto ya tendremos corriendo siempre el servicio del chat.**
+
+### 5. API REST
+
+`/api/cursos`				GET
+
+`/api/curso/{id}`			GET
+
+`/api/cursos?texto-buscar`	GET
+
+`/api/usuarios`				GET
+
+`/api/usuario/id/{id}`		GET 
+
+`/api/tematicas`			GET
+
+`/api/tematica/{id}`		GET
+
+`/api/desuscribir/{idusuario}/curso/{idcurso}` GET
+
+`/api/agregar-ciudad/{nombre}`		GET
+
+`/api/agregar-pais/{nombre}`			GET
+
+`/api/agregar-universidad/{nombre}`	GET
+
+`/api/listar-ciudades`		GET
+
+`/api/listar-paises`		GET
+
+`/api/listar-universidades`	GET
+
+`/api/temarios`				GET
+
+`/api/temarios?id_curso=6`	GET
+
+`/api/temarios?id_curso={course_id}&tipo_contenido={content_type}`	GET
+
+`/api/usuario/social/{id_social}` GET
+
+`/api/pais/{country_id}`	GET
+
+`/api/ciudad/{city_id}`	GET
+
+`/api/universidad/{university_id}`	GET
+
+`/api/universidad/{university_id}`	GET
+
+`/api/curso_usuario/{user_id}` GET
+
+`/api/assign-course?user_id={user_id}&course_id={course_id}`	POST
+
+`/api/classes?course_id={course_id}`	GET
+
+`/api/class/{class_id}`	GET
+
+`/api/classes?course_id={course_id}&week_id={week_id}`	GET
+
+`/api/tests?course_id={course_id}&week_id={week_id}`	GET
+
+`/api/tests?course_id={course_id}`	GET
+
+`/api/test/{test_id}`	GET

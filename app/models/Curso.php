@@ -13,6 +13,8 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 	public $errors;
     protected $primaryKey = 'id_curso';
 
+  
+  	
  
  	protected $table = 'curso';
  	 	
@@ -115,9 +117,28 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 		$profesores = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Admin')->get();
 		return $profesores;
 	}
+
+	public function getProfesoresAdminApi(){
+		$lista = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Admin')->get();
+		$profesores = array();
+		foreach ($lista as $profe) {
+			$profesores[] = Usuario::where('id','=', $profe->id_usuario)->get()[0];
+		}
+		return $profesores;
+	}
 	
 	public function getProfesoresAsistentes(){
 		$profesores = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Basico')->get();
+		return $profesores;
+	}
+
+	public function getProfesoresAsistentesApi(){
+		$lista = RelacionUsuarioCurso::where('id_curso','=', $this->id_curso)->where('tipo_relacion','=', 'Profesor Basico')->get();
+		$profesores = array();
+		foreach ($lista as $profe) {
+			$profesores[] = Usuario::where('id','=', $profe->id_usuario)->get()[0];
+		}
+
 		return $profesores;
 	}
 	
@@ -183,6 +204,18 @@ class Curso extends Eloquent implements UserInterface, RemindableInterface
 
 		return Response::json(($inscritos));
 	}	
+
+
+	public function toArray()
+    {
+        $array = parent::toArray();
+        $array['nombre_tematica'] = $this->getTematica();
+        $array['fecha_inicio_semantica'] = $this->getFechaInicio();
+        $array['imagen_presentacion_url'] = "http://informaticaeducativaucc.com/imagenes/".$this->imagen_presentacion;
+        $array['profesores_admin'] = $this->getProfesoresAdminApi();
+        $array['profesores_asistentes'] = $this->getProfesoresAsistentesApi();
+        return $array;
+    }
 	
 
 	
