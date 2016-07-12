@@ -191,7 +191,7 @@ Route::group(array('prefix' => 'api'), function()
     }
     return Response::json($tests);
   });
-// /api/questions
+  // /api/questions
   Route::get('questions', function()
   {
     $data = Input::all();
@@ -202,6 +202,31 @@ Route::group(array('prefix' => 'api'), function()
       $questions = Pregunta::all();
     }
     return Response::json($questions);
+  });
+
+  // /api/grade?id
+
+  Route::get('grade', function()
+  {
+    $data = Input::all();
+    $test = $data['test_id'];
+    $user = $data['user_id'];
+    $grade = Calificacion::where('id_evaluacion', '=', $test)->where('id_usuario', '=', $user)->get();
+    return Response::json($grade);
+  });
+
+  // /api/grade
+
+  Route::put('grade', function()
+  {
+    $data = Input::all();
+    $test = $data['test_id'];
+    $user = $data['user_id'];
+    $grade = $data['grade'];
+    $attemps = $data['attemps'];
+    Calificacion::where('id_evaluacion', '=', $test)->where('id_usuario', '=', $user)
+            ->update(array('nota' => $grade, 'intentos' => $attemps));
+    return 0;
   });
 
   // /api/test/{test_id}
