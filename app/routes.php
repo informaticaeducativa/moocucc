@@ -225,8 +225,9 @@ Route::group(array('prefix' => 'api'), function()
     $grade = $data['grade'];
     $attemps = $data['attemps'];
     $course = $data['course_id'];
+    $date = $data['date'];
     Calificacion::insert(array('id_usuario' => $user, 'id_evaluacion' => $test, 'nota' => $grade, 
-                              'id_curso' => $course, 'intentos' => $attemps));
+                              'fecha' => $date ,'id_curso' => $course, 'intentos' => $attemps));
     return 0;
   });
 
