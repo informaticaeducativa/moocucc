@@ -215,7 +215,22 @@ Route::group(array('prefix' => 'api'), function()
     return Response::json($grade);
   });
 
-  // /api/grade
+  // POST /api/grade
+
+  Route::post('grade', function()
+  {
+    $data = Input::all();
+    $test = $data['test_id'];
+    $user = $data['user_id'];
+    $grade = $data['grade'];
+    $attemps = $data['attemps'];
+    $course = $data['course_id'];
+    Calificacion::insert(array('id_usuario' => $user, 'id_evaluacion' => $test, 'nota' => $grade, 
+                              'id_curso' => $course, 'intentos' => $attemps));
+    return 0;
+  });
+
+  // PUT /api/grade
 
   Route::put('grade', function()
   {
