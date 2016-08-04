@@ -29,7 +29,7 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
             'server_contenido_grafico' => 'required',
             'contenido_grafico' => 'required',
             'contenido_texto' => 'required',
-            'kinestesico' => 'kinestesico',
+            'kinestesico' => 'required',
             'semana' => 'required'
         );
         
