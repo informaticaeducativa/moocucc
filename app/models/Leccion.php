@@ -16,7 +16,7 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
  
  	protected $table = 'leccion';
  	 	
- 	protected $fillable = array('id_leccion', 'nombre', 'id_curso', 'server_contenido_grafico', 'contenido_grafico', 'contenido_texto', 'semana');
+ 	protected $fillable = array('id_leccion', 'nombre', 'id_curso', 'server_contenido_grafico', 'contenido_grafico', 'contenido_texto', 'kinestesico', 'semana');
 
 	//protected $hidden = array('password', 'remember_token');
     public $timestamps = false;
@@ -29,6 +29,7 @@ class Leccion extends Eloquent implements UserInterface, RemindableInterface
             'server_contenido_grafico' => 'required',
             'contenido_grafico' => 'required',
             'contenido_texto' => 'required',
+            'kinestesico' => 'kinestesico',
             'semana' => 'required'
         );
         

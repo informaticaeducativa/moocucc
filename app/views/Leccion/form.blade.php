@@ -48,15 +48,15 @@
     </div>
     <div class="form-group col-md-5">
       {{ Form::label('contenido_grafico', 'Iframe del contenido gráfico (Youtube)') }}
-      {{ Form::text('contenido_grafico', null, array('placeholder' => 'Introduce el iframe que te comparte youtube', 'class' => 'form-control')) }}
+      {{ Form::text('contenido_grafico', null, array('placeholder' => 'Introduce el iframe para el contenido visual', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-10">
       {{ Form::label('contenido_texto', 'Introduce el contenido de texto') }}
       {{ Form::textarea('contenido_texto', null, array('placeholder' => 'Introduce el contenido de texto', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-10">
-      {{ Form::label('contenido_texto', 'Introduce el contenido de texto') }}
-      {{ Form::textarea('contenido_texto', null, array('placeholder' => 'Introduce el contenido de texto 2', 'class' => 'form-control')) }}
+      {{ Form::label('kinestesico', 'Introduce el contenido de Kinestésico') }}
+      {{ Form::textarea('kinestesico', null, array('placeholder' => 'Introduce el contenido de Kinestésico', 'class' => 'form-control')) }}
     </div>
   </div>
   {{ Form::hidden('server_contenido_grafico', 'youtube') }}
