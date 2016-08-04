@@ -46,13 +46,17 @@
       {{ Form::label('semana', 'Semana de publicación del contenido') }}
       {{ Form::select('semana', array('1'=>'Semana 1', '2'=>'Semana 2', '3'=>'Semana 3', '4'=>'Semana 4', '5'=>'Semana 5', '6'=>'Semana 6', '7'=>'Semana 7', '8'=>'Semana 8', '9'=>'Semana 9'), null, array('class' => 'form-control')) }}
     </div>
-    <div class="form-group col-md-5">
+    <!-- <div class="form-group col-md-5">
       {{ Form::label('contenido_grafico', 'Iframe del contenido gráfico (Youtube)') }}
       {{ Form::text('contenido_grafico', null, array('placeholder' => 'Introduce el iframe para el contenido visual', 'class' => 'form-control')) }}
+    </div> -->
+    <div class="form-group col-md-10">
+      {{ Form::label('contenido_grafico', 'Introduce el contenido visual') }}
+      {{ Form::textarea('contenido_grafico', null, array('placeholder' => 'Introduce el contenido visual', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-10">
-      {{ Form::label('contenido_texto', 'Introduce el contenido de texto') }}
-      {{ Form::textarea('contenido_texto', null, array('placeholder' => 'Introduce el contenido de texto', 'class' => 'form-control')) }}
+      {{ Form::label('contenido_texto', 'Introduce el contenido de lingüístico') }}
+      {{ Form::textarea('contenido_texto', null, array('placeholder' => 'Introduce el contenido lingüístico', 'class' => 'form-control')) }}
     </div>
     <div class="form-group col-md-10">
       {{ Form::label('kinestesico', 'Introduce el contenido de Kinestésico') }}
