@@ -46,15 +46,15 @@
 		<h6 class="strong">{{ $curso->nombre }}</h6>
 		<h2 class="strong"><center>{{ $leccion->nombre }}</center></h2>
 		<br>
-			<div id="div_auditivo">
-				{{ $leccion->contenido_texto }}
-			</div>
-			<br>
 			<div id="div_visual">
 				<center>
 					{{ $leccion->contenido_grafico }}
 				</center>
 			</div>
+			<div id="div_auditivo">
+				{{ $leccion->contenido_texto }}
+			</div>
+			<br>
 			<br>
 			<hr>
 			<br>
