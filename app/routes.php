@@ -191,7 +191,7 @@ Route::group(array('prefix' => 'api'), function()
     }
     return Response::json($tests);
   });
-// /api/questions
+  // /api/questions
   Route::get('questions', function()
   {
     $data = Input::all();
@@ -202,6 +202,48 @@ Route::group(array('prefix' => 'api'), function()
       $questions = Pregunta::all();
     }
     return Response::json($questions);
+  });
+
+  // GET /api/grade
+
+  Route::get('grade', function()
+  {
+    $data = Input::all();
+    $test = $data['test_id'];
+    $user = $data['user_id'];
+    $grade = Calificacion::where('id_evaluacion', '=', $test)->where('id_usuario', '=', $user)->get();
+    return Response::json($grade);
+  });
+
+  // POST /api/grade
+
+  Route::post('grade', function()
+  {
+    $data = Input::all();
+    $test = $data['test_id'];
+    $user = $data['user_id'];
+    $grade = $data['grade'];
+    $attemps = $data['attemps'];
+    $course = $data['course_id'];
+    $date = $data['date'];
+    Calificacion::insert(array('id_usuario' => $user, 'id_evaluacion' => $test, 'nota' => $grade,
+                              'fecha' => $date ,'id_curso' => $course, 'intentos' => $attemps));
+    return 0;
+  });
+
+  // PUT /api/grade
+
+  Route::put('grade', function()
+  {
+    $data = Input::all();
+    $test = $data['test_id'];
+    $user = $data['user_id'];
+    $grade = $data['grade'];
+    $attemps = $data['attemps'];
+    $date = $data['date'];
+    Calificacion::where('id_evaluacion', '=', $test)->where('id_usuario', '=', $user)
+            ->update(array('nota' => $grade, 'intentos' => $attemps, 'fecha' => $date));
+    return 0;
   });
 
   // /api/test/{test_id}
