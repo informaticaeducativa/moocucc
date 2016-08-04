@@ -48,12 +48,15 @@
 		<br>
 			<div id="div_visual">
 				<center>
-					{{ $leccion->kinestesico }}
+					{{ $leccion->contenido_grafico }}
 				</center>
 			</div>
-			<!-- <div id="div_auditivo">
+			<div id="div_auditivo">
 				{{ $leccion->contenido_texto }}
-			</div> -->
+			</div>
+			<div id="div_kinestesico">
+				{{ $leccion->kinestesico }}
+			</div>
 			<br>
 			<br>
 			<hr>

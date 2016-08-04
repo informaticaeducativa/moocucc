@@ -166,8 +166,9 @@ clase index.blade.php
 			$("#btn_visual").attr("class","btn btn-block btn-primary");
 			$("#btn_auditivo").attr("class","btn btn-block btn-primary");
 
-			$("#div_auditivo").show();
-			$("#div_visual").show();
+			$("#div_kinestesico").show();
+			$("#div_auditivo").hide();
+			$("#div_visual").hide();
 		});
 
 		$("#btn_visual").click(function() {
@@ -176,6 +177,7 @@ clase index.blade.php
 			$("#btn_auditivo").attr("class","btn btn-block btn-info");
 
 			$("#div_auditivo").hide();
+			$("#div_kinestesico").hide();
 			$("#div_visual").show();
 		});
 
@@ -186,6 +188,7 @@ clase index.blade.php
 
 			$("#div_auditivo").show();
 			$("#div_visual").hide();
+			$("#div_kinestesico").hide();
 		});
 
 
