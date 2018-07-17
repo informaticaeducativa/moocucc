@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Auth0\Login\LoginServiceProvider',
+		'\Tomgrohl\Laravel\Encryption\EncryptionServiceProvider::class'
 		"Formativ\Chat\ChatServiceProvider",
     	'Barryvdh\Cors\CorsServiceProvider',
 
